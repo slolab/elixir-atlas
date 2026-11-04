@@ -14,7 +14,7 @@ uv run scripts/data.py pull
 
 `data/` is not in git. S3 keeps timestamped snapshots and releases that never change.
 
-- `data/input/<source>/`: raw data, collected by hand. Can have strctured (tabled) and unstrctured (text files, presentations)
+- `data/input/<source>/`: original scraped or manually collected data: API responses, web pages and documents.
 - `data/extracted/<source>/`: structured data extracted from unstrctured `input/`.
 - `data/releases/<id>/`: the built data product.
 
@@ -28,4 +28,10 @@ uv run scripts/data.py pull-release [id]  # newest release by default
 uv run scripts/data.py push-release <id>
 ```
 
-`pull` never overwrites your local changes. `push` refuses if S3 has a snapshot you haven't pulled.
+`pull` never overwrites your local changes. `push` refuses if S3 has a snapshot you haven't pulled. Behaviour:
+
+- First pull, no .snapshot.json. Every file already on disk counts as yours and is kept. Files you do not have are downloaded.
+- You edited or added files after a pull. Those stay. Untouched files update to S3.
+- You deleted a file that was in the base. It stays deleted, even if S3 still has it.
+
+Scraping: [sources, coverage and usage](docs/data-sources-scraping.md).
