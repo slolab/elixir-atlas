@@ -1,0 +1,36 @@
+id: atlas_261110
+version: 1
+purpose: |
+  I co-lead or support ELIXIR groups and projects: a Community, Platform or
+  Focus Group, community support at the Hub, reporting on my Node's
+  contributions, or the ELIXIR website. I want an Atlas over ELIXIR's public
+  information, from the ELIXIR and Node websites, the Scientific Programme,
+  publications, tool and training catalogues and EU project records, that I can
+  ask in plain language.
+
+  I will use it to see where ELIXIR groups overlap in topics and people and who
+  holds roles in several of them; to get a consolidated picture of a
+  Community's resources, outputs, links to Platforms and plans; to find which
+  people from a Node took part in a project, what they did and whether that
+  work was funded; and to gather and check the facts for a project webpage,
+  with the source of each detail.
+reference_dataset: 20261110T134028Z
+context: |
+  Answers rely on public information only. The Perun people export and
+  documents that need permission are out of scope; where a question needs
+  them, say what is missing instead of guessing. An organisation's EU funding
+  does not establish that a named person was funded. Give the source of each
+  key fact.
+rubric:
+  - name: correctness
+    criteria: |
+      Grade the answer against the question, the context, the reference answer
+      and the eval notes. Each component in the eval notes scores 1 when the
+      answer states it correctly and 0 otherwise. Accept equivalent wording,
+      names and formats. Extra content does not change the score unless it
+      contradicts a component. Missing information stated as fact scores 0.
+
+      Verdict:
+      - correct: every component scores 1.
+      - partial: at least half score 1.
+      - failed: fewer than half score 1, or there is no answer.

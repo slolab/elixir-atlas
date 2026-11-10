@@ -82,3 +82,7 @@ venv.bak/
 # Data lives on S3 (scripts/data.py)
 data/
 /.scraping/
+
+# Evaluation runs (eval/run.py)
+eval/tasks/
+eval/results/

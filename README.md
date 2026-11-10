@@ -35,3 +35,5 @@ uv run scripts/data.py push-release <id>
 - You deleted a file that was in the base. It stays deleted, even if S3 still has it.
 
 Scraping: [sources, coverage and usage](docs/data-sources-scraping.md).
+
+Evaluation: [CQ sets, runs and Argilla](eval/README.md).
