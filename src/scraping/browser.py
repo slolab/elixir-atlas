@@ -167,11 +167,13 @@ class Browser:
             raise ValueError(f'HTTP {result["status"]} downloading document')
         return body, result["url"], content_type, "response"
 
-    def fetch(self, url, document, max_bytes, on_block):
+    def fetch(self, url, document, max_bytes, on_block, wait_for=None):
         try:
             if document:
                 return self.document(url, max_bytes, on_block)
             self.navigate(url, on_block)
+            if wait_for:
+                self.page.locator(wait_for).first.wait_for(state="attached", timeout=20000)
             body = self.page.content().encode()
             if len(body) > max_bytes:
                 raise ValueError("Page exceeds download size limit")

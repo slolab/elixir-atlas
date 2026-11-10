@@ -59,3 +59,27 @@ See [coverage and scraping instructions](data-sources-scraping.md).
 16. **Archived Commissioned Services project plans** (stories 2, 4)
     - Why: deliverables and people per project (budget redacted); stands in for prior grant applications.
     - How: Xenia, if permission is granted.
+
+## Extended stories — 10 November 2026
+
+17. **CORDIS: STEERS, CONVERGE and EXCELERATE** — public
+    - Why: project dates, participating organisations, funding, reports and deliverables for grant writing, contributions and webpage updates.
+    - How: English fact sheets, results and reporting pages for grants [101131096](https://cordis.europa.eu/project/id/101131096), [871075](https://cordis.europa.eu/project/id/871075) and [676559](https://cordis.europa.eu/project/id/676559), including public attachments. Organisation funding does not establish individual funding.
+18. **Project outputs and example pages** — public
+    - How: Zenodo searches by those three grant numbers, plus the STEERS community, including all record versions. Retain metadata and document/office attachments; exclude bulk CSV/TSV/JSON/XML research data. Explicit 24-compute and FAIR-FEGA pages retain conflicting evidence and support later comparisons. These commissioned activities have no identified Zenodo collection.
+19. **Additional Node teams and plans** — public
+    - How: bounded official pages for Czechia, Finland, Luxembourg, Netherlands, France, Norway, Portugal and Switzerland, named in the example projects. Exact URLs and path boundaries are in `sources.py`.
+    - Scope: teams, projects and roadmaps; Switzerland includes the first group listing and a named 24-compute participant lookup, rendered in Chrome. One explicit Portuguese FAIR-FEGA announcement supplies named contributions; other news remains excluded. Public profiles do not establish actual effort or complete membership.
+20. **Europe PMC: Systems Biology reviews** — public
+    - Why: an external baseline for the Community's state-of-the-art question.
+    - How: JSON metadata and abstracts for reviews matching “systems biology” in title/abstract, published 2022–10 November 2026. No full-text crawl; the query is explicit in `sources.py`.
+21. **Project participation records** — needs permission
+    - Need: approved task assignments, person/Node links, funded/in-kind status and effort for STEERS, 24-compute and FAIR-FEGA. Preserve unknown values; do not infer them from organisation funding.
+22. **Group membership and activity** — needs permission
+    - Need: approved rosters, work plans, minutes and participation summaries for Communities, Platforms, Focus Groups, working groups and task forces. Link-accessible Drive documents remain restricted unless approved for public use.
+23. **Bid outcomes** — needs permission
+    - Need: approved redacted application records and outcomes, including unsuccessful bids; public funded-project catalogues cannot supply these.
+
+## Manually supplied
+
+**Perun people database**: two user-provided CSV exports in `data/input/perun/`, included in the S3 snapshot at the user's request. Treat them as restricted: they contain names, affiliations, email addresses and account identifiers. Keep the original exports unchanged; their contents are not committed to Git or approved for public output.

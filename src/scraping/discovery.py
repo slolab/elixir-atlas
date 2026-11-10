@@ -29,10 +29,26 @@ def extension(url):
     return Path(unquote(urlsplit(url).path)).suffix.lower()
 
 
+def eu_download(url):
+    return host(url) == "ec.europa.eu" and bool(re.fullmatch(
+        r"/research/participants/documents/downloadPublic(?:/.*)?", urlsplit(url).path))
+
+
+def eu_attachment(body, current):
+    soup = BeautifulSoup(body, "html.parser")
+    refresh = soup.find("meta", attrs={"http-equiv": re.compile("^refresh$", re.I)})
+    target = re.search(r"url\s*=\s*(.+)$", refresh.get("content", ""), re.I) if refresh else None
+    url = normalize(urljoin(current, target[1].strip(" '\""))) if target else None
+    if not url or not eu_download(url) or "/attachment/" not in urlsplit(url).path:
+        raise ValueError("EC download page has no public attachment redirect")
+    return url
+
+
 def is_document(url):
     return extension(url) in DOCUMENTS or urlsplit(url).path.endswith("/pdf") or (
         host(url) == "arxiv.org" and urlsplit(url).path.startswith("/pdf/")) or (
-        host(url) == "drive.google.com" and urlsplit(url).path == "/uc")
+        host(url) == "drive.google.com" and urlsplit(url).path == "/uc") or (
+        eu_download(url) and "/attachment/" in urlsplit(url).path)
 
 
 def pagination_url(current, following, kind):
@@ -96,8 +112,13 @@ def website(body, current, content_type, source):
             continue
         if not url or excluded(url, source):
             continue
+        zenodo_doi = re.fullmatch(r"/10\.5281/zenodo\.(\d+)/?", urlsplit(url).path, re.I)
         drive = re.fullmatch(r"/file/d/([\w-]+)/(?:view|preview)", urlsplit(url).path)
-        if host(url) == "drive.google.com" and drive:
+        if host(url) in ("doi.org", "dx.doi.org") and zenodo_doi:
+            result.links.append((f"https://zenodo.org/api/records/{zenodo_doi[1]}", "download"))
+        elif eu_download(url):
+            result.links.append((url, "download"))
+        elif host(url) == "drive.google.com" and drive:
             result.links.append((f"https://drive.google.com/uc?export=download&id={drive[1]}", "download"))
         elif extension(url) in MEDIA or host(url) in ("youtube.com", "youtu.be", "vimeo.com"):
             result.links.append((url, "video"))
@@ -135,6 +156,20 @@ def biotools(body, current, content_type, source):
 
 def tess(body, current, content_type, source):
     return catalogue(body, current, content_type, source, "tess")
+
+
+def europepmc(body, current, content_type, source):
+    if "json" not in content_type:
+        raise ValueError("Expected Europe PMC JSON")
+    data = json.loads(body)
+    records = data["resultList"]["result"]
+    result = Discovery(group="publications", total=int(data["hitCount"]),
+                       ids=[f"{record['source']}:{record['id']}" for record in records])
+    query = dict(parse_qsl(urlsplit(current).query))
+    following = data.get("nextCursorMark")
+    if records and following and following != query.get("cursorMark", "*"):
+        result.links.append((pagination_url(current, "?" + urlencode({"cursorMark": following}), "europepmc"), "download"))
+    return result
 
 
 def zenodo(body, current, content_type, source):

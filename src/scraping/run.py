@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 import httpx
 
 from browser import Browser, VerificationRequired, challenge
-from discovery import PRIVATE, extension, host, is_document, normalize
+from discovery import PRIVATE, extension, host, is_document, normalize, eu_download, eu_attachment
 from sources import SOURCES
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -69,7 +69,8 @@ class Collector:
 
     def record(self, source, url, status, **details):
         previous = self.latest.get((source, url), {})
-        row = {"source": source, "url": url, "status": status, **details}
+        access = SOURCES[source].access if source in SOURCES else "public"
+        row = {"source": source, "url": url, "status": status, **details, "access": access}
         comparable = lambda item: {k: v for k, v in item.items() if k != "updated_at"}
         if comparable(row) == comparable(previous):
             return previous
@@ -91,8 +92,9 @@ class Collector:
     def browser_fetch(self, url, source):
         if self.browser is None:
             self.browser = Browser(self.stack, self.browser_state, self.cookies, self.headed, self.verification_timeout, self.browser_channel)
+        wait_for = SOURCES[source].render_waits.get(urlsplit(url).path) if source in SOURCES else None
         return self.browser.fetch(url, is_document(url), self.max_bytes,
-                                  lambda reason: self.record(source, url, "blocked", reason=reason))
+                                  lambda reason: self.record(source, url, "blocked", reason=reason), wait_for=wait_for)
 
     def request(self, url, browser=False, source=None):
         self.pause()
@@ -113,6 +115,8 @@ class Collector:
                 if "html" in content_type and challenge(bytes(body), response.headers):
                     return self.browser_fetch(url, source)
                 response.raise_for_status()
+                if eu_download(url) and "/attachment/" not in urlsplit(url).path and "html" in content_type:
+                    return self.request(eu_attachment(bytes(body), str(response.url)), source=source)
                 return bytes(body), str(response.url), content_type, "response"
 
     def permitted(self, url):
@@ -127,7 +131,7 @@ class Collector:
             self.robots[origin] = rules
         return self.robots[origin].can_fetch(AGENT, url)
 
-    def save(self, source, url, body, final_url, content_type, representation, discovered_from=None):
+    def save(self, source, url, body, final_url, content_type, representation, discovered_from=None, retrieved_at=None):
         if len(body) > self.max_bytes or not body:
             raise ValueError("Empty response or download exceeds size limit")
         if "html" in content_type:
@@ -135,7 +139,7 @@ class Collector:
             title = soup.title.get_text(strip=True) if soup.title else ""
             if challenge(body) or soup.select_one("#block-elixir2-accessdeniedanonymous") or title.lower() == "access denied" or PRIVATE.search(urlsplit(final_url).path):
                 raise ValueError("Blocked or redirected to a login page")
-            if is_document(url):
+            if is_document(url) or eu_download(url):
                 raise ValueError("Expected a document, received HTML")
         suffix = extension(final_url)
         if "html" in content_type:
@@ -150,25 +154,34 @@ class Collector:
         elif not re.fullmatch(r"\.[a-zA-Z0-9]{1,10}", suffix):
             suffix = mimetypes.guess_extension(content_type) or ".bin"
         stem = re.sub(r"[^A-Za-z0-9._-]+", "-", unquote(urlsplit(url).path).strip("/"))[-90:].lstrip(".") or "index"
-        path = self.output / source / f"{stem}-{hashlib.sha256(url.encode()).hexdigest()[:12]}{suffix}"
+        digest = hashlib.sha256(body).hexdigest()
+        path = self.output / source / f"{stem}-{hashlib.sha256(url.encode()).hexdigest()[:12]}-{digest[:12]}{suffix}"
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_name(f".{path.name}.part")
         temporary.write_bytes(body)
         temporary.replace(path)
         return self.record(source, url, "saved", final_url=final_url,
                            path=str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
-                           content_type=content_type, bytes=len(body), representation=representation,
-                           retrieved_at=datetime.now(UTC).isoformat(timespec="seconds"),
+                           content_type=content_type, bytes=len(body), sha256=digest, representation=representation,
+                           retrieved_at=retrieved_at or datetime.now(UTC).isoformat(timespec="seconds"),
                            discovered_from=discovered_from, discovery_status="pending")
 
     def fetch(self, source, url, browser=False, discovered_from=None):
         cached = self.cache.get((source, url))
-        if cached and not self.refresh:
+        if not cached and not self.refresh and source in SOURCES and SOURCES[source].access == "public":
+            candidates = [row for (_, address), row in self.cache.items()
+                          if address == url and row.get("access", "public") == "public"]
+            cached = max(candidates, key=lambda row: row.get("retrieved_at", ""), default=None)
+        if cached and not self.refresh and not (eu_download(url) and "html" in cached["content_type"]):
             path = ROOT / cached["path"]
             if path.is_file() and path.stat().st_size == cached["bytes"]:
+                body = path.read_bytes()
+                if cached["source"] != source:
+                    cached = self.save(source, url, body, cached["final_url"], cached["content_type"],
+                                       cached["representation"], discovered_from, cached.get("retrieved_at"))
                 if discovered_from and not cached.get("discovered_from"):
                     cached = {**cached, "discovered_from": discovered_from}
-                return path.read_bytes(), cached, True
+                return body, cached, True
         try:
             if host(url) in self.blocked_hosts:
                 self.record(source, url, "blocked", reason="This host needs manual verification; rerun to retry", discovered_from=discovered_from)

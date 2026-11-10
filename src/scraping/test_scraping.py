@@ -10,7 +10,7 @@ import httpx
 
 from run import Collector, collect, main
 from browser import VerificationRequired
-from discovery import Discovery, website, f1000, tess, zenodo, normalize, page_allowed, pagination_url
+from discovery import Discovery, website, f1000, tess, zenodo, europepmc, normalize, page_allowed, pagination_url, eu_attachment
 from dataclasses import replace
 from unittest.mock import patch
 
@@ -225,6 +225,97 @@ class ScrapingTests(unittest.TestCase):
         url = "https://drive.google.com/file/d/example/view"
         self.assertEqual(website(b'<a href="/unrelated">Other</a>', url, "text/html", source).links,
                          [("https://drive.google.com/uc?export=download&id=example", "download")])
+
+    def test_cordis_follows_public_attachments_and_zenodo_dois_only(self):
+        source = SOURCES["cordis-steers"]
+        url = source.urls[1]
+        download = "https://ec.europa.eu/research/participants/documents/downloadPublic?appId=PPGMS&documentIds=abc"
+        body = f'<a href="{download}">Report</a><a href="https://doi.org/10.5281/ZENODO.123">Output</a><a href="/project/id/999">Other project</a><a href="/project/id/101131096/de">German</a>'
+        self.assertEqual(set(html_links(body, url, source)), {
+            (download, "download"), ("https://zenodo.org/api/records/123", "download")})
+        attachment = "https://www.ec.europa.eu/research/participants/documents/downloadPublic/abc/attachment/def"
+        wrapper = f'<meta http-equiv="refresh" content="0;url={attachment}">'
+        self.assertEqual(eu_attachment(wrapper, download), attachment)
+        with self.assertRaises(ValueError):
+            eu_attachment('<meta http-equiv="refresh" content="0;url=https://elsewhere.org/private">', download)
+
+    def test_ec_document_resolves_transient_link_before_caching(self):
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            collector = Collector(stack, root / "index.jsonl", root / "raw", 0, 10000, False)
+            stable = "https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=abc"
+            attachment = "https://ec.europa.eu/research/participants/documents/downloadPublic/abc/attachment/def"
+            requests = []
+            def respond(request):
+                requests.append(str(request.url))
+                if request.url.path == "/robots.txt":
+                    return httpx.Response(200, text="User-agent: *\n")
+                if str(request.url) == stable:
+                    return httpx.Response(200, text=f'<meta http-equiv="refresh" content="0;url={attachment}">', headers={"content-type": "text/html"})
+                return httpx.Response(200, content=b"%PDF-1.7 example", headers={"content-type": "application/pdf"})
+            collector.client = stack.enter_context(httpx.Client(transport=httpx.MockTransport(respond)))
+            first = collector.fetch("cordis-steers", stable)
+            second = collector.fetch("cordis-steers", stable)
+            self.assertEqual(first[0], b"%PDF-1.7 example")
+            self.assertTrue(second[2])
+            self.assertEqual(requests[-2:], [stable, attachment])
+            self.assertNotIn(("cordis-steers", attachment), collector.latest)
+            self.assertEqual(first[1]["final_url"], attachment)
+
+    def test_europepmc_cursor_keeps_topic_scope_and_terminates(self):
+        source = SOURCES["europepmc-systems-biology"]
+        data = {"hitCount": 1, "nextCursorMark": "next+cursor==",
+                "resultList": {"result": [{"source": "MED", "id": "123"}]}}
+        first = europepmc(json.dumps(data).encode(), source.urls[0], "application/json", source)
+        self.assertEqual(first.ids, ["MED:123"])
+        self.assertEqual(first.total, 1)
+        from urllib.parse import parse_qs, urlsplit
+        query = parse_qs(urlsplit(first.links[0][0]).query)
+        self.assertEqual(query["query"], parse_qs(urlsplit(source.urls[0]).query)["query"])
+        self.assertEqual(query["cursorMark"], ["next+cursor=="])
+        data["resultList"]["result"] = []
+        self.assertEqual(europepmc(json.dumps(data).encode(), first.links[0][0], "application/json", source).links, [])
+
+    def test_refresh_preserves_previous_content_and_records_access(self):
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            collector = Collector(stack, root / "index.jsonl", root / "raw", 0, 10000, False)
+            url = "https://example.org/project"
+            old = collector.save("project-pages", url, b"<title>Old</title>", url, "text/html", "response")
+            new = collector.save("project-pages", url, b"<title>New</title>", url, "text/html", "response")
+            self.assertNotEqual(old["path"], new["path"])
+            self.assertEqual(Path(old["path"]).read_bytes(), b"<title>Old</title>")
+            self.assertEqual(collector.cache["project-pages", url]["path"], new["path"])
+            self.assertNotEqual(old["sha256"], new["sha256"])
+            self.assertEqual(new["access"], "public")
+            row = collector.record("project-participation", None, "deferred", access="public")
+            self.assertEqual(row["access"], "restricted")
+
+    def test_new_public_source_reuses_download_with_original_date(self):
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            collector = Collector(stack, root / "index.jsonl", root / "raw", 0, 10000, False)
+            url = "https://zenodo.org/api/records/123"
+            old = collector.save("zenodo", url, b'{"id":123}', url, "application/json", "response", retrieved_at="2026-01-01T00:00:00+00:00")
+            with patch.object(collector, "request", side_effect=AssertionError("Unexpected download")):
+                body, reused, cached = collector.fetch("zenodo-steers", url)
+            self.assertTrue(cached)
+            self.assertEqual(body, b'{"id":123}')
+            self.assertNotEqual(old["path"], reused["path"])
+            self.assertEqual(reused["retrieved_at"], old["retrieved_at"])
+            collector.cache["zenodo", url]["access"] = "restricted"
+            collector.cache.pop(("zenodo-steers", url))
+            with patch.object(collector, "permitted", return_value=True), patch.object(collector, "request", return_value=(body, url, "application/json", "response")) as request:
+                self.assertFalse(collector.fetch("zenodo-steers", url)[2])
+                request.assert_called_once()
+
+    def test_added_node_sources_do_not_expand_to_news_or_unrelated_pages(self):
+        for name, url in (("node-norway", "https://elixir.no/news/example"),
+                          ("node-finland", "https://csc.fi/contact/unrelated/"),
+                          ("node-switzerland", "https://www.sib.swiss/directory/someone")):
+            self.assertFalse(page_allowed(url, SOURCES[name]))
+        source = SOURCES["node-portugal"]
+        self.assertEqual(html_links('<a href="/news/archive">Other news</a>', source.urls[-1], source), [])
 
     def test_one_blocked_host_does_not_stop_other_downloads(self):
         with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
