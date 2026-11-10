@@ -37,7 +37,7 @@ def settings():
 def main(folder):
     cq_set = yaml.safe_load((folder / "set.yaml").read_text())
     questions = [yaml.safe_load(path.read_text()) for path in sorted((folder / "questions").glob("*.yaml"))]
-    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
     client = rg.Argilla(api_url=API_URL, api_key=os.environ["ARGILLA_API_KEY"])
     if client.workspaces(WORKSPACE) is None:
         rg.Workspace(name=WORKSPACE, client=client).create()
