@@ -1,0 +1,52 @@
+id: atlas_261110-002
+user_story: 4
+question: |
+  Where do the ELIXIR Systems Biology and Microbial Biotechnology Communities
+  overlap in topics and leadership, and is any joint activity between them
+  already running or planned?
+answerability: answerable
+reference_answer: |
+  The two Communities share a co-lead and a core topic, genome-scale metabolic
+  modelling. They already work together in DBTLHub, and a joint use case is
+  planned.
+
+  - **Shared co-lead:** Vitor Martins dos Santos (ELIXIR Netherlands) co-leads
+    both. Their other co-leads and Hub liaisons differ.
+  - **Shared topics:** genome-scale metabolic models (Standard-GEM and
+    constraint-based modelling in Systems Biology; microbial models and a
+    model-testing suite in Microbial Biotechnology). Both also work on
+    modelling standards, industry engagement and training in TeSS.
+  - **Running:** DBTLHub (January 2024 – December 2026), a Commissioned Service
+    that builds a one-stop shop of databases, datasets and tools for the
+    Design-Build-Test-Learn cycle in biotechnology. Both Communities take part.
+  - **Planned:** at its September 2026 meeting, the Systems Biology Community
+    proposed a "systems biology bundle" of workflows, with a microbial use
+    case to be built with Microbial Biotechnology.
+
+  DBTLHub ends in December 2026, so the microbial use case is a natural place
+  to continue the joint work.
+
+  Sources:
+  - https://elixir-europe.org/communities/systems-biology
+  - https://elixir-europe.org/communities/microbial-biotechnology
+  - DBTLHub:
+    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub
+  - Systems Biology Community meeting report, October 2026:
+    https://f1000research.com/documents/15-1717
+eval_notes: |
+  Scored:
+  1. Shared co-lead: Vitor Martins dos Santos.
+  2. Shared topic: genome-scale metabolic modelling.
+  3. Running: DBTLHub (2024–2026) involves both Communities.
+  4. Planned: the September 2026 meeting proposed a microbial use case with
+     Microbial Biotechnology, within a systems biology bundle.
+  Accepted: "GEMs" or "GSMMs".
+  Traps: "A microbial metabolism resource for Systems Biology" predates the
+  Systems Biology Community and is not a joint activity. Sharing a Science
+  tier is not a joint activity. /focus-groups/systems-biology shows the
+  Community page; it is not a separate group.
+sources:
+  - data/input/elixir/communities-systems-biology-d4e592b20d80.html
+  - data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-dbtlhub-5b825e734781.html
+  - data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf

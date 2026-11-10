@@ -1,0 +1,57 @@
+id: atlas_261110-006
+user_story: 7
+question: |
+  Who from ELIXIR Switzerland takes part in the ELIXIR Compute Platform
+  Commissioned Service for 2024–2026 (2024-TECHNOLOGY-Compute)? What does each
+  person work on, and is their work funded by ELIXIR or contributed in-kind?
+answerability: partially_answerable
+reference_answer: |
+  One person from ELIXIR Switzerland is named: **Alexander Kanitz** of SIB
+  Swiss Institute of Bioinformatics. His roles come from the 2024–2026 work
+  plan, which records assignments, not actual effort.
+
+  - **WP4 Multi-Cloud Infrastructure Deployment:** co-lead, with Viktória
+    Spišaková (Masaryk University) and Ivar Janmaat (SURF). He leads Activity
+    1 on the ELIXIR Cloud SDK use case portfolio, and SIB is responsible for
+    deliverables D4.1 (federated compute service portfolio) and D4.3
+    (standards for workflow and tool inputs and outputs).
+  - **Other work packages:** member of activities in WP2 (authorisation), WP3
+    (sensitive data access and processing) and WP5 (provider dashboard and
+    provenance).
+  - **Output:** co-author of the ELIXIR All Hands 2024 poster on the Compute
+    Platform's vision for 2024–2026.
+
+  **Funding is not public.** ELIXIR funds Commissioned Services from its core
+  budget, but no public source shows how the budget is split between
+  partners. Whether SIB or Kanitz is funded or contributes in-kind, and how
+  much effort he gives, is unknown. The Compute Platform coordinators or
+  ELIXIR Switzerland could confirm.
+
+  Sources:
+  - Project page:
+    https://elixir-europe.org/how-we-work/scientific-programme/technology/24-compute
+  - Work plan 2024–2026: https://doi.org/10.5281/zenodo.12819244
+  - Compute Platform page: https://elixir-europe.org/platforms/compute
+  - Scientific Programme (funding of Commissioned Services):
+    https://elixir-europe.org/how-we-work/scientific-programme
+  - Poster: https://doi.org/10.7490/f1000research.1119735.1
+eval_notes: |
+  Scored:
+  1. Person: Alexander Kanitz (SIB). Accept "Alex Kanitz".
+  2. WP4: co-lead of WP4 Multi-Cloud Infrastructure Deployment.
+  3. WP4 tasks: at least one of Activity 1 (Cloud SDK use cases), D4.1 and
+     D4.3.
+  4. Other work packages: at least two of WP2, WP3 and WP5.
+  5. Funding: says funded or in-kind status is not public. Inferring funding
+     from ELIXIR's core budget scores 0.
+  Accepted: either end date, January or December 2026.
+  Traps: SIB's €0 EU contribution in ELIXIR-STEERS belongs to a different
+  project and does not make this work in-kind.
+sources:
+  - data/input/project-pages/how-we-work-scientific-programme-technology-24-compute-88dc3806b38e-5d622a8b7f76.html
+  - data/input/elixir/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
+  - data/input/elixir/platforms-compute-eacbc306762c.html
+  - data/input/elixir/internal-projects-commissioned-services-01b2b5ce3eef.html
+  - data/input/elixir/internal-projects-commissioned-services-2024-compute-fe8508a1f821.html
+  - data/input/node-switzerland/directory-4e3217110975-8580482ae05b.html
+  - data/input/f1000/posters-13-591-095d88b0ce4d.html

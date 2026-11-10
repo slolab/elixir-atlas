@@ -1,0 +1,66 @@
+id: atlas_261110-008
+user_story: 8
+question: |
+  The FAIR-FEGA project page on the ELIXIR website ("FAIR-FEGA: Accelerating
+  high-quality FAIR data deposition in Federated EGA") went live in mid-2025.
+  What on it should I update or double-check now, which new outputs or links
+  could I add, and do any public sources conflict with it? Please give the
+  source and date for each point.
+answerability: partially_answerable
+reference_answer: |
+  Page: https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega
+  (published 30 June 2025, last edited 4 June 2026).
+
+  **Update or check**
+  - **Dates.** The page and the Commissioned Services list say January 2025 –
+    January 2026. The Human data and translational research (HDTR) page,
+    edited 5 May 2026, says January 2025 – December 2026, and the ELIXIR
+    Annual Report 2025 says the HDTR projects run "through 2026". Confirm the
+    end date. If the project has ended, the text needs a status update.
+  - **Nodes.** The text says seven Nodes but lists five: France, Norway,
+    Portugal, Spain and Switzerland. No public source names the other two. The
+    text counts "both institutions managing Central EGA" as partners, so check
+    whether EMBL-EBI should be listed.
+  - **People.** A BioData.pt news item of 9 June 2026 says Ana Teresa Freitas,
+    Jorge Oliveira and Jorge Silva were awarded FAIR-FEGA. They are not on the
+    page.
+  - **Lead.** No public source names a lead or coordinator.
+
+  **Outputs to link**
+  No FAIR-FEGA deliverables or reports are public. A related poster, "Unifying
+  FEGA metadata: A standardized model for multimodal data" (ELIXIR All Hands,
+  11 June 2025, https://doi.org/10.7490/f1000research.1120212.1), carries the
+  FAIR-FEGA keyword. Confirm that it is a project output before you link it.
+  Tasks, milestones and deposited datasets are only in project plans that are
+  not public.
+
+  Sources:
+  - HDTR page:
+    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr
+  - Commissioned Services list:
+    https://elixir-europe.org/internal-projects/commissioned-services-list
+  - ELIXIR Annual Report 2025:
+    https://elixir-europe.org/sites/default/files/documents/elixir-AnnualReport2025.pdf
+  - BioData.pt news, 9 June 2026:
+    https://biodata.pt/news/biodatapt-leads-work-packages-new-elixir-projects
+eval_notes: |
+  Scored:
+  1. Dates: the page's January 2026 end conflicts with the HDTR page
+     (December 2026) or the Annual Report 2025 ("through 2026").
+  2. Nodes: the text says seven Nodes but lists five, and the other two are
+     not named publicly.
+  3. Lead: no public source names a lead or coordinator; none is invented.
+  4. People: the June 2026 BioData.pt item names Ana Teresa Freitas, Jorge
+     Oliveira and Jorge Silva, who are missing from the page.
+  5. Outputs: no FAIR-FEGA deliverables or reports are public. Naming the
+     poster is welcome but not required; invented outputs score 0.
+  Traps: the HDTR page's twelve Nodes cover all five HDTR projects, not
+  FAIR-FEGA alone. The news item does not say whether those people were
+  funded.
+sources:
+  - data/input/project-pages/how-we-work-scientific-programme-science-hdtr-fair-fega-147f79ce933d-d81d75344d65.html
+  - data/input/elixir/how-we-work-scientific-programme-science-hdtr-5efc37669726.html
+  - data/input/elixir/internal-projects-commissioned-services-list-9b7c0990ff93.html
+  - data/input/elixir/sites-default-files-documents-elixir-AnnualReport2025.pdf-9a13b9c969b2.pdf
+  - data/input/node-portugal/news-biodatapt-leads-work-packages-new-elixir-projects-68d021093ee0-caec8a7a2443.html
+  - data/input/f1000/posters-14-578-9f3350e9df6b.html

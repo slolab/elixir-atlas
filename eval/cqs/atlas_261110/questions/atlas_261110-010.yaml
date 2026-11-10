@@ -1,0 +1,63 @@
+id: atlas_261110-010
+user_story: 8
+question: |
+  I'm checking the ELIXIR website page for the Compute Platform Commissioned
+  Service in the 2024–28 Scientific Programme (24-compute). Which details are
+  missing or inconsistent across the ELIXIR website and other public sources
+  (lead, Nodes, dates, work packages, outputs)? Tell me what to fix and where
+  each value comes from.
+answerability: answerable
+reference_answer: |
+  Page: https://elixir-europe.org/how-we-work/scientific-programme/technology/24-compute
+  (last edited 13 October 2026).
+
+  Compared with:
+  - [A] an older page for the same service, still online:
+    https://elixir-europe.org/internal-projects/commissioned-services/2024-compute
+  - [B] the Compute Platform 2024–26 work plan, July 2024:
+    https://doi.org/10.5281/zenodo.12819244
+  - [C] the Technology tier page,
+    https://elixir-europe.org/how-we-work/scientific-programme/technology,
+    and the Commissioned Services list,
+    https://elixir-europe.org/internal-projects/commissioned-services-list
+
+  | Detail | This page | Other sources | Fix |
+  |---|---|---|---|
+  | Lead | Missing | CSC (FI), Masaryk University (CZ), BIH at Charité (DE) [A, B] | Add |
+  | Dates | Jan 2024 – Dec 2026 | 36 months from Jan 2024 [B, C]; Jan 2024 – Jan 2026 [A, one list entry] | Fix [A] |
+  | Nodes | 6: CZ, FI, DE, LU, NL, CH | 13 [A, B]: also BE, EE, EMBL-EBI, FR, GR, IT, UK | Confirm and update |
+  | Work packages | WP2–WP5 | Also WP1, Platform management and coordination [A, B] | Add WP1 |
+  | Listing | – | Listed twice, as "(2024-26)" and "(2024-TECHNOLOGY-Compute)" [C] | Merge, or redirect [A] |
+
+  **Outputs to link**
+  - The work plan [B], with 31 deliverables and 27 milestones. The Compute
+    Platform page (https://elixir-europe.org/platforms/compute) links it; this
+    page does not.
+  - The 2025 face-to-face meeting report, April 2025:
+    https://doi.org/10.5281/zenodo.15224009
+  - No other outputs are public. Ask the Platform leads for annual reports.
+eval_notes: |
+  Scored:
+  1. Lead: none on the page; the lead institutions are CSC, Masaryk
+     University and BIH at Charité.
+  2. Dates: the January 2026 end (older page or list entry) conflicts with
+     December 2026 (current page, work plan, Technology tier page).
+  3. Nodes: the page lists six, the work plan or older page 13; names at
+     least two missing ones.
+  4. Work packages: WP1 is missing.
+  5. Duplicates: the service has two pages or list entries.
+  6. Outputs: the work plan on Zenodo should be linked.
+  Accepted: Charité or BIH; the Zenodo record URL for the DOI; the older
+  page's different WP3 and WP4 leads.
+  Traps: the people list is not scored. Treating the older page as current
+  and the new page's dates as wrong contradicts component 2.
+sources:
+  - data/input/project-pages/how-we-work-scientific-programme-technology-24-compute-88dc3806b38e-5d622a8b7f76.html
+  - data/input/elixir/internal-projects-commissioned-services-2024-compute-fe8508a1f821.html
+  - data/input/elixir/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
+  - data/input/elixir/api-records-12819244-b222eb879ba6.json
+  - data/input/elixir/how-we-work-scientific-programme-technology-ee4e9b0d714f.html
+  - data/input/elixir/internal-projects-commissioned-services-list-cd2bddc1214c.html
+  - data/input/elixir/internal-projects-commissioned-services-list-bed987b49080.html
+  - data/input/zenodo/api-records-15224009-d2fb4351fe01.json
+  - data/input/elixir/platforms-compute-eacbc306762c.html
