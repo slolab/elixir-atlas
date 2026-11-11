@@ -58,7 +58,7 @@ See [coverage and scraping instructions](data-sources-scraping.md).
     - How: Xenia, if permission is granted.
 16. **Archived Commissioned Services project plans** (stories 2, 4)
     - Why: deliverables and people per project (budget redacted); stands in for prior grant applications.
-    - How: Xenia, if permission is granted.
+    - How: Xenia, if permission is granted. Publicly released plans on Zenodo are collected separately under source 24.
 
 ## Extended stories — 10 November 2026
 
@@ -66,7 +66,7 @@ See [coverage and scraping instructions](data-sources-scraping.md).
     - Why: project dates, participating organisations, funding, reports and deliverables for grant writing, contributions and webpage updates.
     - How: English fact sheets, results and reporting pages for grants [101131096](https://cordis.europa.eu/project/id/101131096), [871075](https://cordis.europa.eu/project/id/871075) and [676559](https://cordis.europa.eu/project/id/676559), including public attachments. Organisation funding does not establish individual funding.
 18. **Project outputs and example pages** — public
-    - How: Zenodo searches by those three grant numbers, plus the STEERS community, including all record versions. Retain metadata and document/office attachments; exclude bulk CSV/TSV/JSON/XML research data. Explicit 24-compute and FAIR-FEGA pages retain conflicting evidence and support later comparisons. These commissioned activities have no identified Zenodo collection.
+    - How: Zenodo searches by those three grant numbers, plus the STEERS community, including all record versions. Retain metadata and document/office attachments; exclude bulk CSV/TSV/JSON/XML research data. Explicit 24-compute and FAIR-FEGA pages retain conflicting evidence and support later comparisons. The public Compute Platform work plan is included under source 24; no standalone FAIR-FEGA plan has been identified on Zenodo.
 19. **Additional Node teams and plans** — public
     - How: bounded official pages for Czechia, Finland, Luxembourg, Netherlands, France, Norway, Portugal and Switzerland, named in the example projects. Exact URLs and path boundaries are in `sources.py`.
     - Scope: teams, projects and roadmaps; Switzerland includes the first group listing and a named 24-compute participant lookup, rendered in Chrome. One explicit Portuguese FAIR-FEGA announcement supplies named contributions; other news remains excluded. Public profiles do not establish actual effort or complete membership.
@@ -79,6 +79,10 @@ See [coverage and scraping instructions](data-sources-scraping.md).
     - Need: approved rosters, work plans, minutes and participation summaries for Communities, Platforms, Focus Groups, working groups and task forces. Link-accessible Drive documents remain restricted unless approved for public use.
 23. **Bid outcomes** — needs permission
     - Need: approved redacted application records and outcomes, including unsuccessful bids; public funded-project catalogues cannot supply these.
+24. **Public ELIXIR project plans and roadmaps on Zenodo** — public
+    - Why: planned activities, contributors, milestones and deliverables, including all five Platform work plans and both BFSP work-plan versions.
+    - How: `zenodo-project-plans` searches across Zenodo for ELIXIR-related work/project/action/implementation plans, proposals and roadmaps, across all years and versions. Save metadata and document attachments in `data/input/zenodo-project-plans/`; reuse existing downloads. The query is in `sources.py` and does not require the ELIXIR community tag.
+    - Limit: results include related planning documents, not only project plans. A matching catalogue count verifies the search results, not every plan on Zenodo; poorly described or restricted plans can remain missing.
 
 ## Manually supplied
 

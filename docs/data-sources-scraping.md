@@ -29,6 +29,12 @@ All 16 enabled extension sources finished, with no pending or failed downloads. 
 
 Participation, group-activity and bid-outcome inputs remain deferred for permission and files. Existing FAIRsharing and internal-source gaps above remain unchanged.
 
+## Public Zenodo plans — 10 November 2026
+
+`zenodo-project-plans` collected **43 matching records and 35 document attachments**, with no pending or failed downloads. The source folder contains **80 files, 53.9 MB**, including two search pages and 28 reused downloads. All document checksums match Zenodo; offline resume passes. Eight image attachments and three XML copies remain excluded.
+
+All five Platform work plans and both BFSP versions were already in the published snapshot. This search also found the [ELIXIR–Euro-BioImaging action plan](https://zenodo.org/records/14743742), which has no ELIXIR community tag, plus related proposals and roadmaps. The 43 matches are not 43 project plans. Coverage is complete for the configured query; unidentified or restricted plans can remain missing. These additions are local and await the next S3 snapshot.
+
 ## S3 snapshot
 
 Snapshot **`20261110T134028Z`** contains **6,891 files, 5.07 GB**, including both original Perun CSV exports in `input/perun/`. Their remote SHA-256 checksums were verified. The Perun data is restricted and stays out of Git; browser cookies and session files are excluded from both Git and the snapshot.
@@ -41,6 +47,7 @@ uv run python src/scraping/run.py all --cookies .scraping/cookies.json
 uv run python src/scraping/run.py f1000 zenodo
 uv run python src/scraping/run.py biotools --refresh
 uv run python src/scraping/run.py cordis-steers zenodo-steers project-pages
+uv run python src/scraping/run.py zenodo-project-plans
 ```
 
 Omit names to list sources. [sources.py](../src/scraping/sources.py) covers every numbered entry in [data sources](data-sources.md), including deferred inputs. Add websites there; add unusual discovery functions in [discovery.py](../src/scraping/discovery.py). The runner stays shared.

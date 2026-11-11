@@ -65,6 +65,12 @@ SOURCES = {
         "https://zenodo.org/api/records?q=communities:elixir&size=25&sort=mostrecent",
         "https://zenodo.org/api/records/17202558",
     ), discover=zenodo, sections=(5, 8)),
+    "zenodo-project-plans": Source(("https://zenodo.org/api/records?" + urlencode({
+        "q": '(elixir OR communities:elixir) AND title:("work plan" OR "project plan" OR "work programme" '
+             'OR "work program" OR workplan OR "action plan" OR "implementation plan" OR "project proposal" '
+             'OR "grant proposal" OR roadmap OR "community proposal")',
+        "all_versions": "true", "size": 25, "sort": "mostrecent",
+    }),), discover=zenodo, sections=(24,), formats=PROJECT_DOCUMENTS),
     "systems-biology": Source((
         "https://arxiv.org/abs/2609.13127", "https://arxiv.org/pdf/2609.13127",
     ), discover=files, sections=(9,)),
