@@ -96,15 +96,26 @@ def release(db: Database):
 
 
 @app.get("/api/schema")
-def topology(db: Database, format: Literal["topology", "sql"] = "topology"):
+def topology(db: Database, format: Literal["topology", "sql"] = "topology", tables: str | None = Query(default=None, max_length=2000), detail: Literal["full", "summary"] = "full"):
     if format == "sql":
         if isinstance(db, Snapshot):
             raise HTTPException(501, "SQL querying requires PostgreSQL mode")
         current = views.one(db, "SELECT id, manifest, topology FROM release")
+        definitions = sql_schema(current["topology"])
+        if isinstance(tables, str):
+            selected = {name.strip().removeprefix("atlas.") for name in tables.split(",")}
+            unknown = selected - {name.removeprefix("atlas.") for name in definitions}
+            if unknown:
+                raise HTTPException(422, f"Unknown tables: {', '.join(sorted(unknown))}. Use /api/schema?format=sql&detail=summary to discover tables.")
+            definitions = {name: value for name, value in definitions.items() if name.removeprefix("atlas.") in selected}
+        if detail == "summary":
+            definitions = {name: {key: value for key, value in entity.items() if key != "columns"} | {
+                "references": {column: value["references"] for column, value in entity["columns"].items() if "references" in value and column != "biotope_provenance_id"}
+            } for name, entity in definitions.items()}
         return {"dialect": "PostgreSQL", "release": current["id"], "api_revision": API_REVISION,
                 "schema_sha256": current["manifest"]["files"]["schema_config.yaml"]["sha256"],
-                "tables": sql_schema(current["topology"]), "functions": sorted(query.FUNCTIONS), "cast_types": sorted(query.TYPES),
-                "requirements": ["FROM functions require WITH ORDINALITY, e.g. unnest(pages) WITH ORDINALITY AS u(url, position)."],
+                "tables": definitions, "functions": sorted(query.FUNCTIONS), "cast_types": sorted(query.TYPES),
+                "requirements": ["Quote column identifiers with double quotes, especially reserved words such as \"end\".", "FROM functions require WITH ORDINALITY, e.g. unnest(pages) WITH ORDINALITY AS u(url, position)."],
                 "limits": {"rows": query.MAX_ROWS, "bytes": query.MAX_BYTES, "timeout_ms": query.TIMEOUT_MS, "concurrency": 2}}
     if isinstance(db, Snapshot):
         return db.schema
@@ -128,7 +139,7 @@ def query_database(body: QueryRequest, request: Request, db: Database):
         result = query.execute(db, body.sql, body.limit, current, API_REVISION)
         return JSONResponse(content={**result, "request_id": request_id})
     except query.QueryError as error:
-        return JSONResponse(status_code=error.status, content={"request_id": request_id, "error": {"code": error.code, "message": str(error), "position": error.position}})
+        return JSONResponse(status_code=error.status, content={"request_id": request_id, "error": {"code": error.code, "message": str(error), "position": error.position, "hint": error.hint}})
     except DatabaseError as error:
         timeout = isinstance(error, (errors.QueryCanceled, errors.LockNotAvailable))
         return JSONResponse(status_code=408 if timeout else 400, content={"request_id": request_id, "error": {
@@ -193,6 +204,12 @@ def search(db: Database, q: str = Query(min_length=2, max_length=200), type: str
     term = q.strip()
     if len(term) < 2:
         raise HTTPException(422, "Enter at least two characters")
+    if isinstance(type, str):
+        types = {name.casefold(): name for name in topology(db)}
+        canonical = types.get(type.strip().casefold())
+        if canonical is None:
+            raise HTTPException(422, {"message": "Unknown search type", "types": list(types.values())})
+        type = canonical
     if isinstance(db, Snapshot):
         return db.search(term, type, limit, offset)
     escaped = term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")

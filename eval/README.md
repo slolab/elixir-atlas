@@ -64,7 +64,7 @@ Once annotators have started, do not edit a version in place. Raise `version` in
 Start the [local PostgreSQL API](../server/README.md#local-postgresql-api), then run:
 
 ```bash
-uv run src/eval/run.py eval/cqs/atlas_261110 --evidence skill-api \
+uv run src/eval/run.py eval/cqs/atlas_261111 --evidence skill-api \
   --experiment sql-local --api-url http://host.docker.internal:8811 \
   --api-probe-url http://127.0.0.1:8811 \
   --api-traces /tmp/atlas-sql-api-traces
@@ -75,3 +75,22 @@ Docker Desktop resolves `host.docker.internal` to the host. `--api-probe-url` le
 The first local SQL run on 11 November 2026 used the exact CQ snapshot and data release from `api-cached-20261111`, with the same model and reasoning settings. All ten trials completed. Requests fell from 299 to 129 and response bodies from 5.61 MB to 3.28 MB, while the graded mean fell from 0.55 to 0.40. This is an efficiency gain and an observed quality regression in one run; API and skill changes were evaluated together. The three downgraded answers lost a co-lead qualifier, missed source conflicts, or left a numbered deliverable match unresolved. These need evidence-level review before further tuning.
 
 Local artifacts are in `results/atlas_261110-v1__skill-api__sql-local-20261111-v1__gpt-6-luna/`: `comparison.json`, `trace-audit.json`, `cq-set.json`, native agent traces, answers, grades, agent response archives, and independent server traces. The audit verified all 129 responses and matched all 49 SQL request bodies and responses to server request IDs. No SQL result was truncated. Railway was not updated. A separate one-query activity diagnostic is in `results/sql-activity-local-20261111/`; its interpretation is no linked dated activity in the snapshot, not proof of public inactivity.
+
+
+## New CQ iteration, 11 November 2026
+
+The `atlas_261111` set has 21 questions. Two full local runs used identical CQs, release manifest, model and reasoning settings, with only the API and skill changed. Agents had the skill and API only; the raw-data pipeline was unchanged. No Railway changes were made.
+
+| Run | Questions | Mean score | API calls | HTTP errors | Response bytes |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `cq21-baseline` | 21 | 0.31 | 470 | 27 | 9.06 MB |
+| `cq21-improved` | 21 | 0.31 | 509 | 14 | 12.94 MB |
+| `cq21-batched` | 001, 003, 005, 007 | 0.50 | 85 | 2 | 2.16 MB |
+
+The API changes fix silent empty results from wrong-case search types, add generated schema summaries/table selection, and provide SQL quoting hints. The skill now distinguishes unknown status from ended groups and verifies source-specific evidence. The full-run score did not improve: leadership, STEERS commitments and tool contributors improved, while onboarding, German output reporting and bundle feasibility declined. Grading-path variation affects at least the onboarding comparison; the two runs are exploratory, not proof of a general quality gain.
+
+The final small skill refinement requests facts and evidence together in batched SQL. It was tested on four questions, not the full set. Those questions scored 0.25 in the baseline and 0.50 in both follow-ups. Compared with the first update, its overlap answer eliminated 24 full initiative fetches and reduced calls from 38 to 24. Across all four questions, calls fell from 91 to 85, while response bytes increased. More evidence retrieval is not automatically better evidence selection.
+
+`results/cq21-iteration-20261111/comparison.json` contains per-question results and verified controls. All 46 trials retain answers, grades, native sessions and trajectories; 1,064 responses were verified and all 368 SQL request bodies matched server traces. Each job has `trace-audit.json` and a frozen `cq-set.json`. The improved and batched runs share one frozen local API, so their independent server archives overlap; the audit reconciles their union by request ID. Jobs ran concurrently, so runtime is not a controlled comparison.
+
+`results/cq21-iteration-20261111/build-findings.json` records evidence-linked rebuild candidates: pan-ELIXIR directory membership/status, missing Community-to-report links, and missing joining/access qualifiers. These were documented without changing the graph or teaching reference-answer facts through the skill.

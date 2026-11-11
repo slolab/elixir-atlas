@@ -35,11 +35,12 @@ CommonTableExpr GroupingSet GroupingFunc SQLValueFunction CollateClause List
 
 
 class QueryError(ValueError):
-    def __init__(self, message, code="query_not_allowed", position=None, status=400):
+    def __init__(self, message, code="query_not_allowed", position=None, status=400, hint=None):
         super().__init__(message)
         self.code = code
         self.position = position
         self.status = status
+        self.hint = hint
 
 
 def names(parts):
@@ -63,7 +64,7 @@ def validate(query, tables):
         statements = json.loads(parse_sql_json(query))["stmts"]
     except ParseError as error:
         position = error.args[1] + 1 if len(error.args) > 1 and isinstance(error.args[1], int) else None
-        raise QueryError(error.args[0], "syntax_error", position) from error
+        raise QueryError(error.args[0], "syntax_error", position, hint='Use double quotes for identifiers such as "end" and single quotes for string values. Send the SQL as a JSON string; do not leave placeholders in it.') from error
     if len(statements) != 1 or "SelectStmt" not in statements[0]["stmt"]:
         raise QueryError("Send exactly one SELECT query, optionally with read-only CTEs.")
 

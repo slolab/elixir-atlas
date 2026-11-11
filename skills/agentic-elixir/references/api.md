@@ -6,9 +6,9 @@ Requests return JSON without authentication. URL-encode GET parameters and send 
 
 ## SQL
 
-Check `/api/release`. When `api.sql` is true, read `/api/schema?format=sql` for the served release's PostgreSQL tables, types, descriptions, foreign keys, supported functions and limits. Reuse it during the investigation. Otherwise use the GET routes below.
+Check `/api/release`. When `api.sql` is true, use `/api/schema?format=sql&detail=summary` to discover tables and relationship directions. Fetch full definitions with `&tables=initiative,holdsrole,person` (substitute your tables). These definitions retain the build's descriptions, types, nullability and foreign keys. Reuse them during the investigation. The unfiltered `/api/schema?format=sql` still returns everything; save large responses and inspect relevant sections rather than relying on truncated terminal output. Otherwise use the GET routes below.
 
-`POST /api/query` accepts `{"sql":"SELECT ...","limit":1000}`. It supports one read query with joins, CTEs, subqueries, unions, aggregates and window functions. FROM functions require `WITH ORDINALITY`, for example `unnest(i.pages) WITH ORDINALITY AS u(url, position)`. Dates may be text with varying precision; read their descriptions before casting. Count distinct entity IDs when several source-specific edges describe the same relationship.
+`POST /api/query` accepts `{"sql":"SELECT ...","limit":1000}`. It supports one read query with joins, CTEs, subqueries, unions, aggregates and window functions. FROM functions require `WITH ORDINALITY`, for example `unnest(i.pages) WITH ORDINALITY AS u(url, position)`. Quote column identifiers, especially reserved words such as `"end"`. Dates may be text with varying precision; read their descriptions before casting. Count distinct entity IDs when several source-specific edges describe the same relationship.
 
 ```sh
 atlas='https://atlas-production-d392fb6d.up.railway.app'
@@ -35,7 +35,7 @@ Errors include a message, SQLSTATE, position and hint where available. Correct t
 | `/api/home` | None | Node directory, initiative kinds and project overview |
 | `/api/overlap` | Optional `groups_only`, `minimum`, `liaisons` | Shared leadership roles |
 
-Search `q` is 2–200 characters. Use returned `entity_type` and `id` for record/relationship requests; types are case-sensitive and IDs must not be guessed. For relationship evidence, fetch its `relation_type` and `relation_id` through `/api/record`.
+Search `q` is 2–200 characters. Use returned `entity_type` and `id` for record/relationship requests; search type names are case-insensitive; use the returned casing for record and relationship requests. IDs must not be guessed. Unknown search types return 422 rather than an empty result. For relationship evidence, fetch its `relation_type` and `relation_id` through `/api/record`.
 
 Search supports quoted phrases, uppercase `OR` and `-excluded` terms; these disable fuzzy-name fallback. Search includes relationships as well as entities. Scores rank within a query, not across queries.
 

@@ -65,6 +65,8 @@ A dashboard build in `dashboard/dist` is served directly by FastAPI, or set `ATL
 
 SQL is available on Railway and in local PostgreSQL mode. `/api/release` reports SQL availability and the running API code fingerprint. `GET /api/schema?format=sql` adds PostgreSQL names, types, keys and query limits to the release's Biotope descriptions. The default schema response remains topology metadata.
 
+The local CQ iteration adds `detail=summary` for a compact table catalogue with relationship directions, and `tables=initiative,holdsrole` to select full definitions. Descriptions still come from the served build. Search accepts case-insensitive type names and returns 422 with valid types for an unknown type, so a filter mistake cannot silently look like missing evidence. SQL syntax errors also include quoting guidance. These follow-up changes have not been deployed to Railway.
+
 `POST /api/query` accepts `{"sql":"SELECT kind, count(*) FROM initiative GROUP BY kind","limit":1000}`. It returns positional rows, column metadata, release/request identities and truncation information. The [skill API reference](../skills/agentic-elixir/references/api.md) covers requests, errors and pagination.
 
 The reader role and read-only transaction enforce database permissions. The SQL parser accepts one read query over documented tables and supported built-ins, rejecting writes, commands, row locks and custom routines/types/operators. FROM functions require `WITH ORDINALITY` to prevent scalar field notation from invoking unsupported functions.

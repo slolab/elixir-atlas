@@ -137,6 +137,24 @@ class QueryTests(unittest.TestCase):
         self.assertEqual(schema["tables"]["atlas.thing"]["columns"]["aliases"]["type"], "text[]")
         self.assertTrue(schema["tables"]["atlas.thing"]["columns"]["optional"]["nullable"])
         self.assertEqual(len(schema["api_revision"]), 64)
+        selected = self.client.get("/api/schema?format=sql&tables=atlas.link,thing").json()
+        self.assertEqual(set(selected["tables"]), {"atlas.link", "atlas.thing"})
+        self.assertEqual(selected["tables"]["atlas.thing"], schema["tables"]["atlas.thing"])
+        summary = self.client.get("/api/schema?format=sql&detail=summary").json()
+        self.assertNotIn("columns", summary["tables"]["atlas.link"])
+        self.assertEqual(summary["tables"]["atlas.link"]["references"]["source"], "atlas.thing.id")
+        self.assertEqual(self.client.get("/api/schema?format=sql&tables=private.canary").status_code, 422)
+
+    def test_search_type_casing_and_invalid_types(self):
+        canonical = self.client.get("/api/search?q=Alpha&type=Thing").json()
+        for spelling in ("thing", "THING"):
+            result = self.client.get("/api/search", params={"q": "Alpha", "type": spelling})
+            self.assertEqual(result.status_code, 200)
+            self.assertEqual(result.json(), canonical)
+            self.assertEqual(result.json()["total"], 1)
+        result = self.client.get("/api/search?q=Alpha&type=not_a_type")
+        self.assertEqual(result.status_code, 422)
+        self.assertIn("Thing", result.json()["detail"]["types"])
 
     def test_startup_detects_column_grants_and_privileged_functions(self):
         with psycopg.connect(self.owner_url) as db:
@@ -171,6 +189,7 @@ class QueryTests(unittest.TestCase):
         result = self.post("SELEC name FROM thing")
         self.assertEqual(result.json()["error"]["code"], "syntax_error")
         self.assertIsNotNone(result.json()["error"]["position"])
+        self.assertIn('"end"', result.json()["error"]["hint"])
         for statement in ["WITH x AS (DELETE FROM thing RETURNING *) SELECT * FROM x", "SELECT (123::bigint).pg_advisory_lock", "WITH pg_roles AS (SELECT * FROM pg_roles) SELECT * FROM pg_roles"]:
             self.assertEqual(self.post(statement).status_code, 400)
         self.assertEqual(self.post("SELECT count(*) FROM thing").json()["rows"], [[1]])
