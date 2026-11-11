@@ -4,4 +4,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates curl git jq poppler-utils procps python3 ripgrep \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+RUN npm install -g @openai/codex@0.167.1 && codex --version
 WORKDIR /workspace

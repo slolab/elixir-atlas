@@ -35,6 +35,27 @@ def ordered_tables(schema):
     return sorted(schema, key=lambda name: (schema[name]["represented_as"] == "edge", name))
 
 
+def sql_schema(schema):
+    tables = {}
+    for name in ordered_tables(schema):
+        entity = schema[name]
+        metadata = entity.get("biotope", {})
+        columns = {"id": {"type": "text", "nullable": False, "description": "Stable record identifier.", "primary_key": True}}
+        if entity["represented_as"] == "edge":
+            for end in ("source", "target"):
+                columns[end] = {"type": "text", "nullable": False, "references": f"atlas.{entity[end].lower()}.id", "description": f"The {end} endpoint ({entity[end]})."}
+        for column, kind in entity["properties"].items():
+            columns[column] = {"type": TYPES[kind], "nullable": column in metadata.get("nullable", []), "description": metadata.get("property_descriptions", {}).get(column, "")}
+            if column == "biotope_provenance_id":
+                columns[column].update(references="atlas.provenance.id", description="Source evidence and mapping identifiers for this record.")
+        tables[f"atlas.{name.lower()}"] = {"concept": name, "kind": entity["represented_as"], "description": entity.get("description", ""), "columns": columns}
+    tables["atlas.provenance"] = {"description": "Build evidence for a record. Internal artifact paths identify provenance, not public citations; use source URLs and DOIs for citations.", "columns": {
+        "id": {"type": "bigint", "nullable": False, "primary_key": True},
+        "data": {"type": "jsonb", "nullable": False, "description": "mappings and evidence entries with source artifact, version and location."},
+    }}
+    return tables
+
+
 def ddl(schema, namespace="atlas"):
     ns = identifier(namespace)
     statements = [

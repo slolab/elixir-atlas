@@ -11,6 +11,7 @@ from psycopg import sql
 from psycopg.types.json import Jsonb
 
 from .schema import ddl, identifier, ordered_tables, read_schema
+from .permissions import grant_reader
 
 
 def verify_release(path):
@@ -58,7 +59,7 @@ def search_record(name, row, entity, titles):
     return name, row["id"], title, names, body, url
 
 
-def import_release(path, database_url, namespace="atlas"):
+def import_release(path, database_url, namespace="atlas", reader=None):
     identifier(namespace)
     staging = namespace + "_loading"
     manifest = verify_release(path)
@@ -113,6 +114,8 @@ def import_release(path, database_url, namespace="atlas"):
             connection.execute(sql.SQL("INSERT INTO {}.release (id, manifest, topology, counts) VALUES (%s, %s, %s, %s)").format(sql.Identifier(staging)), (manifest["id"], Jsonb(manifest), Jsonb(schema), Jsonb(counts)))
             for table in [*map(str.lower, schema), "search_document"]:
                 connection.execute(sql.SQL("ANALYZE {}.{}").format(sql.Identifier(staging), sql.Identifier(table)))
+            if reader:
+                grant_reader(connection, staging, reader)
             connection.execute(sql.SQL("DROP SCHEMA IF EXISTS {} CASCADE").format(sql.Identifier(namespace)))
             connection.execute(sql.SQL("ALTER SCHEMA {} RENAME TO {}").format(sql.Identifier(staging), sql.Identifier(namespace)))
     return {"release": manifest["id"], "tables": len(counts), "records": sum(counts.values()), "counts": counts}
@@ -126,7 +129,9 @@ def main():
     if args.schema_only:
         print("CREATE EXTENSION IF NOT EXISTS pg_trgm;\n" + ddl(read_schema(args.release / "schema_config.yaml")))
     else:
-        print(json.dumps(import_release(args.release.resolve(), os.environ["DATABASE_URL"]), indent=2))
+        from psycopg.conninfo import conninfo_to_dict
+        reader = conninfo_to_dict(os.environ["DATABASE_URL"])["user"]
+        print(json.dumps(import_release(args.release.resolve(), os.environ["DATABASE_ADMIN_URL"], reader=reader), indent=2))
 
 
 if __name__ == "__main__":

@@ -78,11 +78,11 @@ class SchemaTests(unittest.TestCase):
                 verify_release(path)
 
 
-@unittest.skipUnless(os.environ.get("DATABASE_URL"), "Requires PostgreSQL")
+@unittest.skipUnless(os.environ.get("DATABASE_ADMIN_URL"), "Requires PostgreSQL owner credentials")
 class ImportTests(unittest.TestCase):
     def test_typed_import_repeat_and_rollback(self):
         namespace = "atlas_test_" + uuid.uuid4().hex[:12]
-        url = os.environ["DATABASE_URL"]
+        url = os.environ["DATABASE_ADMIN_URL"]
         try:
             with tempfile.TemporaryDirectory() as directory:
                 path = Path(directory)
