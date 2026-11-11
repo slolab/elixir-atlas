@@ -1,0 +1,337 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/input/perun",
+  "description": "Dataset containing 2 files (text/csv) with automatically inferred types and structure",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "citeAs": "Unknown. (2026). data/input/perun [Data set].",
+  "dateCreated": "2026-11-10T16:17:36.179446Z",
+  "version": "1.0.0",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "export%202.csv",
+      "name": "export 2.csv",
+      "contentSize": "79669",
+      "contentUrl": "export 2.csv",
+      "encodingFormat": "text/csv",
+      "sha256": "3223dfe246d6520197fef57a949004de44b9d581ae70a4baeee521f51c40804d"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "export.csv",
+      "name": "export.csv",
+      "contentSize": "129363",
+      "contentUrl": "export.csv",
+      "encodingFormat": "text/csv",
+      "sha256": "a07c1f0d75f22b01265e3adab89ba42bde8851236ec25ae53d988d96079092b1"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "export%202.csv#export%202",
+      "name": "export 2",
+      "description": "Records from export 2.csv",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/type",
+          "name": "type",
+          "description": "Column 'type' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/fullName",
+          "name": "fullName",
+          "description": "Column 'fullName' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "fullName"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/status",
+          "name": "status",
+          "description": "Column 'status' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/groupStatus",
+          "name": "groupStatus",
+          "description": "Column 'groupStatus' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "groupStatus"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/organization",
+          "name": "organization",
+          "description": "Column 'organization' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "organization"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/email",
+          "name": "email",
+          "description": "Column 'email' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "email"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/logins",
+          "name": "logins",
+          "description": "Column 'logins' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "logins"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export%202.csv#export%202/lifescienceid-username",
+          "name": "lifescienceid-username",
+          "description": "Column 'lifescienceid-username' from export 2.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export%202.csv"
+            },
+            "extract": {
+              "column": "lifescienceid-username"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "export.csv#export",
+      "name": "export",
+      "description": "Records from export.csv",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/type",
+          "name": "type",
+          "description": "Column 'type' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/fullName",
+          "name": "fullName",
+          "description": "Column 'fullName' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "fullName"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/status",
+          "name": "status",
+          "description": "Column 'status' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/groupStatus",
+          "name": "groupStatus",
+          "description": "Column 'groupStatus' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "groupStatus"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/organization",
+          "name": "organization",
+          "description": "Column 'organization' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "organization"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/email",
+          "name": "email",
+          "description": "Column 'email' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "email"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/logins",
+          "name": "logins",
+          "description": "Column 'logins' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "logins"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "export.csv#export/lifescienceid-username",
+          "name": "lifescienceid-username",
+          "description": "Column 'lifescienceid-username' from export.csv",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "export.csv"
+            },
+            "extract": {
+              "column": "lifescienceid-username"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    }
+  ],
+  "biotope:status": "processed"
+}

@@ -1,0 +1,1186 @@
+[
+{
+"uri": "http://edamontology.org/topic_3521",
+"label": "2D PAGE experiment"
+},
+{
+"uri": "http://edamontology.org/topic_4029",
+"label": "Acoustics"
+},
+{
+"uri": "http://edamontology.org/topic_3810",
+"label": "Agricultural science"
+},
+{
+"uri": "http://edamontology.org/topic_0083",
+"label": "Alignment"
+},
+{
+"uri": "http://edamontology.org/topic_3400",
+"label": "Allergy, clinical immunology and immunotherapeutics"
+},
+{
+"uri": "http://edamontology.org/topic_3370",
+"label": "Analytical chemistry"
+},
+{
+"uri": "http://edamontology.org/topic_3067",
+"label": "Anatomy"
+},
+{
+"uri": "http://edamontology.org/topic_3679",
+"label": "Animal study"
+},
+{
+"uri": "http://edamontology.org/topic_4013",
+"label": "Antimicrobial resistance"
+},
+{
+"uri": "http://edamontology.org/topic_3569",
+"label": "Applied mathematics"
+},
+{
+"uri": "http://edamontology.org/topic_4053",
+"label": "ATAC-seq"
+},
+{
+"uri": "http://edamontology.org/topic_3337",
+"label": "Biobank"
+},
+{
+"uri": "http://edamontology.org/topic_3292",
+"label": "Biochemistry"
+},
+{
+"uri": "http://edamontology.org/topic_3050",
+"label": "Biodiversity"
+},
+{
+"uri": "http://edamontology.org/topic_3398",
+"label": "Bioengineering"
+},
+{
+"uri": "http://edamontology.org/topic_3383",
+"label": "Bioimaging"
+},
+{
+"uri": "http://edamontology.org/topic_0091",
+"label": "Bioinformatics"
+},
+{
+"uri": "http://edamontology.org/topic_3070",
+"label": "Biology"
+},
+{
+"uri": "http://edamontology.org/topic_3360",
+"label": "Biomarkers"
+},
+{
+"uri": "http://edamontology.org/topic_3368",
+"label": "Biomaterials"
+},
+{
+"uri": "http://edamontology.org/topic_3344",
+"label": "Biomedical science"
+},
+{
+"uri": "http://edamontology.org/topic_3892",
+"label": "Biomolecular simulation"
+},
+{
+"uri": "http://edamontology.org/topic_3306",
+"label": "Biophysics"
+},
+{
+"uri": "http://edamontology.org/topic_4019",
+"label": "Biosciences"
+},
+{
+"uri": "http://edamontology.org/topic_3297",
+"label": "Biotechnology"
+},
+{
+"uri": "http://edamontology.org/topic_3374",
+"label": "Biotherapeutics"
+},
+{
+"uri": "http://edamontology.org/topic_0152",
+"label": "Carbohydrates"
+},
+{
+"uri": "http://edamontology.org/topic_4020",
+"label": "Carbon cycle"
+},
+{
+"uri": "http://edamontology.org/topic_3335",
+"label": "Cardiology"
+},
+{
+"uri": "http://edamontology.org/topic_0608",
+"label": "Cell and tissue culture"
+},
+{
+"uri": "http://edamontology.org/topic_2229",
+"label": "Cell biology"
+},
+{
+"uri": "http://edamontology.org/topic_3340",
+"label": "Cell culture collection"
+},
+{
+"uri": "http://edamontology.org/topic_3369",
+"label": "Chemical biology"
+},
+{
+"uri": "http://edamontology.org/topic_2258",
+"label": "Cheminformatics"
+},
+{
+"uri": "http://edamontology.org/topic_3314",
+"label": "Chemistry"
+},
+{
+"uri": "http://edamontology.org/topic_3931",
+"label": "Chemometrics"
+},
+{
+"uri": "http://edamontology.org/topic_3179",
+"label": "ChIP-on-chip"
+},
+{
+"uri": "http://edamontology.org/topic_3169",
+"label": "ChIP-seq"
+},
+{
+"uri": "http://edamontology.org/topic_3940",
+"label": "Chromosome conformation capture"
+},
+{
+"uri": "http://edamontology.org/topic_3944",
+"label": "Cladistics"
+},
+{
+"uri": "http://edamontology.org/topic_3341",
+"label": "Clone library"
+},
+{
+"uri": "http://edamontology.org/topic_0797",
+"label": "Comparative genomics"
+},
+{
+"uri": "http://edamontology.org/topic_3423",
+"label": "Complementary medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3343",
+"label": "Compound libraries and screening"
+},
+{
+"uri": "http://edamontology.org/topic_3307",
+"label": "Computational biology"
+},
+{
+"uri": "http://edamontology.org/topic_3332",
+"label": "Computational chemistry"
+},
+{
+"uri": "http://edamontology.org/topic_3316",
+"label": "Computer science"
+},
+{
+"uri": "http://edamontology.org/topic_3958",
+"label": "Copy number variation"
+},
+{
+"uri": "http://edamontology.org/topic_3403",
+"label": "Critical care medicine"
+},
+{
+"uri": "http://edamontology.org/topic_4017",
+"label": "Cryogenic electron microscopy"
+},
+{
+"uri": "http://edamontology.org/topic_4045",
+"label": "Cybersecurity"
+},
+{
+"uri": "http://edamontology.org/topic_3959",
+"label": "Cytogenetics"
+},
+{
+"uri": "http://edamontology.org/topic_3934",
+"label": "Cytometry"
+},
+{
+"uri": "http://edamontology.org/topic_3077",
+"label": "Data acquisition"
+},
+{
+"uri": "http://edamontology.org/topic_3365",
+"label": "Data architecture, analysis and design"
+},
+{
+"uri": "http://edamontology.org/topic_0219",
+"label": "Data curation and archival"
+},
+{
+"uri": "http://edamontology.org/topic_3571",
+"label": "Data governance"
+},
+{
+"uri": "http://edamontology.org/topic_3345",
+"label": "Data identity and mapping"
+},
+{
+"uri": "http://edamontology.org/topic_3366",
+"label": "Data integration and warehousing"
+},
+{
+"uri": "http://edamontology.org/topic_3071",
+"label": "Data management"
+},
+{
+"uri": "http://edamontology.org/topic_3473",
+"label": "Data mining"
+},
+{
+"uri": "http://edamontology.org/topic_4044",
+"label": "Data protection"
+},
+{
+"uri": "http://edamontology.org/topic_3572",
+"label": "Data quality management"
+},
+{
+"uri": "http://edamontology.org/topic_4011",
+"label": "Data rescue"
+},
+{
+"uri": "http://edamontology.org/topic_3263",
+"label": "Data security"
+},
+{
+"uri": "http://edamontology.org/topic_0092",
+"label": "Data visualisation"
+},
+{
+"uri": "http://edamontology.org/topic_3489",
+"label": "Database management"
+},
+{
+"uri": "http://edamontology.org/topic_3405",
+"label": "Dentistry"
+},
+{
+"uri": "http://edamontology.org/topic_3404",
+"label": "Dermatology"
+},
+{
+"uri": "http://edamontology.org/topic_3064",
+"label": "Developmental biology"
+},
+{
+"uri": "http://edamontology.org/topic_0654",
+"label": "DNA"
+},
+{
+"uri": "http://edamontology.org/topic_3125",
+"label": "DNA binding sites"
+},
+{
+"uri": "http://edamontology.org/topic_2533",
+"label": "DNA mutation"
+},
+{
+"uri": "http://edamontology.org/topic_3176",
+"label": "DNA packaging"
+},
+{
+"uri": "http://edamontology.org/topic_2885",
+"label": "DNA polymorphism"
+},
+{
+"uri": "http://edamontology.org/topic_3127",
+"label": "DNA replication and recombination"
+},
+{
+"uri": "http://edamontology.org/topic_3373",
+"label": "Drug development"
+},
+{
+"uri": "http://edamontology.org/topic_3336",
+"label": "Drug discovery"
+},
+{
+"uri": "http://edamontology.org/topic_3375",
+"label": "Drug metabolism"
+},
+{
+"uri": "http://edamontology.org/topic_3406",
+"label": "Ear, nose and throat medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3954",
+"label": "Echography"
+},
+{
+"uri": "http://edamontology.org/topic_0610",
+"label": "Ecology"
+},
+{
+"uri": "http://edamontology.org/topic_4016",
+"label": "Electrocardiography"
+},
+{
+"uri": "http://edamontology.org/topic_4014",
+"label": "Electroencephalography"
+},
+{
+"uri": "http://edamontology.org/topic_0611",
+"label": "Electron microscopy"
+},
+{
+"uri": "http://edamontology.org/topic_3065",
+"label": "Embryology"
+},
+{
+"uri": "http://edamontology.org/topic_3407",
+"label": "Endocrinology and metabolism"
+},
+{
+"uri": "http://edamontology.org/topic_3855",
+"label": "Environmental science"
+},
+{
+"uri": "http://edamontology.org/topic_0821",
+"label": "Enzymes"
+},
+{
+"uri": "http://edamontology.org/topic_3295",
+"label": "Epigenetics"
+},
+{
+"uri": "http://edamontology.org/topic_3173",
+"label": "Epigenomics"
+},
+{
+"uri": "http://edamontology.org/topic_3974",
+"label": "Epistasis"
+},
+{
+"uri": "http://edamontology.org/topic_3299",
+"label": "Evolutionary biology"
+},
+{
+"uri": "http://edamontology.org/topic_3676",
+"label": "Exome sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_3678",
+"label": "Experimental design and studies"
+},
+{
+"uri": "http://edamontology.org/topic_4012",
+"label": "FAIR data"
+},
+{
+"uri": "http://edamontology.org/topic_3955",
+"label": "Fluxomics"
+},
+{
+"uri": "http://edamontology.org/topic_3573",
+"label": "Freshwater biology"
+},
+{
+"uri": "http://edamontology.org/topic_1775",
+"label": "Function analysis"
+},
+{
+"uri": "http://edamontology.org/topic_0085",
+"label": "Functional genomics"
+},
+{
+"uri": "http://edamontology.org/topic_0659",
+"label": "Functional, regulatory and non-coding RNA"
+},
+{
+"uri": "http://edamontology.org/topic_3409",
+"label": "Gastroenterology"
+},
+{
+"uri": "http://edamontology.org/topic_3410",
+"label": "Gender medicine"
+},
+{
+"uri": "http://edamontology.org/topic_0623",
+"label": "Gene and protein families"
+},
+{
+"uri": "http://edamontology.org/topic_0203",
+"label": "Gene expression"
+},
+{
+"uri": "http://edamontology.org/topic_0204",
+"label": "Gene regulation"
+},
+{
+"uri": "http://edamontology.org/topic_0114",
+"label": "Gene structure"
+},
+{
+"uri": "http://edamontology.org/topic_3512",
+"label": "Gene transcripts"
+},
+{
+"uri": "http://edamontology.org/topic_3912",
+"label": "Genetic engineering"
+},
+{
+"uri": "http://edamontology.org/topic_0199",
+"label": "Genetic variation"
+},
+{
+"uri": "http://edamontology.org/topic_3053",
+"label": "Genetics"
+},
+{
+"uri": "http://edamontology.org/topic_3923",
+"label": "Genome resequencing"
+},
+{
+"uri": "http://edamontology.org/topic_4037",
+"label": "Genomic imprinting"
+},
+{
+"uri": "http://edamontology.org/topic_0622",
+"label": "Genomics"
+},
+{
+"uri": "http://edamontology.org/topic_0625",
+"label": "Genotype and phenotype"
+},
+{
+"uri": "http://edamontology.org/topic_3516",
+"label": "Genotyping experiment"
+},
+{
+"uri": "http://edamontology.org/topic_3399",
+"label": "Geriatric medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3517",
+"label": "GWAS study"
+},
+{
+"uri": "http://edamontology.org/topic_3411",
+"label": "Gynaecology and obstetrics"
+},
+{
+"uri": "http://edamontology.org/topic_3408",
+"label": "Haematology"
+},
+{
+"uri": "http://edamontology.org/topic_3412",
+"label": "Hepatic and biliary medicine"
+},
+{
+"uri": "http://edamontology.org/topic_4052",
+"label": "Hi-C"
+},
+{
+"uri": "http://edamontology.org/topic_2815",
+"label": "Human biology"
+},
+{
+"uri": "http://edamontology.org/topic_3574",
+"label": "Human genetics"
+},
+{
+"uri": "http://edamontology.org/topic_3382",
+"label": "Imaging"
+},
+{
+"uri": "http://edamontology.org/topic_3930",
+"label": "Immunogenetics"
+},
+{
+"uri": "http://edamontology.org/topic_3948",
+"label": "Immunoinformatics"
+},
+{
+"uri": "http://edamontology.org/topic_0804",
+"label": "Immunology"
+},
+{
+"uri": "http://edamontology.org/topic_3967",
+"label": "Immunomics"
+},
+{
+"uri": "http://edamontology.org/topic_3656",
+"label": "Immunoprecipitation experiment"
+},
+{
+"uri": "http://edamontology.org/topic_2830",
+"label": "Immunoproteins and antigens"
+},
+{
+"uri": "http://edamontology.org/topic_3324",
+"label": "Infectious disease"
+},
+{
+"uri": "http://edamontology.org/topic_0605",
+"label": "Informatics"
+},
+{
+"uri": "http://edamontology.org/topic_3386",
+"label": "Laboratory animal science"
+},
+{
+"uri": "http://edamontology.org/topic_0607",
+"label": "Laboratory information management"
+},
+{
+"uri": "http://edamontology.org/topic_3361",
+"label": "Laboratory techniques"
+},
+{
+"uri": "http://edamontology.org/topic_3385",
+"label": "Light microscopy"
+},
+{
+"uri": "http://edamontology.org/topic_0153",
+"label": "Lipids"
+},
+{
+"uri": "http://edamontology.org/topic_3068",
+"label": "Literature and language"
+},
+{
+"uri": "http://edamontology.org/topic_4056",
+"label": "Long-read sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_3474",
+"label": "Machine learning"
+},
+{
+"uri": "http://edamontology.org/topic_0102",
+"label": "Mapping"
+},
+{
+"uri": "http://edamontology.org/topic_3387",
+"label": "Marine biology"
+},
+{
+"uri": "http://edamontology.org/topic_3315",
+"label": "Mathematics"
+},
+{
+"uri": "http://edamontology.org/topic_3576",
+"label": "Medical biotechnology"
+},
+{
+"uri": "http://edamontology.org/topic_3384",
+"label": "Medical imaging"
+},
+{
+"uri": "http://edamontology.org/topic_3063",
+"label": "Medical informatics"
+},
+{
+"uri": "http://edamontology.org/topic_0209",
+"label": "Medicinal chemistry"
+},
+{
+"uri": "http://edamontology.org/topic_3303",
+"label": "Medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3376",
+"label": "Medicines research and development"
+},
+{
+"uri": "http://edamontology.org/topic_0820",
+"label": "Membrane and lipoproteins"
+},
+{
+"uri": "http://edamontology.org/topic_4038",
+"label": "Metabarcoding"
+},
+{
+"uri": "http://edamontology.org/topic_3939",
+"label": "Metabolic engineering"
+},
+{
+"uri": "http://edamontology.org/topic_3172",
+"label": "Metabolomics"
+},
+{
+"uri": "http://edamontology.org/topic_3837",
+"label": "Metagenomic sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_3174",
+"label": "Metagenomics"
+},
+{
+"uri": "http://edamontology.org/topic_4060",
+"label": "Metaproteomics"
+},
+{
+"uri": "http://edamontology.org/topic_3941",
+"label": "Metatranscriptomics"
+},
+{
+"uri": "http://edamontology.org/topic_3674",
+"label": "Methylated DNA immunoprecipitation"
+},
+{
+"uri": "http://edamontology.org/topic_3518",
+"label": "Microarray experiment"
+},
+{
+"uri": "http://edamontology.org/topic_3339",
+"label": "Microbial collection"
+},
+{
+"uri": "http://edamontology.org/topic_3697",
+"label": "Microbial ecology"
+},
+{
+"uri": "http://edamontology.org/topic_3301",
+"label": "Microbiology"
+},
+{
+"uri": "http://edamontology.org/topic_4030",
+"label": "Microfluidics"
+},
+{
+"uri": "http://edamontology.org/topic_4054",
+"label": "miRNA silencing"
+},
+{
+"uri": "http://edamontology.org/topic_0798",
+"label": "Mobile genetic elements"
+},
+{
+"uri": "http://edamontology.org/topic_0621",
+"label": "Model organisms"
+},
+{
+"uri": "http://edamontology.org/topic_3047",
+"label": "Molecular biology"
+},
+{
+"uri": "http://edamontology.org/topic_0176",
+"label": "Molecular dynamics"
+},
+{
+"uri": "http://edamontology.org/topic_3945",
+"label": "Molecular evolution"
+},
+{
+"uri": "http://edamontology.org/topic_3321",
+"label": "Molecular genetics"
+},
+{
+"uri": "http://edamontology.org/topic_0602",
+"label": "Molecular interactions, pathways and networks"
+},
+{
+"uri": "http://edamontology.org/topic_3388",
+"label": "Molecular medicine"
+},
+{
+"uri": "http://edamontology.org/topic_2275",
+"label": "Molecular modelling"
+},
+{
+"uri": "http://edamontology.org/topic_3338",
+"label": "Mouse clinic"
+},
+{
+"uri": "http://edamontology.org/topic_3444",
+"label": "MRI"
+},
+{
+"uri": "http://edamontology.org/topic_4021",
+"label": "Multiomics"
+},
+{
+"uri": "http://edamontology.org/topic_3416",
+"label": "Musculoskeletal medicine"
+},
+{
+"uri": "http://edamontology.org/topic_0218",
+"label": "Natural language processing"
+},
+{
+"uri": "http://edamontology.org/topic_3304",
+"label": "Neurobiology"
+},
+{
+"uri": "http://edamontology.org/topic_3334",
+"label": "Neurology"
+},
+{
+"uri": "http://edamontology.org/topic_3448",
+"label": "Neutron diffraction"
+},
+{
+"uri": "http://edamontology.org/topic_0593",
+"label": "NMR"
+},
+{
+"uri": "http://edamontology.org/topic_3511",
+"label": "Nucleic acid sites, features and motifs"
+},
+{
+"uri": "http://edamontology.org/topic_0097",
+"label": "Nucleic acid structure analysis"
+},
+{
+"uri": "http://edamontology.org/topic_0077",
+"label": "Nucleic acids"
+},
+{
+"uri": "http://edamontology.org/topic_3390",
+"label": "Nutritional science"
+},
+{
+"uri": "http://edamontology.org/topic_3391",
+"label": "Omics"
+},
+{
+"uri": "http://edamontology.org/topic_2640",
+"label": "Oncology"
+},
+{
+"uri": "http://edamontology.org/topic_0089",
+"label": "Ontology and terminology"
+},
+{
+"uri": "http://edamontology.org/topic_4010",
+"label": "Open science"
+},
+{
+"uri": "http://edamontology.org/topic_3417",
+"label": "Opthalmology"
+},
+{
+"uri": "http://edamontology.org/topic_3418",
+"label": "Paediatrics"
+},
+{
+"uri": "http://edamontology.org/topic_3401",
+"label": "Pain medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3943",
+"label": "Paleogenomics"
+},
+{
+"uri": "http://edamontology.org/topic_3302",
+"label": "Parasitology"
+},
+{
+"uri": "http://edamontology.org/topic_0634",
+"label": "Pathology"
+},
+{
+"uri": "http://edamontology.org/topic_3519",
+"label": "PCR experiment"
+},
+{
+"uri": "http://edamontology.org/topic_3577",
+"label": "Personalised medicine"
+},
+{
+"uri": "http://edamontology.org/topic_0208",
+"label": "Pharmacogenomics"
+},
+{
+"uri": "http://edamontology.org/topic_0202",
+"label": "Pharmacology"
+},
+{
+"uri": "http://edamontology.org/topic_3378",
+"label": "Pharmacovigilance"
+},
+{
+"uri": "http://edamontology.org/topic_3298",
+"label": "Phenomics"
+},
+{
+"uri": "http://edamontology.org/topic_3293",
+"label": "Phylogenetics"
+},
+{
+"uri": "http://edamontology.org/topic_0194",
+"label": "Phylogenomics"
+},
+{
+"uri": "http://edamontology.org/topic_0084",
+"label": "Phylogeny"
+},
+{
+"uri": "http://edamontology.org/topic_3318",
+"label": "Physics"
+},
+{
+"uri": "http://edamontology.org/topic_3300",
+"label": "Physiology"
+},
+{
+"uri": "http://edamontology.org/topic_0780",
+"label": "Plant biology"
+},
+{
+"uri": "http://edamontology.org/topic_3056",
+"label": "Population genetics"
+},
+{
+"uri": "http://edamontology.org/topic_3796",
+"label": "Population genomics"
+},
+{
+"uri": "http://edamontology.org/topic_3379",
+"label": "Preclinical and clinical studies"
+},
+{
+"uri": "http://edamontology.org/topic_0632",
+"label": "Probes and primers"
+},
+{
+"uri": "http://edamontology.org/topic_3534",
+"label": "Protein binding sites"
+},
+{
+"uri": "http://edamontology.org/topic_3538",
+"label": "Protein disordered structure"
+},
+{
+"uri": "http://edamontology.org/topic_0108",
+"label": "Protein expression"
+},
+{
+"uri": "http://edamontology.org/topic_0130",
+"label": "Protein folding, stability and design"
+},
+{
+"uri": "http://edamontology.org/topic_0736",
+"label": "Protein folds and structural domains"
+},
+{
+"uri": "http://edamontology.org/topic_0137",
+"label": "Protein hydropathy"
+},
+{
+"uri": "http://edamontology.org/topic_3957",
+"label": "Protein interaction experiment"
+},
+{
+"uri": "http://edamontology.org/topic_3557",
+"label": "Protein interaction experiment"
+},
+{
+"uri": "http://edamontology.org/topic_0128",
+"label": "Protein interactions"
+},
+{
+"uri": "http://edamontology.org/topic_0601",
+"label": "Protein modifications"
+},
+{
+"uri": "http://edamontology.org/topic_0123",
+"label": "Protein properties"
+},
+{
+"uri": "http://edamontology.org/topic_3542",
+"label": "Protein secondary structure"
+},
+{
+"uri": "http://edamontology.org/topic_3043",
+"label": "Protein sequences"
+},
+{
+"uri": "http://edamontology.org/topic_3510",
+"label": "Protein sites, features and motifs"
+},
+{
+"uri": "http://edamontology.org/topic_0166",
+"label": "Protein structural motifs and surfaces"
+},
+{
+"uri": "http://edamontology.org/topic_2814",
+"label": "Protein structure analysis"
+},
+{
+"uri": "http://edamontology.org/topic_0140",
+"label": "Protein targeting and localisation"
+},
+{
+"uri": "http://edamontology.org/topic_3120",
+"label": "Protein variants"
+},
+{
+"uri": "http://edamontology.org/topic_0078",
+"label": "Proteins"
+},
+{
+"uri": "http://edamontology.org/topic_3922",
+"label": "Proteogenomics"
+},
+{
+"uri": "http://edamontology.org/topic_0644",
+"label": "Proteome"
+},
+{
+"uri": "http://edamontology.org/topic_0121",
+"label": "Proteomics"
+},
+{
+"uri": "http://edamontology.org/topic_3520",
+"label": "Proteomics experiment"
+},
+{
+"uri": "http://edamontology.org/topic_3419",
+"label": "Psychiatry"
+},
+{
+"uri": "http://edamontology.org/topic_3305",
+"label": "Public health and epidemiology"
+},
+{
+"uri": "http://edamontology.org/topic_3570",
+"label": "Pure mathematics"
+},
+{
+"uri": "http://edamontology.org/topic_3393",
+"label": "Quality affairs"
+},
+{
+"uri": "http://edamontology.org/topic_3055",
+"label": "Quantitative genetics"
+},
+{
+"uri": "http://edamontology.org/topic_3325",
+"label": "Rare diseases"
+},
+{
+"uri": "http://edamontology.org/topic_3395",
+"label": "Regenerative medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3394",
+"label": "Regulatory affairs"
+},
+{
+"uri": "http://edamontology.org/topic_3420",
+"label": "Reproductive health"
+},
+{
+"uri": "http://edamontology.org/topic_3322",
+"label": "Respiratory medicine"
+},
+{
+"uri": "http://edamontology.org/topic_4027",
+"label": "Ribosome Profiling"
+},
+{
+"uri": "http://edamontology.org/topic_0099",
+"label": "RNA"
+},
+{
+"uri": "http://edamontology.org/topic_3794",
+"label": "RNA immunoprecipitation"
+},
+{
+"uri": "http://edamontology.org/topic_3320",
+"label": "RNA splicing"
+},
+{
+"uri": "http://edamontology.org/topic_3170",
+"label": "RNA-Seq"
+},
+{
+"uri": "http://edamontology.org/topic_3523",
+"label": "RNAi experiment"
+},
+{
+"uri": "http://edamontology.org/topic_3377",
+"label": "Safety sciences"
+},
+{
+"uri": "http://edamontology.org/topic_3277",
+"label": "Sample collections"
+},
+{
+"uri": "http://edamontology.org/topic_0080",
+"label": "Sequence analysis"
+},
+{
+"uri": "http://edamontology.org/topic_0196",
+"label": "Sequence assembly"
+},
+{
+"uri": "http://edamontology.org/topic_0157",
+"label": "Sequence composition, complexity and repeats"
+},
+{
+"uri": "http://edamontology.org/topic_3041",
+"label": "Sequence databases"
+},
+{
+"uri": "http://edamontology.org/topic_0160",
+"label": "Sequence sites, features and motifs"
+},
+{
+"uri": "http://edamontology.org/topic_3168",
+"label": "Sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_4057",
+"label": "Short-read sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_3524",
+"label": "Simulation experiment"
+},
+{
+"uri": "http://edamontology.org/topic_4028",
+"label": "Single-cell sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_4055",
+"label": "siRNA experiment"
+},
+{
+"uri": "http://edamontology.org/topic_0154",
+"label": "Small molecules"
+},
+{
+"uri": "http://edamontology.org/topic_3372",
+"label": "Software engineering"
+},
+{
+"uri": "http://edamontology.org/topic_4047",
+"label": "Software management"
+},
+{
+"uri": "http://edamontology.org/topic_2269",
+"label": "Statistics and probability"
+},
+{
+"uri": "http://edamontology.org/topic_1317",
+"label": "Structural biology"
+},
+{
+"uri": "http://edamontology.org/topic_0122",
+"label": "Structural genomics"
+},
+{
+"uri": "http://edamontology.org/topic_3175",
+"label": "Structural variation"
+},
+{
+"uri": "http://edamontology.org/topic_0081",
+"label": "Structure analysis"
+},
+{
+"uri": "http://edamontology.org/topic_0082",
+"label": "Structure prediction"
+},
+{
+"uri": "http://edamontology.org/topic_3421",
+"label": "Surgery"
+},
+{
+"uri": "http://edamontology.org/topic_3895",
+"label": "Synthetic biology"
+},
+{
+"uri": "http://edamontology.org/topic_3371",
+"label": "Synthetic chemistry"
+},
+{
+"uri": "http://edamontology.org/topic_2259",
+"label": "Systems biology"
+},
+{
+"uri": "http://edamontology.org/topic_3396",
+"label": "Systems medicine"
+},
+{
+"uri": "http://edamontology.org/topic_0637",
+"label": "Taxonomy"
+},
+{
+"uri": "http://edamontology.org/topic_3452",
+"label": "Tomography"
+},
+{
+"uri": "http://edamontology.org/topic_0003",
+"label": "Topic"
+},
+{
+"uri": "http://edamontology.org/topic_2840",
+"label": "Toxicology"
+},
+{
+"uri": "http://edamontology.org/topic_0749",
+"label": "Transcription factors and regulatory sites"
+},
+{
+"uri": "http://edamontology.org/topic_3308",
+"label": "Transcriptomics"
+},
+{
+"uri": "http://edamontology.org/topic_3342",
+"label": "Translational medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3414",
+"label": "Trauma medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3575",
+"label": "Tropical medicine"
+},
+{
+"uri": "http://edamontology.org/topic_3422",
+"label": "Urology and nephrology"
+},
+{
+"uri": "http://edamontology.org/topic_3966",
+"label": "Vaccinology"
+},
+{
+"uri": "http://edamontology.org/topic_4046",
+"label": "Version control"
+},
+{
+"uri": "http://edamontology.org/topic_3397",
+"label": "Veterinary medicine"
+},
+{
+"uri": "http://edamontology.org/topic_0781",
+"label": "Virology"
+},
+{
+"uri": "http://edamontology.org/topic_3673",
+"label": "Whole genome sequencing"
+},
+{
+"uri": "http://edamontology.org/topic_0769",
+"label": "Workflows"
+},
+{
+"uri": "http://edamontology.org/topic_2828",
+"label": "X-ray diffraction"
+},
+{
+"uri": "http://edamontology.org/topic_3500",
+"label": "Zoology"
+}
+]

@@ -1,0 +1,1784 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/extracted/catalogues",
+  "description": "Dataset containing 7 files (application/jsonl) with automatically inferred types and structure",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "citeAs": "Unknown. (2026). data/extracted/catalogues [Data set].",
+  "dateCreated": "2026-11-10T18:00:12.180987Z",
+  "version": "1.0.0",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "biotools.jsonl",
+      "name": "biotools.jsonl",
+      "contentSize": "37572486",
+      "contentUrl": "biotools.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "4e24f20e97f4daae8f83c553f9ba82b8a59d427a5cc5e12e6133ce9eb0650a08"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "europepmc_reviews.jsonl",
+      "name": "europepmc_reviews.jsonl",
+      "contentSize": "2919171",
+      "contentUrl": "europepmc_reviews.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "b88c2c9473a4d500f5b60b9a505104cf49ac796c211a69a7bdd0796f6bf68e07"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "f1000_items.jsonl",
+      "name": "f1000_items.jsonl",
+      "contentSize": "512018",
+      "contentUrl": "f1000_items.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "b673034479896be2f1aee4115422443f259c4c6372385690b37df10daa733479"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tess_events.jsonl",
+      "name": "tess_events.jsonl",
+      "contentSize": "14286103",
+      "contentUrl": "tess_events.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "5ca20dc1ac05d70e5920e4cb58b7a52469184b87b41108b643ba3c7c7485568c"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tess_facets.jsonl",
+      "name": "tess_facets.jsonl",
+      "contentSize": "38646",
+      "contentUrl": "tess_facets.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "9e21c06bac968bbe12abc1452e461183afe6ee91473be54ddc6530cbf157ac34"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tess_materials.jsonl",
+      "name": "tess_materials.jsonl",
+      "contentSize": "4340298",
+      "contentUrl": "tess_materials.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "2d605ecd47725bd7b2310953be77f61d60375e5eb6d0a50660e50d2cf90b3ad4"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "zenodo_records.jsonl",
+      "name": "zenodo_records.jsonl",
+      "contentSize": "1091271",
+      "contentUrl": "zenodo_records.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "601f2d731ec0c3d785dfa72bcec576f5902cdce416685147961b86ac4fdbdbfe"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "biotools.jsonl#biotools",
+      "name": "biotools.jsonl",
+      "description": "Records from biotools.jsonl (34819 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/addition_date",
+          "name": "addition_date",
+          "description": "Column 'addition_date'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "addition_date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/biotools_id",
+          "name": "biotools_id",
+          "description": "Column 'biotools_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "biotools_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/collections",
+          "name": "collections",
+          "description": "Column 'collections'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "collections"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/credit_emails",
+          "name": "credit_emails",
+          "description": "Column 'credit_emails'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "credit_emails"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/credit_names",
+          "name": "credit_names",
+          "description": "Column 'credit_names'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "credit_names"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/credit_orcids",
+          "name": "credit_orcids",
+          "description": "Column 'credit_orcids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "credit_orcids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/credit_types",
+          "name": "credit_types",
+          "description": "Column 'credit_types'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "credit_types"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/description",
+          "name": "description",
+          "description": "Column 'description'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/elixir_communities",
+          "name": "elixir_communities",
+          "description": "Column 'elixir_communities'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "elixir_communities"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/elixir_nodes",
+          "name": "elixir_nodes",
+          "description": "Column 'elixir_nodes'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "elixir_nodes"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/elixir_platforms",
+          "name": "elixir_platforms",
+          "description": "Column 'elixir_platforms'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "elixir_platforms"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/homepage",
+          "name": "homepage",
+          "description": "Column 'homepage'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "homepage"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/last_update",
+          "name": "last_update",
+          "description": "Column 'last_update'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "last_update"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/name",
+          "name": "name",
+          "description": "Column 'name'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/publication_dois",
+          "name": "publication_dois",
+          "description": "Column 'publication_dois'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "publication_dois"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/tool_types",
+          "name": "tool_types",
+          "description": "Column 'tool_types'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "tool_types"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/topic_labels",
+          "name": "topic_labels",
+          "description": "Column 'topic_labels'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "topic_labels"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools.jsonl#biotools/topic_uris",
+          "name": "topic_uris",
+          "description": "Column 'topic_uris'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "biotools.jsonl"
+            },
+            "extract": {
+              "column": "topic_uris"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "europepmc_reviews.jsonl#europepmc_reviews",
+      "name": "europepmc_reviews.jsonl",
+      "description": "Records from europepmc_reviews.jsonl (1201 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/abstract",
+          "name": "abstract",
+          "description": "Column 'abstract'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "abstract"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/author_names",
+          "name": "author_names",
+          "description": "Column 'author_names'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "author_names"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/author_orcids",
+          "name": "author_orcids",
+          "description": "Column 'author_orcids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "author_orcids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/cited_by_count",
+          "name": "cited_by_count",
+          "description": "Column 'cited_by_count'",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "cited_by_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/doi",
+          "name": "doi",
+          "description": "Column 'doi'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/epmc_id",
+          "name": "epmc_id",
+          "description": "Column 'epmc_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "epmc_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/first_publication_date",
+          "name": "first_publication_date",
+          "description": "Column 'first_publication_date'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "first_publication_date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/journal",
+          "name": "journal",
+          "description": "Column 'journal'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "journal"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/keywords",
+          "name": "keywords",
+          "description": "Column 'keywords'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "keywords"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/mesh_terms",
+          "name": "mesh_terms",
+          "description": "Column 'mesh_terms'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "mesh_terms"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/pmid",
+          "name": "pmid",
+          "description": "Column 'pmid'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "pmid"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/pub_year",
+          "name": "pub_year",
+          "description": "Column 'pub_year'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "pub_year"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "europepmc_reviews.jsonl#europepmc_reviews/title",
+          "name": "title",
+          "description": "Column 'title'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "europepmc_reviews.jsonl"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "f1000_items.jsonl#f1000_items",
+      "name": "f1000_items.jsonl",
+      "description": "Records from f1000_items.jsonl (734 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/creator_names",
+          "name": "creator_names",
+          "description": "Column 'creator_names'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "creator_names"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/date",
+          "name": "date",
+          "description": "Column 'date'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/description",
+          "name": "description",
+          "description": "Column 'description'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/doi",
+          "name": "doi",
+          "description": "Column 'doi'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/item_path",
+          "name": "item_path",
+          "description": "Column 'item_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "item_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/kind",
+          "name": "kind",
+          "description": "Column 'kind'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "kind"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/subjects",
+          "name": "subjects",
+          "description": "Column 'subjects'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "subjects"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "f1000_items.jsonl#f1000_items/title",
+          "name": "title",
+          "description": "Column 'title'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "f1000_items.jsonl"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "tess_events.jsonl#tess_events",
+      "name": "tess_events.jsonl",
+      "description": "Records from tess_events.jsonl (10323 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/city",
+          "name": "city",
+          "description": "Column 'city'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "city"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/collection_ids",
+          "name": "collection_ids",
+          "description": "Column 'collection_ids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "collection_ids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/content_provider_id",
+          "name": "content_provider_id",
+          "description": "Column 'content_provider_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "content_provider_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/country",
+          "name": "country",
+          "description": "Column 'country'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "country"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/description",
+          "name": "description",
+          "description": "Column 'description'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/end",
+          "name": "end",
+          "description": "Column 'end'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "end"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/event_types",
+          "name": "event_types",
+          "description": "Column 'event_types'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "event_types"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/host_institutions",
+          "name": "host_institutions",
+          "description": "Column 'host_institutions'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "host_institutions"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/keywords",
+          "name": "keywords",
+          "description": "Column 'keywords'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "keywords"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/node_ids",
+          "name": "node_ids",
+          "description": "Column 'node_ids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "node_ids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/online",
+          "name": "online",
+          "description": "Column 'online'",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "online"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/organizer",
+          "name": "organizer",
+          "description": "Column 'organizer'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "organizer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/start",
+          "name": "start",
+          "description": "Column 'start'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "start"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/tess_id",
+          "name": "tess_id",
+          "description": "Column 'tess_id'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "tess_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/title",
+          "name": "title",
+          "description": "Column 'title'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/topic_labels",
+          "name": "topic_labels",
+          "description": "Column 'topic_labels'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "topic_labels"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/topic_uris",
+          "name": "topic_uris",
+          "description": "Column 'topic_uris'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "topic_uris"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/url",
+          "name": "url",
+          "description": "Column 'url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "url"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "tess_facets.jsonl#tess_facets",
+      "name": "tess_facets.jsonl",
+      "description": "Records from tess_facets.jsonl (218 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "tess_facets.jsonl#tess_facets/catalogue",
+          "name": "catalogue",
+          "description": "Column 'catalogue'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_facets.jsonl"
+            },
+            "extract": {
+              "column": "catalogue"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_facets.jsonl#tess_facets/count",
+          "name": "count",
+          "description": "Column 'count'",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileObject": {
+              "@id": "tess_facets.jsonl"
+            },
+            "extract": {
+              "column": "count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_facets.jsonl#tess_facets/facet",
+          "name": "facet",
+          "description": "Column 'facet'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_facets.jsonl"
+            },
+            "extract": {
+              "column": "facet"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_facets.jsonl#tess_facets/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_facets.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_facets.jsonl#tess_facets/value",
+          "name": "value",
+          "description": "Column 'value'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_facets.jsonl"
+            },
+            "extract": {
+              "column": "value"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "tess_materials.jsonl#tess_materials",
+      "name": "tess_materials.jsonl",
+      "description": "Records from tess_materials.jsonl (3677 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/authors",
+          "name": "authors",
+          "description": "Column 'authors'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "authors"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/collection_ids",
+          "name": "collection_ids",
+          "description": "Column 'collection_ids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "collection_ids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/content_provider_id",
+          "name": "content_provider_id",
+          "description": "Column 'content_provider_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "content_provider_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/date_published",
+          "name": "date_published",
+          "description": "Column 'date_published'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "date_published"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/description",
+          "name": "description",
+          "description": "Column 'description'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/doi",
+          "name": "doi",
+          "description": "Column 'doi'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/keywords",
+          "name": "keywords",
+          "description": "Column 'keywords'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "keywords"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/node_ids",
+          "name": "node_ids",
+          "description": "Column 'node_ids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "node_ids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/resource_types",
+          "name": "resource_types",
+          "description": "Column 'resource_types'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "resource_types"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/tess_id",
+          "name": "tess_id",
+          "description": "Column 'tess_id'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "tess_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/title",
+          "name": "title",
+          "description": "Column 'title'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/topic_labels",
+          "name": "topic_labels",
+          "description": "Column 'topic_labels'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "topic_labels"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/topic_uris",
+          "name": "topic_uris",
+          "description": "Column 'topic_uris'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "topic_uris"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/url",
+          "name": "url",
+          "description": "Column 'url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "url"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "zenodo_records.jsonl#zenodo_records",
+      "name": "zenodo_records.jsonl",
+      "description": "Records from zenodo_records.jsonl (469 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/communities",
+          "name": "communities",
+          "description": "Column 'communities'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "communities"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/concept_doi",
+          "name": "concept_doi",
+          "description": "Column 'concept_doi'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "concept_doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/concept_record_id",
+          "name": "concept_record_id",
+          "description": "Column 'concept_record_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "concept_record_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/creator_affiliations",
+          "name": "creator_affiliations",
+          "description": "Column 'creator_affiliations'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "creator_affiliations"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/creator_names",
+          "name": "creator_names",
+          "description": "Column 'creator_names'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "creator_names"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/creator_orcids",
+          "name": "creator_orcids",
+          "description": "Column 'creator_orcids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "creator_orcids"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/description",
+          "name": "description",
+          "description": "Column 'description'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/doi",
+          "name": "doi",
+          "description": "Column 'doi'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/file_names",
+          "name": "file_names",
+          "description": "Column 'file_names'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "file_names"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/grant_acronyms",
+          "name": "grant_acronyms",
+          "description": "Column 'grant_acronyms'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "grant_acronyms"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/grant_codes",
+          "name": "grant_codes",
+          "description": "Column 'grant_codes'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "grant_codes"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/keywords",
+          "name": "keywords",
+          "description": "Column 'keywords'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "keywords"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/publication_date",
+          "name": "publication_date",
+          "description": "Column 'publication_date'",
+          "dataType": "sc:Date",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "publication_date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/record_id",
+          "name": "record_id",
+          "description": "Column 'record_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "record_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/resource_type",
+          "name": "resource_type",
+          "description": "Column 'resource_type'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "resource_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/source_paths",
+          "name": "source_paths",
+          "description": "Column 'source_paths'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "source_paths"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/title",
+          "name": "title",
+          "description": "Column 'title'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/url",
+          "name": "url",
+          "description": "Column 'url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/version",
+          "name": "version",
+          "description": "Column 'version'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "version"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    }
+  ],
+  "biotope:status": "processed"
+}

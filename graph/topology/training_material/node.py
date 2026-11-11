@@ -1,0 +1,30 @@
+from dataclasses import dataclass, field
+from typing import ClassVar, NewType
+
+
+TrainingMaterialId = NewType("TrainingMaterialId", str)
+
+
+@dataclass(frozen=True)
+class TrainingMaterial:
+    """A training material listed in TeSS. All TeSS materials are admitted; links to Nodes and ELIXIR groups come
+    from TeSS's own Node and collection assignments, only for ids whose names the snapshot reveals (see
+    training_event)."""
+
+    schema_id: ClassVar[str] = "atlas:training_material"
+    id: TrainingMaterialId
+    tess_id: str = field(metadata={"description": "TeSS identifier."})
+    title: str | None = field(metadata={"description": "Title."})
+    url: str | None = field(metadata={"description": "URL."})
+    doi: str | None = field(metadata={"description": "DOI."})
+    authors: list[str] = field(metadata={"description": "Authors as TeSS lists them."})
+    resource_types: list[str] = field(metadata={"description": "Resource types."})
+    date_published: str | None = field(
+        metadata={"description": "Publication or creation date."}
+    )
+    keywords: list[str] = field(metadata={"description": "Keywords."})
+    topics: list[str] = field(metadata={"description": "EDAM topic labels."})
+    content_provider: str | None = field(
+        metadata={"description": "TeSS content provider."}
+    )
+    description: str | None = field(metadata={"description": "Description."})

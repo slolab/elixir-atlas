@@ -1,0 +1,281 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/extracted/cordis_projects.jsonl",
+  "description": "CordisProject records extracted from data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html, data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html, data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html. An EU-funded project as its CORDIS fact sheet states it: grant, dates, costs and coordinator. One record per fact sheet.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "cordis_projects.jsonl",
+      "name": "cordis_projects.jsonl",
+      "contentSize": "10096",
+      "contentUrl": "data/extracted/cordis_projects.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "b14b929f37d71fea24e77dbacd1f4a589b14d1d6eeaa6a3087349c37d5c86b98",
+      "isBasedOn": [
+        {
+          "contentUrl": "data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html",
+          "sha256": "7876de9152680603f5198bdea3b841bf9ef2aaa0048ab661453cf6b7a9979b70"
+        },
+        {
+          "contentUrl": "data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html",
+          "sha256": "c989fcc8221314b84fd01bfaf954cec0df68caf76a91b041d3afceb498e575d3"
+        },
+        {
+          "contentUrl": "data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html",
+          "sha256": "f8dda8493d26a0c479d78c349824e64b165440875bdc988d69b448560490d1b0"
+        }
+      ],
+      "biotope:schemaRevision": "cc316544f8cedd14f93bef94faa16fa7bacc8f8b442056c7569980c5659e0e5f",
+      "biotope:extractor": {
+        "name": "cordis-project-reader",
+        "version": "1",
+        "settings": {}
+      }
+    }
+  ],
+  "dateCreated": "2026-11-10T16:32:13.407611+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "cordis_projects.jsonl#cordis_projects",
+      "name": "cordis_projects.jsonl",
+      "description": "CordisProject records extracted from documents. An EU-funded project as its CORDIS fact sheet states it: grant, dates, costs and coordinator. One record per fact sheet.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/id",
+          "name": "id",
+          "description": "The record ID: the document's dataset folder and its path within it, then the record key's values.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/document",
+          "name": "document",
+          "description": "The document's path in the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "document"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/grant_id",
+          "name": "grant_id",
+          "description": "Grant agreement ID.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/grant_id/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/acronym",
+          "name": "acronym",
+          "description": "Project acronym as the fact sheet gives it.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/acronym/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/title",
+          "name": "title",
+          "description": "Project title as the fact sheet gives it.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/title/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/start",
+          "name": "start",
+          "description": "Start date as YYYY-MM-DD.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/start/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/end",
+          "name": "end",
+          "description": "End date as YYYY-MM-DD.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/end/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/total_cost_eur",
+          "name": "total_cost_eur",
+          "description": "Total cost of the project in euro.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/total_cost_eur/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/eu_contribution_eur",
+          "name": "eu_contribution_eur",
+          "description": "EU contribution to the project in euro.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/eu_contribution_eur/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/coordinator",
+          "name": "coordinator",
+          "description": "Coordinating organisation, as CORDIS names it.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/coordinator/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_projects.jsonl#cordis_projects/objective",
+          "name": "objective",
+          "description": "The project's objective text from the fact sheet.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_projects.jsonl"
+            },
+            "extract": {
+              "column": "values/objective/value"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true,
+      "key": {
+        "@id": "cordis_projects.jsonl#cordis_projects/id"
+      }
+    }
+  ],
+  "biotope:status": "processed",
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html"
+    },
+    {
+      "@id": "data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html"
+    },
+    {
+      "@id": "data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html"
+    }
+  ]
+}
