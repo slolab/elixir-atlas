@@ -1,0 +1,149 @@
+id: atlas_261111-013
+use_case: "B9"
+question: |
+  For ELIXIR Germany's (de.NBI) end-of-year report: which ELIXIR Commissioned
+  Services that list ELIXIR Germany, and which EU projects of ELIXIR, have
+  outputs on Zenodo dated 2026 (1 January to 11 November) with at least one
+  author at a German institution? Name the outputs and those authors, and say
+  which German-listed services running in 2026 have no such output.
+answerability: partially_answerable
+reference_answer: |
+  29 Zenodo records from 2026 qualify. Every Commissioned Service below lists
+  ELIXIR Germany among its Nodes.
+
+  **E-PAN: Enhancing pan-genome analysis in plants** (BFSP WP2; page:
+  January 2025 to May 2026). 8 records:
+  - Deliverables D2.1 (31 May), D2.2, D2.3 (1 June), D2.5, D2.6 (17 Sept).
+  - E-PAN Workshop 2026 (30 June): the event record, the white-paper overview
+    and the PanBARLEX talk.
+  - People: Sebastian Beier (Forschungszentrum Jülich), Heidrun Gundlach
+    (Helmholtz Center Munich), Marc Christian Heuermann, Anne Fiebig,
+    Patrick König, Uwe Scholz (IPK Gatersleben).
+
+  **FAIRyMAGs** (BFSP WP3; page: January 2025 to June 2026). 11 records:
+  - D3.1, D3.3, D3.5 and milestones M3.1, M3.2, M3.4, M3.5 (hackathon in
+    Freiburg), all 1 June. Also D3.4 and a conference abstract (17 Sept),
+    M3.3 (19 Sept) and M3.6, a bioRxiv preprint (5 Oct).
+  - People: Paul Zierep, Mina Hojat Ansari (University of Freiburg).
+
+  **HARVEST** (BFSP WP4; page: January 2025 to June 2026). 4 records:
+  - D4.1, D4.2, D4.3, a preprint on plant data FAIRification (1 June), D4.5
+    webinar (5 Oct).
+  - People: Daniel Arend, Manuel Feser (IPK), Sebastian Beier, Daniel
+    Wibberg (Forschungszentrum Jülich).
+
+  **Building FAIR metadata standards for non-human pathogen data** (BFSP
+  WP7; January to December 2026). 2 records: D7.1 gap analysis and M7.1
+  (20 Sept). Person: Daniel Wibberg (Forschungszentrum Jülich).
+
+  **ELIXIR Tools Platform** (January 2024 to December 2026). 1 record: the 2025 hybrid meeting
+  report (8 Jan). Person: Björn Grüning (University of Freiburg).
+
+  **DATAREX** (ended December 2025). 2 records: D3.3 on data brokering
+  (6 Jan; Ulrike Wittig, HITS) and D2.4, the end report on learning paths in
+  TeSS (30 Jan; Helena Schnitzer, Forschungszentrum Jülich).
+
+  **ELIXIR-STEERS** (EU grant 101131096, February 2024 to January 2027). The
+  University of Freiburg is a beneficiary (net EU contribution €86,600) and
+  Björn Grüning is its General Assembly representative. 1 record: M3.5,
+  proof-of-concept workflow optimisations (19 June; Björn Grüning with
+  Nicola Soranzo, Earlham).
+
+  **German-listed services running in 2026 with no such output:** the
+  Compute, Data and Infrastructure Services Commissioned Services; Node
+  support; PeoplePulse; the FAIR plant virtual assistant (BFSP WP8);
+  RCI-M metabolomics; FAIR annotation workflows for PDBe-KB;
+  Spatial2Galaxy. Empowering users (HDTR) and FEGA-Connect ended in January
+  2026, also without one.
+
+  **What is missing for a full report:** publications, posters, software
+  and training outside Zenodo; what each German partner committed to in
+  each plan; and per-Node funding. The de.NBI list of Commissioned Services
+  with German contributions stops at 2023 projects.
+
+  Sources:
+  - Project pages: https://elixir-europe.org/how-we-work/scientific-programme/science/bfsp/e-pan,
+    .../bfsp/fairymags, .../bfsp/harvest, .../bfsp/fairnhp,
+    https://elixir-europe.org/how-we-work/scientific-programme/technology/tools,
+    https://elixir-europe.org/internal-projects/commissioned-services/datarex
+  - BFSP work plan v2 (WP numbering): https://zenodo.org/records/19469586
+  - Outputs: https://zenodo.org/records/<id> for 20474120, 20480561,
+    20487638, 22818002, 22818124, 21066927, 21062264, 21065633, 20490822,
+    20491034, 20491762, 20492418, 20492676, 20492964, 20493091, 22818544,
+    22819377, 22849644, 23169999, 20496587, 20497147, 20497338, 23170962,
+    22860776, 22860916, 18187591, 17979335, 18454311, 20759675
+  - ELIXIR-STEERS: https://cordis.europa.eu/project/id/101131096; handbook
+    v3: https://zenodo.org/records/18469231
+  - de.NBI list: https://www.denbi.de/commissioned-services-of-elixir-de
+eval_notes: |
+  Scored:
+  1. BFSP outputs: E-PAN, FAIRyMAGs and HARVEST, with German authors from
+     IPK, Forschungszentrum Jülich, Helmholtz Munich and Freiburg.
+  2. The non-human pathogen metadata project (WP7) with Daniel Wibberg.
+  3. ELIXIR-STEERS: Freiburg as beneficiary, Björn Grüning, and the M3.5
+     record.
+  4. At least two of: the Tools Platform meeting report, the DATAREX D3.3 or
+     D2.4 reports.
+  5. Names German-listed services without 2026 outputs and states what the
+     data cannot show (non-Zenodo outputs, per-Node commitments, funding).
+  Accepted: counts that differ by a few records if each record named is
+  correct; adding the RDM Maturity Model (Jeanne Wilbrandt, FLI) as a
+  probable DATAREX output; adding German Heads of Node from the STEERS
+  handbook.
+  Traps: outputs dated after the project's page end date (E-PAN deliverables
+  in September) still count. The E-PAN D2.4 record has no German author. The
+  older Training Platform page lists Germany but the 2024–28 page does not.
+  EMBL Heidelberg is not ELIXIR Germany. The ELIXIR AI Strategy and the FEGA
+  white paper have German authors but are not project outputs.
+sources:
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-bfsp-e-pan-501112af6ba5.html
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-bfsp-fairymags-dea92e6d26cf.html
+  - data/input/elixir/how-we-work-scientific-programme-science-bfsp-harvest-ffb128ae4292.html
+  - data/input/elixir/how-we-work-scientific-programme-science-bfsp-fairnhp-aa1b8bff3f98.html
+  - data/input/elixir/how-we-work-scientific-programme-science-bfsp-fairplant-f7da0acc58ef.html
+  - data/input/elixir/how-we-work-scientific-programme-technology-tools-440680fd987c.html
+  - data/input/elixir/how-we-work-scientific-programme-technology-24-compute-88dc3806b38e.html
+  - data/input/elixir/how-we-work-scientific-programme-technology-data-71282031a7e0.html
+  - data/input/elixir/how-we-work-scientific-programme-technology-infraserv-8c32e7a87d9f.html
+  - data/input/elixir/how-we-work-scientific-programme-technology-training-57bc2228a3d3.html
+  - data/input/elixir/how-we-work-scientific-programme-nodes-support-67466de6c4d9.html
+  - data/input/elixir/how-we-work-scientific-programme-people-peoplepulse-a900b2cae788.html
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-metabolomics-650970e517d0.html
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-pdbe-d5b3e9b970a2.html
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-spatial2-7ef279e7ecbd.html
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-data-619cd9d00201.html
+  - data/input/elixir/how-we-work-scientific-programme-science-hdtr-fega-4ee9e0700e9f.html
+  - data/input/elixir/internal-projects-commissioned-services-datarex-33368d83847d.html
+  - data/input/zenodo/api-records-19469586-files-24-SCIENCE-BFSP-v2.pdf-content-f4f5f9a8d8cc.pdf
+  - data/input/elixir/api-records-20474120-31be9ed5f285.json
+  - data/input/elixir/api-records-20480561-859f7ab2f77d.json
+  - data/input/elixir/api-records-20487638-07bf44fefd65.json
+  - data/input/zenodo/api-records-22818002-693c7598e03e.json
+  - data/input/zenodo/api-records-22818124-4c6e2bea2938.json
+  - data/input/zenodo/api-records-21066927-92c2c5804a13.json
+  - data/input/zenodo/api-records-21062264-3afd1cc60cb4.json
+  - data/input/zenodo/api-records-21065633-880c6a6fdf73.json
+  - data/input/elixir/api-records-20490822-da9028ff211c.json
+  - data/input/elixir/api-records-20491034-546c27a5e3d1.json
+  - data/input/elixir/api-records-20491762-e31500aa6bdf.json
+  - data/input/elixir/api-records-20492418-14bfcb24305c.json
+  - data/input/elixir/api-records-20492676-487fa650f4a7.json
+  - data/input/elixir/api-records-20492964-827da559e739.json
+  - data/input/elixir/api-records-20493091-9efb84b4abc5.json
+  - data/input/zenodo/api-records-22818544-ad7f4003651f.json
+  - data/input/zenodo/api-records-22819377-7e1260a52ccb.json
+  - data/input/zenodo/api-records-22849644-582fe998af6d.json
+  - data/input/zenodo/api-records-23169999-6a1f94aba6b5.json
+  - data/input/elixir/api-records-20496587-eeaf28d98807.json
+  - data/input/elixir/api-records-20497147-69435529387b.json
+  - data/input/elixir/api-records-20497338-7ac09d8cdb87.json
+  - data/input/node-france/api-records-23170962-0d6e748f607b-b46d6bd19bfa.json
+  - data/input/zenodo/api-records-22860776-2d2f63464315.json
+  - data/input/zenodo/api-records-22860916-467c6d710673.json
+  - data/input/zenodo/api-records-18187591-954244a5e4fe.json
+  - data/input/zenodo/api-records-17979335-f0fa97125e57.json
+  - data/input/zenodo/api-records-18454311-c5940b4c7de7.json
+  - data/input/zenodo-steers/api-records-20759675-f23aadeadc6e-3fd9585b2980.json
+  - data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
+  - data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf
+  - data/input/node-germany/commissioned-services-of-elixir-de-f54a7ab67524.html

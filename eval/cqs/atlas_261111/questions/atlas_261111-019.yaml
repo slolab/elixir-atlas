@@ -1,0 +1,96 @@
+id: atlas_261111-019
+use_case: "C2.2"
+question: |
+  Who in the ELIXIR Systems Biology Community develops or supports tools, and
+  which tools are they? Use bio.tools credits and the Community's own pages.
+answerability: partially_answerable
+reference_answer: |
+  The Community's member list is not public, so "members" here means people
+  named on public pages: the co-leads and liaison, the SYBEL participants,
+  the 2026 meeting report and the authors of "Making Models That Matter".
+  Tools were matched to them by the person's name in bio.tools credits.
+
+  **Tagged with the Systems Biology Community in bio.tools** (3 tools)
+  - **SKM** (Stress Knowledge Map), also tagged Plant Sciences: Carissa
+    Bleker, Kristina Gruden, Živa Ramšak, Vid Podpečan, National Institute
+    of Biology (ELIXIR Slovenia). https://bio.tools/skm
+  - **GlyCombo** and **GlyComboCLI**: Christopher Ashwood and Maia Kelly,
+    who appear nowhere else in the Community's pages.
+
+  **Tools credited to named Community people** (no Community tag)
+  - National Institute of Biology, Slovenia: BoolDog (Carissa Bleker, Anže
+    Županič, Kristina Gruden); DiNAR (Kristina Gruden, Živa Ramšak).
+  - University of Minho, Portugal: merlin (Miguel Rocha, Oscar Dias);
+    TranSyT and diel_models (Oscar Dias).
+  - ELIXIR Sweden: Metabolic Atlas (Mihail Anton).
+  - Luxembourg: MINERVA Platform (Marek Ostaszewski).
+  - Germany: COPASI and basico (Frank T. Bergmann).
+  - Maastricht University: PathVisio (Chris Evelo, Martina Kutmon) and
+    WikiPathways (Martina Kutmon).
+  - EMBL-EBI: BioModels (Rahuman Malik-Sheriff).
+  - Others: CaSQ and RA-map (Anna Niarakis), CyFi-MAP (Irina Balaur),
+    AEON.py (David Šafránek), modelbase (Anna Matuszyńska).
+
+  **Resources the Community page promotes**
+  - standard-GEM, and three bio.tools modelling domains: constraint-based,
+    logical and qualitative, and rule-based modelling. The domains' contents
+    are not in the data.
+
+  **Gaps**
+  - No public member list, and no record of who maintains which tool for
+    the Community. The meeting report plans talks with the Tools Platform to
+    improve the Community's representation in bio.tools.
+  - Name matching may miss people credited only by institution.
+
+  Sources:
+  - Community page: https://elixir-europe.org/communities/systems-biology
+  - SYBEL: https://elixir-europe.org/internal-projects/commissioned-services/2023-sybel
+  - Meeting report: https://f1000research.com/documents/15-1717
+  - Preprint: https://arxiv.org/abs/2609.13127
+  - bio.tools entries: https://bio.tools/<id>, for example
+    https://bio.tools/merlin-sysbio, https://bio.tools/metabolicatlas,
+    https://bio.tools/MINERVA_Platform
+eval_notes: |
+  Scored:
+  1. Says the member list is not public and names the public sources used
+     for people.
+  2. bio.tools tag: exactly three tools (SKM, GlyCombo, GlyComboCLI), with
+     SKM credited to the National Institute of Biology group (Bleker,
+     Gruden).
+  3. Credited tools: at least four correct person-tool pairs among Community
+     people, for example merlin (Rocha, Dias), Metabolic Atlas (Anton),
+     MINERVA (Ostaszewski), COPASI (Bergmann), BoolDog (Bleker), PathVisio
+     (Evelo, Kutmon).
+  4. Community page resources: standard-GEM or the three bio.tools modelling
+     domains.
+  5. No wrong pairing of a person with a tool.
+  Accepted: other correct bio.tools credits for the named people. Grouping by
+  institution or by Node.
+  Traps: the bio.tools collection "Plant Systems Biology" is not the
+  Community. GlyCombo's developers have no other link to the Community.
+  John Hancock is a co-lead candidate in the 2026 election but is not listed
+  as a co-lead on the Community page; he has no bio.tools credit.
+sources:
+  - data/input/elixir/communities-systems-biology-d4e592b20d80.html
+  - data/input/elixir/internal-projects-commissioned-services-2023-sybel-5fbee0dffb5f.html
+  - data/input/elixir/communities-co-lead-elections-98278416cde9.html
+  - data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf
+  - data/input/systems-biology/pdf-2609.13127-4b55a8c8051a.pdf
+  - data/input/biotools/api-t-3e77f0b98173.json
+  - data/input/biotools/api-t-4dc2b6e48d5c.json
+  - data/input/biotools/api-t-8d6f00e2b54b.json
+  - data/input/biotools/api-t-0fd2a0517a19.json
+  - data/input/biotools/api-t-5abac9f4c025.json
+  - data/input/biotools/api-t-0ae4a6107be7.json
+  - data/input/biotools/api-t-6da4976d10c9.json
+  - data/input/biotools/api-t-0821958ba397.json
+  - data/input/biotools/api-t-af4c469b24c5.json
+  - data/input/biotools/api-t-22086402388c.json
+  - data/input/biotools/api-t-a06944893946.json
+  - data/input/biotools/api-t-06d599d82429.json
+  - data/input/biotools/api-t-563dbf239e59.json
+  - data/input/biotools/api-t-63d7fa85291a.json
+  - data/input/biotools/api-t-2f3fdbd25264.json
+  - data/input/biotools/api-t-9da184f1db7a.json
+  - data/input/biotools/api-t-4fd59e999aae.json
+  - data/input/biotools/api-t-cd7c66c3f741.json

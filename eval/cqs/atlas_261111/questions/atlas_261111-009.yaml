@@ -1,0 +1,51 @@
+id: atlas_261111-009
+use_case: "B4"
+question: |
+  For our ELIXIR Estonia report: is the University of Tartu funded by the EU
+  in ELIXIR-STEERS, or does it contribute in-kind? How much EU funding does
+  it receive, and does that tell us whether our people on STEERS are paid by
+  the project?
+answerability: partially_answerable
+reference_answer: |
+  **Funded.** CORDIS lists TARTU ULIKOOL (University of Tartu) as a
+  participant in ELIXIR-STEERS (Horizon Europe grant 101131096, 1 February
+  2024 to 31 January 2027, coordinated by EMBL):
+
+  - Net EU contribution: **€67,500**
+  - Total cost declared by the university: **€84,375**
+
+  The EU contribution covers 80% of Tartu's declared cost. The remaining
+  €16,875 is not paid by the grant; CORDIS does not say how Tartu covers it.
+  The University of Tartu is the only Estonian organisation in the project.
+  Tallinn University, where Deputy Head of Node Kairi Koort works, is not a
+  participant.
+
+  **Individuals: not public.** The €67,500 goes to the university. No public
+  source says whether Hedi Peterson, Uku Raudvere, Heleri Inno or other ELIXIR
+  Estonia staff named in STEERS documents are paid from it, or how much
+  effort each gives. The STEERS project handbook names roles but no budgets
+  or person-months. The University of Tartu or the STEERS project office at
+  the ELIXIR Hub could confirm.
+
+  Sources:
+  - CORDIS: https://cordis.europa.eu/project/id/101131096
+  - STEERS participants: https://elixir-europe.org/about-us/how-funded/eu-projects/steers/participants
+  - D1.6 Updated Project Handbook v3: https://doi.org/10.5281/zenodo.18469231
+eval_notes: |
+  Scored:
+  1. Funded: the University of Tartu is an EU-funded participant
+     (beneficiary), not in-kind.
+  2. Net EU contribution €67,500.
+  3. Total cost €84,375, or the 80% funding rate.
+  4. Says the EU funding is the organisation's and does not show whether
+     any named person is paid by the project or how much time they give.
+  Accepted: "€67.5k"; omitting the total cost if the net EU contribution and
+  point 4 are right.
+  Traps: €3,200,000 is the whole project's EU contribution and €4,000,000.01
+  its total cost. €197,829.29 (CONVERGE) and €557,502.50 (EXCELERATE) are
+  Tartu's figures in earlier projects. ELIXIR membership fees in the 2024-28
+  financial plan are not STEERS funding.
+sources:
+  - data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
+  - data/input/elixir/about-us-how-funded-eu-projects-steers-participants-d48391fb1530.html
+  - data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf

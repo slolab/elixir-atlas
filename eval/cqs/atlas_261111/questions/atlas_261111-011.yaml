@@ -1,0 +1,86 @@
+id: atlas_261111-011
+use_case: "B7"
+question: |
+  I am drafting the webpage for the ELIXIR Compute Platform Commissioned
+  Service of the 2024–28 Scientific Programme (2024-TECHNOLOGY-Compute).
+  From its work plan on Zenodo and the ELIXIR website, give me the fields for
+  the page: Nodes, people with their roles, Communities, dates and the plan
+  link. Flag any field where the sources disagree.
+answerability: answerable
+reference_answer: |
+  **Name.** ELIXIR Compute Platform (2024-TECHNOLOGY-Compute). The plan calls
+  it Commissioned Service 2024-TECH-COMPUTE.
+
+  **Plan link.** "ELIXIR Compute Platform 2024-26 Work Plan", Zenodo,
+  published 25 July 2024: https://doi.org/10.5281/zenodo.12819244
+  (https://zenodo.org/records/12819244). Authors: Luděk Matyska, Juha
+  Törnroos, Harald Wagener, Gavin Farrell, Peter Maccallum, Jonathan Tedds.
+
+  **Dates.** January 2024 to December 2026 (project page; the Technology tier
+  page gives start 1 January 2024, 36 months; the plan runs M01–M36).
+  Conflict: the older page for the same service, "ELIXIR Compute Platform
+  (2024-26)", still says January 2024 to January 2026.
+
+  **Nodes.**
+  - Project page: Czech Republic, Finland, Germany, Luxembourg, Netherlands,
+    Switzerland.
+  - Plan: lead institutions Masaryk University (CZ), Berlin Institute of
+    Health at Charité (DE) and CSC (FI). Member institutions in Belgium,
+    Switzerland, Czech Republic, Germany, Estonia, France, Greece, Italy,
+    Luxembourg, Netherlands and the UK, plus the ELIXIR Hub, EMBL-EBI and
+    Australian BioCommons as international partner.
+  - Conflict: the page omits Belgium and Greece although it names WP5 leads
+    from both (Paul De Geest, VIB; Thanasis Vergoulis, Athena RC). The older
+    2024-26 page lists 13 Nodes, including the UK and EMBL-EBI.
+
+  **People and roles (plan).**
+  - Platform coordination (WP1): Luděk Matyska (Masaryk University), Harald
+    Wagener (BIH/Charité), Juha Törnroos (CSC); Hub: Jonathan Tedds
+    (Coordinator), Gavin Farrell (Technical Officer).
+  - WP2 Advanced Service Access Control: Dominik F. Bučík (Masaryk
+    University), Aino-Riikka Corell (CSC).
+  - WP3 Protected Access to Sensitive Data for Analysis: Sven Twardziok
+    (BIH/Charité), Stefan Negru (CSC).
+  - WP4 Multi-Cloud Infrastructure Deployment: Viktória Spišaková (Masaryk
+    University), Alexander Kanitz (SIB), Ivar Janmaat (SURF).
+  - WP5 Sustainability, Accounting and Provenance for Federated Analytics:
+    Michael R. Crusoe (DE-FUB), Thanasis Vergoulis (Athena RC), Paul De Geest (VIB).
+  - The project page lists 14 people. It adds Tristan Perard (CSC, not in
+    the plan) and Venkata Satagopam (University of Luxembourg, a plan
+    member) and leaves out Aino-Riikka Corell.
+
+  **Communities.** None named. The page's Platform/Community field says only
+  "Compute". The plan refers to ELIXIR Communities in general (and to
+  MGnify use cases) but names no Community as partner.
+
+  Sources:
+  - Project page: https://elixir-europe.org/how-we-work/scientific-programme/technology/24-compute
+  - Technology tier page: https://elixir-europe.org/how-we-work/scientific-programme/technology
+  - Older page: https://elixir-europe.org/internal-projects/commissioned-services/2024-compute
+  - Work plan: https://zenodo.org/records/12819244
+  - Tristan Perard's affiliation: https://f1000research.com/posters/15-937
+eval_notes: |
+  Scored:
+  1. Plan link: the Zenodo work plan, DOI 10.5281/zenodo.12819244.
+  2. Dates: January 2024 to December 2026, with the older page's January
+     2026 end flagged as a conflict.
+  3. Nodes: the page's six Nodes, and the plan's wider partnership (at least
+     that Belgium and Greece appear as WP5 leads but not in the page's
+     Nodes).
+  4. People: the three Platform coordinators and the WP leads, with
+     institutions.
+  5. Communities: no ELIXIR Community is named; none is invented.
+  Accepted: listing the 14 people from the page instead of WP leads, if the
+  differences from the plan are flagged. Naming the UK as a plan partner
+  (University of Manchester).
+  Traps: the older "ELIXIR Compute Platform (2024-26)" page with the January
+  2026 end and 13 Nodes. "Compute" in the Platform/Community field is the
+  Platform, not a Community. The 2025 Face-to-Face report is an output, not
+  the plan.
+sources:
+  - data/input/project-pages/how-we-work-scientific-programme-technology-24-compute-88dc3806b38e-5d622a8b7f76.html
+  - data/input/elixir/how-we-work-scientific-programme-technology-ee4e9b0d714f.html
+  - data/input/elixir/internal-projects-commissioned-services-2024-compute-fe8508a1f821.html
+  - data/input/zenodo/api-records-12819244-b222eb879ba6.json
+  - data/input/zenodo/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
+  - data/input/f1000/posters-15-937-fc3468a4aa84.html

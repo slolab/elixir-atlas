@@ -1,0 +1,61 @@
+id: atlas_261111-003
+use_case: "A3"
+question: |
+  I want to take part in the ELIXIR Research Data Management Community. Who
+  should I contact about Community matters, through which channel, and how
+  do I join?
+answerability: answerable
+reference_answer: |
+  **Contact**
+  - Email **rdm@elixir-europe.org**. The Community page gives this one
+    address both to join the mailing list and to reach the co-leads, so
+    there is no need to write to each co-lead.
+  - Co-leads: Munazah Andrabi (ELIXIR UK), Mijke Jetten (ELIXIR
+    Netherlands) and Federico Bianchini (interim, ELIXIR Norway).
+  - Hub liaison: Katharina F Heil (ELIXIR Hub,
+    katharina.heil@elixir-europe.org).
+
+  **Channels**
+  - Mailing list: rdm@elixir-europe.org.
+  - Slack: the Community framework lists a Slack channel. The Community page
+    gives no Slack link. The Communities Handbook says each Community has a
+    channel in the ELIXIR Slack workspace (elixir-europe.slack.com) and that
+    non-ELIXIR partners get a guest invite through the Community liaison.
+  - Monthly online Community meeting, plus work-package meetings and
+    face-to-face events (Community framework).
+
+  **How to join**
+  1. Read the Communities Handbook and the RDM Community page.
+  2. Click "Join this Community" on the Community page.
+  3. Register with Life Science Login. Membership needs approval.
+  4. After approval you get the ELIXIR RDM Community onboarding document.
+
+  Sources:
+  - Community page:
+    https://elixir-europe.org/communities/research-data-management
+  - Community framework (v02, 2025): https://doi.org/10.5281/zenodo.15235047
+  - Communities Handbook: https://f1000research.com/documents/13-80
+  - Hub Communities Team: https://elixir-europe.org/communities
+eval_notes: |
+  Scored:
+  1. Contact address rdm@elixir-europe.org, given as the route to the
+     co-leads (no need to email each co-lead).
+  2. Co-leads: Munazah Andrabi, Mijke Jetten and Federico Bianchini
+     (interim); liaison Katharina Heil.
+  3. Joining: "Join this Community" button with Life Science Login
+     registration and approval.
+  4. Onboarding document available after approval.
+  5. Slack: says a Slack channel exists but the public page gives no link,
+     without inventing a channel name or URL.
+  Accepted: communities@elixir-europe.org as the Hub Communities Team
+  address (Handbook) in addition to rdm@. Mentioning the monthly Community
+  meeting.
+  Traps: the RDM Trainer Network is a separate network under the Community
+  with its own mailing list and leads (Nils-Christian Lübke, Helena
+  Schnitzer, Xenia Perez Sitja). The ELIXIR-UK RDM groups are national.
+sources:
+  - data/input/elixir/communities-research-data-management-ef9ea6882b1e.html
+  - data/input/elixir/communities-research-data-management-trainer-network-2480ae2054cd.html
+  - data/input/elixir/communities-6227f498e77a.html
+  - data/input/zenodo/api-records-15235047-files-Framework_v02_2025.pdf-content-86626353c614.pdf
+  - data/input/f1000/documents-13-80-pdf-46f3f3cafe8c.pdf

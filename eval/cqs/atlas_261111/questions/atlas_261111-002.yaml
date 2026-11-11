@@ -1,0 +1,128 @@
+id: atlas_261111-002
+use_case: "A2"
+question: |
+  Which of the current ELIXIR Communities show no public activity since
+  11 November 2025? For each, give the date of its latest public evidence.
+answerability: partially_answerable
+reference_answer: |
+  Public activity here means a dated public item from 11 November 2025 on
+  that the Community produced, ran or took part in by name: a meeting or
+  event (held or announced), a report, roadmap, paper or poster, a
+  deliverable naming it as participant, a new project page listing it, or a
+  related news item on its page. Page edits and co-lead election listings do
+  not count. The evidence base is the ELIXIR website, F1000 ELIXIR Gateway,
+  Zenodo, TeSS and Node websites as crawled on 4 November 2026. Slack,
+  minutes and mailing lists are not public, so a Community missing here may
+  still be active.
+
+  **No public activity found**
+  - **Cancer Data**: latest evidence 30 June 2025, the FAIR-FEGA project page
+    that names the Community (project January 2025 to January 2026). The
+    Community page has no related news.
+  - **Microbial Biotechnology**: latest evidence 1 July 2025, the DBTLHub
+    project page that lists it. No Community output or event since 2024.
+
+  **Only indirect evidence** (named in other groups' records, no own output
+  or event found)
+  - **Proteomics**: 28 November 2025, new PDBe-KB workflow project page
+    listing it.
+  - **Federated Human Data**: 25 August 2026, ELIXIR-STEERS milestone M2.5
+    lists it among Communities at its outreach events.
+  - **Intrinsically Disordered Proteins**: 25 August 2026, same milestone.
+  - **Human Copy Number Variation**: 12 September 2026, Tools Platform
+    milestone M4.1 selects it as a benchmarking partner.
+
+  **Active** (latest Community event or output)
+  - Single-Cell Omics: hybrid event report, 21 October 2026
+  - Systems Biology: hybrid event report, 15 October 2026
+  - Rare Diseases: roadmap 2026–2028, 7 October 2026
+  - Toxicology: hybrid meeting report, 8 September 2026
+  - Food and Nutrition: guest talk in that Toxicology report; Community
+    meeting announced for 24 November 2026
+  - 3D-BioInfo: Community meeting announced for 25 November 2026
+  - Galaxy: hybrid meeting report, 4 August 2026
+  - Biodiversity: poster co-authored by the Community, 15 July 2026
+  - Research Data Management: poster, 6 July 2026
+  - Metabolomics: BioHackathon poster with the Community, 16 June 2026;
+    RCI-M workshop report, 7 March 2026
+  - Plant Sciences: plant pan-genome white paper, 7 May 2026; meeting
+    announced for 17 February 2027
+  - Domestic Animals Genome and Phenome: Community paper, 2 March 2026
+  - Microbiome: workshop report with the Pathogen Data Focus Group,
+    5 February 2026; event announced for 16 February 2027
+
+  Sources:
+  - Communities: https://elixir-europe.org/communities and each Community
+    page linked from it
+  - Events listing: https://www.elixir-europe.org/events
+  - Cancer Data:
+    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega
+  - Microbial Biotechnology:
+    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub
+  - Proteomics:
+    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/pdbe
+  - ELIXIR-STEERS M2.5: https://doi.org/10.5281/zenodo.22096360
+  - Tools Platform M4.1: https://doi.org/10.5281/zenodo.22730058
+  - F1000: https://f1000research.com/documents/15-1758,
+    https://f1000research.com/documents/15-1717,
+    https://f1000research.com/documents/15-1685,
+    https://f1000research.com/documents/15-1506,
+    https://f1000research.com/documents/15-1280,
+    https://f1000research.com/posters/15-1167,
+    https://f1000research.com/posters/15-1088,
+    https://f1000research.com/posters/15-943,
+    https://f1000research.com/documents/15-372,
+    https://f1000research.com/articles/14-739,
+    https://f1000research.com/articles/15-339
+  - Microbiome workshop report: https://doi.org/10.5281/zenodo.18494658
+eval_notes: |
+  Scored:
+  1. Definition: states what counts as public activity and that absence in
+     the crawled data does not prove inactivity.
+  2. Cancer Data flagged with no activity, latest evidence mid-2025 (30 June
+     2025).
+  3. Microbial Biotechnology flagged with no activity, latest evidence
+     mid-2025 or earlier.
+  4. Proteomics, Human Copy Number Variation, Intrinsically Disordered
+     Proteins and Federated Human Data: either flagged as thin or listed as
+     active with the indirect item and its date. Not marked active from a
+     project's duration alone.
+  5. Does not flag as inactive any Community with a dated 2026 meeting
+     report, roadmap or Community paper (Single-Cell Omics, Systems Biology,
+     Rare Diseases, Toxicology, Galaxy, Domestic Animals Genome and
+     Phenome).
+  Accepted: Microbial Biotechnology's latest evidence given as 2024 (ELIXIR-UK
+  activity page) if DBTLHub is not counted. Cancer Data noted as a partner in
+  Spatial2Galaxy, whose 2026 reports do not name the Community, if the
+  answer keeps it flagged. Small differences in latest dates for active
+  Communities.
+  Traps: page "last modified" dates and the 2026 co-lead election list are
+  not Community activity. The ELIXIR-UK "Human Data Community" call of
+  January 2026 is a national group, not Federated Human Data. Marine
+  Metagenomics is not current.
+sources:
+  - data/input/elixir/communities-6227f498e77a.html
+  - data/input/elixir/communities-cancer-data-096a7c12a376.html
+  - data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html
+  - data/input/elixir/communities-proteomics-3a9d2022994a.html
+  - data/input/elixir/communities-research-data-management-ef9ea6882b1e.html
+  - data/input/elixir/events-3bbed456f4cf.html
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-fair-fega-5c49c71c2fbe.html
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-dbtlhub-5b825e734781.html
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-pdbe-d5b3e9b970a2.html
+  - data/input/zenodo-steers/api-records-22096360-7abcfa7d33db-8c02e4e71223.json
+  - data/input/zenodo/api-records-22730058-489c5d4f4214.json
+  - data/input/zenodo/api-records-18494658-d1cf51e54adb.json
+  - data/input/f1000/documents-15-1758-bc3d1f3883ee.html
+  - data/input/f1000/documents-15-1717-7ef2cfb06597.html
+  - data/input/f1000/documents-15-1685-cc6adb9c4f4c.html
+  - data/input/f1000/documents-15-1506-a95ef205cc83.html
+  - data/input/f1000/documents-15-1280-4b5d7a10821a.html
+  - data/input/f1000/posters-15-1167-73210d6f982d.html
+  - data/input/f1000/posters-15-1088-7730863b31a1.html
+  - data/input/f1000/posters-15-943-bfa5fec280ce.html
+  - data/input/f1000/documents-15-372-9aef02184acc.html
+  - data/input/f1000/articles-14-739-8d845081f7fe.html
+  - data/input/f1000/articles-15-339-25264896b524.html
+  - data/input/node-uk/event-human-data-community-2026-priorities-priorities-09d7da35403a.html
+  - data/input/tess-events/

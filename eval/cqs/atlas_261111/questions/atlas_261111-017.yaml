@@ -1,0 +1,79 @@
+id: atlas_261111-017
+use_case: "C1.3"
+question: |
+  Which training materials in TeSS should I use to learn genome-scale
+  metabolic modelling, and which relevant training events listed in TeSS start
+  on or after 11 November 2026?
+answerability: answerable
+reference_answer: |
+  "Officially recommended" below means the item is in the ELIXIR Systems
+  Biology Community's TeSS collection, which the Community page links. All
+  other items are only listed in TeSS.
+
+  **Upcoming events** (both in the Community's TeSS collection)
+  - **Constraint-based modeling of metabolic networks with CellNetAnalyzer
+    and CNApy: Module 2 – Advanced topics**: online, 19 November 2026,
+    de.NBI (ELIXIR Germany).
+    https://tess.elixir-europe.org/events/constraint-based-modeling-of-metabolic-networks-with-cellnetanalyzer-and-cnapy-module-2-advanced-topics
+  - **Constraint-Based Modeling: Introduction and Advanced Topics (2027)**:
+    Maastricht, 1–5 February 2027; GEM methods for biotechnology and systems
+    biomedicine.
+    https://tess.elixir-europe.org/events/constraint-based-modeling-introduction-and-advanced-topics-2027
+
+  No other event starting from 11 November 2026 matches genome-scale or
+  constraint-based modelling. The collection's Dynamic Modeling in Systems
+  Biology course (Wageningen, 7–11 December 2026) covers dynamic, not
+  constraint-based, models.
+
+  **Materials for GEMs** (listed in TeSS, not in the Community collection)
+  - Constraint-based reconstruction and analysis (COBRA) Toolbox tutorials:
+    https://tess.elixir-europe.org/materials/constraint-based-reconstruction-and-analysis-toolbox-tutorials
+  - Tutorials on COBREXA:
+    https://tess.elixir-europe.org/materials/tutorials-on-cobrexa
+  - Analysis of huge metabolic models with COBREXA.jl:
+    https://tess.elixir-europe.org/materials/analysis-of-huge-metabolic-models-with-cobrexa-jl-6a5d2934-1460-4b79-a0c6-6957c7994c1a
+  - Interrogating the effect of enzyme kinetics on metabolism using
+    differentiable constraint-based models:
+    https://tess.elixir-europe.org/materials/interrogating-the-effect-of-enzyme-kinetics-on-metabolism-using-differentiable-constraint-based-models
+  - Introduction to CellNetAnalyzer:
+    https://tess.elixir-europe.org/materials/introduction-to-cellnetanalyzer
+
+  **Related materials in the Community collection** (officially
+  recommended, on model reproducibility in general rather than GEMs)
+  - Exploring reproducible and reusable systems biology models with
+    BioModels:
+    https://tess.elixir-europe.org/materials/exploring-reproducible-and-reusable-systems-biology-models-with-biomodels
+  - Reproducibility in Systems Biology Modelling: BioModels' role:
+    https://tess.elixir-europe.org/materials/reproducibility-in-systems-biology-modelling-biomodels-role
+
+  Collection: https://tess.elixir-europe.org/collections/elixir-systems-biology-community-training-events-and-materials1
+eval_notes: |
+  Scored:
+  1. Events: CNApy Module 2 (online, 19 November 2026) and the Maastricht
+     Constraint-Based Modeling course (1–5 February 2027).
+  2. Materials: at least three of the five GEM materials (COBRA Toolbox
+     tutorials, COBREXA tutorials, COBREXA.jl, differentiable constraint-based
+     models, Introduction to CellNetAnalyzer).
+  3. Labels: says which items are in the Systems Biology Community's TeSS
+     collection and which are only in TeSS. None of the five GEM materials is
+     in the collection.
+  4. Links to the TeSS entries or the collection.
+  Accepted: adding Dynamic Modeling in Systems Biology (7–11 December 2026)
+  the EMBL-EBI multi-omics course (8–12 March 2027) or VIB's Tracer
+  metabolomics course (Leuven, 2–4 March 2027) as adjacent, if not called
+  GEM training.
+  Traps: CNApy Module 1 ran on 5 November 2026, before the cut-off. The BiG
+  Talks Metabolic Atlas event in the collection dates from 10 September
+  2021. TeSS events tagged with the EDAM topic "Systems biology" are not the
+  Community collection.
+sources:
+  - data/input/elixir/communities-systems-biology-d4e592b20d80.html
+  - data/input/tess-events/events.json_api-b5a06ffce44b.json
+  - data/input/tess-events/events.json_api-4489623f50f9.json
+  - data/input/tess-events/events.json_api-58b01afa1437.json
+  - data/input/tess-events/events.json_api-e4ba6862e944.json
+  - data/input/tess-materials/materials.json_api-4b48c029b993.json
+  - data/input/tess-materials/materials.json_api-2e20543dcaa8.json
+  - data/input/tess-materials/materials.json_api-d971f358bc76.json
+  - data/input/tess-materials/materials.json_api-4237f92dafa3.json
+  - data/input/tess-materials/materials.json_api-ccf716dfdf60.json

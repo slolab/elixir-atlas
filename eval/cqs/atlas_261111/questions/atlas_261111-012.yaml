@@ -1,0 +1,75 @@
+id: atlas_261111-012
+use_case: "B8"
+question: |
+  The FAIR-FEGA project page
+  (https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega)
+  went live on 30 June 2025. Since then, which new outputs or changes to the
+  project's dates have appeared in public sources? Give the source and date
+  for each.
+answerability: partially_answerable
+reference_answer: |
+  The page was published on 30 June 2025 and last edited on 4 June 2026. It
+  still gives the duration as January 2025 to January 2026 and says nothing
+  about the project's status.
+
+  **Date changes**
+  - **ELIXIR Annual Report 2025** (PDF dated 4 June 2026): lists FAIR-FEGA
+    among the five Human data and translational research (HDTR) projects
+    "funded in 2025" and says these projects are "scheduled to run through
+    2026". This conflicts with the page's January 2026 end.
+  - **HDTR page** (edited 5 May 2026): gives January 2025 to December 2026,
+    but for the HDTR area as a whole, not for FAIR-FEGA alone.
+  - The Commissioned Services list still shows January 2025 to January 2026.
+  - No source gives a new FAIR-FEGA end date. Confirm it with the project.
+
+  **Outputs**
+  No public record is labelled as a FAIR-FEGA deliverable or report. Two new
+  FEGA documents involve FAIR-FEGA people and could be linked once the
+  project confirms them:
+  - **"FEGA Metadata Technical Report: EGA v2 model"**, FEGA Metadata Working
+    Group, Zenodo, 2 April 2026 (v1.0.1): https://zenodo.org/records/19388370.
+    It describes the new FEGA metadata model, which FAIR-FEGA says it will
+    test. Jorge Oliveira (BioData.pt) is an author and Gabriele Rinck
+    (EMBL-EBI, on the FAIR-FEGA page) a contributor. It credits HEREDITARY
+    and ELIXIR, not FAIR-FEGA.
+  - **"Federated EGA in the European and Global Human Data Ecosystem"**,
+    white paper, Zenodo, 5 October 2026 (v1.1):
+    https://zenodo.org/records/23157797. Authors include Teresa D'Altri and
+    Gabriele Rinck (both on the FAIR-FEGA page) and Ana Teresa Freitas. It
+    does not mention FAIR-FEGA.
+
+  The page could also reuse the Annual Report's one-line summary: "Defining
+  metadata standards to improve data submission to FEGA nodes and improve
+  FAIRification".
+
+  Sources:
+  - FAIR-FEGA page: https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega
+  - HDTR page: https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr
+  - Commissioned Services list: https://elixir-europe.org/internal-projects/commissioned-services-list?page=2
+  - ELIXIR Annual Report 2025: https://elixir-europe.org/sites/default/files/documents/elixir-AnnualReport2025.pdf
+eval_notes: |
+  Scored:
+  1. The page still says January 2025 to January 2026 although it was edited
+     in June 2026, and the end date has passed with no status update.
+  2. The Annual Report 2025 says the HDTR projects run "through 2026", which
+     conflicts with the page.
+  3. No public output is labelled as a FAIR-FEGA output; none is invented.
+  4. Names the FEGA Metadata Technical Report (Zenodo, April 2026) as a
+     related output, with the caveat that it is not credited to FAIR-FEGA.
+  Accepted: also naming the October 2026 FEGA white paper; citing the HDTR
+  page's December 2026 end as context, if it is marked as area-wide.
+  Traps: the poster "Unifying FEGA metadata" (11 June 2025) carries the
+  FAIR-FEGA keyword but predates the page, so it is not new. The HDTR page's
+  dates and twelve Nodes cover all five HDTR projects. The second URL
+  (/commissioned-services/science/hdtr/fair-fega) is the same page.
+sources:
+  - data/input/project-pages/how-we-work-scientific-programme-science-hdtr-fair-fega-147f79ce933d-d81d75344d65.html
+  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-fair-fega-5c49c71c2fbe.html
+  - data/input/elixir/how-we-work-scientific-programme-science-hdtr-5efc37669726.html
+  - data/input/elixir/internal-projects-commissioned-services-list-9b7c0990ff93.html
+  - data/input/elixir/sites-default-files-documents-elixir-AnnualReport2025.pdf-9a13b9c969b2.pdf
+  - data/input/zenodo/api-records-19388370-558c0cea9b3c.json
+  - data/input/zenodo/api-records-19388370-files-FEGA-Metadata-Technical-Report-v1.0.1.pdf-content-6521ac4a8a67.pdf
+  - data/input/elixir/api-records-23157797-81006a11950c.json
+  - data/input/elixir/api-records-23157797-files-Federated-EGA-Positioning-White-Paper.pdf-content-2cbc7802eba9.pdf
+  - data/input/f1000/posters-14-578-9f3350e9df6b.html
