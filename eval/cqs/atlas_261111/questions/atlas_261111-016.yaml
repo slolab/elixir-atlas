@@ -1,0 +1,70 @@
+id: atlas_261111-016
+use_case: "C1.2"
+question: |
+  I am starting a genome-scale metabolic modelling project. Which ELIXIR
+  Community white papers, reports or recommendations should I read, and which
+  of them are still in preparation?
+answerability: partially_answerable
+reference_answer: |
+  **Systems Biology Community** (officially recommended: linked from the
+  Community page or written by the Community)
+  - **White paper**, "Systems Biology in ELIXIR: modelling in the spotlight"
+    (F1000Research, version 2, 2024). Sets the Community's goals. On GEMs it
+    names standard-GEM, MEMOTE, MetaNetX and Metabolic Atlas, and
+    constraint-based modelling.
+    https://f1000research.com/articles/11-1265/v2
+  - **"Making Models That Matter: How to Build Trustworthy and Useful
+    Systems Biology Models"** (Hancock et al., arXiv, submitted 11 September
+    2026). Ten recommendations for FAIR- and CURE-compliant models; for GEMs
+    it recommends FROG analysis and the standard-GEM template.
+    https://arxiv.org/abs/2609.13127
+  - **standard-GEM: standardisation of open-source genome-scale metabolic
+    models** (Anton et al., bioRxiv preprint, 2023). Linked from the
+    Community page.
+    https://www.biorxiv.org/content/10.1101/2023.03.21.512712v1.abstract
+  - **Hybrid event report**, Ljubljana, 10–11 September 2026 (published 15
+    October 2026). Lists what is still open, including an RDMkit page on
+    systems biology models. https://f1000research.com/documents/15-1717
+
+  **In preparation (not yet public)**
+  - RDMkit page on systems biology models: in progress, target December
+    2026.
+  - Updates of SBML and SED-ML for the FAIR and CURE principles and AI: named
+    as outstanding needs, no date.
+
+  **Other Communities**
+  - **Microbial Biotechnology Community page**: its first goal is scalable
+    microbial GEMs, including an open-source, community-supported
+    evaluation suite for metabolic models. No white paper is linked from the
+    page. https://elixir-europe.org/communities/microbial-biotechnology
+  - **"A Microbial metabolism resource for Systems Biology: shared semantic
+    standards for reference data types"** (ELIXIR Implementation Study
+    report, 2018): maps ChEBI, Rhea, GO and EC numbers to the concepts of
+    metabolic models. https://f1000research.com/documents/7-1369
+
+  Sources:
+  - Community page: https://elixir-europe.org/communities/systems-biology
+eval_notes: |
+  Scored:
+  1. White paper: "Systems Biology in ELIXIR: modelling in the spotlight"
+     (F1000Research 11:1265), with a link.
+  2. Recommendations: "Making Models That Matter" (arXiv 2609.13127) with
+     its ten recommendations.
+  3. GEM-specific: the standard-GEM preprint linked from the Community page.
+  4. In preparation: the RDMkit page on systems biology models, target
+     December 2026.
+  5. Microbial Biotechnology: its GEM goal, or the 2018 microbial metabolism
+     implementation study report.
+  Accepted: listing the 2026 meeting report itself. Mentioning the PBPK
+  reproducibility paper linked from the Community page as less relevant.
+  Traps: the focus-groups/systems-biology URL shows the same Community page
+  and is not a separate group. The white paper is dated 2022 for version 1
+  and 2024 for version 2; either is fine if the article is right.
+sources:
+  - data/input/elixir/communities-systems-biology-d4e592b20d80.html
+  - data/input/f1000/articles-11-1265-v2-pdf-55068db9319e.pdf
+  - data/input/systems-biology/abs-2609.13127-9600566b7535.html
+  - data/input/systems-biology/pdf-2609.13127-4b55a8c8051a.pdf
+  - data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf
+  - data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html
+  - data/input/f1000/documents-7-1369-pdf-194cb5289e85.pdf

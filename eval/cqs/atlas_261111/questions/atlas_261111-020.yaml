@@ -1,0 +1,96 @@
+id: atlas_261111-020
+use_case: "C2.3"
+question: |
+  Which other ELIXIR Communities should the Systems Biology Community bring in
+  as domain applications for its next roadmap, based on existing joint
+  projects, publications and topic overlap?
+answerability: answerable
+reference_answer: |
+  I would start with the three ELIXIR Communities behind the planned systems
+  biology bundle pilots, then Toxicology, then Rare Diseases.
+
+  **1. Microbial Biotechnology** (strongest link)
+  - Planned microbial pilot of the systems biology bundle (2026 meeting
+    report).
+  - Joint project DBTLHub (January 2024 – December 2026).
+  - Shared co-lead: Vitor Martins dos Santos. Microbial GEMs are its first
+    goal.
+
+  **2. Plant Sciences**
+  - Planned plant pilot built on the Stress Knowledge Map (SKM).
+  - SKM is tagged with both Communities in bio.tools.
+  - Kristina Gruden co-leads Plant Sciences, took part in SYBEL and
+    presented Plant Community activities at the 2026 meeting.
+
+  **3. Food and Nutrition**
+  - Named in the meeting report's outreach for the bundle pilots.
+  - Joint project RCI-M (January 2024 – December 2026).
+  - Its white paper describes nutritional systems biology.
+
+  **4. Toxicology**
+  - PBPK model reproducibility paper (Domínguez-Romero et al., 2024),
+    linked from the Systems Biology page.
+  - Toxicology's meeting report (F1000, September 2026) names the Systems
+    Biology Community as a partner for its model infrastructure work and
+    plans to make PBPK and other toxicology models reusable, following the
+    CURE principles and RO-Crate.
+  - Sara Morsy, Toxicology interim co-lead, co-authored "Making Models That
+    Matter". Joint project RCI-M.
+
+  **5. Rare Diseases**
+  - A Systems Biology Service Bundle for Rare Diseases exists (2023),
+    co-authored by Marek Ostaszewski.
+  - The white paper expects Federated Human Data and Rare Diseases to supply
+    data for disease modelling.
+
+  **Weaker links:** Metabolomics (DBTLHub, RCI-M, the 2021 fluxomics
+  study), Single-Cell Omics (TELLME, 2026; RCI-M), Microbiome (DBTLHub;
+  microbiome modelling is still open from the previous roadmap).
+
+  The medical pilot depends on Disease Maps, which is an external network,
+  not an ELIXIR Community.
+
+  Sources:
+  - Meeting report: https://f1000research.com/documents/15-1717
+  - Community page: https://elixir-europe.org/communities/systems-biology
+  - White paper: https://f1000research.com/articles/11-1265/v2
+  - DBTLHub: https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub
+  - RCI-M: https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/metabolomics
+  - TELLME: https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/tellme
+  - Toxicology meeting report: https://f1000research.com/documents/15-1506
+  - Plant Sciences: https://elixir-europe.org/communities/plant-sciences
+  - SKM: https://bio.tools/skm
+  - Rare disease bundle: https://elixir-europe.org/services/service-bundles/systems-biology-rare-disease
+eval_notes: |
+  Scored:
+  1. Microbial Biotechnology, with DBTLHub, the shared co-lead or the
+     microbial pilot.
+  2. Plant Sciences, with SKM (shared bio.tools tag or plant pilot) or
+     Kristina Gruden.
+  3. Food and Nutrition, with the bundle outreach or RCI-M.
+  4. Toxicology, with the PBPK work, RCI-M or the Toxicology meeting
+     report.
+  5. Evidence: each recommended Community is backed by a named project,
+     publication or shared tool.
+  Accepted: Rare Diseases, Metabolomics, Single-Cell Omics or Microbiome as
+  further candidates with evidence. A different order if justified.
+  Traps: Disease Maps, COMBINE and ISGSB are not ELIXIR Communities. The
+  Toxicology report's footer says "Last updated 08/2025" while F1000 dates
+  it 8 September 2026.
+sources:
+  - data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf
+  - data/input/elixir/communities-systems-biology-d4e592b20d80.html
+  - data/input/f1000/articles-11-1265-v2-pdf-55068db9319e.pdf
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-dbtlhub-5b825e734781.html
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-metabolomics-b4a8a1f7e589.html
+  - data/input/elixir/how-we-work-scientific-programme-science-cmr-tellme-b20314c918e4.html
+  - data/input/elixir/internal-projects-commissioned-services-2023-sybel-5fbee0dffb5f.html
+  - data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html
+  - data/input/elixir/communities-plant-sciences-baf90445b836.html
+  - data/input/elixir/communities-toxicology-49484bd5f374.html
+  - data/input/f1000/documents-15-1506-pdf-e7797bb2198d.pdf
+  - data/input/f1000/articles-11-978-v1-pdf-f85118c90c22.pdf
+  - data/input/systems-biology/pdf-2609.13127-4b55a8c8051a.pdf
+  - data/input/biotools/api-t-3e77f0b98173.json
+  - data/input/elixir/services-service-bundles-systems-biology-rare-disease-9642738e7d39.html
+  - data/input/elixir/ords-10006029-files-ELIXIR-Service-Bundle-Systems-biology-for-rare-diseases_V1.pdf-content-5061764acd5f.pdf

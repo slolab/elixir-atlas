@@ -1,0 +1,68 @@
+id: atlas_261111-010
+use_case: "B5"
+question: |
+  ELIXIR Estonia contributes to ELIXIR-STEERS Task 4.3, capacity building in
+  training skills for ELIXIR Node staff. Which other ELIXIR projects cover
+  the same topic, and where is each overlap written down?
+answerability: answerable
+reference_answer: |
+  **Stated overlap: ELIXIR Training Platform 2024-26 work plan**
+  (https://doi.org/10.5281/zenodo.12516053)
+  - **WP4, Train-the-Trainer programme consolidation.** The plan names
+    "complementary links to ELIXIR-STEERS WP4, Task 4.1 and 4.3". Its
+    overview cites Task 4.3 by name. ELIXIR Estonia is in this WP: Priit
+    Adler (University of Tartu) is a member of Activity 1 and an expected
+    member of Activity 2.
+  - **WP3, training guidelines and Training Platform procedures.** WP3 is
+    "complementary linked" to STEERS WP4. Its Activity 2 work on Training
+    Coordinator roles and onboarding cites Tasks 4.1, 4.2 and 4.3. ELIXIR
+    Estonia is not listed in WP3.
+
+  **The same overlap from the STEERS side**
+  - The STEERS WP4 page says Task 4.3 builds on Training Platform resources
+    such as the ELIXIR-GOBLET Train-the-Trainer programme.
+    https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp4
+  - STEERS D4.1 (the Task 4.3 deliverable, delivered March 2026) reports
+    close collaboration with the Training Platform and the ELIXIR-GOBLET
+    Train-the-Trainer programme, and delivery of Train-the-Trainer courses to
+    Node staff together with the Training Platform.
+    https://doi.org/10.5281/zenodo.20759756
+
+  **Related topic, no stated link**
+  - ELIXIR Node support (January 2024 to December 2026) builds capacity
+    across Nodes "through training, knowledge exchange" and tools for impact
+    evaluation. ELIXIR Estonia and Hedi Peterson take part. Its page does not
+    mention STEERS, and its focus is closer to Tasks 4.1 and 4.2 (Node
+    operations and impact).
+    https://elixir-europe.org/how-we-work/scientific-programme/nodes/support
+  - Staff exchange "Bioinformatics and statistical skills training workshop"
+    (SEP 2025-08, March to May 2025): ELIXIR Estonia helped ELIXIR Czech
+    Republic build its training portfolio. It trains researchers, not
+    trainers.
+    https://elixir-europe.org/internal-projects/staff-exchange-programme/bioinformatics-stats
+eval_notes: |
+  Scored:
+  1. Training Platform 2024-26 WP4 (Train-the-Trainer), with the plan's
+     explicit link to STEERS Tasks 4.1 and 4.3 and its DOI.
+  2. ELIXIR Estonia's place on both sides: Hedi Peterson in STEERS Task 4.3
+     or Priit Adler in Training Platform WP4. Naming Priit Adler scores
+     higher.
+  3. Training Platform WP3 links to STEERS WP4 (Tasks 4.1 to 4.3).
+  4. Separates links that a source states from overlaps inferred from the
+     topic (Node support, the staff exchange).
+  5. A source link for each overlap.
+  Accepted: the 2024-training project page
+  (https://elixir-europe.org/internal-projects/commissioned-services/2024-training)
+  alongside the DOI; citing STEERS D4.1 or the WP4 page for the STEERS side.
+  Traps: Training Platform D4.1 (FAIR training guide) is not STEERS D4.1.
+  ELITMa (STEERS Task 4.2) is management training, not training-skills
+  capacity building; citing it alone as the overlap scores 0 for point 1.
+  The 2022-23 TeSS services have ended.
+sources:
+  - data/input/elixir/about-us-how-funded-eu-projects-steers-wp4-be60fab378d5.html
+  - data/input/zenodo/records-12516053-files-COPY-for-publishing_24-TECHNOLOGY-TRAININGPLATFORM-v0.2.pdf-content-a9e217096534.pdf
+  - data/input/zenodo/api-records-12516053-c05079848af9.json
+  - data/input/zenodo-steers/programme-on-the-implementation-of-training-skills-for-research-infrastructure.pdf-content-8ef135509551-99d7bd5cde71.pdf
+  - data/input/elixir/how-we-work-scientific-programme-nodes-support-67466de6c4d9.html
+  - data/input/elixir/internal-projects-staff-exchange-programme-bioinformatics-stats-222873449abf.html
+  - data/input/elixir/internal-projects-commissioned-services-2024-training-44d231a0f1b9.html

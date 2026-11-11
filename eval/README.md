@@ -1,25 +1,25 @@
 # Evaluation
 
-`user_stories.md` holds the user stories. The scripts that run and annotate the evaluation are in `src/eval/`. `cqs/<set-id>/` holds a competency-question (CQ) set, a simplified version of the biotope-bench layout:
+`user_stories.md` holds the end-to-end use cases (A, B, C) that the CQ sets are built from. The scripts that run and annotate the evaluation are in `src/eval/`. `cqs/<set-id>/` holds a competency-question (CQ) set, a simplified version of the biotope-bench layout:
 
 - `set.yaml`: the set's `id`, its `version`, the users' `purpose`, the data snapshot it was written against (`reference_dataset`), the `context` that answering agents see and the `correctness` `rubric`.
-- `questions/<set-id>-NNN.yaml`: one question with its `user_story`, `question`, `answerability`, `reference_answer`, `eval_notes` (the components the rubric scores) and `sources` (paths under `data/`).
+- `questions/<set-id>-NNN.yaml`: one question with its `use_case` (a question id from `user_stories.md`, such as `B4`), `question`, `answerability`, `reference_answer`, `eval_notes` (the components the rubric scores) and `sources` (paths under `data/`).
 - `sidenotes.md`: how the answers were derived, data-quality notes and details left out of the answers.
+
+Retired sets are in `archive/`.
 
 The rubric measures accuracy: whether the answer's facts are correct. Argilla collects how users like the answers: annotators see each question with its reference answer, rate it from 1 to 5 and can leave feedback.
 
 ## Run the evaluation
 
 ```bash
-uv run src/eval/run.py eval/cqs/atlas_261110
-uv run src/eval/run.py eval/cqs/atlas_261110 --questions 006 007 --repeats 3
-uv run src/eval/run.py eval/cqs/atlas_261110 --evidence skill-api --experiment api-baseline --questions 006
-uv run src/eval/run.py eval/cqs/atlas_261110 --evidence skill-api --experiment api-baseline
+uv run src/eval/run.py eval/cqs/atlas_261111
+uv run src/eval/run.py eval/cqs/atlas_261111 --questions 006 007 --repeats 3
 ```
 
 `run.py` turns each question into a [Harbor](https://github.com/laude-institute/harbor) task in `eval/tasks/`, and Harbor runs Codex with `openai/gpt-6-luna` at reasoning effort high in Docker. The shared image preinstalls Codex 0.167.1 so trials reuse the cached installation instead of downloading Node.js and Codex for each question. With `--evidence raw`, the default, the agent reads all of `data/input` read-only and the URL index `data-sources-scraping.jsonl`; it can reach only OpenRouter and PyPI. It writes its answer to `answer.md`.
 
-With `--evidence skill-api`, the container receives a copy of `skills/agentic-elixir` and can reach the public Atlas API as its only evidence service. It receives no raw data, source index, local graph or reference answers. External source pages cannot be fetched; their URLs can be cited from API evidence. The questions, answer prompt, model settings and judge are shared with raw mode. The agent is instructed to save complete API responses and a request log under `/workspace/evidence`, which Harbor collects as an artifact.
+`judge.py` then grades every answer by the set's rubrics with `openai/gpt-6-luna-decisions` on OpenRouter's decisions API. A verdict with a confidence below 0.8 is graded again by `openai/gpt-6.1-sol` at reasoning effort high. Each trial in `eval/results/<job>/` keeps its `judgement.json`, and the script prints a score table. Each choice of `--questions` and `--repeats` is its own job, such as `atlas_261111-v1__raw__gpt-6-luna__006-007-x3`. Rerunning the same command resumes unfinished trials and grades again only answers whose inputs changed.
 
 Use `--api-url` to evaluate another Atlas deployment. The copied API reference and network allowlist use that address; the distributed skill stays unchanged. A local service must be reachable from Docker, not just the host's loopback address. Use PostgreSQL when comparing with Railway: the SQLite backend has different search semantics and ranking.
 
@@ -52,7 +52,7 @@ This follows the trace-based evaluation guidance from [OpenAI](https://developer
 ## Push to Argilla
 
 ```bash
-uv run src/eval/push_argilla.py eval/cqs/atlas_261110
+uv run src/eval/push_argilla.py eval/cqs/atlas_261111
 ```
 
 The script needs `ARGILLA_API_KEY` (an owner key) in `.env`. It writes to the `elixir-atlas` workspace on `https://test.senantix.com`, in a dataset named `<set-id>-v<version>`, and creates both if needed. Rerunning it updates that dataset from the YAMLs: changed questions are updated, new ones are added and deleted ones are removed.
