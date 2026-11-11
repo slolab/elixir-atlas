@@ -41,3 +41,30 @@ Evaluation: [CQ sets, runs and Argilla](eval/README.md).
 Dashboard: `python3 scripts/dashboard.py` opens the local `graph/build/graph.sqlite` snapshot. See [local SQLite and API modes](dashboard/README.md).
 
 Serving: [PostgreSQL, API, search and Railway deployment](server/README.md).
+
+## Agentic ELIXIR skill
+
+[Agentic ELIXIR](skills/agentic-elixir/SKILL.md) answers the [user stories](eval/user_stories.md) through the public Atlas API, using enriched keyword searches, relationships and source evidence. The package contains only the skill and its API reference; no credentials, local data or runtime dependencies are needed beyond an agent that can make HTTP requests.
+
+Install from this checkout:
+
+```bash
+npx skills add ./skills/agentic-elixir -g
+```
+
+After the skill is published to this repository, install remotely:
+
+```bash
+npx skills add slolab/elixir-atlas --skill agentic-elixir -g
+```
+
+The installer lets you choose agents. To select one explicitly, add `-a codex`, `-a claude-code`, `-a opencode` or `-a hermes-agent`. See the installer's [supported agents](https://github.com/vercel-labs/skills/blob/main/docs/agents.md). The installer requires Node.js; the installed skill does not.
+
+To create a ZIP from the repository root:
+
+```bash
+mkdir -p dist
+python3 -m zipfile -c dist/agentic-elixir.zip skills/agentic-elixir
+```
+
+Extract the ZIP and install its `agentic-elixir` folder with `npx skills add ./agentic-elixir -g`, or place that folder in your agent's skills directory.

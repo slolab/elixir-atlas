@@ -1,34 +1,58 @@
 import os
 import re
+import hashlib
+import threading
 from contextlib import asynccontextmanager, closing
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from psycopg import errors, sql
 from psycopg.rows import dict_row
 from psycopg_pool import ConnectionPool, PoolTimeout
+from psycopg import Error as DatabaseError
+from pydantic import BaseModel, Field
 
 from . import views
 from .sqlite_snapshot import Snapshot
+from . import query
+from .permissions import check_reader
+from .schema import sql_schema
+from .tracing import trace
+
+
+API_REVISION = hashlib.sha256(b"".join(path.name.encode() + path.read_bytes() for path in sorted(Path(__file__).parent.glob("*.py")))).hexdigest()
+QUERY_SLOTS = threading.BoundedSemaphore(2)
 
 
 @asynccontextmanager
 async def lifespan(app):
     app.state.snapshot = None
+    app.state.trace_directory = os.environ.get("ATLAS_TRACE_DIR")
     if path := os.environ.get("ATLAS_SQLITE_PATH"):
         with closing(Snapshot(path)) as snapshot:
             app.state.snapshot = snapshot
             yield
         return
     with ConnectionPool(os.environ["DATABASE_URL"], min_size=1, max_size=8, timeout=10, kwargs={"row_factory": dict_row, "prepare_threshold": None}) as pool:
+        with pool.connection() as conn:
+            check_reader(conn)
         app.state.pool = pool
         yield
 
 
 app = FastAPI(title="ELIXIR Atlas API", version="1.0.0", description="Read-only access to the Atlas release, records, relationships, source evidence and keyword search.", lifespan=lifespan)
+app.middleware("http")(trace)
+
+
+@app.exception_handler(RequestValidationError)
+def invalid_request(request, error):
+    return JSONResponse(status_code=422, content={"request_id": request.state.request_id, "detail": [
+        {key: item[key] for key in ("type", "loc", "msg")} for item in error.errors()
+    ]})
 
 
 def connection(request: Request):
@@ -67,15 +91,66 @@ def health(db: Database):
 @app.get("/api/release")
 def release(db: Database):
     if isinstance(db, Snapshot):
-        return db.release
-    return views.one(db, "SELECT id, manifest, counts, imported_at FROM release")
+        return {**db.release, "api": {"revision": API_REVISION, "sql": False}}
+    return {**views.one(db, "SELECT id, manifest, counts, imported_at FROM release"), "api": {"revision": API_REVISION, "sql": True}}
 
 
 @app.get("/api/schema")
-def topology(db: Database):
+def topology(db: Database, format: Literal["topology", "sql"] = "topology", tables: str | None = Query(default=None, max_length=2000), detail: Literal["full", "summary"] = "full"):
+    if format == "sql":
+        if isinstance(db, Snapshot):
+            raise HTTPException(501, "SQL querying requires PostgreSQL mode")
+        current = views.one(db, "SELECT id, manifest, topology FROM release")
+        definitions = sql_schema(current["topology"])
+        if isinstance(tables, str):
+            selected = {name.strip().removeprefix("atlas.") for name in tables.split(",")}
+            unknown = selected - {name.removeprefix("atlas.") for name in definitions}
+            if unknown:
+                raise HTTPException(422, f"Unknown tables: {', '.join(sorted(unknown))}. Use /api/schema?format=sql&detail=summary to discover tables.")
+            definitions = {name: value for name, value in definitions.items() if name.removeprefix("atlas.") in selected}
+        if detail == "summary":
+            definitions = {name: {key: value for key, value in entity.items() if key != "columns"} | {
+                "references": {column: value["references"] for column, value in entity["columns"].items() if "references" in value and column != "biotope_provenance_id"}
+            } for name, entity in definitions.items()}
+        return {"dialect": "PostgreSQL", "release": current["id"], "api_revision": API_REVISION,
+                "schema_sha256": current["manifest"]["files"]["schema_config.yaml"]["sha256"],
+                "tables": definitions, "functions": sorted(query.FUNCTIONS), "cast_types": sorted(query.TYPES),
+                "requirements": ["Quote column identifiers with double quotes, especially reserved words such as \"end\".", "FROM functions require WITH ORDINALITY, e.g. unnest(pages) WITH ORDINALITY AS u(url, position)."],
+                "limits": {"rows": query.MAX_ROWS, "bytes": query.MAX_BYTES, "timeout_ms": query.TIMEOUT_MS, "concurrency": 2}}
     if isinstance(db, Snapshot):
         return db.schema
     return views.one(db, "SELECT topology FROM release")["topology"]
+
+
+class QueryRequest(BaseModel):
+    sql: str = Field(min_length=1, max_length=32_000)
+    limit: int = Field(default=query.MAX_ROWS, ge=1, le=query.MAX_ROWS)
+
+
+@app.post("/api/query")
+def query_database(body: QueryRequest, request: Request, db: Database):
+    if isinstance(db, Snapshot):
+        raise HTTPException(501, "SQL querying requires PostgreSQL mode")
+    request_id = request.state.request_id
+    if not QUERY_SLOTS.acquire(blocking=False):
+        return JSONResponse(status_code=503, content={"request_id": request_id, "error": {"code": "busy", "message": "Two queries are already running. Retry shortly."}})
+    try:
+        current = views.one(db, "SELECT id, manifest, topology FROM release")
+        result = query.execute(db, body.sql, body.limit, current, API_REVISION)
+        return JSONResponse(content={**result, "request_id": request_id})
+    except query.QueryError as error:
+        return JSONResponse(status_code=error.status, content={"request_id": request_id, "error": {"code": error.code, "message": str(error), "position": error.position, "hint": error.hint}})
+    except DatabaseError as error:
+        timeout = isinstance(error, (errors.QueryCanceled, errors.LockNotAvailable))
+        return JSONResponse(status_code=408 if timeout else 400, content={"request_id": request_id, "error": {
+            "code": "query_timeout" if timeout else "sql_error", "sqlstate": error.sqlstate,
+            "message": error.diag.message_primary, "position": error.diag.statement_position,
+            "hint": error.diag.message_hint,
+        }})
+    except RecursionError:
+        return JSONResponse(status_code=400, content={"request_id": request_id, "error": {"code": "query_too_complex", "message": "Reduce SQL nesting."}})
+    finally:
+        QUERY_SLOTS.release()
 
 
 @app.get("/api/home")
@@ -129,6 +204,12 @@ def search(db: Database, q: str = Query(min_length=2, max_length=200), type: str
     term = q.strip()
     if len(term) < 2:
         raise HTTPException(422, "Enter at least two characters")
+    if isinstance(type, str):
+        types = {name.casefold(): name for name in topology(db)}
+        canonical = types.get(type.strip().casefold())
+        if canonical is None:
+            raise HTTPException(422, {"message": "Unknown search type", "types": list(types.values())})
+        type = canonical
     if isinstance(db, Snapshot):
         return db.search(term, type, limit, offset)
     escaped = term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
