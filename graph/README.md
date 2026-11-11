@@ -106,7 +106,7 @@ out.
 
    ```bash
    biotope graph check
-   biotope graph build
+   biotope graph build --format sqlite
    biotope graph metagraph --report graph/build/run.json
    ```
 
@@ -118,7 +118,7 @@ biotope add --rebake data/study
 biotope extract run
 biotope source generate .biotope/datasets/data/study.jsonld --out graph/sources
 biotope graph check
-biotope graph build
+biotope graph build --format sqlite
 ```
 
 Move data files with `biotope mv`, which updates every ID that names them. When

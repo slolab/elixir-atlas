@@ -16,11 +16,9 @@ purpose: |
   with the source of each detail.
 reference_dataset: 20261110T134028Z
 context: |
-  Answers rely on public information only. The Perun people export and
-  documents that need permission are out of scope; where a question needs
-  them, say what is missing instead of guessing. An organisation's EU funding
-  does not establish that a named person was funded. Give the source of each
-  key fact.
+  Use all supplied evidence. If information is missing, say so instead of
+  guessing. An organisation's EU funding does not establish that a named
+  person was funded. Give the source of each key fact.
 rubric:
   - name: correctness
     criteria: |
