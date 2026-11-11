@@ -1,0 +1,85 @@
+id: atlas_261111-007
+use_case: "B2"
+question: |
+  I'm in ELIXIR Estonia. What did our Node commit to in the EU project
+  ELIXIR-STEERS: which tasks does the University of Tartu work on, which
+  deliverables or milestones are they tied to and when are these due? Where
+  is the plan, ideally as a stable link?
+answerability: partially_answerable
+reference_answer: |
+  The University of Tartu (short name UTARTU, participant 7) is a beneficiary
+  of ELIXIR-STEERS, which runs from 1 February 2024 to 31 January 2027. It
+  **leads no deliverable, milestone or task**: none of the task leaders and
+  deliverable leads in the project handbook is from Tartu. The project
+  website names Hedi Peterson (University of Tartu) among the leadership of
+  four tasks:
+
+  - **Task 3.4, optimisation criteria for environmental impact in workflow
+    management systems (WP3)**
+    - M3.4 Strategy to identify the most critical parts of a workflow for
+      optimisation: due 31 July 2025, completed 31 July 2025. Heleri Inno
+      (UT) is a co-author. https://doi.org/10.5281/zenodo.17035147
+    - M3.5 Proof-of-concept implementation of optimisations in a workflow
+      management system: due 31 January 2026, completed 30 April 2026
+      (delayed). Uku Raudvere (EE) is a listed participant.
+      https://doi.org/10.5281/zenodo.20759675
+  - **Task 4.1, good practices in Node operations (WP4)**: D4.2 ELIXIR Node
+    Development Almanac, due January 2027.
+  - **Task 4.2, organisational and management capacity for Nodes (ELITMa)**:
+    M4.1 Expansion of ELITMa with modules on Node Services Provision and
+    greening of research infrastructure operations, due 31 January 2026,
+    completed 14 January 2026; Hedi Peterson (UT, EE) is a listed
+    participant (https://doi.org/10.5281/zenodo.20761901). D4.3 deposit of
+    new ELITMa training materials in an open repository and TeSS, due January
+    2027.
+  - **Task 4.3, training skills for Node staff**: D4.1 Customised programme
+    on the implementation of training skills for research infrastructure,
+    due 31 January 2026, delivered 5 March 2026 (delayed).
+    https://doi.org/10.5281/zenodo.20759756
+
+  Hedi Peterson also represents UTARTU in the General Assembly and ELIXIR
+  Estonia in the Heads of Nodes Committee, with Kairi Koort as deputy.
+
+  **Where the plan is:** the grant agreement and its description of work are
+  not public. The task descriptions are on the STEERS work package pages, the
+  due dates on the deliverables page, and the roles in the D1.6 Updated
+  Project Handbook v3 (January 2026), https://doi.org/10.5281/zenodo.18469231.
+  Public sources do not give Tartu's person-months or which part of each task
+  Tartu does.
+
+  Sources:
+  - https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp3
+  - https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp4
+  - https://elixir-europe.org/about-us/how-funded/eu-projects/steers/deliverables
+  - https://cordis.europa.eu/project/id/101131096
+  - https://doi.org/10.5281/zenodo.18469231 (D1.6 handbook)
+eval_notes: |
+  Scored:
+  1. Says the University of Tartu leads no STEERS deliverable, milestone or
+     task, and is a contributing beneficiary.
+  2. Tasks: 3.4, 4.1, 4.2 and 4.3. At least three of the four.
+  3. Linked outputs with due dates: D4.1 (January 2026), D4.2 and D4.3
+     (January 2027), M4.1 (January 2026), M3.5 (January 2026). At least
+     three, with correct dates.
+  4. Plan location: the STEERS website pages and the D1.6 handbook DOI
+     10.5281/zenodo.18469231; says the grant agreement is not public.
+  5. Says Tartu's effort per task is not public.
+  Accepted: the D1.3 handbook (https://doi.org/10.5281/zenodo.14810093)
+  instead of D1.6, since it gives the same roles. "Almanack" spelling. D4.1
+  given as "delivered March 2026" or "due January 2026".
+  Traps: D4.1 of the Training Platform (a FAIR training guide, reviewed by
+  Diana Pilvar) is a different D4.1. The 2024-26 Tools Platform plan, where
+  Hedi Peterson co-leads WP2 Activity 3, is a different project. Being in a
+  task's "Leadership" list on the website does not make Tartu the task
+  leader.
+sources:
+  - data/input/elixir/about-us-how-funded-eu-projects-steers-wp3-bd836267417c.html
+  - data/input/elixir/about-us-how-funded-eu-projects-steers-wp4-be60fab378d5.html
+  - data/input/elixir/about-us-how-funded-eu-projects-steers-deliverables-732c34d571e1.html
+  - data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
+  - data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf
+  - data/input/zenodo-steers/rt_Strategy-to-identify-the-most-critical-parts-of-a-workflow-for-optimisation.pdf-content-3ed4a6671b2b-219831aa2eb1.pdf
+  - data/input/zenodo-steers/4_-Strategy-to-identify-the-most-critical-parts-of-a-workflow-for-optimisation.pdf-content-6a1defcad15e-87c370171d88.pdf
+  - data/input/zenodo-steers/oof-of-concept-implementation-of-optimisations-in-a-workflow-management-system.pdf-content-bf3c2f33b813-d6cf0eb315ab.pdf
+  - data/input/zenodo-steers/XIR-Node-Services-Provision-and-Greening-of-research-infrastructure-operations.pdf-content-026cbcf3565b-ef334da2f088.pdf
+  - data/input/zenodo-steers/programme-on-the-implementation-of-training-skills-for-research-infrastructure.pdf-content-8ef135509551-99d7bd5cde71.pdf
