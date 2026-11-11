@@ -20,7 +20,21 @@ Generate a reviewable SQL schema from a release:
 uv run --directory server python -m atlas_api.import_release ../data/releases/20261111 --schema-only
 ```
 
-## Local API
+## Quick local SQLite dashboard
+
+From the repository root:
+
+```bash
+python3 scripts/dashboard.py
+```
+
+This opens `graph/build/graph.sqlite` through a local API and starts the same dashboard at http://127.0.0.1:5180. To use another file, pass its path as the first argument. Only the SQLite file is required; matching `schema_config.yaml` and `provenance.json` beside it add descriptions and source evidence. No PostgreSQL or release import is needed. The source file is opened read-only, copied into memory and indexed there. Restart the command after rebuilding; Ctrl+C stops both processes.
+
+Local keyword search uses SQLite FTS5 with words and quoted phrases combined with AND. It supports the same type filters and pagination, but has different ranking and does not implement PostgreSQL's fuzzy matching, `OR` or exclusions. See [dashboard modes](../dashboard/README.md).
+
+For a standalone SQLite API, set `ATLAS_SQLITE_PATH` to an absolute snapshot path and run the same Uvicorn command below. SQLite mode is explicit; without that variable, the API requires `DATABASE_URL`. Railway uses PostgreSQL and must leave `ATLAS_SQLITE_PATH` unset.
+
+## Local PostgreSQL API
 
 Set `DATABASE_URL` to a PostgreSQL database you control, then run from the repository root:
 
@@ -30,7 +44,7 @@ uv run --directory server python -m atlas_api.import_release ../data/releases/20
 uv run --directory server uvicorn atlas_api.main:app --host 127.0.0.1 --port 8000
 ```
 
-Start the dashboard separately with `npm run dev --prefix dashboard`. A production dashboard build in `dashboard/dist` is served directly by FastAPI, or set `ATLAS_STATIC_DIR` explicitly.
+Start the dashboard separately with `npm run dev:api --prefix dashboard`. A production dashboard build in `dashboard/dist` is served directly by FastAPI, or set `ATLAS_STATIC_DIR` explicitly.
 
 ## API and search
 
@@ -72,7 +86,9 @@ npm run build --prefix dashboard
 uv run --directory server python -m unittest discover -s tests -v
 ```
 
-Without `DATABASE_URL`, only schema/checksum tests run. With PostgreSQL, import tests use a temporary schema and check typed round-trips, repeat imports and rollback after failure. Set `ATLAS_RELEASE_DIR` to the imported release to compare every field of every record and check all dashboard queries, search pagination, filtering, phrase behavior, provenance, relationships and index availability. Set `ATLAS_TEST_BASE_URL` to test live HTTP validation, missing records and read-only routes.
+Without `DATABASE_URL`, the schema/checksum and SQLite fixture tests run. Set `ATLAS_TEST_SQLITE` to an absolute path to a built snapshot to also check every dashboard view and record type against it. These tests cover both bare snapshots and optional metadata, indexed search, pagination, read-only access and an unchanged source file.
+
+With PostgreSQL, import tests use a temporary schema and check typed round-trips, repeat imports and rollback after failure. Set `ATLAS_RELEASE_DIR` to the imported release to compare every field of every record and check all dashboard queries, search pagination, filtering, phrase behavior, provenance, relationships and index availability. Set `ATLAS_TEST_BASE_URL` to test live HTTP validation, missing records and read-only routes.
 
 With a Railway SSH key registered, run the full suite through the deployed service's private connection. Alternatively, use a one-off service with the same image and private database connection, the test command as its start command, and restart policy `NEVER`; remove it when checks finish. Do not add the test suite to the app's normal pre-deploy command.
 

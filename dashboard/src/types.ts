@@ -58,7 +58,7 @@ export type RecordData = {
   title: string;
   record: Row;
   definition: { description: string; represented_as: string; source?: string; target?: string; biotope: { property_descriptions: Record<string, string> } };
-  provenance: { mappings: string[]; evidence: { artifact: string; version: string; location: string; record_set?: string }[] };
+  provenance: { available?: boolean; mappings: string[]; evidence: { artifact: string; version: string; location: string; record_set?: string }[] };
 };
 export type RelationsData = {
   total: number;

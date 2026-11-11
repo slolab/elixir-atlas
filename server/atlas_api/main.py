@@ -1,6 +1,6 @@
 import os
 import re
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, closing
 from pathlib import Path
 from typing import Annotated
 
@@ -12,10 +12,17 @@ from psycopg.rows import dict_row
 from psycopg_pool import ConnectionPool, PoolTimeout
 
 from . import views
+from .sqlite_snapshot import Snapshot
 
 
 @asynccontextmanager
 async def lifespan(app):
+    app.state.snapshot = None
+    if path := os.environ.get("ATLAS_SQLITE_PATH"):
+        with closing(Snapshot(path)) as snapshot:
+            app.state.snapshot = snapshot
+            yield
+        return
     with ConnectionPool(os.environ["DATABASE_URL"], min_size=1, max_size=8, timeout=10, kwargs={"row_factory": dict_row, "prepare_threshold": None}) as pool:
         app.state.pool = pool
         yield
@@ -25,6 +32,10 @@ app = FastAPI(title="ELIXIR Atlas API", version="1.0.0", description="Read-only 
 
 
 def connection(request: Request):
+    if snapshot := request.app.state.snapshot:
+        with snapshot.lock:
+            yield snapshot
+        return
     with request.app.state.pool.connection() as conn:
         with conn.transaction():
             conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
@@ -45,6 +56,8 @@ def unavailable(request, error):
 
 @app.get("/healthz")
 def health(db: Database):
+    if isinstance(db, Snapshot):
+        return {"status": "ok", "release": db.release["id"], "mode": "sqlite"}
     release = views.one(db, "SELECT id FROM release")
     if release is None:
         raise HTTPException(503, "No release loaded")
@@ -53,11 +66,15 @@ def health(db: Database):
 
 @app.get("/api/release")
 def release(db: Database):
+    if isinstance(db, Snapshot):
+        return db.release
     return views.one(db, "SELECT id, manifest, counts, imported_at FROM release")
 
 
 @app.get("/api/schema")
 def topology(db: Database):
+    if isinstance(db, Snapshot):
+        return db.schema
     return views.one(db, "SELECT topology FROM release")["topology"]
 
 
@@ -112,6 +129,8 @@ def search(db: Database, q: str = Query(min_length=2, max_length=200), type: str
     term = q.strip()
     if len(term) < 2:
         raise HTTPException(422, "Enter at least two characters")
+    if isinstance(db, Snapshot):
+        return db.search(term, type, limit, offset)
     escaped = term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
     params = {"q": term, "contains": "%" + escaped + "%", "prefix": escaped + "%", "type": type, "limit": limit, "offset": offset, "literal": re.search(r'"|(?:^|\s)-|\bOR\b', term, re.IGNORECASE) is None}
     facets = views.rows(db, f"SELECT entity_type, count(*) count FROM search_document WHERE {SEARCH_MATCH} GROUP BY entity_type ORDER BY count DESC,entity_type", params)
@@ -134,6 +153,8 @@ def entity_schema(db, type):
 
 @app.get("/api/record")
 def record(db: Database, type: RecordId, id: RecordId):
+    if isinstance(db, Snapshot):
+        return db.record(type, id)
     schema, entity = entity_schema(db, type)
     row = found(views.one(db, sql.SQL("SELECT * FROM {}").format(sql.Identifier(type.lower())) + sql.SQL(" WHERE id=%s"), (id,)))
     title = views.one(db, "SELECT title FROM search_document WHERE entity_type=%s AND id=%s", (type,id))
@@ -143,6 +164,8 @@ def record(db: Database, type: RecordId, id: RecordId):
 
 @app.get("/api/relations")
 def relations(db: Database, type: RecordId, id: RecordId, limit: int = Query(default=30, ge=1, le=100), offset: int = Query(default=0, ge=0, le=100000)):
+    if isinstance(db, Snapshot):
+        return db.relations(type, id, limit, offset)
     schema, entity = entity_schema(db, type)
     queries = []
     params = []

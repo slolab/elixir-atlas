@@ -1,8 +1,15 @@
+from .sqlite_snapshot import Snapshot
+
+
 def rows(connection, query, params=()):
+    if isinstance(connection, Snapshot):
+        query = query.replace("%s", "?")
     return connection.execute(query, params).fetchall()
 
 
 def one(connection, query, params=()):
+    if isinstance(connection, Snapshot):
+        query = query.replace("%s", "?")
     return connection.execute(query, params).fetchone()
 
 
@@ -93,6 +100,8 @@ def review_kinds(connection):
 
 
 def subject_reviews(connection, id):
+    if isinstance(connection, Snapshot):
+        return rows(connection, "SELECT * FROM ReviewItem WHERE status='open' AND EXISTS (SELECT 1 FROM json_each(subjects) WHERE value=%s) ORDER BY id", (id,))
     return rows(connection, "SELECT * FROM ReviewItem WHERE status='open' AND subjects @> ARRAY[%s] ORDER BY id", (id,))
 
 
@@ -104,6 +113,8 @@ def reviews(connection, kind):
 
 def overlap(connection, liaisons, groups_only, minimum):
     kinds = ["lead", "co_lead", "chair", "coordinator", "deputy", "work_package_lead", "task_lead"] + (["liaison"] if liaisons else [])
+    if isinstance(connection, Snapshot):
+        return connection.overlap(kinds, groups_only, minimum)
     return {
         "holders": rows(connection, """SELECT id,name,count(DISTINCT initiative) places,
             string_agg(kind || '|' || initiative || '|' || initiative_name,'§' ORDER BY initiative_name,kind) detail

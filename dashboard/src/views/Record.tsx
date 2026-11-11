@@ -35,9 +35,9 @@ export function RecordPage({ value }: { value: string }) {
       </dl>
     </Section>
     <Section title="Source evidence" note="Each entry identifies the source version and location used to build this record.">
-      <More items={data.provenance.evidence} limit={12} render={(items) => <ol className="evidence-list">{items.map((item, index) => <li key={`${item.artifact}/${item.location}/${index}`}>
+      {data.provenance.available === false ? <Empty>Source evidence is unavailable in this local snapshot. Place its provenance.json beside graph.sqlite and restart to include it.</Empty> : <More items={data.provenance.evidence} limit={12} render={(items) => <ol className="evidence-list">{items.map((item, index) => <li key={`${item.artifact}/${item.location}/${index}`}>
         <strong>{item.artifact}</strong><span>{item.location}</span><code>{item.version}</code>
-      </li>)}</ol>} />
+      </li>)}</ol>} />}
     </Section>
     {data.definition.represented_as === "node" ? <Relations type={type} id={id} key={`${type}/${id}`} /> : null}
   </article>;
