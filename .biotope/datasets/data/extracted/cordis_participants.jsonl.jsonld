@@ -1,0 +1,268 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/extracted/cordis_participants.jsonl",
+  "description": "CordisParticipant records extracted from data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html, data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html, data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html. An organisation in an EU-funded project as its CORDIS fact sheet lists it: the coordinator, participants and associated partners, with country, net EU contribution and total cost. One record per organisation.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "cordis_participants.jsonl",
+      "name": "cordis_participants.jsonl",
+      "contentSize": "266581",
+      "contentUrl": "data/extracted/cordis_participants.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "b2b0058b579950adeef76b7b2b8ebfaba6aadd7558c2ff083ca0648e65e4e34b",
+      "isBasedOn": [
+        {
+          "contentUrl": "data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html",
+          "sha256": "7876de9152680603f5198bdea3b841bf9ef2aaa0048ab661453cf6b7a9979b70"
+        },
+        {
+          "contentUrl": "data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html",
+          "sha256": "c989fcc8221314b84fd01bfaf954cec0df68caf76a91b041d3afceb498e575d3"
+        },
+        {
+          "contentUrl": "data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html",
+          "sha256": "f8dda8493d26a0c479d78c349824e64b165440875bdc988d69b448560490d1b0"
+        }
+      ],
+      "biotope:schemaRevision": "92fc39f867469610a3545d56e9142aab982950fbe8860e2d7eb241bc56f710c7",
+      "biotope:extractor": {
+        "name": "cordis-participant-reader",
+        "version": "1",
+        "settings": {}
+      }
+    }
+  ],
+  "dateCreated": "2026-11-10T16:32:15.110601+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "cordis_participants.jsonl#cordis_participants",
+      "name": "cordis_participants.jsonl",
+      "description": "CordisParticipant records extracted from documents. An organisation in an EU-funded project as its CORDIS fact sheet lists it: the coordinator, participants and associated partners, with country, net EU contribution and total cost. One record per organisation.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/id",
+          "name": "id",
+          "description": "The record ID: the document's dataset folder and its path within it, then the record key's values.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/document",
+          "name": "document",
+          "description": "The document's path in the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "document"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/grant_id",
+          "name": "grant_id",
+          "description": "Grant agreement ID of the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/grant_id/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/organisation",
+          "name": "organisation",
+          "description": "The organisation's legal name as CORDIS lists it.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/organisation/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/country",
+          "name": "country",
+          "description": "Country CORDIS gives for the organisation.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/country/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/participation",
+          "name": "participation",
+          "description": "The CORDIS section listing it: coordinator, participant (beneficiary) or partner (associated partner, which receives no EU contribution).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/participation/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/participation_ended",
+          "name": "participation_ended",
+          "description": "True when CORDIS marks the organisation's participation as ended.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/participation_ended/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/net_eu_contribution_eur",
+          "name": "net_eu_contribution_eur",
+          "description": "Net EU contribution to this organisation in euro, as listed; null when none is listed.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/net_eu_contribution_eur/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/total_cost_eur",
+          "name": "total_cost_eur",
+          "description": "Total cost of this organisation's participation in euro, as listed.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/total_cost_eur/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "cordis_participants.jsonl#cordis_participants/activity_type",
+          "name": "activity_type",
+          "description": "CORDIS activity type of the organisation.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "cordis_participants.jsonl"
+            },
+            "extract": {
+              "column": "values/activity_type/value"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true,
+      "key": {
+        "@id": "cordis_participants.jsonl#cordis_participants/id"
+      }
+    }
+  ],
+  "biotope:status": "processed",
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html"
+    },
+    {
+      "@id": "data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html"
+    },
+    {
+      "@id": "data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "biocypher": {
+      "source": "biocypher/biotope",
+      "sourceType": "github",
+      "skillPath": "skills/biocypher/SKILL.md",
+      "computedHash": "d506718e3b021859ee936c9bada687f619ed4033070dc9271ec5fbedd4ae5208"
+    },
+    "biotope-croissant": {
+      "source": "biocypher/biotope",
+      "sourceType": "github",
+      "skillPath": "skills/biotope-croissant/SKILL.md",
+      "computedHash": "d53979d9d8e9c8315abae1f38df6264f875338cad184d4ca3bda79429d643a83"
+    }
+  }
+}

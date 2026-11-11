@@ -1,0 +1,37 @@
+import { useEffect, useState } from "react";
+
+export type Route = { page: string; id: string };
+
+function parse(): Route {
+  const [, page = "", ...rest] = window.location.hash.split("/");
+  return { page: page || "home", id: decodeURIComponent(rest.join("/")) };
+}
+
+export function useRoute(): Route {
+  const [route, setRoute] = useState(parse);
+  useEffect(() => {
+    const update = () => {
+      const next = parse();
+      setRoute((previous) => {
+        if (previous.page !== next.page || (previous.id !== next.id && next.page !== "search")) {
+          window.scrollTo(0, 0);
+        }
+        return next;
+      });
+    };
+    window.addEventListener("hashchange", update);
+    return () => window.removeEventListener("hashchange", update);
+  }, []);
+  return route;
+}
+
+export function href(page: string, id = ""): string {
+  return id ? `#/${page}/${encodeURIComponent(id)}` : `#/${page}`;
+}
+
+const PAGES: Record<string, string> = { initiative: "initiative", person: "person", node: "node" };
+
+export function entityHref(id: string): string | null {
+  const page = PAGES[id.split(":", 1)[0]];
+  return page ? href(page, id) : null;
+}

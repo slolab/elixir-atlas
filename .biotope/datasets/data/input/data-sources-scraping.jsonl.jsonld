@@ -1,0 +1,348 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/input/data-sources-scraping.jsonl",
+  "description": "Dataset for data-sources-scraping.jsonl",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "data-sources-scraping.jsonl",
+      "name": "data-sources-scraping.jsonl",
+      "contentSize": "7576443",
+      "contentUrl": "data/input/data-sources-scraping.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "254a8cca4d0832d4b31c9f19675b8de6ac1fe30336c19371f606a5369761ae9c"
+    }
+  ],
+  "dateCreated": "2026-11-10T16:17:35.997412+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "data-sources-scraping.jsonl#data-sources-scraping",
+      "name": "data-sources-scraping.jsonl",
+      "description": "Records from data-sources-scraping.jsonl (13455 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/bytes",
+          "name": "bytes",
+          "description": "Column 'bytes'",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "bytes"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/content_type",
+          "name": "content_type",
+          "description": "Column 'content_type'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "content_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/discovered_from",
+          "name": "discovered_from",
+          "description": "Column 'discovered_from'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "discovered_from"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/discovery_status",
+          "name": "discovery_status",
+          "description": "Column 'discovery_status'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "discovery_status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/error",
+          "name": "error",
+          "description": "Column 'error'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "error"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/final_url",
+          "name": "final_url",
+          "description": "Column 'final_url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "final_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/links",
+          "name": "links",
+          "description": "Column 'links'",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "links"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/note",
+          "name": "note",
+          "description": "Column 'note'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "note"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/path",
+          "name": "path",
+          "description": "Column 'path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/previous_path",
+          "name": "previous_path",
+          "description": "Column 'previous_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "previous_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/reason",
+          "name": "reason",
+          "description": "Column 'reason'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "reason"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/representation",
+          "name": "representation",
+          "description": "Column 'representation'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "representation"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/retrieved_at",
+          "name": "retrieved_at",
+          "description": "Column 'retrieved_at'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "retrieved_at"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/reviewed_at",
+          "name": "reviewed_at",
+          "description": "Column 'reviewed_at'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "reviewed_at"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/source",
+          "name": "source",
+          "description": "Column 'source'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "source"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/status",
+          "name": "status",
+          "description": "Column 'status'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/updated_at",
+          "name": "updated_at",
+          "description": "Column 'updated_at'",
+          "dataType": "sc:DateTime",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "updated_at"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data-sources-scraping.jsonl#data-sources-scraping/url",
+          "name": "url",
+          "description": "Column 'url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "data-sources-scraping.jsonl"
+            },
+            "extract": {
+              "column": "url"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    }
+  ],
+  "biotope:status": "processed"
+}

@@ -79,8 +79,12 @@ venv.bak/
 # OS
 .DS_Store
 
-# Data lives on S3 (scripts/data.py)
-data/
+# Data lives on S3 (scripts/data.py); Biotope annotations and extracted records stay in git
+/data/**
+!/data/**/
+!/data/**/*.biotope.yaml
+!/data/extracted/**
+/data/extracted/catalogues/*.jsonl
 /.scraping/
 
 # Evaluation runs (eval/run.py)

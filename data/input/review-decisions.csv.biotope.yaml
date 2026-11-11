@@ -1,0 +1,17 @@
+# What people write about this dataset. A value here wins over the data's; an empty value clears it.
+description: >-
+  Reviewers' decisions on the atlas review items (table review_item of graph/build/graph.sqlite). One row per
+  decided item; the next build applies each decision and exports the item as resolved.
+tables:
+  review-decisions.csv#review-decisions:
+    description: One decision per review item.
+    key: review_id
+    columns:
+      review_id:
+        description: The review_item id exactly as the build exported it, e.g. review:person_match:0123456789abcdef.
+      decision:
+        description: >-
+          For person_match, organisation_match and initiative_match items, 'same' (join them) or 'different' (keep
+          them apart). For value_conflict items, the correct value as text (a date as YYYY, YYYY-MM or YYYY-MM-DD for
+          start, end and date conflicts, which the build then uses), or 'all valid' when the sources are each right
+          for their time.
