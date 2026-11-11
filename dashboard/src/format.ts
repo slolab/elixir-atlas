@@ -1,4 +1,4 @@
-import type { SqlValue } from "sql.js";
+import type { Value } from "./db";
 
 const LABELS: Record<string, string> = {
   eu_project: "EU project",
@@ -20,7 +20,7 @@ const LABELS: Record<string, string> = {
   hub: "ELIXIR Hub",
 };
 
-export function label(value: SqlValue | undefined): string {
+export function label(value: Value | undefined): string {
   if (typeof value !== "string" || !value) {
     return "";
   }
@@ -31,11 +31,11 @@ export function label(value: SqlValue | undefined): string {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-export function text(value: SqlValue | undefined): string {
+export function text(value: Value | undefined): string {
   return value === null || value === undefined ? "" : String(value);
 }
 
-export function period(start: SqlValue | undefined, end: SqlValue | undefined): string {
+export function period(start: Value | undefined, end: Value | undefined): string {
   if (!start && !end) {
     return "";
   }
@@ -46,11 +46,11 @@ export function count(value: number, one: string, many: string): string {
   return `${value.toLocaleString("en")} ${value === 1 ? one : many}`;
 }
 
-export function euros(value: SqlValue | undefined): string {
+export function euros(value: Value | undefined): string {
   return typeof value === "number" ? `€${Math.round(value).toLocaleString("en")}` : "";
 }
 
-export function month(date: SqlValue | undefined, edge: "start" | "end"): number | null {
+export function month(date: Value | undefined, edge: "start" | "end"): number | null {
   const match = /^(\d{4})(?:-(\d{2}))?/.exec(text(date));
   if (!match) {
     return null;
@@ -65,7 +65,7 @@ export function monthName(index: number): string {
   return `${MONTHS[index % 12]} ${Math.floor(index / 12)}`;
 }
 
-export function pageLabel(url: SqlValue | undefined): string {
+export function pageLabel(url: Value | undefined): string {
   try {
     const parsed = new URL(text(url));
     const parts = parsed.pathname.split("/").filter(Boolean);
@@ -78,7 +78,7 @@ export function pageLabel(url: SqlValue | undefined): string {
   }
 }
 
-export function host(url: SqlValue | undefined): string {
+export function host(url: Value | undefined): string {
   try {
     return new URL(text(url)).hostname.replace(/^www\./, "");
   } catch {

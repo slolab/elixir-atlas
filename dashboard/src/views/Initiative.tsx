@@ -1,6 +1,7 @@
+import type { InitiativeData } from "../types";
 import { useMemo, useState } from "react";
-import { Empty, Facts, More, Section, SourceLink } from "../components";
-import { list, one, rows, type Row } from "../db";
+import { RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
+import { apiUrl, useApi, list, type Row } from "../db";
 import { euros, label, period, text } from "../format";
 import { href } from "../route";
 import { Timeline } from "../Timeline";
@@ -16,51 +17,8 @@ function rank(kind: string): number {
 }
 
 export function InitiativePage({ id }: { id: string }) {
-  const data = useMemo(() => {
-    const initiative = one("select * from Initiative where id = ?", [id]);
-    if (!initiative) {
-      return null;
-    }
-    const plan = rows("select p.* from PlanItemOf o join PlanItem p on p.id = o.source where o.target = ? order by p.date is null, p.date, p.code, p.label", [id]);
-    const leads = rows<{ plan: string; id: string; name: string }>(
-      "select l.target plan, pe.id, pe.name from LeadsPlanItem l join Person pe on pe.id = l.source join PlanItemOf o on o.source = l.target where o.target = ? group by l.target, pe.id",
-      [id],
-    );
-    const delivered = rows<{ plan: string; id: string; title: string; url: string }>(
-      "select d.target plan, o.id, o.title, o.url from Delivers d join Output o on o.id = d.source join PlanItemOf p on p.source = d.target where p.target = ?",
-      [id],
-    );
-    return {
-      initiative,
-      roles: rows<Role>(
-        "select h.source person, p.name, h.role_kind, h.role, h.work_item, h.funding, h.source_url, h.retrieved_at from HoldsRole h join Person p on p.id = h.source where h.target = ?",
-        [id],
-      ),
-      nodes: rows<{ id: string; name: string; sources: number }>(
-        "select n.id, n.name, count(distinct t.source_url) sources from TakesPartIn t join ElixirNode n on n.id = t.source where t.target = ? group by n.id order by n.name",
-        [id],
-      ),
-      plan,
-      leads,
-      delivered,
-      outputs: rows("select o.*, f.basis from OutputOf f join Output o on o.id = f.source where f.target = ? order by o.date desc", [id]),
-      related: rows<{ id: string; name: string; kind: string; n: number }>(
-        `select i.id, i.name, i.kind, count(*) n from RelatedTo r join Initiative i on i.id = case when r.source = ? then r.target else r.source end
-         where (r.source = ? or r.target = ?) and i.id != ? group by i.id order by n desc, i.name`,
-        [id, id, id, id],
-      ),
-      statements: rows("select s.* from StatementAbout a join SourceStatement s on s.id = a.source where a.target = ? order by s.coverage, s.source_url", [id]),
-      topics: rows<{ label: string }>("select t.label from InitiativeTopic it join Topic t on t.id = it.target where it.source = ? group by t.id order by count(*) desc, t.label", [id]),
-      tools: rows("select t.id, t.name, t.url from ToolFor f join Tool t on t.id = f.source where f.target = ? group by t.id order by t.name", [id]),
-      events: rows("select e.id, e.title, e.url, e.start from EventFor f join TrainingEvent e on e.id = f.source where f.target = ? group by e.id order by e.start desc", [id]),
-      materials: rows("select m.id, m.title, m.url, m.date_published from MaterialFor f join TrainingMaterial m on m.id = f.source where f.target = ? group by m.id order by m.date_published desc", [id]),
-      reviews: rows("select * from ReviewItem where status = 'open' and subjects like ?", [`%"${id}"%`]),
-    };
-  }, [id]);
-
-  if (!data) {
-    return <Empty>No group or project has the id “{id}”. Search for it by name instead.</Empty>;
-  }
+  const { data, error } = useApi<InitiativeData>(apiUrl("initiative", { id }));
+  if (!data) return <RequestState error={error} />;
   const { initiative } = data;
   const pages = list(initiative.pages);
   const aliases = list(initiative.aliases).filter((alias) => alias !== initiative.name);
@@ -70,6 +28,7 @@ export function InitiativePage({ id }: { id: string }) {
         <p className="kind">{label(initiative.kind)}</p>
         <h1>{text(initiative.name)}</h1>
         {initiative.summary ? <p className="summary">{text(initiative.summary)}</p> : null}
+        <p className="note"><a href={href("record", `Initiative/${id}`)}>Record and source evidence</a></p>
       </header>
       <div className="entity-body">
         <aside className="side">

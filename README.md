@@ -37,3 +37,5 @@ uv run scripts/data.py push-release <id>
 Scraping: [sources, coverage and usage](docs/data-sources-scraping.md).
 
 Evaluation: [CQ sets, runs and Argilla](eval/README.md).
+
+Serving: [PostgreSQL, API, search and Railway deployment](server/README.md).

@@ -1,14 +1,14 @@
 import { type ReactNode, useState } from "react";
-import type { SqlValue } from "sql.js";
+import type { Value } from "./db";
 import { host, pageLabel, text } from "./format";
 import { entityHref } from "./route";
 
-export function EntityLink({ id, children }: { id: SqlValue; children: ReactNode }) {
+export function EntityLink({ id, children }: { id: Value; children: ReactNode }) {
   const target = entityHref(text(id));
   return target ? <a href={target}>{children}</a> : <>{children}</>;
 }
 
-export function SourceLink({ url, retrieved, full }: { url: SqlValue | undefined; retrieved?: SqlValue; full?: boolean }) {
+export function SourceLink({ url, retrieved, full }: { url: Value | undefined; retrieved?: Value; full?: boolean }) {
   if (!url) {
     return null;
   }
@@ -89,4 +89,8 @@ function MoreInner<T>({ items, limit, render }: { items: T[]; limit: number; ren
       ) : null}
     </>
   );
+}
+
+export function RequestState({ error }: { error?: string }) {
+  return error ? <div className="status failed" role="alert"><p>{error}</p><button type="button" onClick={() => window.location.reload()}>Try again</button></div> : <p className="status" role="status">Loading atlas records…</p>;
 }

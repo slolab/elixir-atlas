@@ -1,21 +1,22 @@
-import { useMemo, useState } from "react";
-import { Empty, EntityLink, More, SourceLink } from "../components";
-import { list, rows, type Row } from "../db";
+import type { ReviewsData } from "../types";
+import { useState } from "react";
+import { Empty, RequestState, EntityLink, More, SourceLink } from "../components";
+import { apiUrl, useApi, list, type Row } from "../db";
 import { label, text } from "../format";
 import { href } from "../route";
 
 export function Reviews({ kind }: { kind: string }) {
-  const kinds = useMemo(() => rows<{ kind: string; n: number }>("select kind, count(*) n from ReviewItem where status = 'open' group by kind order by n desc"), []);
-  const active = kind || kinds[0]?.kind || "";
   const [filter, setFilter] = useState("");
-  const items = useMemo(() => rows("select * from ReviewItem where status = 'open' and kind = ? order by property, question", [active]), [active]);
+  const { data, error } = useApi<ReviewsData>(apiUrl("reviews", { kind }));
+  if (!data) return <RequestState error={error} />;
+  const { kinds, active, items } = data;
   const needle = filter.trim().toLowerCase();
   const shown = needle ? items.filter((item) => `${text(item.question)} ${text(item.subject_names)}`.toLowerCase().includes(needle)) : items;
   return (
     <>
       <h1 className="page-title">Review queue</h1>
       <p className="lede">
-        Each item is a question the build could not settle from the sources. Write a decision in data/input/review-decisions.csv, with the item id and either same, different, the correct value or all valid. The next build applies it.
+        Each item is a question the sources could not settle. The queue is read-only; reviewed decisions are included in a future data release.
       </p>
       <nav className="tabs" aria-label="Kinds of review item">
         {kinds.map((entry) => (

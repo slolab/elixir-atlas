@@ -1,10 +1,14 @@
 # ELIXIR Atlas dashboard
 
-A local, read-only explorer for the atlas database. It opens `../graph/build/graph.sqlite` in the browser with sql.js, so the data stays on this machine.
+A public, read-only explorer served by the Atlas API. The browser requests records from PostgreSQL through named API endpoints. It does not download the SQLite release.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Then open http://localhost:5180. Build the database first with `uv run --project graph biotope graph build --format sqlite` from the repository root. The database holds Perun personal data: keep the server on localhost and do not publish a build of this app together with the database.
+Start the API on localhost:8000 first, then open http://localhost:5180. Vite forwards `/api` and `/healthz` to the API. See [server setup and deployment](../server/README.md).
+
+The existing project, person, Node, overlap and review views use the API. Keyword search covers all record types with ranked results, type filters and pagination. Every result has a record-and-evidence view, and node records also show their relationships.
+
+The project owner confirmed public access to the complete 20261111 release on 2026-11-11. There is no login or editing interface.

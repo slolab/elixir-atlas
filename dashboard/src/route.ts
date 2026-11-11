@@ -35,3 +35,12 @@ export function entityHref(id: string): string | null {
   const page = PAGES[id.split(":", 1)[0]];
   return page ? href(page, id) : null;
 }
+
+export function recordHref(type: string, id: string): string {
+  const pages: Record<string, string> = { Initiative: "initiative", Person: "person", ElixirNode: "node" };
+  return pages[type] ? href(pages[type], id) : href("record", `${type}/${id}`);
+}
+
+export function typeLabel(type: string): string {
+  return type === "ElixirNode" ? "ELIXIR Node" : type.replace(/([a-z])([A-Z])/g, "$1 $2");
+}
