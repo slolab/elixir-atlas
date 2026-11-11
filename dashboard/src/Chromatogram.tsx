@@ -1,5 +1,4 @@
 import { useMemo, useState, type KeyboardEvent, type MouseEvent } from "react";
-import { rows } from "./db";
 import { month, monthName, text } from "./format";
 import { href } from "./route";
 
@@ -35,13 +34,9 @@ function smooth(values: number[], sigma: number): number[] {
   });
 }
 
-export function Chromatogram() {
+export function Chromatogram({ projects: source }: { projects: Project[] }) {
   const data = useMemo(() => {
-    const kinds = TRACES.flatMap((trace) => trace.kinds);
-    const projects = rows<Project>(
-      `select id, name, kind, start, "end" from Initiative where kind in (${kinds.map(() => "?").join(",")}) and start is not null and "end" is not null`,
-      kinds,
-    )
+    const projects = source
       .map((project) => ({ ...project, from: month(project.start, "start")!, to: month(project.end, "end")! }))
       .filter((project) => project.from <= project.to);
     const first = Math.max(2014 * 12, Math.min(...projects.map((project) => project.from)));
@@ -61,7 +56,7 @@ export function Chromatogram() {
     const curves = raw.map((counts) => smooth(counts, 1.6));
     const peak = Math.max(1, ...curves.flat());
     return { projects, first, last, span, raw, curves, peak };
-  }, []);
+  }, [source]);
 
   const [hover, setHover] = useState<number | null>(null);
   const [picked, setPicked] = useState(() => Math.min(Math.max(TODAY, data.first), data.last));

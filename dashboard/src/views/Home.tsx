@@ -1,24 +1,13 @@
-import { useMemo } from "react";
+import type { HomeData } from "../types";
 import { Chromatogram } from "../Chromatogram";
-import { Bars, Section } from "../components";
-import { rows } from "../db";
+import { Bars, RequestState, Section } from "../components";
+import { apiUrl, useApi } from "../db";
 import { label } from "../format";
 import { href } from "../route";
 
 export function Home() {
-  const data = useMemo(
-    () => ({
-      kinds: rows<{ kind: string; n: number }>("select kind, count(*) n from Initiative group by kind order by n desc"),
-      nodes: rows<{ id: string; name: string; initiatives: number; people: number }>(
-        `select n.id, n.name,
-          (select count(distinct target) from TakesPartIn where source = n.id) initiatives,
-          (select count(distinct source) from InNode where target = n.id) people
-         from ElixirNode n order by initiatives desc, n.name`,
-      ),
-      reviews: rows<{ kind: string; n: number }>("select kind, count(*) n from ReviewItem where status = 'open' group by kind order by n desc"),
-    }),
-    [],
-  );
+  const { data, error } = useApi<HomeData>(apiUrl("home"));
+  if (!data) return <RequestState error={error} />;
   return (
     <>
       <section className="hero">
@@ -26,7 +15,7 @@ export function Home() {
         <p className="lede">
           Four kinds of ELIXIR project, traced from their start and end dates. Search above for any group, project, person or Node.
         </p>
-        <Chromatogram />
+        <Chromatogram projects={data.projects} />
       </section>
       <div className="columns">
         <Section title="Groups and projects by kind">

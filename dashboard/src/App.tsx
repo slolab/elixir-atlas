@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { openAtlas } from "./db";
 import { href, useRoute } from "./route";
 import { Home } from "./views/Home";
 import { InitiativePage } from "./views/Initiative";
@@ -7,31 +6,16 @@ import { NodePage } from "./views/Node";
 import { Overlap } from "./views/Overlap";
 import { PersonPage } from "./views/Person";
 import { Reviews } from "./views/Reviews";
+import { RecordPage } from "./views/Record";
 import { KindList, Search } from "./views/Search";
 
-type State = { status: "loading" } | { status: "ready" } | { status: "failed"; message: string };
-
 export function App() {
-  const [state, setState] = useState<State>({ status: "loading" });
   const route = useRoute();
-  useEffect(() => {
-    openAtlas().then(
-      () => setState({ status: "ready" }),
-      (error: unknown) => setState({ status: "failed", message: error instanceof Error ? error.message : String(error) }),
-    );
-  }, []);
   return (
     <>
       <Masthead query={route.page === "search" ? route.id : ""} page={route.page} />
       <main className="page">
-        {state.status === "loading" ? <p className="status">Opening the atlas database…</p> : null}
-        {state.status === "failed" ? (
-          <div className="status failed">
-            <p>The atlas database could not be opened.</p>
-            <p>{state.message}</p>
-          </div>
-        ) : null}
-        {state.status === "ready" ? <View page={route.page} id={route.id} /> : null}
+        <View page={route.page} id={route.id} key={route.page} />
       </main>
     </>
   );
@@ -39,6 +23,8 @@ export function App() {
 
 function View({ page, id }: { page: string; id: string }) {
   switch (page) {
+    case "record":
+      return <RecordPage value={id} />;
     case "initiative":
       return <InitiativePage id={id} />;
     case "person":
@@ -78,13 +64,14 @@ function Masthead({ query, page }: { query: string; page: string }) {
       </a>
       <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
         <label htmlFor="search" className="visually-hidden">
-          Search groups, projects, people and Nodes
+          Search the atlas
         </label>
         <input
           id="search"
           type="search"
           autoComplete="off"
-          placeholder="Search groups, projects, people and Nodes"
+          maxLength={200}
+          placeholder="Search the atlas"
           value={value}
           onChange={(event) => search(event.target.value)}
         />

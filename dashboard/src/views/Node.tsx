@@ -1,40 +1,14 @@
-import { useMemo } from "react";
-import { Empty, Facts, More, Section } from "../components";
-import { list, one, rows } from "../db";
+import type { NodeData } from "../types";
+import { RequestState, Empty, Facts, More, Section } from "../components";
+import { apiUrl, useApi, list } from "../db";
 import { count, label, text } from "../format";
 import { href } from "../route";
 
 type Taking = { id: string; name: string; kind: string; family: string; start: string | null; end: string | null };
-type Member = { id: string; name: string; places: number; leads: number };
 
 export function NodePage({ id }: { id: string }) {
-  const data = useMemo(() => {
-    const node = one("select * from ElixirNode where id = ?", [id]);
-    if (!node) {
-      return null;
-    }
-    return {
-      node,
-      initiatives: rows<Taking>(
-        `select i.id, i.name, i.kind, i.family, i.start, i."end" from TakesPartIn t join Initiative i on i.id = t.target
-         where t.source = ? group by i.id order by i.family, i.kind, i.name`,
-        [id],
-      ),
-      people: rows<Member>(
-        `select p.id, p.name,
-           (select count(distinct target) from HoldsRole where source = p.id) places,
-           (select count(distinct target) from HoldsRole where source = p.id and role_kind in ('lead', 'co_lead', 'chair', 'coordinator', 'work_package_lead', 'task_lead')) leads
-         from InNode n join Person p on p.id = n.source where n.target = ? group by p.id order by leads desc, places desc, p.name`,
-        [id],
-      ),
-      tools: one<{ n: number }>("select count(distinct source) n from ToolInNode where target = ?", [id])?.n ?? 0,
-      events: one<{ n: number }>("select count(distinct source) n from EventInNode where target = ?", [id])?.n ?? 0,
-      materials: one<{ n: number }>("select count(distinct source) n from MaterialInNode where target = ?", [id])?.n ?? 0,
-    };
-  }, [id]);
-  if (!data) {
-    return <Empty>No Node has the id “{id}”.</Empty>;
-  }
+  const { data, error } = useApi<NodeData>(apiUrl("node", { id }));
+  if (!data) return <RequestState error={error} />;
   const { node } = data;
   const groups = data.initiatives.filter((item) => item.family === "group");
   const projects = data.initiatives.filter((item) => item.family === "project");
@@ -46,6 +20,7 @@ export function NodePage({ id }: { id: string }) {
         <p className="summary">
           Takes part in {count(groups.length, "group", "groups")} and {count(projects.length, "project", "projects")}. Sources place {count(data.people.length, "person", "people")} in this Node.
         </p>
+        <p className="note"><a href={href("record", `ElixirNode/${id}`)}>Record and source evidence</a></p>
       </header>
       <div className="entity-body">
         <aside className="side">

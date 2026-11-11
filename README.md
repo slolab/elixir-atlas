@@ -37,3 +37,7 @@ uv run scripts/data.py push-release <id>
 Scraping: [sources, coverage and usage](docs/data-sources-scraping.md).
 
 Evaluation: [CQ sets, runs and Argilla](eval/README.md).
+
+Dashboard: `python3 scripts/dashboard.py` opens the local `graph/build/graph.sqlite` snapshot. See [local SQLite and API modes](dashboard/README.md).
+
+Serving: [PostgreSQL, API, search and Railway deployment](server/README.md).

@@ -1,48 +1,16 @@
-import { useMemo, useState } from "react";
-import { Empty, More, Section } from "../components";
-import { rows } from "../db";
+import type { OverlapData } from "../types";
+import { useState } from "react";
+import { Empty, RequestState, More, Section } from "../components";
+import { apiUrl, useApi } from "../db";
 import { label } from "../format";
 import { href } from "../route";
-
-const LEADING = ["lead", "co_lead", "chair", "coordinator", "deputy", "work_package_lead", "task_lead"];
-
-type Holder = { id: string; name: string; places: number; detail: string };
-type Pair = { first: string; first_name: string; second: string; second_name: string; shared: number; people: string };
 
 export function Overlap() {
   const [liaisons, setLiaisons] = useState(false);
   const [groupsOnly, setGroupsOnly] = useState(false);
   const [minimum, setMinimum] = useState(3);
-  const kinds = liaisons ? [...LEADING, "liaison"] : LEADING;
-  const marks = kinds.map(() => "?").join(",");
-  const family = groupsOnly ? "and i.family = 'group'" : "";
-  const holders = useMemo(
-    () =>
-      rows<Holder>(
-        `select id, name, count(distinct initiative) places, group_concat(kind || '|' || initiative || '|' || initiative_name, '§') detail
-         from (
-           select distinct p.id, p.name, h.role_kind kind, i.id initiative, i.name initiative_name
-           from HoldsRole h join Person p on p.id = h.source join Initiative i on i.id = h.target
-           where h.role_kind in (${marks}) ${family}
-         )
-         group by id having places >= ? order by places desc, name`,
-        [...kinds, minimum],
-      ),
-    [marks, family, minimum, liaisons],
-  );
-  const pairs = useMemo(
-    () =>
-      rows<Pair>(
-        `select a.target first, ia.name first_name, b.target second, ib.name second_name, count(distinct a.source) shared,
-           group_concat(distinct p.name) people
-         from HoldsRole a join HoldsRole b on a.source = b.source and a.target < b.target
-         join Initiative ia on ia.id = a.target join Initiative ib on ib.id = b.target join Person p on p.id = a.source
-         where a.role_kind in (${marks}) and b.role_kind in (${marks}) and ia.family = 'group' and ib.family = 'group'
-         group by a.target, b.target having shared > 1 order by shared desc, ia.name limit 60`,
-        [...kinds, ...kinds],
-      ),
-    [marks, liaisons],
-  );
+  const { data, error } = useApi<OverlapData>(apiUrl("overlap", { liaisons, groups_only: groupsOnly, minimum }));
+  const { holders, pairs } = data ?? { holders: [], pairs: [] };
   return (
     <>
       <h1 className="page-title">Who carries several leading roles</h1>
@@ -68,6 +36,8 @@ export function Overlap() {
           places
         </label>
       </div>
+      {!data ? <RequestState error={error} /> : null}
+      {data ? <>
       <Section title="People" note={`${holders.length} people hold leading roles in at least ${minimum} places.`}>
         {holders.length ? (
           <More
@@ -139,6 +109,7 @@ export function Overlap() {
           <Empty>No two groups share more than one leader.</Empty>
         )}
       </Section>
+      </> : null}
     </>
   );
 }

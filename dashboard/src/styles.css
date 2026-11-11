@@ -924,3 +924,26 @@ p {
     animation: none;
   }
 }
+
+.search-type { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; }
+.search-type select { max-width: 100%; padding: .5rem .7rem; font: inherit; border: 1px solid currentColor; background: transparent; }
+.search-hits { list-style: none; padding: 0; }
+.search-hits > li { padding: 1.5rem 0; border-bottom: 1px solid #d9d6d0; }
+.search-hits h2 { margin: .3rem 0 .6rem; font-size: 1.25rem; }
+.search-hits p { max-width: 80ch; margin: .5rem 0; overflow-wrap: anywhere; }
+.search-links { display: flex; flex-wrap: wrap; gap: 1rem; font-size: .85rem; }
+.pagination { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin: 1.5rem 0; }
+.pagination button, .status button { font: inherit; padding: .5rem 1rem; background: transparent; border: 1px solid currentColor; cursor: pointer; }
+.pagination button:disabled { opacity: .4; cursor: default; }
+.record-fields > div { display: grid; grid-template-columns: minmax(180px, 1fr) 2fr; gap: 2rem; padding: 1rem 0; border-bottom: 1px solid #d9d6d0; }
+.record-fields dt { font-weight: 600; }
+.record-fields dt .note { font-weight: 400; }
+.record-fields dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.evidence-list { padding-left: 1.4rem; }
+.evidence-list li { margin: 1rem 0; overflow-wrap: anywhere; }
+.evidence-list span, .evidence-list code { display: block; margin-top: .2rem; font-size: .85rem; }
+@media (max-width: 680px) {
+  .record-fields > div { grid-template-columns: 1fr; gap: .3rem; }
+  .search-type { align-items: stretch; flex-direction: column; gap: .4rem; }
+  .pagination { gap: .5rem; font-size: .85rem; }
+}

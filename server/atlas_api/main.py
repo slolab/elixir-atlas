@@ -1,0 +1,190 @@
+import os
+import re
+from contextlib import asynccontextmanager, closing
+from pathlib import Path
+from typing import Annotated
+
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from psycopg import errors, sql
+from psycopg.rows import dict_row
+from psycopg_pool import ConnectionPool, PoolTimeout
+
+from . import views
+from .sqlite_snapshot import Snapshot
+
+
+@asynccontextmanager
+async def lifespan(app):
+    app.state.snapshot = None
+    if path := os.environ.get("ATLAS_SQLITE_PATH"):
+        with closing(Snapshot(path)) as snapshot:
+            app.state.snapshot = snapshot
+            yield
+        return
+    with ConnectionPool(os.environ["DATABASE_URL"], min_size=1, max_size=8, timeout=10, kwargs={"row_factory": dict_row, "prepare_threshold": None}) as pool:
+        app.state.pool = pool
+        yield
+
+
+app = FastAPI(title="ELIXIR Atlas API", version="1.0.0", description="Read-only access to the Atlas release, records, relationships, source evidence and keyword search.", lifespan=lifespan)
+
+
+def connection(request: Request):
+    if snapshot := request.app.state.snapshot:
+        with snapshot.lock:
+            yield snapshot
+        return
+    with request.app.state.pool.connection() as conn:
+        with conn.transaction():
+            conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
+            conn.execute("SET LOCAL search_path TO atlas, public")
+            conn.execute("SET LOCAL statement_timeout TO '10s'")
+            yield conn
+
+
+Database = Annotated[object, Depends(connection)]
+RecordId = Annotated[str, Query(min_length=1, max_length=500)]
+
+
+@app.exception_handler(PoolTimeout)
+@app.exception_handler(errors.QueryCanceled)
+def unavailable(request, error):
+    return JSONResponse(status_code=503, content={"detail": "The atlas is busy. Please try again shortly."})
+
+
+@app.get("/healthz")
+def health(db: Database):
+    if isinstance(db, Snapshot):
+        return {"status": "ok", "release": db.release["id"], "mode": "sqlite"}
+    release = views.one(db, "SELECT id FROM release")
+    if release is None:
+        raise HTTPException(503, "No release loaded")
+    return {"status": "ok", "release": release["id"]}
+
+
+@app.get("/api/release")
+def release(db: Database):
+    if isinstance(db, Snapshot):
+        return db.release
+    return views.one(db, "SELECT id, manifest, counts, imported_at FROM release")
+
+
+@app.get("/api/schema")
+def topology(db: Database):
+    if isinstance(db, Snapshot):
+        return db.schema
+    return views.one(db, "SELECT topology FROM release")["topology"]
+
+
+@app.get("/api/home")
+def home(db: Database):
+    return views.home(db)
+
+
+def found(record):
+    if record is None:
+        raise HTTPException(404, "Record not found")
+    return record
+
+
+@app.get("/api/person")
+def person(db: Database, id: RecordId):
+    return found(views.person(db, id))
+
+
+@app.get("/api/initiative")
+def initiative(db: Database, id: RecordId):
+    return found(views.initiative(db, id))
+
+
+@app.get("/api/node")
+def node(db: Database, id: RecordId):
+    return found(views.node(db, id))
+
+
+@app.get("/api/kind")
+def kind(db: Database, id: RecordId):
+    return views.kind(db, id)
+
+
+@app.get("/api/reviews")
+def reviews(db: Database, kind: str = Query(default="", max_length=100)):
+    return views.reviews(db, kind)
+
+
+@app.get("/api/overlap")
+def overlap(db: Database, liaisons: bool = False, groups_only: bool = False, minimum: int = Query(default=3, ge=2, le=10)):
+    return views.overlap(db, liaisons, groups_only, minimum)
+
+
+SEARCH_MATCH = """document @@ websearch_to_tsquery('english', %(q)s)
+    OR document @@ websearch_to_tsquery('simple', %(q)s)
+    OR (%(literal)s AND (names ILIKE %(contains)s OR title %% %(q)s))"""
+
+
+@app.get("/api/search")
+def search(db: Database, q: str = Query(min_length=2, max_length=200), type: str | None = Query(default=None, max_length=100), limit: int = Query(default=30, ge=1, le=100), offset: int = Query(default=0, ge=0, le=100000)):
+    term = q.strip()
+    if len(term) < 2:
+        raise HTTPException(422, "Enter at least two characters")
+    if isinstance(db, Snapshot):
+        return db.search(term, type, limit, offset)
+    escaped = term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    params = {"q": term, "contains": "%" + escaped + "%", "prefix": escaped + "%", "type": type, "limit": limit, "offset": offset, "literal": re.search(r'"|(?:^|\s)-|\bOR\b', term, re.IGNORECASE) is None}
+    facets = views.rows(db, f"SELECT entity_type, count(*) count FROM search_document WHERE {SEARCH_MATCH} GROUP BY entity_type ORDER BY count DESC,entity_type", params)
+    hits = views.rows(db, f"""SELECT entity_type,id,title,left(body,320) excerpt,url,
+        ts_rank_cd(document,websearch_to_tsquery('english',%(q)s)) +
+        ts_rank_cd(document,websearch_to_tsquery('simple',%(q)s)) + similarity(title,%(q)s) +
+        CASE WHEN lower(title)=lower(%(q)s) THEN 10 WHEN title ILIKE %(prefix)s THEN 3 ELSE 0 END score
+        FROM search_document WHERE ({SEARCH_MATCH}) AND (%(type)s::text IS NULL OR entity_type=%(type)s)
+        ORDER BY score DESC,title,entity_type,id LIMIT %(limit)s OFFSET %(offset)s""", params)
+    total = sum(facet["count"] for facet in facets if type is None or facet["entity_type"] == type)
+    return {"query": term, "total": total, "facets": facets, "hits": hits, "limit": limit, "offset": offset}
+
+
+def entity_schema(db, type):
+    schema = topology(db)
+    if type not in schema:
+        raise HTTPException(404, "Unknown record type")
+    return schema, schema[type]
+
+
+@app.get("/api/record")
+def record(db: Database, type: RecordId, id: RecordId):
+    if isinstance(db, Snapshot):
+        return db.record(type, id)
+    schema, entity = entity_schema(db, type)
+    row = found(views.one(db, sql.SQL("SELECT * FROM {}").format(sql.Identifier(type.lower())) + sql.SQL(" WHERE id=%s"), (id,)))
+    title = views.one(db, "SELECT title FROM search_document WHERE entity_type=%s AND id=%s", (type,id))
+    evidence = views.one(db, "SELECT data FROM provenance WHERE id=%s", (row["biotope_provenance_id"],))
+    return {"entity_type": type, "title": title["title"], "record": row, "definition": entity, "provenance": evidence["data"]}
+
+
+@app.get("/api/relations")
+def relations(db: Database, type: RecordId, id: RecordId, limit: int = Query(default=30, ge=1, le=100), offset: int = Query(default=0, ge=0, le=100000)):
+    if isinstance(db, Snapshot):
+        return db.relations(type, id, limit, offset)
+    schema, entity = entity_schema(db, type)
+    queries = []
+    params = []
+    for name, edge in schema.items():
+        if edge["represented_as"] == "edge":
+            for endpoint, other in (("source", "target"), ("target", "source")):
+                if edge[endpoint] == type:
+                    queries.append(sql.SQL("""SELECT %s::text relation_type,r.id relation_id,%s::text direction,
+                        %s::text entity_type,r.{} id,s.title FROM {} r JOIN search_document s ON s.entity_type=%s AND s.id=r.{}
+                        WHERE r.{}=%s""").format(sql.Identifier(other), sql.Identifier(name.lower()), sql.Identifier(other), sql.Identifier(endpoint)))
+                    params.extend([name, "outgoing" if endpoint == "source" else "incoming", edge[other], edge[other], id])
+    if not queries:
+        return {"total": 0, "items": [], "limit": limit, "offset": offset}
+    union = sql.SQL(" UNION ALL ").join(queries)
+    total = views.one(db, sql.SQL("SELECT count(*) total FROM ({}) links").format(union), params)["total"]
+    items = views.rows(db, sql.SQL("SELECT * FROM ({}) links ORDER BY relation_type,title,relation_id,direction LIMIT %s OFFSET %s").format(union), [*params,limit,offset])
+    return {"total": total, "items": items, "limit": limit, "offset": offset}
+
+
+static = Path(os.environ.get("ATLAS_STATIC_DIR", Path(__file__).resolve().parents[2] / "dashboard" / "dist"))
+if static.is_dir():
+    app.mount("/", StaticFiles(directory=static, html=True), name="dashboard")
