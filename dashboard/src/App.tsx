@@ -20,7 +20,9 @@ export function App() {
   const requestLink = route.page === "request-update" ? href(route.page, route.id) : updateRequestHref({ entityType, entityId, context: href(route.page, route.id), from: href(route.page, route.id) });
   return (
     <div className="app-shell">
-      <Masthead query={route.page === "search" ? route.id : ""} page={route.page} requestLink={requestLink} />
+      <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById("main-content")?.focus(); }}>Skip to main content</a>
+      <Masthead query={route.page === "search" ? route.id : ""} page={route.page} />
+      <Navigation page={route.page} requestLink={requestLink} />
       <main className="page" id="main-content" tabIndex={-1}>
         <View page={route.page} id={route.id} key={route.page} />
       </main>
@@ -55,15 +57,9 @@ function View({ page, id }: { page: string; id: string }) {
   }
 }
 
-function Masthead({ query, page, requestLink }: { query: string; page: string; requestLink: string }) {
+function Masthead({ query, page }: { query: string; page: string }) {
   const [value, setValue] = useState(query);
   useEffect(() => setValue(query), [query]);
-  const navigation = [
-    { page: "home", title: "Home", icon: "m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9" },
-    { page: "topic", title: "Find by topic", icon: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4 5-2 6-6 2 2-6 6-2Z" },
-    { page: "overlap", title: "Shared leadership", icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8 1a4 4 0 0 1 0 7m1 4a4 4 0 0 1 4 4v2" },
-    { page: "reviews", title: "Data review", icon: "M9 5h12M9 12h12M9 19h12M2 5l1 1 3-3M2 12l1 1 3-3M2 19l1 1 3-3" },
-  ];
   const search = (next: string) => {
     setValue(next);
     const target = href("search", next.trim());
@@ -76,36 +72,44 @@ function Masthead({ query, page, requestLink }: { query: string; page: string; r
   };
   return (
     <header className="masthead">
-      <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById("main-content")?.focus(); }}>Skip to main content</a>
-      <div className="masthead-inner">
-        <a className="brand" href="#/" aria-label="ELIXIR Atlas home">
-          <img src="/brand/elixir-atlas-logo.svg" alt="ELIXIR Atlas" width="440" height="132" />
-        </a>
-        <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
-          <label htmlFor="search" className="visually-hidden">
-            Search the atlas
-          </label>
-          <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg>
-          <input
-            id="search"
-            type="search"
-            autoComplete="off"
-            maxLength={200}
-            placeholder="Search the atlas"
-            value={value}
-            onChange={(event) => search(event.target.value)}
-          />
-        </form>
-      </div>
-      <nav className="nav" aria-label="Main navigation">
-        <div className="nav-inner">
-          {navigation.map((item) => <a key={item.page} href={item.page === "home" ? "#/" : href(item.page)} aria-current={page === item.page ? "page" : undefined} onClick={() => { if (page === item.page) window.scrollTo(0, 0); }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={item.icon} /></svg>
-            {item.title}
-          </a>)}
-          <a className="feedback-link" href={requestLink} aria-current={page === "request-update" ? "page" : undefined}>Request update</a>
-        </div>
-      </nav>
+      <a className="brand" href="#/" aria-label="ELIXIR Atlas home">
+        <img src="/brand/elixir-atlas-logo.svg" alt="ELIXIR Atlas" width="440" height="132" />
+      </a>
+      <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
+        <label htmlFor="search" className="visually-hidden">
+          Search the atlas
+        </label>
+        <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg>
+        <input
+          id="search"
+          type="search"
+          autoComplete="off"
+          maxLength={200}
+          placeholder="Search the atlas"
+          value={value}
+          onChange={(event) => search(event.target.value)}
+        />
+      </form>
     </header>
+  );
+}
+
+function Navigation({ page, requestLink }: { page: string; requestLink: string }) {
+  const navigation = [
+    { page: "home", title: "Home", icon: "m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9" },
+    { page: "topic", title: "Find by topic", icon: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4 5-2 6-6 2 2-6 6-2Z" },
+    { page: "overlap", title: "Shared leadership", icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8 1a4 4 0 0 1 0 7m1 4a4 4 0 0 1 4 4v2" },
+    { page: "reviews", title: "Data review", icon: "M9 5h12M9 12h12M9 19h12M2 5l1 1 3-3M2 12l1 1 3-3M2 19l1 1 3-3" },
+  ];
+  return (
+    <nav className="nav" aria-label="Main navigation">
+      <div className="nav-inner">
+        {navigation.map((item) => <a key={item.page} href={item.page === "home" ? "#/" : href(item.page)} aria-current={page === item.page ? "page" : undefined} onClick={() => { if (page === item.page) window.scrollTo(0, 0); }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={item.icon} /></svg>
+          {item.title}
+        </a>)}
+        <a className="feedback-link" href={requestLink} aria-current={page === "request-update" ? "page" : undefined}>Request update</a>
+      </div>
+    </nav>
   );
 }
