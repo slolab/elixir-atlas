@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Empty, RequestState, SourceLink } from "../components";
+import { Table, Empty, RequestState, SourceLink } from "../components";
 import { apiUrl, useApi } from "../db";
 import { label, period } from "../format";
 import { href, recordHref, typeLabel } from "../route";
@@ -52,7 +52,7 @@ export function KindList({ kind }: { kind: string }) {
     <>
       <h1 className="page-title">{label(kind)}</h1>
       <p className="lede">{items.length} in the atlas, with the people, Nodes and plan items each one has.</p>
-      <table className="table">
+      <Table className="table">
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -75,7 +75,7 @@ export function KindList({ kind }: { kind: string }) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import type { PersonData } from "../types";
-import { RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
+import { Table, RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
 import { apiUrl, useApi, list } from "../db";
 import { label, text } from "../format";
 import { href } from "../route";
@@ -46,13 +46,13 @@ export function PersonPage({ id }: { id: string }) {
         </aside>
         <div className="main">
           {data.reviews.length ? (
-            <Section title="Open questions" note="This record may be the same person as another one. A reviewer can settle it in the review decisions file.">
+            <Section title="Open questions" note="This record may be the same person as another one. Request an update to suggest a resolution.">
               <More items={data.reviews} limit={2} render={(shown) => <ReviewList items={shown} />} />
             </Section>
           ) : null}
           <Section title="Roles">
             {data.roles.length ? (
-              <table className="table">
+              <Table className="table">
                 <thead>
                   <tr>
                     <th scope="col">Group or project</th>
@@ -81,14 +81,14 @@ export function PersonPage({ id }: { id: string }) {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </Table>
             ) : (
               <Empty>No roles recorded.</Empty>
             )}
           </Section>
           {data.led.length ? (
             <Section title="Plan items led">
-              <table className="table plan">
+              <Table className="table plan">
                 <thead>
                   <tr>
                     <th scope="col">Item</th>
@@ -111,7 +111,7 @@ export function PersonPage({ id }: { id: string }) {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </Table>
             </Section>
           ) : null}
           {data.outputs.length ? (

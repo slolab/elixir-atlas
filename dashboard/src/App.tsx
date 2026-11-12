@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { href, useRoute } from "./route";
+import { href, updateRequestHref, useRoute } from "./route";
 import { Home } from "./views/Home";
 import { PortfolioPage } from "./views/Portfolio";
 import { InitiativePage } from "./views/Initiative";
@@ -9,22 +9,30 @@ import { PersonPage } from "./views/Person";
 import { Reviews } from "./views/Reviews";
 import { RecordPage } from "./views/Record";
 import { KindList, Search } from "./views/Search";
+import { UpdateRequestPage } from "./UpdateRequest";
 import { TopicPage } from "./views/Topic";
 
 export function App() {
   const route = useRoute();
+  const types: Record<string, string> = { person: "Person", initiative: "Initiative", node: "ElixirNode" };
+  const [recordType, ...recordId] = route.id.split("/");
+  const entityType = route.page === "record" ? recordType : types[route.page];
+  const entityId = route.page === "record" ? recordId.join("/") : entityType ? route.id : undefined;
+  const requestLink = route.page === "request-update" ? href(route.page, route.id) : updateRequestHref({ entityType, entityId, context: href(route.page, route.id), from: href(route.page, route.id) });
   return (
-    <>
-      <Masthead query={route.page === "search" ? route.id : ""} page={route.page} />
-      <main className="page">
+    <div className="app-shell">
+      <Masthead query={route.page === "search" ? route.id : ""} page={route.page} requestLink={requestLink} />
+      <main className="page" id="main-content" tabIndex={-1}>
         <View page={route.page} id={route.id} key={route.page} />
       </main>
-    </>
+    </div>
   );
 }
 
 function View({ page, id }: { page: string; id: string }) {
   switch (page) {
+    case "request-update":
+      return <UpdateRequestPage value={id} key={id} />;
     case "topic":
       return <TopicPage id={id} />;
     case "record":
@@ -50,9 +58,16 @@ function View({ page, id }: { page: string; id: string }) {
   }
 }
 
-function Masthead({ query, page }: { query: string; page: string }) {
+function Masthead({ query, page, requestLink }: { query: string; page: string; requestLink: string }) {
   const [value, setValue] = useState(query);
   useEffect(() => setValue(query), [query]);
+  const navigation = [
+    { page: "home", title: "Home", icon: "m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9" },
+    { page: "portfolio", title: "Node portfolio", icon: "M3 7h18v13H3zM8 7V4h8v3M3 13h18" },
+    { page: "topic", title: "Find by topic", icon: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4 5-2 6-6 2 2-6 6-2Z" },
+    { page: "overlap", title: "Shared leadership", icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8 1a4 4 0 0 1 0 7m1 4a4 4 0 0 1 4 4v2" },
+    { page: "reviews", title: "Data review", icon: "M9 5h12M9 12h12M9 19h12M2 5l1 1 3-3M2 12l1 1 3-3M2 19l1 1 3-3" },
+  ];
   const search = (next: string) => {
     setValue(next);
     const target = href("search", next.trim());
@@ -65,36 +80,35 @@ function Masthead({ query, page }: { query: string; page: string }) {
   };
   return (
     <header className="masthead">
-      <a className="brand" href="#/">
-        ELIXIR Atlas
-      </a>
-      <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
-        <label htmlFor="search" className="visually-hidden">
-          Search the atlas
-        </label>
-        <input
-          id="search"
-          type="search"
-          autoComplete="off"
-          maxLength={200}
-          placeholder="Search the atlas"
-          value={value}
-          onChange={(event) => search(event.target.value)}
-        />
-      </form>
-      <nav className="nav">
-        <a href={href("portfolio")} aria-current={page === "portfolio" ? "page" : undefined}>
-          Node portfolio
+      <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById("main-content")?.focus(); }}>Skip to main content</a>
+      <div className="masthead-inner">
+        <a className="brand" href="#/" aria-label="ELIXIR Atlas home">
+          <img src="/brand/elixir-atlas-logo.svg" alt="ELIXIR Atlas" width="440" height="132" />
         </a>
-        <a href={href("topic")} aria-current={page === "topic" ? "page" : undefined}>
-          Find by topic
-        </a>
-        <a href={href("overlap")} aria-current={page === "overlap" ? "page" : undefined}>
-          Overlap
-        </a>
-        <a href={href("reviews")} aria-current={page === "reviews" ? "page" : undefined}>
-          Review queue
-        </a>
+        <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
+          <label htmlFor="search" className="visually-hidden">
+            Search the atlas
+          </label>
+          <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg>
+          <input
+            id="search"
+            type="search"
+            autoComplete="off"
+            maxLength={200}
+            placeholder="Search the atlas"
+            value={value}
+            onChange={(event) => search(event.target.value)}
+          />
+        </form>
+      </div>
+      <nav className="nav" aria-label="Main navigation">
+        <div className="nav-inner">
+          {navigation.map((item) => <a key={item.page} href={item.page === "home" ? "#/" : href(item.page)} aria-current={page === item.page ? "page" : undefined} onClick={() => { if (page === item.page) window.scrollTo(0, 0); }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={item.icon} /></svg>
+            {item.title}
+          </a>)}
+          <a className="feedback-link" href={requestLink} aria-current={page === "request-update" ? "page" : undefined}>Request update</a>
+        </div>
       </nav>
     </header>
   );

@@ -1,5 +1,5 @@
 import type { NodeData } from "../types";
-import { RequestState, Empty, Facts, More, Section } from "../components";
+import { Table, RequestState, Empty, Facts, More, Section } from "../components";
 import { apiUrl, useApi, list } from "../db";
 import { count, label, text } from "../format";
 import { href } from "../route";
@@ -47,7 +47,7 @@ export function NodePage({ id }: { id: string }) {
                 items={data.people}
                 limit={30}
                 render={(shown) => (
-                  <table className="table">
+                  <Table className="table">
                     <thead>
                       <tr>
                         <th scope="col">Person</th>
@@ -66,7 +66,7 @@ export function NodePage({ id }: { id: string }) {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </Table>
                 )}
               />
             ) : (
