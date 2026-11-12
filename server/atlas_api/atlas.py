@@ -96,6 +96,21 @@ def _neighbours(db, route, item_id, other_table):
     return hops
 
 
+def _linked(card, cards, q_routes, topology):
+    table = CARDS[card][0]
+    parts = []
+    for other in cards:
+        if other == card or CARDS[other][0] not in topology:
+            continue
+        o_table, o_where = CARDS[other][0], CARDS[other][1]
+        for r in q_routes:
+            for here, there, end_here, end_there in (("source", "target", r["source"], r["target"]), ("target", "source", r["target"], r["source"])):
+                if end_here == table and end_there == o_table:
+                    cond = f" WHERE {o_where.replace('kind', 'o.kind').replace('family', 'o.family')}" if o_where else ""
+                    parts.append(f"SELECT e.{here} FROM {ident(r['id'])} e JOIN {ident(o_table)} o ON o.id=e.{there}{cond}")
+    return " UNION ".join(parts)
+
+
 def pick(db, topology, question_id, picks):
     routes = routes_of(topology)
     q = next((x for x in questions() if x["id"] == question_id), None)
@@ -131,9 +146,11 @@ def pick(db, topology, question_id, picks):
                                       **{k: row.get(k) for k in EVIDENCE}})
             allowed = reach if allowed is None else allowed & reach
         if allowed is None:
-            total = rows(db, f"SELECT count(*) n FROM ({base}) s")[0]["n"]
-            got = rows(db, f"{base} ORDER BY {ident(CARDS[card][2])}, id LIMIT {MAX_ITEMS}")
-            result["cards"][card] = {"filtered": False, "total": total, "items": got}
+            linked = _linked(card, q["cards"], q_routes, topology)
+            scoped = f"{base}{' AND ' if where else ' WHERE '}id IN ({linked})" if linked else base
+            total = rows(db, f"SELECT count(*) n FROM ({scoped}) s")[0]["n"]
+            got = rows(db, f"{scoped} ORDER BY {ident(CARDS[card][2])}, id LIMIT {MAX_ITEMS}")
+            result["cards"][card] = {"filtered": False, "linked": bool(linked), "total": total, "items": got}
             continue
         ids = sorted(allowed)
         got = []

@@ -9,7 +9,8 @@ type RouteDef = { id: string; source: string; target: string; description: strin
 type Question = { id: string; use_case: string; question: string; cards: string[]; routes: string[] };
 type Overview = { questions: Question[]; cards: Record<string, Card>; routes: Record<string, RouteDef> };
 type Link = { route: string; from: string; to: string; properties: Record<string, unknown>; evidence?: string; source_url?: string; retrieved_at?: string };
-type Picked = { question: string; cards: Record<string, { filtered: boolean; total: number; items: Row[] }>; links: Link[]; links_total: number };
+type CardData = { filtered: boolean; linked?: boolean; total: number; items: Row[] };
+type Picked = { question: string; cards: Record<string, CardData>; links: Link[]; links_total: number };
 type Pick = { card: string; id: string; title: string };
 
 const GROUPS: Record<string, string> = {
@@ -114,7 +115,7 @@ function Board({ question, overview }: { question: Question; overview: Overview 
   );
 }
 
-function CardColumn({ card, data, picked, onToggle }: { card: Card; data?: { filtered: boolean; total: number; items: Row[] }; picked: Set<string>; onToggle: (row: Row) => void }) {
+function CardColumn({ card, data, picked, onToggle }: { card: Card; data?: CardData; picked: Set<string>; onToggle: (row: Row) => void }) {
   const [filter, setFilter] = useState("");
   const items = (data?.items ?? []).filter((r) => !filter || text(r.title).toLowerCase().includes(filter.toLowerCase()));
   return (
@@ -122,7 +123,7 @@ function CardColumn({ card, data, picked, onToggle }: { card: Card; data?: { fil
       <header>
         <h3 title={card.description}>{card.label}</h3>
         <span className="count">
-          {data ? (data.filtered ? `${data.total} of ${card.count}` : card.count) : "…"}
+          {data ? (data.filtered || data.linked ? `${data.total} of ${card.count}` : card.count) : "…"}
         </span>
       </header>
       <input type="search" placeholder={`Find ${card.label.toLowerCase()}`} value={filter} onChange={(e) => setFilter(e.target.value)} />
