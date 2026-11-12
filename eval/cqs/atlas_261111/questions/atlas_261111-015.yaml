@@ -47,7 +47,10 @@ reference_answer: |
   - **merlin**: genome-scale reconstruction; tagged ELIXIR Portugal and the
     Tools Platform. https://bio.tools/merlin-sysbio
   - The bio.tools domain "Constraint-based modelling", linked from the
-    Systems Biology Community page.
+    Systems Biology Community page, lists 22 tools, among them CarveMe,
+    merlin, RAVEN Toolbox, OptFlux, CNApy, COBREXA.jl, sybil, Pathway
+    Tools, AuReMe and FAME. The domain is a catalogue listing, not a
+    recommendation of each tool.
     https://bio.tools/t?domain=constraint-based-modelling
 
   **Not available yet or not in the evidence**
@@ -79,8 +82,9 @@ eval_notes: |
   Accepted: other bio.tools GEM tools if labelled catalogue-only. Calling the
   COMBINE FAIRsharing collection recommended, since the preprint names it.
   Traps: the bio.tools Systems Biology tag (SKM, GlyCombo, GlyComboCLI) is
-  not a GEM toolset. The contents of the bio.tools domain are not in the
-  data. A tool with a Node tag is not thereby recommended by a Community.
+  not a GEM toolset. A tool listed in the bio.tools domain that the
+  Community page links is not thereby recommended by the Community. A tool
+  with a Node tag is not thereby recommended by a Community.
 sources:
   - data/input/elixir/communities-systems-biology-d4e592b20d80.html
   - data/input/f1000/articles-11-1265-v2-pdf-55068db9319e.pdf
@@ -95,3 +99,4 @@ sources:
   - data/input/biotools/api-t-0fd2a0517a19.json
   - data/input/biotools/api-t-3e77f0b98173.json
   - data/input/biotools/api-t-4dc2b6e48d5c.json
+  - data/input/biotools-domains/api-t-f0fb7eb70dae-f3ceb383e8b6.json
