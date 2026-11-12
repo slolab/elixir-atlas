@@ -247,3 +247,26 @@ def topic_support(connection, topic_ids, today):
     return {"topics": chosen, "communities": ranked, "resources": sorted(resources.values(), key=lambda r: (-len(r["by"]), r["name"].lower())),
             "tools": tools[:60], "tools_total": len(tools), "papers": papers[:30], "papers_total": len(papers),
             "materials": materials[:40], "materials_total": len(materials), "events": events[:40], "events_total": len(events)}
+
+
+def portfolio(connection, id, year):
+    node = one(connection, "SELECT id, name, country FROM ElixirNode WHERE id=%s", (id,))
+    if node is None:
+        return None
+    projects = rows(connection, """SELECT i.id, i.name, i.kind, i.family, i.start, i."end", v.period, v.period_status, v.bases, v.beneficiaries, v.sources, v.limits
+        FROM NodeInvolvedIn v JOIN Initiative i ON i.id=v.target WHERE v.source=%s ORDER BY i.start NULLS LAST, i.name""", (id,))
+    commitments = rows(connection, """SELECT DISTINCT o.target initiative, p.id, p.code, p.kind, p.label, p.date, p.status, w.role, pe.id person, pe.name person_name, w.source_url
+        FROM WorksOnPlanItem w JOIN InNode n ON n.source=w.source AND n.target=%s
+        JOIN PlanItem p ON p.id=w.target JOIN PlanItemOf o ON o.source=p.id JOIN Person pe ON pe.id=w.source
+        ORDER BY o.target, p.code, pe.name""", (id,))
+    years = rows(connection, """SELECT DISTINCT substr(o.date, 1, 4) year FROM Authored a JOIN InNode n ON n.source=a.source AND n.target=%s
+        JOIN Output o ON o.id=a.target WHERE o.date IS NOT NULL ORDER BY year DESC""", (id,))
+    chosen = year or (years[0]["year"] if years else "")
+    outputs = rows(connection, """SELECT o.id, o.title, o.date, o.url, o.kind, o.resource_type,
+        string_agg(DISTINCT pe.name, ', ') authors,
+        (SELECT string_agg(DISTINCT g.name, ', ') FROM OutputOf l JOIN Initiative g ON g.id=l.target WHERE l.source=o.id) projects
+        FROM Authored a JOIN InNode n ON n.source=a.source AND n.target=%s JOIN Person pe ON pe.id=a.source
+        JOIN Output o ON o.id=a.target WHERE substr(o.date, 1, 4)=%s
+        GROUP BY o.id, o.title, o.date, o.url, o.kind, o.resource_type ORDER BY o.date DESC, o.title""", (id, chosen))
+    return {"node": node, "projects": projects, "commitments": commitments, "years": [y["year"] for y in years], "year": chosen, "outputs": outputs,
+            "nodes": rows(connection, "SELECT id, name FROM ElixirNode ORDER BY name")}
