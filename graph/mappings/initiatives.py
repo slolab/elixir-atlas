@@ -2,11 +2,12 @@ from collections.abc import Iterator
 
 from biotope.graph import Mapping, SourceRecord
 
-from ..alignment.links import EdgeLink, InitiativeRecord, ParticipationLink, StatementLink
+from ..alignment.links import BecameLink, EdgeLink, InitiativeRecord, ParticipationLink, StatementLink
 from ..alignment.names import digest, list_item, one_line
 from ..sources.cordis_participants_jsonl.records.schema import CordisParticipantRow
 from ..sources.initiative_statements_jsonl.records.schema import InitiativeStatementRow
 from ..topology import (
+    Became,
     ElixirNodeId,
     Initiative,
     InitiativeId,
@@ -46,6 +47,30 @@ def make_initiative(record: SourceRecord[InitiativeRecord]) -> Iterator[Initiati
         grant_id=value.grant_id,
         total_cost_eur=value.total_cost_eur,
         eu_contribution_eur=value.eu_contribution_eur,
+        join_url=value.join_url,
+        joining=one_line(value.joining),
+        programme=value.programme,
+        period_status=value.period_status,
+        recent_activity=list(value.recent_activity),
+        leaders=list(value.leaders),
+        limits=list(value.limits),
+        scope=value.scope,
+        latest_own_activity=value.latest_own_activity,
+        latest_activity=value.latest_activity,
+    )
+
+
+def make_became(link: SourceRecord[BecameLink]) -> Iterator[Became]:
+    value = link.value
+    yield Became(
+        id=f"became:{digest(value.source, value.target)}",
+        source=InitiativeId(value.source),
+        target=InitiativeId(value.target),
+        date=value.date,
+        evidence=one_line(value.evidence),
+        source_url=value.located.url,
+        retrieved_at=value.located.retrieved_at,
+        source_document=value.located.document_id,
     )
 
 
@@ -94,10 +119,11 @@ def make_source_statement(
 def make_takes_part_in(link: SourceRecord[EdgeLink]) -> Iterator[TakesPartIn]:
     value = link.value
     yield TakesPartIn(
-        id=f"takes_part_in:{digest(value.source, value.target, value.located.document_id or '', value.as_written)}",
+        id=f"takes_part_in:{digest(value.source, value.target, value.located.document_id or '', value.as_written, value.basis)}",
         source=ElixirNodeId(value.source),
         target=InitiativeId(value.target),
         as_written=list_item(value.as_written),
+        basis=value.basis,
         source_url=value.located.url,
         retrieved_at=value.located.retrieved_at,
         source_document=value.located.document_id,
@@ -107,10 +133,12 @@ def make_takes_part_in(link: SourceRecord[EdgeLink]) -> Iterator[TakesPartIn]:
 def make_related_to(link: SourceRecord[EdgeLink]) -> Iterator[RelatedTo]:
     value = link.value
     yield RelatedTo(
-        id=f"related_to:{digest(value.source, value.target, value.located.document_id or '', value.as_written)}",
+        id=f"related_to:{digest(value.source, value.target, value.located.document_id or '', value.as_written, value.basis)}",
         source=InitiativeId(value.source),
         target=InitiativeId(value.target),
         as_written=list_item(value.as_written),
+        direction="reverse" if value.basis == "reverse" else "stated",
+        quote=value.quote,
         source_url=value.located.url,
         retrieved_at=value.located.retrieved_at,
         source_document=value.located.document_id,
@@ -148,12 +176,21 @@ SOURCE_STATEMENTS = Mapping(
 TAKES_PART_IN = Mapping(
     name="atlas:takes_part_in",
     function=make_takes_part_in,
-    evidence=("Nodes named by a statement or a plan item of the initiative, resolved against the closed list of Nodes.",),
+    evidence=(
+        "Nodes named by a statement or a plan item of the initiative, resolved against the closed list of Nodes "
+        "(own_page when the statement is the initiative's own main page); and, as lead_node, the Nodes of the current "
+        "leads that a group's own page names.",
+    ),
+)
+BECAME = Mapping(
+    name="atlas:became",
+    function=make_became,
+    evidence=("Transitions the ELIXIR directory pages and archived group pages state, resolved to initiatives by name.",),
 )
 RELATED_TO = Mapping(
     name="atlas:related_to",
     function=make_related_to,
-    evidence=("Related groups and projects a statement names, resolved by page, name or acronym.",),
+    evidence=("Related groups and projects a statement names, resolved by page, name or acronym; each stored in both directions.",),
 )
 PARTICIPATIONS = Mapping(
     name="atlas:participates_in",

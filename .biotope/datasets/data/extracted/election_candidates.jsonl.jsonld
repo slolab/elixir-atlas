@@ -1,0 +1,223 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/extracted/election_candidates.jsonl",
+  "description": "ElectionCandidate records extracted from data/input/elixir/communities-co-lead-elections-98278416cde9.html. A candidate in the ELIXIR Community co-lead election, as the election page's candidate table lists them. Candidacy is not a role: a candidate is neither a co-lead nor, from this page alone, a Community member.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "election_candidates.jsonl",
+      "name": "election_candidates.jsonl",
+      "contentSize": "27315",
+      "contentUrl": "data/extracted/election_candidates.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "081dbefd52f70e8e9ac06c8aea859580b2f8e97c8445ee3a1a93090b2beb8ae4",
+      "isBasedOn": [
+        {
+          "contentUrl": "data/input/elixir/communities-co-lead-elections-98278416cde9.html",
+          "sha256": "3636f95adab068681472d9ffd416a6211dea33b14140c5d9b337d02f8c1f263c"
+        }
+      ],
+      "biotope:schemaRevision": "5a5950490186318e956c14ccf2b65d069c5298ef96895990e964c97523afefac",
+      "biotope:extractor": {
+        "name": "election-reader",
+        "version": "1",
+        "settings": {}
+      }
+    }
+  ],
+  "dateCreated": "2026-11-11T20:03:54.545497+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "election_candidates.jsonl#election_candidates",
+      "name": "election_candidates.jsonl",
+      "description": "ElectionCandidate records extracted from documents. A candidate in the ELIXIR Community co-lead election, as the election page's candidate table lists them. Candidacy is not a role: a candidate is neither a co-lead nor, from this page alone, a Community member.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/id",
+          "name": "id",
+          "description": "The record ID: the document's dataset folder and its path within it, then the record key's values.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/document",
+          "name": "document",
+          "description": "The document's path in the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "document"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/community",
+          "name": "community",
+          "description": "The Community the candidate stands for, as written.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "values/community/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/person",
+          "name": "person",
+          "description": "The candidate's name.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "values/person/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/country",
+          "name": "country",
+          "description": "The country or EMBL site given with the candidate.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "values/country/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/affiliation",
+          "name": "affiliation",
+          "description": "The candidate's organisation, as written.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "values/affiliation/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/note",
+          "name": "note",
+          "description": "A note beside the name, such as 'application withdrawn' or 'reapplying'.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "values/note/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "election_candidates.jsonl#election_candidates/year",
+          "name": "year",
+          "description": "The election year the table is for.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "election_candidates.jsonl"
+            },
+            "extract": {
+              "column": "values/year/value"
+            }
+          },
+          "biotope:nullable": false
+        }
+      ],
+      "biotope:namedAfterFile": true,
+      "key": {
+        "@id": "election_candidates.jsonl#election_candidates/id"
+      }
+    }
+  ],
+  "biotope:status": "processed",
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "data/input/elixir/communities-co-lead-elections-98278416cde9.html"
+    }
+  ]
+}

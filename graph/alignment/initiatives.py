@@ -113,16 +113,20 @@ class Clusters:
     def __init__(self) -> None:
         self.union = UnionFind()
         self.pages: dict[str, set[str]] = defaultdict(set)
+        self.registry: dict[str, set[str]] = defaultdict(set)
 
     def join(self, left: str, right: str, guarded: bool = True) -> bool:
         a, b = self.union.find(left), self.union.find(right)
         if a == b:
             return True
+        if self.registry[a] and self.registry[b]:
+            return False
         if guarded and clash(self.pages[a], self.pages[b]):
             return False
         self.union.union(a, b)
         root = self.union.find(a)
         self.pages[root] = self.pages.pop(a, set()) | self.pages.pop(b, set()) | self.pages[root]
+        self.registry[root] = self.registry.pop(a, set()) | self.registry.pop(b, set()) | self.registry[root]
         return True
 
 
@@ -143,6 +147,8 @@ def resolve_initiatives(claims: list[Claim], redirects: dict[str, str], same: li
 
     for claim in claims:
         union.find(claim.claim_id)
+        if claim.claim_id.startswith("registry:"):
+            clusters_.registry[claim.claim_id].add(claim.claim_id)
         key = page_key(claim.url)
         if claim.coverage == "described" and key:
             own_url[claim.claim_id] = key
@@ -217,12 +223,13 @@ def resolve_initiatives(claims: list[Claim], redirects: dict[str, str], same: li
         group = clusters[root]
         described = [c for c in group if c.coverage == "described"]
         by_length = sorted({own_url[c.claim_id] for c in described if c.claim_id in own_url}, key=lambda u: (not u.startswith("elixir-europe.org"), len(u), u))
-        own = sorted(by_length, key=lambda u: u.startswith("elixir-europe.org/internal-projects/"))
-        kinds = Counter(c.kind for c in described or group)
-        kind = sorted(kinds.items(), key=lambda item: (-item[1], item[0]))[0][0]
+        own = sorted(by_length, key=lambda u: (not u.startswith("elixir-europe.org"), u.startswith("elixir-europe.org/internal-projects/")))
         primary = [c for c in described if c.claim_id in own_url and own_url[c.claim_id] == own[0]] if own else []
+        kinds = Counter(c.kind for c in primary or described or group)
+        kind = sorted(kinds.items(), key=lambda item: (-item[1], item[0]))[0][0]
         names = Counter(c.name for c in group)
-        name = primary[0].name if primary else sorted(names.items(), key=lambda item: (-item[1], item[0]))[0][0]
+        listed = [c for c in group if c.claim_id.startswith("registry:")] or primary
+        name = listed[0].name if listed else sorted(names.items(), key=lambda item: (-item[1], item[0]))[0][0]
         acronyms = Counter(c.acronym for c in group if c.acronym and family(c.kind) == "project")
         acronym = sorted(acronyms.items(), key=lambda item: (-item[1], item[0]))[0][0] if acronyms and family(kind) == "project" else None
         paths = [page.split("/", 1)[1] for page in by_length if "/" in page and page not in documents]

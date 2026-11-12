@@ -15,12 +15,15 @@ from ....standardization import DOI, ORCIDS, PERSON_NAMES
 @dataclass(frozen=True, kw_only=True)
 class ZenodoRecord:
     __record_set__: ClassVar[str] = "zenodo_records.jsonl#zenodo_records"
-    __source_digest__: ClassVar[str] = "a5cd4629035ed0e9311308ebbc28054cf5986a4deafceb83cd80c73f069a1f2d"
+    __source_digest__: ClassVar[str] = "5b8db09a55c8f58ef0c0464eed165058bc1ddbbfbdf7ae03b4d56552bd5c9197"
     __missing_values__: ClassVar[frozenset[str]] = frozenset({""})
 
     communities: list[str]
     concept_doi: str | None
     concept_record_id: str | None
+    contributor_affiliations: list[str]
+    contributor_names: list[str]
+    contributor_orcids: list[str]
     creator_affiliations: list[str]
     person_names: list[str] = source_field("creator_names", term=PERSON_NAMES)
     orcids: list[str] = source_field("creator_orcids", term=ORCIDS)

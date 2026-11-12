@@ -34,7 +34,10 @@ class Output:
         metadata={"description": "EU grant codes the record names."}
     )
     authors: list[str] = field(
-        metadata={"description": "Authors as the record writes them, in order."}
+        metadata={"description": "Authors (Zenodo creators) as the record writes them, in order."}
+    )
+    contributors: list[str] = field(
+        metadata={"description": "Zenodo contributors (supervisors, editors, project members, others), who are not authors; empty for other sources."}
     )
     description: str | None = field(
         metadata={"description": "Abstract or description."}

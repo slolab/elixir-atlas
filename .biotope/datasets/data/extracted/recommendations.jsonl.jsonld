@@ -1,0 +1,514 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/extracted/recommendations.jsonl",
+  "description": "Recommendation records extracted from data/input/elixir/communities-3d-bioinfo-72c3519de65f.html, data/input/elixir/communities-biodiversity-a6d9ccfc5a47.html, data/input/elixir/communities-cancer-data-096a7c12a376.html, data/input/elixir/communities-co-lead-elections-98278416cde9.html, data/input/elixir/communities-domestic-animals-genome-phenome-6d945d0ed580.html, data/input/elixir/communities-food-and-nutrition-2511251c0446.html, data/input/elixir/communities-food-nutrition-2d4e6ac6d2e7.html, data/input/elixir/communities-galaxy-00e56509dc9e.html, data/input/elixir/communities-galaxy-fa75d6bfa1b6.html, data/input/elixir/communities-hcnv-41a11bd460ee.html, data/input/elixir/communities-human-copy-number-variation-ac7a716d00fc.html, data/input/elixir/communities-human-data-6879ac0c7e46.html, data/input/elixir/communities-human-data-6adafac0cb5b.html, data/input/elixir/communities-human-data-7b925ffe8c5a.html, data/input/elixir/communities-human-data-b82d66585aca.html, data/input/elixir/communities-intrinsically-disordered-proteins-88757bc0bf86.html, data/input/elixir/communities-marine-metagenomics-8e168f109c10.html, data/input/elixir/communities-marine-metagenomics-996bb96530fc.html, data/input/elixir/communities-metabolomics-9b0158a65813.html, data/input/elixir/communities-metabolomics-c00190bcc92a.html, data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html, data/input/elixir/communities-microbiome-7132894a5fdd.html, data/input/elixir/communities-plant-sciences-b9a57ba49ada.html, data/input/elixir/communities-plant-sciences-baf90445b836.html, data/input/elixir/communities-proteomics-3a9d2022994a.html, data/input/elixir/communities-proteomics-d1826e73f42e.html, data/input/elixir/communities-rare-diseases-8613bda925b4.html, data/input/elixir/communities-rare-diseases-f0e20c6448ea.html, data/input/elixir/communities-research-data-management-ef9ea6882b1e.html, data/input/elixir/communities-research-data-management-trainer-network-2480ae2054cd.html, data/input/elixir/communities-single-cell-omics-45099943dfd5.html, data/input/elixir/communities-systems-biology-d4e592b20d80.html, data/input/elixir/communities-toxicology-49484bd5f374.html, data/input/elixir/ords-10006029-files-ELIXIR-Service-Bundle-Systems-biology-for-rare-diseases_V1.pdf-content-5061764acd5f.pdf, data/input/f1000/articles-11-1265-v2-30bbc216539b.html, data/input/f1000/documents-15-1280-pdf-4c5e717ea3b1.pdf, data/input/f1000/documents-15-1506-pdf-e7797bb2198d.pdf, data/input/f1000/documents-15-1685-pdf-22ae9bf8d5da.pdf, data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf, data/input/f1000/documents-15-1758-pdf-4b4276d824df.pdf, data/input/f1000/documents-15-229-pdf-5b680bec1866.pdf, data/input/systems-biology/pdf-2609.13127-4b55a8c8051a.pdf. A tool, database, standard, guideline, practice or training resource that an ELIXIR Community page or a Community paper (white paper, meeting report, recommendations paper, service bundle) recommends, endorses, develops or lists as a resource for its field. One record per resource and group. Leave out resources only cited as related work or background, used once as an example, or reachable only through a catalogue the document links to without naming the resource.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "recommendations.jsonl",
+      "name": "recommendations.jsonl",
+      "contentSize": "956412",
+      "contentUrl": "data/extracted/recommendations.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "3b7b89b895c666165b0eefd95ee1425814f91dc9526f2ed6dea8bc4b0f4671bc",
+      "isBasedOn": [
+        {
+          "contentUrl": "data/input/elixir/communities-3d-bioinfo-72c3519de65f.html",
+          "sha256": "5124ef55cecf4f1c74929e15eb29933bb01ac42fec7cddf7536c44707d93dba1"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-biodiversity-a6d9ccfc5a47.html",
+          "sha256": "4dae05f0052ae2a0ab9858e8697752646a8244b3e5ab8f821ee4130055d3ce75"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-cancer-data-096a7c12a376.html",
+          "sha256": "8afbef057d1e215aa6fb0d97a778460384cc0a552d34efffe1b2894ca44dbbb4"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-co-lead-elections-98278416cde9.html",
+          "sha256": "3636f95adab068681472d9ffd416a6211dea33b14140c5d9b337d02f8c1f263c"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-domestic-animals-genome-phenome-6d945d0ed580.html",
+          "sha256": "8ff55568c56582e9bdd88e7a3264c806b1a1b259e6ec3fad714eefa974986d58"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-food-and-nutrition-2511251c0446.html",
+          "sha256": "7a2b2df8716be44499e843ba4b2c294eb4213931ab800130f978a27028b56346"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-food-nutrition-2d4e6ac6d2e7.html",
+          "sha256": "7a2b2df8716be44499e843ba4b2c294eb4213931ab800130f978a27028b56346"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-galaxy-00e56509dc9e.html",
+          "sha256": "da2edf62d7ca928b7fa2916f86d305a53994800134a7e2e52a24e438500c3820"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-galaxy-fa75d6bfa1b6.html",
+          "sha256": "da2edf62d7ca928b7fa2916f86d305a53994800134a7e2e52a24e438500c3820"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-hcnv-41a11bd460ee.html",
+          "sha256": "276298e09208361f9df948e50b7c80908cd8d7bad3c4a10f7b0c7164eb4beaac"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-human-copy-number-variation-ac7a716d00fc.html",
+          "sha256": "276298e09208361f9df948e50b7c80908cd8d7bad3c4a10f7b0c7164eb4beaac"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-human-data-6879ac0c7e46.html",
+          "sha256": "3c16e71ab52e495ad7cebe8132f66212b51dda8fa8c31acb24d088eda118b9a8"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-human-data-6adafac0cb5b.html",
+          "sha256": "3c16e71ab52e495ad7cebe8132f66212b51dda8fa8c31acb24d088eda118b9a8"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-human-data-7b925ffe8c5a.html",
+          "sha256": "3c16e71ab52e495ad7cebe8132f66212b51dda8fa8c31acb24d088eda118b9a8"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-human-data-b82d66585aca.html",
+          "sha256": "3c16e71ab52e495ad7cebe8132f66212b51dda8fa8c31acb24d088eda118b9a8"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-intrinsically-disordered-proteins-88757bc0bf86.html",
+          "sha256": "c7fb52472136c0ae9cfe8bebd4b4ab5fe9410759ce074a6fa966b913911cf705"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-marine-metagenomics-8e168f109c10.html",
+          "sha256": "778a61eb7126d7491c1dd9486386b9f49e7947f474d41d80b15f6d6d73345756"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-marine-metagenomics-996bb96530fc.html",
+          "sha256": "778a61eb7126d7491c1dd9486386b9f49e7947f474d41d80b15f6d6d73345756"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-metabolomics-9b0158a65813.html",
+          "sha256": "0fe3c12d3968c4e3ae9eda6c48ae3622c391b848623bb452ddacb7ad81966a88"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-metabolomics-c00190bcc92a.html",
+          "sha256": "0fe3c12d3968c4e3ae9eda6c48ae3622c391b848623bb452ddacb7ad81966a88"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html",
+          "sha256": "556737b47508478f2d0afe3acb67aff1f6ffb7e98ecb9f6e88b6931d143c3c50"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-microbiome-7132894a5fdd.html",
+          "sha256": "8e8697460434caebcd5b4ea86cd1d1ae8b67b0569e3ef4dc1a1f3378ad3c9d04"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-plant-sciences-b9a57ba49ada.html",
+          "sha256": "5943535356383c444019ba3e4e70081960e7a44c00fd237ab080754668c306a9"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-plant-sciences-baf90445b836.html",
+          "sha256": "5943535356383c444019ba3e4e70081960e7a44c00fd237ab080754668c306a9"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-proteomics-3a9d2022994a.html",
+          "sha256": "f94ea6500c51d4c8d7a9e841d0d895cafa6eb49f38c11dcb6c3e55747a6ba555"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-proteomics-d1826e73f42e.html",
+          "sha256": "f94ea6500c51d4c8d7a9e841d0d895cafa6eb49f38c11dcb6c3e55747a6ba555"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-rare-diseases-8613bda925b4.html",
+          "sha256": "4a2388e33eb581118c61bc2de776ede3c7bd43f490ab0cc3ec8741e16f02d827"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-rare-diseases-f0e20c6448ea.html",
+          "sha256": "4a2388e33eb581118c61bc2de776ede3c7bd43f490ab0cc3ec8741e16f02d827"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-research-data-management-ef9ea6882b1e.html",
+          "sha256": "0fa6bcd8b2dc5c9af4b2c404fdf35a7515f266412d0a07922ec7561c3cb7ef7d"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-research-data-management-trainer-network-2480ae2054cd.html",
+          "sha256": "554f2aaa665e68dab194faa4753843af923fd642bfef4a630ffba6b2ab1181d7"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-single-cell-omics-45099943dfd5.html",
+          "sha256": "f8921378f7cd087e668d2dc1cb35ba89b6a39d3ce63b11c2eacb9b3f2dc26290"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-systems-biology-d4e592b20d80.html",
+          "sha256": "af51bcea23278fbe4801c694e9456fc47e3cb420f92769ea0060c13281fb9142"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-toxicology-49484bd5f374.html",
+          "sha256": "0ec6a1cdaf858ec66fd34236b9f617b6b1ca399254635d39d3c0a330c94868bd"
+        },
+        {
+          "contentUrl": "data/input/elixir/ords-10006029-files-ELIXIR-Service-Bundle-Systems-biology-for-rare-diseases_V1.pdf-content-5061764acd5f.pdf",
+          "sha256": "04b51500ac56af6ec52826665b10df6d3ec065eabfe3b88bd503a4dfd7c089be"
+        },
+        {
+          "contentUrl": "data/input/f1000/articles-11-1265-v2-30bbc216539b.html",
+          "sha256": "088b7a9ae7aa0f14360d5531ca868c16ad182e5a73aea0423377617eb8d17612"
+        },
+        {
+          "contentUrl": "data/input/f1000/documents-15-1280-pdf-4c5e717ea3b1.pdf",
+          "sha256": "c40633545fb5f07139c1e4607145cc7457d3df5ab3809145bff427327dea3406"
+        },
+        {
+          "contentUrl": "data/input/f1000/documents-15-1506-pdf-e7797bb2198d.pdf",
+          "sha256": "07b0231bbd29f30acc8da12644257294a3df4ae305d7fef36c12271f60e445ff"
+        },
+        {
+          "contentUrl": "data/input/f1000/documents-15-1685-pdf-22ae9bf8d5da.pdf",
+          "sha256": "eebe36facead37ab8dd5cc6fec7053545d31250ce962bc93691a1649f99d25b0"
+        },
+        {
+          "contentUrl": "data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf",
+          "sha256": "e063454c8ee1ac1d116710ec42caae0a0fce82512f29b916db0bee13e3904e0b"
+        },
+        {
+          "contentUrl": "data/input/f1000/documents-15-1758-pdf-4b4276d824df.pdf",
+          "sha256": "365f2fb0db5a3afbd77be13525a9e22b946395a97db87a8fc4925f93bcb9198c"
+        },
+        {
+          "contentUrl": "data/input/f1000/documents-15-229-pdf-5b680bec1866.pdf",
+          "sha256": "f4b0df6b41527507c48af7aec9d3775fc82ae43646269f21e74fb381e3d838a0"
+        },
+        {
+          "contentUrl": "data/input/systems-biology/pdf-2609.13127-4b55a8c8051a.pdf",
+          "sha256": "37bae01dad05081f6b3981866101090164eb4518d3ddadb8bf782cdd846ea1ec"
+        }
+      ],
+      "biotope:schemaRevision": "33a14ac1c1a14b614ba2d2e85b019286f5b2cd56dd436b93e62957634db25bd2",
+      "biotope:extractor": {
+        "name": "recommendation-reader",
+        "version": "1",
+        "settings": {
+          "model": "openai/gpt-6.1-terra",
+          "reasoning": "low"
+        }
+      }
+    }
+  ],
+  "dateCreated": "2026-11-11T20:22:13.698861+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "recommendations.jsonl#recommendations",
+      "name": "recommendations.jsonl",
+      "description": "Recommendation records extracted from documents. A tool, database, standard, guideline, practice or training resource that an ELIXIR Community page or a Community paper (white paper, meeting report, recommendations paper, service bundle) recommends, endorses, develops or lists as a resource for its field. One record per resource and group. Leave out resources only cited as related work or background, used once as an example, or reachable only through a catalogue the document links to without naming the resource.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/id",
+          "name": "id",
+          "description": "The record ID: the document's dataset folder and its path within it, then the record key's values.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/document",
+          "name": "document",
+          "description": "The document's path in the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "document"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/resource",
+          "name": "resource",
+          "description": "The resource's name as written, e.g. 'MEMOTE', 'SBML', 'standard-GEM'.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "values/resource/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/kind",
+          "name": "kind",
+          "description": "tool is software; database a data resource or repository; standard a format, ontology or minimum-information checklist; guideline a set of recommendations or a scorecard; practice a way of working; training a course or material; document a paper or report to read.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "values/kind/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/group",
+          "name": "group",
+          "description": "The ELIXIR Community or group whose page or paper names the resource, as written.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "values/group/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/basis",
+          "name": "basis",
+          "description": "recommends when the document recommends, endorses or calls it a community standard or best practice; develops when the group or its members develop or maintain it; lists when it is only listed among the group's resources.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "values/basis/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/purpose",
+          "name": "purpose",
+          "description": "What the document says the resource is for, as a short phrase close to its wording, e.g. 'testing the quality of genome-scale metabolic models'.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "values/purpose/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "recommendations.jsonl#recommendations/url",
+          "name": "url",
+          "description": "The link the document gives for the resource.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "recommendations.jsonl"
+            },
+            "extract": {
+              "column": "values/url/value"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true,
+      "key": {
+        "@id": "recommendations.jsonl#recommendations/id"
+      }
+    }
+  ],
+  "biotope:status": "processed",
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "data/input/elixir/communities-3d-bioinfo-72c3519de65f.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-biodiversity-a6d9ccfc5a47.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-cancer-data-096a7c12a376.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-co-lead-elections-98278416cde9.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-domestic-animals-genome-phenome-6d945d0ed580.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-food-and-nutrition-2511251c0446.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-food-nutrition-2d4e6ac6d2e7.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-galaxy-00e56509dc9e.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-galaxy-fa75d6bfa1b6.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-hcnv-41a11bd460ee.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-human-copy-number-variation-ac7a716d00fc.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-human-data-6879ac0c7e46.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-human-data-6adafac0cb5b.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-human-data-7b925ffe8c5a.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-human-data-b82d66585aca.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-intrinsically-disordered-proteins-88757bc0bf86.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-marine-metagenomics-8e168f109c10.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-marine-metagenomics-996bb96530fc.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-metabolomics-9b0158a65813.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-metabolomics-c00190bcc92a.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-microbiome-7132894a5fdd.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-plant-sciences-b9a57ba49ada.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-plant-sciences-baf90445b836.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-proteomics-3a9d2022994a.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-proteomics-d1826e73f42e.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-rare-diseases-8613bda925b4.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-rare-diseases-f0e20c6448ea.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-research-data-management-ef9ea6882b1e.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-research-data-management-trainer-network-2480ae2054cd.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-single-cell-omics-45099943dfd5.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-systems-biology-d4e592b20d80.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-toxicology-49484bd5f374.html"
+    },
+    {
+      "@id": "data/input/elixir/ords-10006029-files-ELIXIR-Service-Bundle-Systems-biology-for-rare-diseases_V1.pdf-content-5061764acd5f.pdf"
+    },
+    {
+      "@id": "data/input/f1000/articles-11-1265-v2-30bbc216539b.html"
+    },
+    {
+      "@id": "data/input/f1000/documents-15-1280-pdf-4c5e717ea3b1.pdf"
+    },
+    {
+      "@id": "data/input/f1000/documents-15-1506-pdf-e7797bb2198d.pdf"
+    },
+    {
+      "@id": "data/input/f1000/documents-15-1685-pdf-22ae9bf8d5da.pdf"
+    },
+    {
+      "@id": "data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf"
+    },
+    {
+      "@id": "data/input/f1000/documents-15-1758-pdf-4b4276d824df.pdf"
+    },
+    {
+      "@id": "data/input/f1000/documents-15-229-pdf-5b680bec1866.pdf"
+    },
+    {
+      "@id": "data/input/systems-biology/pdf-2609.13127-4b55a8c8051a.pdf"
+    }
+  ]
+}

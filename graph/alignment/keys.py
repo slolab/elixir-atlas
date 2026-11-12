@@ -4,7 +4,7 @@ from urllib.parse import urlsplit
 from .names import ascii_fold
 
 GROUP_KINDS = frozenset(
-    {"community", "platform", "focus_group", "working_group", "task_force", "governance_group", "node_group"}
+    {"community", "platform", "focus_group", "working_group", "task_force", "governance_group", "node_group", "other_group"}
 )
 GROUP_WORDS = re.compile(r"\b(elixir|the|community|communities|platform|focus|group|groups)\b")
 GROUP_REWRITES = (
@@ -17,7 +17,7 @@ GROUP_REWRITES = (
     (re.compile(r"\bai ecosystems\b"), "ai ecosystem"),
     (re.compile(r"\bphenome and genome\b"), "genome and phenome"),
     (re.compile(r"\bstructural bioinformatics\b"), "3d bioinfo"),
-    (re.compile(r"\b3d bio ?info\b"), "3d bioinfo"),
+    (re.compile(r"\b3 ?d bio ?info\b"), "3d bioinfo"),
     (re.compile(r"\bsab\b"), "scientific advisory board"),
     (re.compile(r"\biac\b"), "industry advisory committee"),
     (re.compile(r"\btecg\b"), "technical coordinators"),

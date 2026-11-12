@@ -33,6 +33,9 @@ class Tool:
         metadata={"description": "bio.tools collections; not ELIXIR groups."}
     )
     topics: list[str] = field(metadata={"description": "EDAM topic labels."})
+    recommended_by: list[str] = field(
+        metadata={"description": "Groups whose own page or paper points to this tool (recommends with is_tool), as 'group (basis)'. Empty means no group document was found naming it: a tool_for tag or domain listing alone is a catalogue entry, not a recommendation."}
+    )
     last_update: str | None = field(
         metadata={"description": "When the bio.tools entry was last updated."}
     )

@@ -22,6 +22,7 @@ def _decode(row: dict[str, Any]) -> TessMaterial:
         resource_types=row["resource_types"],
         source_path=row["source_path"],
         tess_id=row["tess_id"],
+        tess_url=row["tess_url"],
         title=row.get("title"),
         topic_labels=row["topic_labels"],
         edam_topic_uris=row["topic_uris"],
