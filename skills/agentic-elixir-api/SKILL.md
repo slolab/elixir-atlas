@@ -17,6 +17,8 @@ Use the public Atlas to investigate the user's question. Read [references/api.md
 
 ## Answer from evidence
 
+When the user asks to submit a correction, use the update-request endpoint in [references/api.md](references/api.md). Include the relevant record or answer context and report the pending receipt. Submission never changes the served data.
+
 - State what the evidence cannot show. Each view's `limits` lists what is not public or not collected (member lists, grant agreements, effort and pay, uncollected sources such as FAIRsharing, RDMkit and Slack); repeat every limit that bears on the question, and say so explicitly when something is missing, unstated or not public rather than leaving it out. When you conclude that nothing matches (no other group documents it, no person leads it, no dates are given), write that conclusion.
 - For people, name them with their role, organisation and Node. For contacts, give the group's mailbox and the named co-leads and liaison. For a person's or Node's involvement, list every role and plan item, including governance roles and participation.
 - Verify each requested claim against source statements, relationship evidence and plan items. Before answering, check that each requested field is supported or explicitly unavailable. Aggregated contacts, dates and roles can combine different sources or subgroups. Preserve source wording such as co-lead, interim, planned and reported; compare conflicting statements instead of relying only on the merged value. Cite original URLs or DOIs.

@@ -8,17 +8,25 @@ import { PersonPage } from "./views/Person";
 import { Reviews } from "./views/Reviews";
 import { RecordPage } from "./views/Record";
 import { KindList, Search } from "./views/Search";
+import { apiUrl, useApi } from "./db";
+import { UpdateRequest, UpdateRequestsEnabled } from "./UpdateRequest";
 import { TopicPage } from "./views/Topic";
 
 export function App() {
   const route = useRoute();
+  const { data, error } = useApi<{ api: { update_requests: boolean } }>(apiUrl("release"));
+  const types: Record<string, string> = { person: "Person", initiative: "Initiative", node: "ElixirNode" };
+  const [recordType, ...recordId] = route.id.split("/");
+  const entityType = route.page === "record" ? recordType : types[route.page];
+  const entityId = route.page === "record" ? recordId.join("/") : entityType ? route.id : undefined;
   return (
-    <>
+    <UpdateRequestsEnabled.Provider value={error ? false : data?.api.update_requests}>
       <Masthead query={route.page === "search" ? route.id : ""} page={route.page} />
       <main className="page">
+        <UpdateRequest key={`${route.page}/${route.id}`} entityType={entityType} entityId={entityId} context={href(route.page, route.id)} />
         <View page={route.page} id={route.id} key={route.page} />
       </main>
-    </>
+    </UpdateRequestsEnabled.Provider>
   );
 }
 

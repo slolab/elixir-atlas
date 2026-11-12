@@ -4,6 +4,7 @@ import { Empty, RequestState, EntityLink, More, SourceLink } from "../components
 import { apiUrl, useApi, list, type Row } from "../db";
 import { label, text } from "../format";
 import { href } from "../route";
+import { UpdateRequest } from "../UpdateRequest";
 
 export function Reviews({ kind }: { kind: string }) {
   const [filter, setFilter] = useState("");
@@ -16,7 +17,7 @@ export function Reviews({ kind }: { kind: string }) {
     <>
       <h1 className="page-title">Review queue</h1>
       <p className="lede">
-        Each item is a question the sources could not settle. The queue is read-only; reviewed decisions are included in a future data release.
+        Each item is a question the sources could not settle. Request an update to suggest a resolution for future review.
       </p>
       <nav className="tabs" aria-label="Kinds of review item">
         {kinds.map((entry) => (
@@ -71,6 +72,7 @@ export function ReviewList({ items }: { items: Row[] }) {
               <span className="muted">Item id </span>
               <code>{text(item.id)}</code>
             </p>
+            <UpdateRequest entityType="ReviewItem" entityId={text(item.id)} context={text(item.question)} />
           </li>
         );
       })}
