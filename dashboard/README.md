@@ -40,3 +40,11 @@ Set `ATLAS_API_URL` to change the Vite proxy target. `npm run build --prefix das
 The existing project, person, Node, overlap and review views use the API. Keyword search covers all record types with ranked results, type filters and pagination. Every result has a record-and-evidence view, and node records also show their relationships.
 
 The project owner confirmed public access to the complete 20261111 release on 2026-11-11. There is no login or editing interface.
+
+## Visual identity
+
+The interface follows the [ELIXIR Brand Guidelines, 2025](https://elixir-europe.org/sites/default/files/documents/elixir-brand-guidelines-2025.pdf): Lato for websites, royal blue `#023452`, neutral grey `#4d4848`, bright orange `#f47d20` and olive green `#bebf32`. Lato Regular and Bold are bundled locally through Fontsource. The interface uses a light colour scheme, with a blue chart surface for contrasting chart colours.
+
+The unmodified [logo](https://elixir-europe.org/sites/default/files/elixir_logo_0.png) and [favicon](https://elixir-europe.org/sites/default/files/favicon.ico) in `public/brand/` come from the main ELIXIR website. Keep the logo proportions and surrounding clear space intact.
+
+The header uses `public/brand/elixir-atlas-logo.svg`: the original ELIXIR image, a vector cartoon Earth, and an Atlas wordmark in Lato Bold. The SVG embeds the original image and font so it is also usable as a standalone logo.

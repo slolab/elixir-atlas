@@ -36,6 +36,10 @@ export function Empty({ children }: { children: ReactNode }) {
   return <p className="empty">{children}</p>;
 }
 
+export function Table({ children, className = "table" }: { children: ReactNode; className?: string }) {
+  return <div className="table-scroll" role="region" aria-label="Scrollable table" tabIndex={0}><table className={className}>{children}</table></div>;
+}
+
 export type Fact = [string, ReactNode];
 
 export function Facts({ facts }: { facts: Fact[] }) {

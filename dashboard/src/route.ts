@@ -29,6 +29,15 @@ export function href(page: string, id = ""): string {
   return id ? `#/${page}/${encodeURIComponent(id)}` : `#/${page}`;
 }
 
+export function updateRequestHref({ entityType, entityId, context = "", from = "#/" }: { entityType?: string; entityId?: string; context?: string; from?: string }) {
+  const params = new URLSearchParams({ context, from });
+  if (entityType && entityId) {
+    params.set("type", entityType);
+    params.set("id", entityId);
+  }
+  return href("request-update", params.toString());
+}
+
 const PAGES: Record<string, string> = { initiative: "initiative", person: "person", node: "node" };
 
 export function entityHref(id: string): string | null {

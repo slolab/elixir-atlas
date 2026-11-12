@@ -1,5 +1,5 @@
 import type { PersonData } from "../types";
-import { RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
+import { Table, RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
 import { apiUrl, useApi, list } from "../db";
 import { label, text } from "../format";
 import { href } from "../route";
@@ -52,7 +52,7 @@ export function PersonPage({ id }: { id: string }) {
           ) : null}
           <Section title="Roles">
             {data.roles.length ? (
-              <table className="table">
+              <Table className="table">
                 <thead>
                   <tr>
                     <th scope="col">Group or project</th>
@@ -81,14 +81,14 @@ export function PersonPage({ id }: { id: string }) {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </Table>
             ) : (
               <Empty>No roles recorded.</Empty>
             )}
           </Section>
           {data.led.length ? (
             <Section title="Plan items led">
-              <table className="table plan">
+              <Table className="table plan">
                 <thead>
                   <tr>
                     <th scope="col">Item</th>
@@ -111,7 +111,7 @@ export function PersonPage({ id }: { id: string }) {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </Table>
             </Section>
           ) : null}
           {data.outputs.length ? (

@@ -1,6 +1,6 @@
 import type { InitiativeData } from "../types";
 import { useMemo, useState } from "react";
-import { RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
+import { Table, RequestState, Empty, Facts, More, Section, SourceLink } from "../components";
 import { apiUrl, useApi, list, type Row } from "../db";
 import { euros, label, period, text } from "../format";
 import { href } from "../route";
@@ -184,7 +184,7 @@ function People({ roles }: { roles: Role[] }) {
         items={people}
         limit={25}
         render={(shown) => (
-          <table className="table">
+          <Table className="table">
             <thead>
               <tr>
                 <th scope="col">Person</th>
@@ -214,7 +214,7 @@ function People({ roles }: { roles: Role[] }) {
                 );
               })}
             </tbody>
-          </table>
+          </Table>
         )}
       />
     </Section>
@@ -241,7 +241,7 @@ function PlanTable({ plan, leads, delivered }: { plan: Row[]; leads: { plan: str
         items={shown}
         limit={30}
         render={(items) => (
-          <table className="table plan">
+          <Table className="table plan">
             <thead>
               <tr>
                 <th scope="col">Item</th>
@@ -280,7 +280,7 @@ function PlanTable({ plan, leads, delivered }: { plan: Row[]; leads: { plan: str
                 );
               })}
             </tbody>
-          </table>
+          </Table>
         )}
       />
     </>
@@ -322,7 +322,7 @@ function Statements({ statements }: { statements: Row[] }) {
     return <Empty>Only role statements or plan items name it; no page describes it.</Empty>;
   }
   return (
-    <table className="table">
+    <Table className="table source-table">
       <thead>
         <tr>
           <th scope="col">Source</th>
@@ -344,7 +344,7 @@ function Statements({ statements }: { statements: Row[] }) {
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 }
 

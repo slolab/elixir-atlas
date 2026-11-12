@@ -1,6 +1,6 @@
 import type { OverlapData } from "../types";
 import { useState } from "react";
-import { Empty, RequestState, More, Section } from "../components";
+import { Table, Empty, RequestState, More, Section } from "../components";
 import { apiUrl, useApi } from "../db";
 import { label } from "../format";
 import { href } from "../route";
@@ -44,7 +44,7 @@ export function Overlap() {
             items={holders}
             limit={25}
             render={(shown) => (
-              <table className="table">
+              <Table className="table">
                 <thead>
                   <tr>
                     <th scope="col">Person</th>
@@ -72,7 +72,7 @@ export function Overlap() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </Table>
             )}
           />
         ) : (
@@ -81,7 +81,7 @@ export function Overlap() {
       </Section>
       <Section title="Groups that share leaders" note="Pairs of Communities, Platforms, Focus Groups and other groups with more than one person in a leading role in both.">
         {pairs.length ? (
-          <table className="table">
+          <Table className="table">
             <thead>
               <tr>
                 <th scope="col">Group</th>
@@ -104,7 +104,7 @@ export function Overlap() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
         ) : (
           <Empty>No two groups share more than one leader.</Empty>
         )}

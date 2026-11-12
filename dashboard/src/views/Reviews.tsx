@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Empty, RequestState, EntityLink, More, SourceLink } from "../components";
 import { apiUrl, useApi, list, type Row } from "../db";
 import { label, text } from "../format";
-import { href } from "../route";
-import { UpdateRequest } from "../UpdateRequest";
+import { href, updateRequestHref } from "../route";
 
 export function Reviews({ kind }: { kind: string }) {
   const [filter, setFilter] = useState("");
@@ -72,7 +71,7 @@ export function ReviewList({ items }: { items: Row[] }) {
               <span className="muted">Item id </span>
               <code>{text(item.id)}</code>
             </p>
-            <UpdateRequest entityType="ReviewItem" entityId={text(item.id)} context={text(item.question)} />
+            <a className="request-link" href={updateRequestHref({ entityType: "ReviewItem", entityId: text(item.id), context: text(item.question), from: window.location.hash || "#/" })}>Request update</a>
           </li>
         );
       })}
