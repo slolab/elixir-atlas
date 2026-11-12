@@ -357,6 +357,9 @@ function Commitments({ items }: { items: Commitment[] }) {
 
 function People({ commitments, projects }: { commitments: Commitment[]; projects: Project[] }) {
   const projectName = new Map(projects.map((p) => [p.id, p.name]));
+  const [only, setOnly] = useState("");
+  const [leadsOnly, setLeadsOnly] = useState(false);
+  const [who, setWho] = useState("");
   const people = new Map<string, { name: string; byProject: Map<string, Map<string, Commitment & { lead: boolean }>> }>();
   for (const c of commitments) {
     const person = people.get(c.person) ?? { name: c.person_name, byProject: new Map() };
@@ -368,19 +371,52 @@ function People({ commitments, projects }: { commitments: Commitment[]; projects
     people.set(c.person, person);
   }
   if (!people.size) return <p className="empty">No plan item names a person placed in this Node.</p>;
-  const count = (p: { byProject: Map<string, Map<string, unknown>> }) => [...p.byProject.values()].reduce((n, m) => n + m.size, 0);
+  const projectIds = [...new Set(commitments.map((c) => c.initiative))].sort((a, b) => (projectName.get(a) ?? a).localeCompare(projectName.get(b) ?? b));
+  const words = who.trim().toLowerCase();
+  const visible = [...people.entries()]
+    .filter(([, p]) => !words || p.name.toLowerCase().includes(words))
+    .map(([pid, p]) => {
+      const byProject = [...p.byProject.entries()]
+        .filter(([project]) => !only || project === only)
+        .map(([project, items]) => [project, [...items.values()].filter((c) => !leadsOnly || c.lead)] as const)
+        .filter(([, items]) => items.length);
+      return { pid, name: p.name, byProject, count: byProject.reduce((n, [, items]) => n + items.length, 0) };
+    })
+    .filter((p) => p.count)
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
   return (
+    <>
+      <div className="portfolio-people-filters">
+        <div role="group" aria-label="Project" className="portfolio-kinds">
+          <button type="button" aria-pressed={!only} onClick={() => setOnly("")}>
+            All projects
+          </button>
+          {projectIds.map((project) => (
+            <button key={project} type="button" aria-pressed={only === project} onClick={() => setOnly(only === project ? "" : project)}>
+              {projectName.get(project) ?? project}
+            </button>
+          ))}
+        </div>
+        <label className="portfolio-check">
+          <input type="checkbox" checked={leadsOnly} onChange={(e) => setLeadsOnly(e.target.checked)} /> Only items they lead
+        </label>
+        <label>
+          <span className="visually-hidden">Find a person</span>
+          <input type="search" className="portfolio-who" placeholder="Find a person" value={who} onChange={(e) => setWho(e.target.value)} />
+        </label>
+      </div>
+      {!visible.length ? (
+        <p className="empty">Nobody matches. Clear the person search or choose All projects.</p>
+      ) : null}
     <ul className="portfolio-people">
-      {[...people.entries()]
-        .sort((a, b) => count(b[1]) - count(a[1]) || a[1].name.localeCompare(b[1].name))
-        .map(([pid, p]) => (
+      {visible.map(({ pid, name, byProject }) => (
           <li key={pid}>
-            <a href={href("person", pid)}>{p.name}</a>
-            {[...p.byProject.entries()].map(([project, items]) => (
+            <a href={href("person", pid)}>{name}</a>
+            {byProject.map(([project, items]) => (
               <div key={project} className="portfolio-person-project">
                 <h4>{projectName.get(project) ?? project}</h4>
                 <More
-                  items={[...items.values()].sort((a, b) => Number(b.lead) - Number(a.lead) || text(a.code).localeCompare(text(b.code), undefined, { numeric: true }))}
+                  items={[...items].sort((a, b) => Number(b.lead) - Number(a.lead) || text(a.code).localeCompare(text(b.code), undefined, { numeric: true }))}
                   limit={3}
                   render={(shown) => (
                     <ul>
@@ -398,6 +434,7 @@ function People({ commitments, projects }: { commitments: Commitment[]; projects
           </li>
         ))}
     </ul>
+    </>
   );
 }
 
