@@ -31,7 +31,9 @@ type Commitment = {
   person_name: string;
   source_url: Value;
 };
-type Output = { id: string; title: string; date: Value; url: Value; resource_type: Value; kind: Value; authors: Value; projects: Value };
+type Output = { id: string; title: string; date: Value; url: Value; resource_type: Value; kind: Value; authors: Value; projects: Value; project_ids: Value };
+type Period = "running" | "ended" | "all";
+type Filter = { period: Period; since: string; kinds: string[] };
 type Data = {
   node: { id: string; name: string };
   nodes: { id: string; name: string }[];
@@ -62,8 +64,34 @@ function names(value: Value): string {
 
 export function PortfolioPage({ id }: { id: string }) {
   const [year, setYear] = useState("");
-  if (!id) return <NodeChooser />;
-  return <Portfolio key={id} id={id} year={year} onYear={setYear} />;
+  const [node, query] = id.split("?");
+  if (!node) return <NodeChooser />;
+  return <Portfolio key={node} id={node} query={new URLSearchParams(query ?? "")} year={year} onYear={setYear} />;
+}
+
+function readFilter(query: URLSearchParams): Filter | null {
+  const period = query.get("period");
+  if (!period) return null;
+  return {
+    period: (["running", "ended", "all"].includes(period) ? period : "all") as Period,
+    since: /^\d{4}$/.test(query.get("since") ?? "") ? query.get("since")! : "",
+    kinds: (query.get("kinds") ?? "").split(",").filter((k) => k in TONES),
+  };
+}
+
+function writeFilter(node: string, filter: Filter) {
+  const query = new URLSearchParams({ period: filter.period });
+  if (filter.since) query.set("since", filter.since);
+  if (filter.kinds.length) query.set("kinds", filter.kinds.join(","));
+  window.history.replaceState(null, "", `#/portfolio/${encodeURIComponent(node)}?${query}`);
+}
+
+function matches(p: Project, filter: Filter): boolean {
+  if (filter.period === "running" && p.period_status !== "running") return false;
+  if (filter.period === "ended" && p.period_status === "running") return false;
+  if (filter.since && text(p.end) && text(p.end).slice(0, 4) < filter.since) return false;
+  if (filter.kinds.length && !filter.kinds.includes(TONES[p.kind] ? p.kind : "other")) return false;
+  return true;
 }
 
 function NodeChooser() {
@@ -87,22 +115,37 @@ function NodeChooser() {
   );
 }
 
-function Portfolio({ id, year, onYear }: { id: string; year: string; onYear: (y: string) => void }) {
+function Portfolio({ id, query, year, onYear }: { id: string; query: URLSearchParams; year: string; onYear: (y: string) => void }) {
   const { data, error } = useApi<Data>(apiUrl("portfolio", { id, year }));
   const [open, setOpen] = useState<string | null>(null);
+  const [chosen, setChosen] = useState<Filter | null>(() => readFilter(query));
   const byProject = useMemo(() => {
     const out = new Map<string, Commitment[]>();
     for (const c of data?.commitments ?? []) out.set(c.initiative, [...(out.get(c.initiative) ?? []), c]);
     return out;
   }, [data]);
   if (!data) return <RequestState error={error} />;
-  const projects = data.projects
+  const all = data.projects
     .filter((p) => p.family === "project")
     .sort((a, b) => Number(b.period_status === "running") - Number(a.period_status === "running") || text(b.start).localeCompare(text(a.start)) || a.name.localeCompare(b.name));
   const groups = data.projects.filter((p) => p.family !== "project");
+  const runningAll = all.filter((p) => p.period_status === "running").length;
+  const filter: Filter = chosen ?? { period: runningAll ? "running" : "all", since: "", kinds: [] };
+  const setFilter = (next: Filter) => {
+    setChosen(next);
+    writeFilter(id, next);
+  };
+  const projects = all.filter((p) => matches(p, filter));
+  const shown = new Set(projects.map((p) => p.id));
+  const commitments = data.commitments.filter((c) => shown.has(c.initiative));
   const running = projects.filter((p) => p.period_status === "running").length;
-  const people = new Set(data.commitments.map((c) => c.person)).size;
-  const items = new Set(data.commitments.map((c) => c.id)).size;
+  const people = new Set(commitments.map((c) => c.person)).size;
+  const items = new Set(commitments.map((c) => c.id)).size;
+  const narrowed = projects.length < all.length;
+  const outputs = narrowed
+    ? data.outputs.filter((o) => text(o.project_ids).split(",").some((p) => shown.has(p.trim())))
+    : data.outputs;
+  const unlinked = narrowed ? data.outputs.filter((o) => !text(o.project_ids)) : [];
   const limits = text(data.projects.find((p) => p.limits)?.limits);
   return (
     <>
@@ -119,10 +162,25 @@ function Portfolio({ id, year, onYear }: { id: string; year: string; onYear: (y:
         </label>
         <h1>{data.node.name}'s portfolio</h1>
         <p className="lede">
-          Sources place {data.node.name} in {projects.length} projects, {running} of them running now, and in {groups.length} groups. {people} of its people are named
-          on {items} tasks, deliverables or other plan items.
+          Sources place {data.node.name} in {all.length} projects, {runningAll} of them running now, and in {groups.length} groups.
         </p>
       </section>
+      <FilterBar filter={filter} onChange={setFilter} all={all} />
+      <p className="portfolio-showing" role="status">
+        {narrowed ? `Showing ${projects.length} of ${all.length} projects` : `Showing all ${all.length} projects`}
+        {!projects.length ? "." : items ? `, with ${people} ${people === 1 ? "person" : "people"} from the Node named on ${items} plan ${items === 1 ? "item" : "items"}.` : "; no plan item in them names the Node's people."}
+        {running && filter.period !== "running" ? ` ${running} running.` : ""}
+      </p>
+      {!projects.length ? (
+        <p className="empty">
+          No project matches.{" "}
+          <button type="button" className="portfolio-reset" onClick={() => setFilter({ period: "all", since: "", kinds: [] })}>
+            Show all {all.length} projects
+          </button>
+        </p>
+      ) : null}
+      {projects.length ? (
+        <>
       <Section title="Projects over time" note="Each bar runs from a project's start to its end; projects without dates are listed below the chart.">
         <Timeline projects={projects} />
       </Section>
@@ -176,10 +234,15 @@ function Portfolio({ id, year, onYear }: { id: string; year: string; onYear: (y:
           </tbody>
         </table>
       </Section>
+        </>
+      ) : null}
       <Section title="Who works on what" note="People a source places in this Node, with the plan items they are named on.">
-        <People commitments={data.commitments} projects={data.projects} />
+        <People commitments={commitments} projects={data.projects} />
       </Section>
-      <Section title="Outputs for the annual report" note="Outputs with at least one author a source places in this Node.">
+      <Section
+        title="Outputs for the annual report"
+        note={narrowed ? "Outputs with at least one author placed in this Node, from the projects shown." : "Outputs with at least one author a source places in this Node."}
+      >
         {data.years.length ? (
           <>
             <div className="filters" role="group" aria-label="Year">
@@ -189,7 +252,7 @@ function Portfolio({ id, year, onYear }: { id: string; year: string; onYear: (y:
                 </button>
               ))}
             </div>
-            {data.outputs.length ? (
+            {outputs.length ? (
               <table className="table">
                 <thead>
                   <tr>
@@ -200,7 +263,7 @@ function Portfolio({ id, year, onYear }: { id: string; year: string; onYear: (y:
                   </tr>
                 </thead>
                 <tbody>
-                  {data.outputs.map((o) => (
+                  {outputs.map((o) => (
                     <tr key={o.id}>
                       <td>
                         <a href={text(o.url)} target="_blank" rel="noreferrer">
@@ -216,8 +279,27 @@ function Portfolio({ id, year, onYear }: { id: string; year: string; onYear: (y:
                 </tbody>
               </table>
             ) : (
-              <p className="empty">No output from {year || data.year} has an author placed in this Node.</p>
+              <p className="empty">No output from {year || data.year} {narrowed ? "in the projects shown " : ""}has an author placed in this Node.</p>
             )}
+            {unlinked.length ? (
+              <details className="portfolio-unlinked">
+                <summary>
+                  {unlinked.length} more {unlinked.length === 1 ? "output is" : "outputs are"} not linked to any project
+                </summary>
+                <ul className="portfolio-people">
+                  {unlinked.map((o) => (
+                    <li key={o.id}>
+                      <a href={text(o.url)} target="_blank" rel="noreferrer">
+                        {o.title}
+                      </a>
+                      <small>
+                        {text(o.date).slice(0, 10)}, {names(o.authors)}
+                      </small>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : null}
           </>
         ) : (
           <p className="empty">No output in the atlas has an author placed in this Node.</p>
@@ -342,7 +424,7 @@ function Timeline({ projects }: { projects: Project[] }) {
               </a>
               <span
                 className="portfolio-label"
-                style={(from - first) / (last - first) > 0.55 ? { right: `calc(100% - ${at(end)})`, left: "auto", textAlign: "right" } : { left: at(from) }}
+                style={(from - first) / (last - first) > 0.55 ? { right: `calc(100% - ${at(end)})`, left: "auto", textAlign: "right" } : { left: at(from), maxWidth: `calc(100% - ${at(from)})` }}
                 aria-hidden="true"
               >
                 {p.name}
@@ -351,18 +433,52 @@ function Timeline({ projects }: { projects: Project[] }) {
           );
         })}
       </ol>
-      <figcaption>
-        {Object.entries(TONES).map(([kind, tone]) => (
-          <span key={kind}>
-            <span className={`portfolio-swatch tone-${tone}`} aria-hidden="true" /> {label(kind)}
-          </span>
-        ))}
-        <span>
-          <span className="portfolio-swatch tone-ink" aria-hidden="true" /> Other
-        </span>
-        <span>The vertical line is today.</span>
-      </figcaption>
+      <figcaption>The dashed line is today; the colours match the kinds in the filter above.</figcaption>
       {undated.length ? <p className="note">Without dates: {undated.map((p) => p.name).join(", ")}.</p> : null}
     </figure>
+  );
+}
+
+function FilterBar({ filter, onChange, all }: { filter: Filter; onChange: (f: Filter) => void; all: Project[] }) {
+  const ends = [...new Set(all.map((p) => text(p.end).slice(0, 4)).filter(Boolean))].sort().reverse();
+  const kinds = [...Object.keys(TONES), "other"].filter((k) => all.some((p) => (TONES[p.kind] ? p.kind : "other") === k));
+  const toggle = (kind: string) =>
+    onChange({ ...filter, kinds: filter.kinds.includes(kind) ? filter.kinds.filter((k) => k !== kind) : [...filter.kinds, kind] });
+  const periods: [Period, string][] = [
+    ["running", "Running now"],
+    ["ended", "Ended"],
+    ["all", "All"],
+  ];
+  return (
+    <div className="portfolio-filters">
+      <div role="group" aria-label="Period" className="portfolio-segment">
+        {periods.map(([value, name]) => (
+          <button key={value} type="button" aria-pressed={filter.period === value} onClick={() => onChange({ ...filter, period: value, since: value === "running" ? "" : filter.since })}>
+            {name}
+          </button>
+        ))}
+      </div>
+      {filter.period !== "running" ? (
+        <label className="portfolio-since">
+          Ended in or after{" "}
+          <select value={filter.since} onChange={(e) => onChange({ ...filter, since: e.target.value })}>
+            <option value="">any year</option>
+            {ends.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
+      <div role="group" aria-label="Kind of project" className="portfolio-kinds">
+        {kinds.map((kind) => (
+          <button key={kind} type="button" aria-pressed={filter.kinds.includes(kind)} onClick={() => toggle(kind)}>
+            <span className={`portfolio-swatch tone-${TONES[kind] ?? "ink"}`} aria-hidden="true" />
+            {kind === "other" ? "Other" : label(kind)}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }

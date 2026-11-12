@@ -264,7 +264,8 @@ def portfolio(connection, id, year):
     chosen = year or (years[0]["year"] if years else "")
     outputs = rows(connection, """SELECT o.id, o.title, o.date, o.url, o.kind, o.resource_type,
         string_agg(DISTINCT pe.name, ', ') authors,
-        (SELECT string_agg(DISTINCT g.name, ', ') FROM OutputOf l JOIN Initiative g ON g.id=l.target WHERE l.source=o.id) projects
+        (SELECT string_agg(DISTINCT g.name, ', ') FROM OutputOf l JOIN Initiative g ON g.id=l.target WHERE l.source=o.id) projects,
+        (SELECT string_agg(DISTINCT g.id, ', ') FROM OutputOf l JOIN Initiative g ON g.id=l.target WHERE l.source=o.id) project_ids
         FROM Authored a JOIN InNode n ON n.source=a.source AND n.target=%s JOIN Person pe ON pe.id=a.source
         JOIN Output o ON o.id=a.target WHERE substr(o.date, 1, 4)=%s
         GROUP BY o.id, o.title, o.date, o.url, o.kind, o.resource_type ORDER BY o.date DESC, o.title""", (id, chosen))
