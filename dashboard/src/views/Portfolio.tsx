@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 import { RequestState, Section, SourceLink } from "../components";
 import { apiUrl, list, type Value, useApi } from "../db";
 import { label, text } from "../format";
@@ -116,7 +116,11 @@ function NodeChooser() {
 }
 
 function Portfolio({ id, query, year, onYear }: { id: string; query: URLSearchParams; year: string; onYear: (y: string) => void }) {
-  const { data, error } = useApi<Data>(apiUrl("portfolio", { id, year }));
+  const { data: fresh, error } = useApi<Data>(apiUrl("portfolio", { id, year }));
+  const last = useRef<Data | undefined>(undefined);
+  if (fresh) last.current = fresh;
+  const data = fresh ?? last.current;
+  const loading = !fresh && !!data;
   const [open, setOpen] = useState<string | null>(null);
   const [chosen, setChosen] = useState<Filter | null>(() => readFilter(query));
   const byProject = useMemo(() => {
@@ -245,12 +249,13 @@ function Portfolio({ id, query, year, onYear }: { id: string; query: URLSearchPa
       >
         {data.years.length ? (
           <>
-            <div className="filters" role="group" aria-label="Year">
+            <div className="filters" role="group" aria-label="Year" aria-busy={loading}>
               {data.years.slice(0, 8).map((y) => (
                 <button key={y} type="button" aria-pressed={y === data.year} onClick={() => onYear(y)}>
                   {y}
                 </button>
               ))}
+              {loading ? <span className="note">Loading {year}…</span> : null}
             </div>
             {outputs.length ? (
               <table className="table">
