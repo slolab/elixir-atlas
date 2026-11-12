@@ -2,7 +2,7 @@
 
 The deployment uses two Railway services: PostgreSQL 18 with a persistent volume, and a FastAPI service that also serves the built React dashboard. PostgreSQL is reachable through Railway's private network. The dashboard and read-only API are public.
 
-Public update-request submission is available when `ATLAS_REQUEST_DATABASE_URL` is configured with a separate insert-only login in the same database. Run the existing permissions command to provision it. Requests remain pending in `atlas_feedback.update_request`, which survives graph release imports. See [update requests](../doc/update-requests.md) for setup, the API, and the future tier-0 review flow.
+Public update-request submission is available when `ATLAS_REQUEST_DATABASE_URL` is configured with a separate insert-only login in the same database. Run the existing permissions command to provision it. Requests remain pending in `atlas_feedback.update_request`, which survives graph release imports. See [update requests](../docs/update-requests.md) for setup, the API, and the future tier-0 review flow.
 
 - Dashboard: https://atlas-production-d392fb6d.up.railway.app
 - API documentation: https://atlas-production-d392fb6d.up.railway.app/docs

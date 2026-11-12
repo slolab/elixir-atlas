@@ -1,4 +1,5 @@
-import "@fontsource-variable/archivo/wdth.css";
+import "@fontsource/lato/latin-400.css";
+import "@fontsource/lato/latin-700.css";
 import "./styles.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

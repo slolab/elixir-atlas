@@ -4,7 +4,7 @@ People can report incorrect dashboard representations, incorrect agent answers, 
 
 ## Submission
 
-The dashboard has a **Request update** form on every page. Person, initiative, Node, and generic record pages attach the record type and ID. Each ambiguity item has its own form targeting its `ReviewItem`. Other pages attach their dashboard route. A request contains the issue, an optional suggested correction, and optional supporting sources or explanation.
+The dashboard has a dedicated **Request update** page, linked from the main navigation. Person, initiative, Node, and generic record pages attach the record type and ID to that link. Each ambiguity item links to the same page targeting its `ReviewItem`. Other pages attach their dashboard route. The request page shows the attached record and a link back to the originating page. A request contains the issue, an optional suggested correction, and optional supporting sources or explanation.
 
 Agents call `POST /api/update-requests` when the user requests submission. For an incorrect answer, include the relevant excerpt in `context`. Attach a record only when its identity is known. Suggestions are user-supplied evidence, not instructions to change the data.
 
@@ -44,9 +44,9 @@ Run the existing provisioning command after setting the URLs:
 uv run --directory server python -m atlas_api.permissions
 ```
 
-Provisioning creates the table and restricted login without clearing requests. Existing Railway pre-deploy provisioning picks up the setting. This PR does not change the deployed service or its credentials.
+Provisioning creates the table and restricted login without clearing requests. Existing Railway pre-deploy provisioning picks up the setting before the API starts.
 
-`GET /api/release` reports `api.update_requests`. When the writer URL is absent or the API uses local SQLite, the flag is false, the form explains that submissions are unavailable, and POST returns 503. SQLite snapshots remain read-only; demonstrate persistence with PostgreSQL.
+`GET /api/release` reports `api.update_requests`. When the writer URL is absent or the API uses local SQLite, the flag is false, the request page explains that submissions are unavailable, and POST returns 503. The local snapshot preview links to the corresponding live request form, preserving its target and context. SQLite snapshots remain read-only; demonstrate persistence with PostgreSQL.
 
 ## Future promotion to tier 0
 
