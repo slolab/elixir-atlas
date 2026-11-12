@@ -57,6 +57,8 @@ A dashboard build in `dashboard/dist` is served directly by FastAPI, or set `ATL
 
 ## API and search
 
+`GET /api/topics` lists research topics with distinct Community, tool and training-material counts. Community counts include both description-based and tool-based matches. `GET /api/topic-support?topics=topic:topic_2259,topic:topic_3939` assembles the researcher workflow: Community contacts, recommended/developed resources with evidence, additional catalogue tools, Community papers, training materials and upcoming events. Supply one to ten distinct topic IDs; multiple topics use OR matching. Unknown IDs return 422. Older SQLite snapshots missing the v3 resource/event tables return an actionable 409 response. Result totals accompany the capped lists. Both endpoints are read-only and support SQLite and PostgreSQL.
+
 `/docs` and `/openapi.json` describe the endpoints. `/api/release` exposes the release identity, manifest, table counts and import time; `/api/schema` exposes the topology metadata. `/healthz` checks the database and loaded release.
 
 `/api/search?q=genomics&type=Tool&limit=30&offset=0` returns ranked records and type counts. `type` is optional. Titles, names and aliases carry the highest weight; descriptions and evidence supply the body. PostgreSQL GIN full-text indexes support the document search, and trigram indexes support name substrings and similar names. Quoted phrases, `OR` and exclusions use PostgreSQL's web-search syntax and disable the fuzzy-name fallback. The maximum page size is 100.

@@ -1,5 +1,7 @@
 import re
 
+from fastapi import HTTPException
+
 from .sqlite_snapshot import Snapshot
 
 
@@ -164,3 +166,85 @@ def overlap(connection, liaisons, groups_only, minimum, directory):
             AND (NOT %s OR {A}) AND (NOT %s OR {B})
             GROUP BY a.target,ia.name,b.target,ib.name HAVING count(DISTINCT a.source)>1 ORDER BY shared DESC,ia.name,a.target,b.target LIMIT 60""".replace("{A}", DIRECTORY.replace("i.", "ia.")).replace("{B}", DIRECTORY.replace("i.", "ib.")), (kinds,kinds,directory,directory)),
     }
+
+
+LEAD_ROLES = ("lead", "co_lead", "chair", "contact", "coordinator")
+
+
+def topics(connection):
+    return rows(connection, """WITH community_topics AS (
+        SELECT i.source community, i.target topic FROM InitiativeTopic i JOIN Initiative g ON g.id=i.source WHERE g.kind='community'
+        UNION
+        SELECT f.target community, x.target topic FROM ToolTopic x JOIN ToolFor f ON f.source=x.source
+        JOIN Initiative g ON g.id=f.target WHERE g.kind='community'
+        ) SELECT t.id, t.label,
+        (SELECT count(*) FROM community_topics c WHERE c.topic=t.id) communities,
+        (SELECT count(DISTINCT x.source) FROM ToolTopic x WHERE x.target=t.id) tools,
+        (SELECT count(DISTINCT x.source) FROM MaterialTopic x WHERE x.target=t.id) materials
+        FROM Topic t ORDER BY t.label""")
+
+
+def marks(values):
+    return ",".join(["%s"] * len(values))
+
+
+def topic_support(connection, topic_ids, today):
+    if isinstance(connection, Snapshot) and not {"Resource", "Recommends", "IsTool", "Event"}.issubset(connection.schema):
+        raise HTTPException(409, "Find by topic needs a newer Atlas snapshot. Restart the dashboard with the 20261112 release or a newer build.")
+    chosen = rows(connection, f"SELECT id, label FROM Topic WHERE id IN ({marks(topic_ids)}) ORDER BY label", topic_ids)
+    ids = [t["id"] for t in chosen]
+    if len(ids) != len(topic_ids):
+        raise HTTPException(422, "A selected research topic is not in this snapshot. Remove it and choose another topic.")
+    by_topic = rows(connection, f"""SELECT g.id, g.name, t.label topic, i.evidence, i.source_url, i.retrieved_at
+        FROM InitiativeTopic i JOIN Initiative g ON g.id=i.source JOIN Topic t ON t.id=i.target
+        WHERE g.kind='community' AND i.target IN ({marks(ids)}) ORDER BY g.name, t.label""", ids)
+    by_tools = rows(connection, f"""SELECT g.id, g.name, count(DISTINCT f.source) tools
+        FROM ToolTopic x JOIN ToolFor f ON f.source=x.source JOIN Initiative g ON g.id=f.target
+        WHERE g.kind='community' AND x.target IN ({marks(ids)}) GROUP BY g.id, g.name""", ids)
+    communities = {}
+    for row in by_topic:
+        entry = communities.setdefault(row["id"], {"id": row["id"], "name": row["name"], "topics": [], "tools": 0})
+        if row["topic"] not in [t["label"] for t in entry["topics"]]:
+            entry["topics"].append({"label": row["topic"], "evidence": row["evidence"], "source_url": row["source_url"], "retrieved_at": row["retrieved_at"]})
+    for row in by_tools:
+        communities.setdefault(row["id"], {"id": row["id"], "name": row["name"], "topics": [], "tools": 0})["tools"] = row["tools"]
+    community_ids = list(communities)
+    if community_ids:
+        for row in rows(connection, f"SELECT id, contacts, join_url, joining, pages FROM Initiative WHERE id IN ({marks(community_ids)})", community_ids):
+            communities[row["id"]].update(contacts=row["contacts"], join_url=row["join_url"], joining=row["joining"], page=(row["pages"] or [None])[0])
+        leads = rows(connection, f"""SELECT h.target community, p.id, p.name, string_agg(DISTINCT h.role_kind, ', ') roles
+            FROM HoldsRole h JOIN Person p ON p.id=h.source
+            WHERE h.target IN ({marks(community_ids)}) AND h.role_kind IN ({marks(LEAD_ROLES)})
+            GROUP BY h.target, p.id, p.name ORDER BY p.name""", community_ids + list(LEAD_ROLES))
+        for row in leads:
+            communities[row["community"]].setdefault("leads", []).append({"id": row["id"], "name": row["name"], "roles": row["roles"]})
+    ranked = sorted(communities.values(), key=lambda c: (-len(c["topics"]), -c["tools"], c["name"]))
+    names = {c["id"]: c["name"] for c in ranked}
+    resources = {}
+    core = [c["id"] for c in ranked if c["topics"]] or community_ids
+    if core:
+        for row in rows(connection, f"""SELECT r.id, r.name, r.kind, r.url, e.source community, e.basis, e.purpose, e.evidence, e.source_url,
+                (SELECT t.homepage FROM IsTool s JOIN Tool t ON t.id=s.target WHERE s.source=r.id LIMIT 1) homepage
+                FROM Recommends e JOIN Resource r ON r.id=e.target WHERE e.source IN ({marks(core)}) ORDER BY r.name""", core):
+            entry = resources.setdefault(row["id"], {"id": row["id"], "name": row["name"], "kind": row["kind"], "url": row["url"] or row["homepage"], "by": []})
+            if not any(b["community"] == names[row["community"]] and b["basis"] == row["basis"] for b in entry["by"]):
+                entry["by"].append({"community": names[row["community"]], "basis": row["basis"], "purpose": row["purpose"], "evidence": row["evidence"], "source_url": row["source_url"]})
+    covered = {row["target"] for row in rows(connection, f"SELECT target FROM IsTool WHERE source IN ({marks(list(resources))})", list(resources))} if resources else set()
+    tools = rows(connection, f"""SELECT t.id, t.name, t.homepage, t.url, t.tool_types, string_agg(DISTINCT g.name, ', ') listed_for
+        FROM ToolTopic x JOIN Tool t ON t.id=x.source
+        LEFT JOIN ToolFor f ON f.source=t.id LEFT JOIN Initiative g ON g.id=f.target AND g.kind='community'
+        WHERE x.target IN ({marks(ids)}) GROUP BY t.id, t.name, t.homepage, t.url, t.tool_types ORDER BY t.name""", ids)
+    tools = sorted((t for t in tools if t["id"] not in covered), key=lambda t: (not t["listed_for"], t["name"].lower()))
+    papers = rows(connection, f"""SELECT DISTINCT o.id, o.title, o.date, o.url, o.doi, o.kind, o.resource_type, g.name community
+        FROM OutputOf l JOIN Output o ON o.id=l.source JOIN Initiative g ON g.id=l.target
+        WHERE l.target IN ({marks(community_ids)}) AND (o.kind IN ('article','document') OR o.resource_type IN ('Report','Publication','Journal article','Preprint','Conference paper'))
+        ORDER BY o.date DESC NULLS LAST, o.title, g.name""", community_ids) if community_ids else []
+    materials = rows(connection, f"""SELECT DISTINCT m.id, m.title, m.url, m.date_published, m.content_provider
+        FROM MaterialTopic x JOIN TrainingMaterial m ON m.id=x.source WHERE x.target IN ({marks(ids)})
+        ORDER BY m.date_published DESC NULLS LAST, m.title""", ids)
+    events = rows(connection, f"""SELECT DISTINCT e.id, e.title, e.url, e.start, e."end", e.city, e.country, e.online
+        FROM EventTopic x JOIN Event e ON e.id=x.source WHERE x.target IN ({marks(ids)}) AND e.start >= %s
+        ORDER BY e.start, e.title""", ids + [today])
+    return {"topics": chosen, "communities": ranked, "resources": sorted(resources.values(), key=lambda r: (-len(r["by"]), r["name"].lower())),
+            "tools": tools[:60], "tools_total": len(tools), "papers": papers[:30], "papers_total": len(papers),
+            "materials": materials[:40], "materials_total": len(materials), "events": events[:40], "events_total": len(events)}

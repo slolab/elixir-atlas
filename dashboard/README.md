@@ -40,3 +40,17 @@ Set `ATLAS_API_URL` to change the Vite proxy target. `npm run build --prefix das
 The existing project, person, Node, overlap and review views use the API. Keyword search covers all record types with ranked results, type filters and pagination. Every result has a record-and-evidence view, and node records also show their relationships.
 
 The project owner confirmed public access to the complete 20261111 release on 2026-11-11. There is no login or editing interface.
+
+## Find by topic
+
+The **Find by topic** page supports the researcher workflow in use case C1. Choose research areas to find matching Communities, contacts and joining links, followed by Community resources, papers, topic-tagged tools and training. Selecting several areas includes matches to any of them. Communities matching more selected areas appear first, followed by those linked through tools.
+
+For a local preview, use the v3 release or a newer build:
+
+```bash
+python3 scripts/dashboard.py data/releases/20261112/graph.sqlite --port 5181
+```
+
+Open http://127.0.0.1:5181/#/topic. Start with **Systems biology** for the metabolic modelling example. Resource labels distinguish recommendations and development from catalogue listings. Expand a label or a Community's match explanation to inspect evidence; record links open the full fields and sources.
+
+Community resources and papers cover their wider work and are not necessarily specific to the selected topic. Training and events come from the collected snapshot, so missing results do not establish that nothing exists. The page exposes result limits when applicable: 60 additional tools, 30 paper/Community matches, 40 training materials and 40 upcoming events.
