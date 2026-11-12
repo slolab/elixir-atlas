@@ -1675,3 +1675,43 @@ p {
   font-size: 0.9rem;
   margin-bottom: 8px;
 }
+
+.portfolio-person-project {
+  margin-top: 8px;
+}
+
+.portfolio-person-project h4 {
+  margin: 0 0 2px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.portfolio-person-project ul li {
+  padding: 2px 0;
+  line-height: 1.35;
+}
+
+.portfolio-person-project b {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.portfolio-lead {
+  margin-left: 6px;
+  padding: 0 6px;
+  font-size: 0.72rem;
+  border: 1px solid var(--trace-a);
+  color: var(--trace-a);
+  border-radius: 999px;
+  vertical-align: 1px;
+}
+
+.portfolio-person-project .more {
+  font-size: 0.8rem;
+}
+
+.portfolio-person-project .more {
+  margin-top: 4px;
+  padding: 2px 8px;
+}

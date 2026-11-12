@@ -1,5 +1,5 @@
 import { Fragment, useMemo, useRef, useState } from "react";
-import { RequestState, Section, SourceLink } from "../components";
+import { More, RequestState, Section, SourceLink } from "../components";
 import { apiUrl, list, type Value, useApi } from "../db";
 import { label, text } from "../format";
 import { href } from "../route";
@@ -357,32 +357,44 @@ function Commitments({ items }: { items: Commitment[] }) {
 
 function People({ commitments, projects }: { commitments: Commitment[]; projects: Project[] }) {
   const projectName = new Map(projects.map((p) => [p.id, p.name]));
-  const people = new Map<string, { name: string; items: Commitment[] }>();
+  const people = new Map<string, { name: string; byProject: Map<string, Map<string, Commitment & { lead: boolean }>> }>();
   for (const c of commitments) {
-    const entry = people.get(c.person) ?? { name: c.person_name, items: [] };
-    if (!entry.items.some((x) => x.id === c.id)) entry.items.push(c);
-    people.set(c.person, entry);
+    const person = people.get(c.person) ?? { name: c.person_name, byProject: new Map() };
+    const items = person.byProject.get(c.initiative) ?? new Map();
+    const key = `${text(c.code)}|${c.label}`;
+    const lead = text(c.role) === "lead";
+    items.set(key, { ...c, lead: lead || !!items.get(key)?.lead });
+    person.byProject.set(c.initiative, items);
+    people.set(c.person, person);
   }
   if (!people.size) return <p className="empty">No plan item names a person placed in this Node.</p>;
+  const count = (p: { byProject: Map<string, Map<string, unknown>> }) => [...p.byProject.values()].reduce((n, m) => n + m.size, 0);
   return (
     <ul className="portfolio-people">
       {[...people.entries()]
-        .sort((a, b) => b[1].items.length - a[1].items.length || a[1].name.localeCompare(b[1].name))
+        .sort((a, b) => count(b[1]) - count(a[1]) || a[1].name.localeCompare(b[1].name))
         .map(([pid, p]) => (
           <li key={pid}>
             <a href={href("person", pid)}>{p.name}</a>
-            <ul>
-              {p.items.map((c) => (
-                <li key={c.id}>
-                  {text(c.code) ? `${text(c.code)}: ` : ""}
-                  {c.label}
-                  <small>
-                    {projectName.get(c.initiative) ?? c.initiative}
-                    {text(c.role) === "lead" ? ", lead" : ""}
-                  </small>
-                </li>
-              ))}
-            </ul>
+            {[...p.byProject.entries()].map(([project, items]) => (
+              <div key={project} className="portfolio-person-project">
+                <h4>{projectName.get(project) ?? project}</h4>
+                <More
+                  items={[...items.values()].sort((a, b) => Number(b.lead) - Number(a.lead) || text(a.code).localeCompare(text(b.code), undefined, { numeric: true }))}
+                  limit={3}
+                  render={(shown) => (
+                    <ul>
+                      {shown.map((c) => (
+                        <li key={`${text(c.code)}|${c.label}`}>
+                          {text(c.code) ? <b>{text(c.code)}</b> : null} {c.label}
+                          {c.lead ? <span className="portfolio-lead">Lead</span> : null}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                />
+              </div>
+            ))}
           </li>
         ))}
     </ul>
