@@ -5,9 +5,8 @@ import { href } from "./route";
 type Project = { id: string; name: string; kind: string; start: string; end: string };
 
 const TRACES = [
-  { key: "services", label: "Commissioned services and studies", short: "commissioned services and studies", kinds: ["commissioned_service", "implementation_study"] },
+  { key: "services", label: "Commissioned services", short: "commissioned services", kinds: ["commissioned_service"] },
   { key: "eu", label: "EU projects", short: "EU projects", kinds: ["eu_project"] },
-  { key: "programme", label: "Scientific Programme projects", short: "Scientific Programme projects", kinds: ["programme_project"] },
   { key: "exchange", label: "Staff exchanges", short: "staff exchanges", kinds: ["staff_exchange"] },
 ];
 

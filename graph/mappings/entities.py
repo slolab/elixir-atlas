@@ -2,6 +2,7 @@ from collections.abc import Iterator
 
 from biotope.graph import Mapping, SourceRecord
 
+from ..alignment.names import list_item
 from ..alignment.nodes import NodeEntry
 from ..alignment.organisations import OrganisationIdentity
 from ..alignment.people import PersonIdentity
@@ -14,7 +15,7 @@ def make_person(person: SourceRecord[PersonIdentity]) -> Iterator[Person]:
     yield Person(
         id=PersonId(value.person_id),
         name=value.name,
-        name_variants=list(value.name_variants),
+        name_variants=list(dict.fromkeys(list_item(name) for name in value.name_variants)),
         orcids=list(value.orcids),
         email_domains=list(value.email_domains),
         in_perun=value.in_perun,
@@ -40,7 +41,7 @@ def make_organisation(organisation: SourceRecord[OrganisationIdentity]) -> Itera
     yield Organisation(
         id=OrganisationId(value.organisation_id),
         name=value.name,
-        name_variants=list(value.name_variants),
+        name_variants=list(dict.fromkeys(list_item(name) for name in value.name_variants)),
         country=value.country,
         activity_type=value.activity_type,
     )

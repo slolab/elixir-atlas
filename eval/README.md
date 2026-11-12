@@ -94,3 +94,26 @@ The final small skill refinement requests facts and evidence together in batched
 `results/cq21-iteration-20261111/comparison.json` contains per-question results and verified controls. All 46 trials retain answers, grades, native sessions and trajectories; 1,064 responses were verified and all 368 SQL request bodies matched server traces. Each job has `trace-audit.json` and a frozen `cq-set.json`. The improved and batched runs share one frozen local API, so their independent server archives overlap; the audit reconciles their union by request ID. Jobs ran concurrently, so runtime is not a controlled comparison.
 
 `results/cq21-iteration-20261111/build-findings.json` records evidence-linked rebuild candidates: pan-ELIXIR directory membership/status, missing Community-to-report links, and missing joining/access qualifiers. These were documented without changing the graph or teaching reference-answer facts through the skill.
+
+## Build v2 run, 11 November 2026
+
+The graph rebuild from `docs/data-layer-problems-2026-11-11.md` ran against CQ set `atlas_261111` version 2, which references snapshot `20261111T204305Z`. The run used a local PostgreSQL API with release `build-v2-candidate`, the skill and the same model settings as the runs above.
+
+| Run | Questions | Mean score | API calls | HTTP errors | Response bytes |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `build-v2` | 21 | 0.31 | 552 | 33 | 14.62 MB |
+
+The mean did not change: 1 correct, 11 partial, 9 failed. The graph holds most facts the failed components need, but about two thirds of the lost components trace to the data layer: views too large to read, edges stored in the direction of their source page, misleading fields, and missing links between existing records. The rest are mostly "not public" statements the agent left out. See `docs/eval-analysis-2026-11-12.md`.
+
+On this machine Docker is rootless, so containers reach the local API through the host's LAN address (`--api-url http://<host IP>:8811`), not `host.docker.internal`.
+
+## Build v3 runs, 12 November 2026
+
+Build v3 precomputes the joins and absences that questions need. These include per-person and per-Node involvement records, shared work between groups, stated cross-project plan links, initiative `limits` and activity dates, and `period_status`. It also fixes the wrong and misleading fields found in the v2 analysis. `graph/ASSUMPTIONS.md` lists each rule with the CQs that motivated it. The runs use the same CQ set, model, skill-api mode and local PostgreSQL API as the v2 run.
+
+| Run | Questions | Mean score | Correct / partial / failed | API responses | Response bytes | Agent cost |
+| --- | ---: | ---: | --- | ---: | ---: | ---: |
+| `build-v3a` | 21 | 0.43 | 3 / 12 / 6 | 641 | 13.2 MB | $0.86 |
+| `build-v3b` | 21 | 0.57 | 5 / 14 / 2 | 498 | 28.3 MB | $0.84 |
+
+`build-v3a` has the source fixes but not yet the precomputed records. `build-v3b` adds the records, plan links, output series and grant-string rules, Node plan-item lists, and the skill and API sections that expose them. Each run is one trial per question, and several verdicts have judge confidence below 0.5. The two remaining failures are 010 and 021. In 010 the agent found the plan links but left out the named Estonian staff and part of the task list. In 021 it named no person per pilot and left out the comparator's funding. Release `20261112` adds plan-item tool mentions and `related_to` quotes after `build-v3b`; those two changes were not evaluated.

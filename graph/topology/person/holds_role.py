@@ -20,7 +20,7 @@ class HoldsRole:
     )
     role_kind: str = field(
         metadata={
-            "description": "lead, co_lead, deputy, chair, coordinator, liaison, work_package_lead, task_lead, contact, head_of_node, node_coordinator, staff, member, participant or other. ELIXIR Hub staff whom a group page lists under 'Leadership' without a lead title are liaison. When an EU project's web page names more than three leads for the same task, they are recorded as participant."
+            "description": "lead, co_lead, deputy, chair, coordinator, liaison, work_package_lead, task_lead, contact, head_of_node, node_coordinator, staff, member, participant, candidate (a candidate in the Community co-lead election, from the election page; not a co-lead, and not by itself a member) or other. ELIXIR Hub staff whom a group page lists under 'Leadership' without a lead title are liaison. When an EU project's web page names more than three leads for the same task, they are recorded as participant."
         }
     )
     work_item: str | None = field(

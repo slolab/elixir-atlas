@@ -53,11 +53,16 @@ class PlanItem:
         }
     )
     leads: list[str] = field(
-        metadata={"description": "Leading people, organisations or Nodes, as written."}
+        metadata={"description": "Leading people, organisations or Nodes, as written. A source list naming more than three people under a 'Leadership' heading is a membership list, not leads: it is moved to participants and leads is empty. The people who lead or work on an item, resolved to person records, are works_on_plan_item edges with role lead or participant."}
     )
     participants: list[str] = field(
         metadata={
-            "description": "Contributing Nodes, organisations, groups or people, as written."
+            "description": "Contributing Nodes, organisations, groups or people, as written, including crowded lead lists (see leads)."
+        }
+    )
+    tools: list[str] = field(
+        metadata={
+            "description": "bio.tools tools the item names, by name or by the long name in its bio.tools description, when the initiative tags or recommends the tool or one of its people is credited for it, as 'name (bio.tools URL; credited: people)'. The credited people are who bio.tools names for the tool, not the item's assigned people."
         }
     )
     effort: str | None = field(

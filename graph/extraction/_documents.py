@@ -1,3 +1,7 @@
+import re
+
+from ..paths import PROJECT_ROOT
+
 ELIXIR = "data/input/elixir/"
 
 GROUP_PAGES = (
@@ -28,7 +32,8 @@ PROJECT_PAGES = (
 NODE_PROJECT_PAGES = (
     "data/input/node-norway/funding-and-projects*.html",
     "data/input/node-uk/activities*.html",
-    "data/input/node-uk/project-2024-technology-*.html",
+    "data/input/node-uk/project-*.html",
+    "data/input/node-germany/commissioned-services-of-elixir-de-*.html",
     "data/input/node-czech/about-elixir-cz-projects*.html",
     "data/input/node-luxembourg/projects*.html",
     "data/input/node-netherlands/en-projects*.html",
@@ -76,12 +81,47 @@ STRATEGY_DOCUMENTS = (
     "data/input/f1000/documents-15-1717-pdf-*.pdf",
     "data/input/f1000/articles-11-1265-v2-*.html",
     "data/input/systems-biology/abs-*.html",
+    "data/input/systems-biology/pdf-2609.13127-*.pdf",
     "data/input/node-czech/elixir-cz-strategy-elixir-cz-strategy-2026-2030*.html",
 )
 
-INITIATIVE_DOCUMENTS = GROUP_PAGES + PROJECT_PAGES + NODE_PROJECT_PAGES + WORK_PLANS + HANDBOOKS + STRATEGY_DOCUMENTS
-ROLE_DOCUMENTS = GROUP_PAGES + PROJECT_PAGES + NODE_PROJECT_PAGES + NODE_PEOPLE_PAGES + WORK_PLANS + HANDBOOKS
-PLAN_DOCUMENTS = GROUP_PAGES + PROJECT_PAGES + NODE_PROJECT_PAGES + WORK_PLANS + HANDBOOKS + STRATEGY_DOCUMENTS
+COMMUNITY_DOCUMENTS = (
+    *(f"data/input/f1000/documents-15-{number}-pdf-*.pdf" for number in (1280, 1758, 1506, 1685, 229)),
+    "data/input/f1000/articles-14-884-pdf-*.pdf",
+    "data/input/f1000/documents-13-80-pdf-*.pdf",
+    "data/input/zenodo/api-records-15235047-files-Framework_*.pdf",
+    ELIXIR + "services-service-bundles-systems-biology-rare-disease-*.html",
+    ELIXIR + "ords-10006029-files-*.pdf",
+)
+
+EU_DOCUMENTS = tuple(
+    path.relative_to(PROJECT_ROOT).as_posix()
+    for path in sorted((PROJECT_ROOT / "data/input/zenodo-steers").glob("*.pdf"))
+    if not re.search(r"Handbook|BFSP|ELITMA", path.name)
+)
+
+INITIATIVE_DOCUMENTS = GROUP_PAGES + PROJECT_PAGES + NODE_PROJECT_PAGES + WORK_PLANS + HANDBOOKS + STRATEGY_DOCUMENTS + COMMUNITY_DOCUMENTS
+ROLE_DOCUMENTS = GROUP_PAGES + PROJECT_PAGES + NODE_PROJECT_PAGES + NODE_PEOPLE_PAGES + WORK_PLANS + HANDBOOKS + COMMUNITY_DOCUMENTS + EU_DOCUMENTS
+PLAN_LINK_DOCUMENTS = PROJECT_PAGES + WORK_PLANS + HANDBOOKS + COMMUNITY_DOCUMENTS + EU_DOCUMENTS
+PLAN_DOCUMENTS = GROUP_PAGES + PROJECT_PAGES + NODE_PROJECT_PAGES + WORK_PLANS + HANDBOOKS + STRATEGY_DOCUMENTS + COMMUNITY_DOCUMENTS + EU_DOCUMENTS
+
+DIRECTORY_PAGES = (
+    ELIXIR + "communities-????????????.html",
+    ELIXIR + "focus-groups-????????????.html",
+    ELIXIR + "platforms-????????????.html",
+    ELIXIR + "communities-marine-metagenomics-*.html",
+)
+ELIXIR_PAGES = tuple(pattern for pattern in GROUP_PAGES + PROJECT_PAGES if pattern.startswith((ELIXIR, "data/input/project-pages/")))
+ELECTION_PAGES = (ELIXIR + "communities-co-lead-elections-*.html",)
+EVENT_PAGES = (ELIXIR + "events-*.html",)
+RECOMMENDATION_DOCUMENTS = (
+    ELIXIR + "communities-*-????????????.html",
+    "data/input/f1000/articles-11-1265-v2-*.html",
+    "data/input/f1000/documents-15-1717-pdf-*.pdf",
+    "data/input/systems-biology/pdf-2609.13127-*.pdf",
+    *(f"data/input/f1000/documents-15-{number}-pdf-*.pdf" for number in (1280, 1758, 1506, 1685, 229)),
+    ELIXIR + "ords-10006029-files-*.pdf",
+)
 CORDIS_DOCUMENTS = (
     "data/input/cordis-*/project-id-?????????-????????????-????????????.html",
     "data/input/cordis-*/project-id-??????-????????????-????????????.html",

@@ -1,0 +1,296 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/extracted/group_directory.jsonl",
+  "description": "GroupDirectoryEntry records extracted from data/input/elixir/communities-6227f498e77a.html, data/input/elixir/communities-a670a13af52a.html, data/input/elixir/communities-marine-metagenomics-8e168f109c10.html, data/input/elixir/communities-marine-metagenomics-996bb96530fc.html, data/input/elixir/focus-groups-7a70669fc9c1.html, data/input/elixir/platforms-4f53bbb1eec8.html, data/input/elixir/platforms-d6ed890ae318.html. One entry of the ELIXIR website's directory of its Communities, Platforms and Focus Groups: the /communities, /platforms and /focus-groups listing pages, and the archive note on a former Community's page. The directory defines which groups are ELIXIR Communities, Platforms and Focus Groups and whether each is current or past.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "group_directory.jsonl",
+      "name": "group_directory.jsonl",
+      "contentSize": "96463",
+      "contentUrl": "data/extracted/group_directory.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "2b1ce6fa53d1ff8b86cf17427ad01d98579393f5d85d29142353d5015d25dd16",
+      "isBasedOn": [
+        {
+          "contentUrl": "data/input/elixir/communities-6227f498e77a.html",
+          "sha256": "5b10164b1a4f1fe27afd5d1de2acea3dc48806e12720a432b4a1abf93d0810d1"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-a670a13af52a.html",
+          "sha256": "d5ed597a15c7e864a173746c58169a2eea436d67d86573c730d21ca533c1ac22"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-marine-metagenomics-8e168f109c10.html",
+          "sha256": "778a61eb7126d7491c1dd9486386b9f49e7947f474d41d80b15f6d6d73345756"
+        },
+        {
+          "contentUrl": "data/input/elixir/communities-marine-metagenomics-996bb96530fc.html",
+          "sha256": "778a61eb7126d7491c1dd9486386b9f49e7947f474d41d80b15f6d6d73345756"
+        },
+        {
+          "contentUrl": "data/input/elixir/focus-groups-7a70669fc9c1.html",
+          "sha256": "ce73059c076c6b617195cc2887794024cacac36dbb7f20d97631ade56b8791c6"
+        },
+        {
+          "contentUrl": "data/input/elixir/platforms-4f53bbb1eec8.html",
+          "sha256": "0e7e9aca8e92a97c93a876269550f526d0081150fcf2ff04fd167f806cf5bd93"
+        },
+        {
+          "contentUrl": "data/input/elixir/platforms-d6ed890ae318.html",
+          "sha256": "3be06fbd270a251d97085748685b7462a411961a7dbfd599102ca4b8105428d3"
+        }
+      ],
+      "biotope:schemaRevision": "c577333e3921204d4bdf554cf3955725eed92e377c9066577383d8774ca5f95e",
+      "biotope:extractor": {
+        "name": "group-directory-reader",
+        "version": "1",
+        "settings": {}
+      }
+    }
+  ],
+  "dateCreated": "2026-11-11T20:03:48.830651+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "group_directory.jsonl#group_directory",
+      "name": "group_directory.jsonl",
+      "description": "GroupDirectoryEntry records extracted from documents. One entry of the ELIXIR website's directory of its Communities, Platforms and Focus Groups: the /communities, /platforms and /focus-groups listing pages, and the archive note on a former Community's page. The directory defines which groups are ELIXIR Communities, Platforms and Focus Groups and whether each is current or past.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/id",
+          "name": "id",
+          "description": "The record ID: the document's dataset folder and its path within it, then the record key's values.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/document",
+          "name": "document",
+          "description": "The document's path in the project.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "document"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/name",
+          "name": "name",
+          "description": "The group's name as the directory writes it.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/name/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/kind",
+          "name": "kind",
+          "description": "The directory section the entry is listed in.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/kind/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/status",
+          "name": "status",
+          "description": "current when the directory lists the group as current; past for past or archived groups.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/status/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/url",
+          "name": "url",
+          "description": "The group's page on the ELIXIR website, as the directory links it.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/url/value"
+            }
+          },
+          "biotope:nullable": false
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/start",
+          "name": "start",
+          "description": "Start year of a past group's period, as YYYY.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/start/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/end",
+          "name": "end",
+          "description": "End year of a past group's period, as YYYY.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/end/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/became",
+          "name": "became",
+          "description": "The group or project this group became or moved its activities to, as written.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/became/value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "group_directory.jsonl#group_directory/became_date",
+          "name": "became_date",
+          "description": "When it became that group, as YYYY-MM.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "group_directory.jsonl"
+            },
+            "extract": {
+              "column": "values/became_date/value"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true,
+      "key": {
+        "@id": "group_directory.jsonl#group_directory/id"
+      }
+    }
+  ],
+  "biotope:status": "processed",
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "data/input/elixir/communities-6227f498e77a.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-a670a13af52a.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-marine-metagenomics-8e168f109c10.html"
+    },
+    {
+      "@id": "data/input/elixir/communities-marine-metagenomics-996bb96530fc.html"
+    },
+    {
+      "@id": "data/input/elixir/focus-groups-7a70669fc9c1.html"
+    },
+    {
+      "@id": "data/input/elixir/platforms-4f53bbb1eec8.html"
+    },
+    {
+      "@id": "data/input/elixir/platforms-d6ed890ae318.html"
+    }
+  ]
+}

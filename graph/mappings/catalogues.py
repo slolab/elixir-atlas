@@ -2,7 +2,7 @@ from collections.abc import Iterator
 
 from biotope.graph import Mapping, SourceRecord
 
-from ..alignment.links import CatalogueLink, DocumentInfo, OutputLink, TopicEntry
+from ..alignment.links import CatalogueLink, DocumentInfo, EventLink, OutputLink, TopicEntry
 from ..alignment.names import digest, list_item, one_line
 from ..sources.catalogues.biotools.schema import BiotoolsTool
 from ..sources.catalogues.europepmc_reviews.schema import EuropepmcReview
@@ -10,12 +10,15 @@ from ..sources.catalogues.f1000_items.schema import F1000Item
 from ..sources.catalogues.tess_events.schema import TessEvent
 from ..sources.catalogues.tess_materials.schema import TessMaterial
 from ..sources.catalogues.zenodo_records.schema import ZenodoRecord
+from ..sources.elixir_events_jsonl.records.schema import ElixirEventRow
 from ..topology import (
     Authored,
     CreditedForTool,
     Delivers,
     ElixirNodeId,
+    Event,
     EventFor,
+    EventId,
     EventInNode,
     EventTopic,
     InitiativeId,
@@ -38,8 +41,6 @@ from ..topology import (
     Topic,
     TopicId,
     ToolTopic,
-    TrainingEvent,
-    TrainingEventId,
     TrainingMaterial,
     TrainingMaterialId,
 )
@@ -72,10 +73,17 @@ def make_tool(row: SourceRecord[BiotoolsTool], link: SourceRecord[CatalogueLink]
         elixir_communities=items(value.elixir_communities),
         collections=items(value.collections),
         topics=items(value.topic_labels),
+        recommended_by=list(link.value.recommended_by),
         last_update=value.last_update,
     )
-    for initiative_id, tag in link.value.initiatives:
-        yield ToolFor(id=f"tool_for:{digest(tool_id, initiative_id, tag)}", source=tool_id, target=InitiativeId(initiative_id), as_written=tag)
+    for initiative_id, tag, basis in link.value.initiatives:
+        yield ToolFor(
+            id=f"tool_for:{digest(tool_id, initiative_id, tag)}",
+            source=tool_id,
+            target=InitiativeId(initiative_id),
+            basis=basis,
+            as_written=tag,
+        )
     for node_id, tag in link.value.nodes:
         yield ToolInNode(id=f"tool_in_node:{digest(tool_id, node_id, tag)}", source=tool_id, target=ElixirNodeId(node_id), as_written=tag)
     for topic_id in link.value.topics:
@@ -90,14 +98,16 @@ def make_tool(row: SourceRecord[BiotoolsTool], link: SourceRecord[CatalogueLink]
 
 
 def make_event(row: SourceRecord[TessEvent], link: SourceRecord[CatalogueLink]) -> Iterator[
-    TrainingEvent | EventFor | EventInNode | EventTopic
+    Event | EventFor | EventInNode | EventTopic
 ]:
-    value, event_id = row.value, TrainingEventId(link.value.item_id)
-    yield TrainingEvent(
+    value, event_id = row.value, EventId(link.value.item_id)
+    yield Event(
         id=event_id,
+        listed_in="tess",
         tess_id=value.tess_id,
         title=one_line(value.title),
-        url=value.url,
+        url=value.tess_url,
+        provider_url=value.url,
         start=value.start,
         end=value.end,
         event_types=items(value.event_types),
@@ -109,14 +119,18 @@ def make_event(row: SourceRecord[TessEvent], link: SourceRecord[CatalogueLink]) 
         keywords=items(value.keywords),
         topics=items(value.topic_labels),
         content_provider=link.value.provider,
+        collections=list(link.value.collections),
+        collections_unnamed=link.value.collections_unnamed,
         description=one_line(value.description),
     )
-    for initiative_id, collection in link.value.initiatives:
+    for initiative_id, collection, url in link.value.initiatives:
         yield EventFor(
             id=f"event_for:{digest(event_id, initiative_id, collection)}",
             source=event_id,
             target=InitiativeId(initiative_id),
+            basis="tess_collection",
             collection=collection,
+            source_url=url,
         )
     for node_id, _ in link.value.nodes:
         yield EventInNode(id=f"event_in_node:{digest(event_id, node_id)}", source=event_id, target=ElixirNodeId(node_id))
@@ -132,7 +146,8 @@ def make_material(row: SourceRecord[TessMaterial], link: SourceRecord[CatalogueL
         id=material_id,
         tess_id=value.tess_id,
         title=one_line(value.title),
-        url=value.url,
+        url=value.tess_url,
+        provider_url=value.url,
         doi=doi_of(value.doi),
         authors=items(value.authors),
         resource_types=items(value.resource_types),
@@ -140,14 +155,17 @@ def make_material(row: SourceRecord[TessMaterial], link: SourceRecord[CatalogueL
         keywords=items(value.keywords),
         topics=items(value.topic_labels),
         content_provider=link.value.provider,
+        collections=list(link.value.collections),
+        collections_unnamed=link.value.collections_unnamed,
         description=one_line(value.description),
     )
-    for initiative_id, collection in link.value.initiatives:
+    for initiative_id, collection, url in link.value.initiatives:
         yield MaterialFor(
             id=f"material_for:{digest(material_id, initiative_id, collection)}",
             source=material_id,
             target=InitiativeId(initiative_id),
             collection=collection,
+            source_url=url,
         )
     for node_id, _ in link.value.nodes:
         yield MaterialInNode(
@@ -155,6 +173,41 @@ def make_material(row: SourceRecord[TessMaterial], link: SourceRecord[CatalogueL
         )
     for topic_id in link.value.topics:
         yield MaterialTopic(id=f"material_topic:{digest(material_id, topic_id)}", source=material_id, target=TopicId(topic_id))
+
+
+def make_elixir_event(row: SourceRecord[ElixirEventRow], link: SourceRecord[EventLink]) -> Iterator[Event | EventFor]:
+    value, event_id = row.value, EventId(link.value.event_id)
+    yield Event(
+        id=event_id,
+        listed_in="elixir_website",
+        tess_id=None,
+        title=one_line(value.title),
+        url=link.value.url,
+        provider_url=None,
+        start=value.start,
+        end=value.end,
+        event_types=[],
+        online=None,
+        city=None,
+        country=None,
+        organizer=None,
+        host_institutions=[],
+        keywords=[],
+        topics=[],
+        content_provider=None,
+        collections=[],
+        collections_unnamed=0,
+        description=None,
+    )
+    for initiative_id, name, url in link.value.initiatives:
+        yield EventFor(
+            id=f"event_for:{digest(event_id, initiative_id, name)}",
+            source=event_id,
+            target=InitiativeId(initiative_id),
+            basis="title",
+            collection=None,
+            source_url=url,
+        )
 
 
 def output_edges(output_id: OutputId, link: OutputLink) -> Iterator[Authored | OutputOf | Delivers]:
@@ -166,6 +219,7 @@ def output_edges(output_id: OutputId, link: OutputLink) -> Iterator[Authored | O
             position=position,
             name_as_written=name,
             affiliation=one_line(affiliation),
+            role="contributor" if link.creators is not None and position > link.creators else "creator",
         )
     for initiative_id, basis in link.initiatives:
         yield OutputOf(
@@ -194,6 +248,7 @@ def make_zenodo_output(row: SourceRecord[ZenodoRecord], link: SourceRecord[Outpu
         communities=items(value.communities),
         grants=items([*value.grant_codes, *value.grant_acronyms]),
         authors=items(value.person_names),
+        contributors=items(value.contributor_names),
         description=one_line(value.description),
     )
     yield from output_edges(output_id, link.value)
@@ -216,6 +271,7 @@ def make_f1000_output(row: SourceRecord[F1000Item], link: SourceRecord[OutputLin
         communities=[],
         grants=[],
         authors=items(value.person_names),
+        contributors=[],
         description=one_line(value.description),
     )
     yield from output_edges(output_id, link.value)
@@ -252,16 +308,27 @@ def make_source_document(info: SourceRecord[DocumentInfo]) -> Iterator[SourceDoc
         retrieved_at=value.retrieved_at,
         source=value.source,
         content_type=value.content_type,
+        published=value.published,
+        modified=value.modified,
     )
 
 
 TOOLS = Mapping(
     name="atlas:tool",
     function=make_tool,
-    evidence=("bio.tools entries with at least one ELIXIR Node, Platform or Community tag; tags resolved to Nodes and groups by name.",),
+    evidence=(
+        "bio.tools entries with an ELIXIR Node, Platform or Community tag, in a bio.tools domain a Community page "
+        "links, credited to a person an ELIXIR source names, or named as a resource a group recommends; tags "
+        "resolved to Nodes and groups by name.",
+    ),
+)
+ELIXIR_EVENTS = Mapping(
+    name="atlas:event_elixir",
+    function=make_elixir_event,
+    evidence=("Events on the ELIXIR events listing and event pages; one per event page URL; groups named in the title.",),
 )
 EVENTS = Mapping(
-    name="atlas:training_event",
+    name="atlas:event_tess",
     function=make_event,
     evidence=("Every TeSS event; TeSS Node and collection ids named by matching their counts to the TeSS facets.",),
 )

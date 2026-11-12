@@ -1,5 +1,5 @@
 id: atlas_261111
-version: 1
+version: 2
 purpose: |
   I coordinate or lead ELIXIR Communities, work for an ELIXIR Node, edit the
   ELIXIR website, or am a researcher looking for what ELIXIR offers in my
@@ -16,7 +16,7 @@ purpose: |
   project webpages. As a researcher or Community co-lead, I use it to find the
   tools, standards, training and Communities in a field and to plan a
   Community's next steps.
-reference_dataset: 20261111T134918Z
+reference_dataset: 20261111T204305Z
 context: |
   Answers rely on public information only. The Perun people export, Slack,
   meeting minutes and documents that need permission are out of scope; where a

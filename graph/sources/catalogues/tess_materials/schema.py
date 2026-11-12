@@ -15,7 +15,7 @@ from ....standardization import DOI, EDAM_TOPIC_URIS
 @dataclass(frozen=True, kw_only=True)
 class TessMaterial:
     __record_set__: ClassVar[str] = "tess_materials.jsonl#tess_materials"
-    __source_digest__: ClassVar[str] = "e5733b73c7c2d0e0211c03643111f226261e99331264652ce988c7440593f72a"
+    __source_digest__: ClassVar[str] = "5938e078b174e82df8972c9106890923cdd0c46a9b7f30603387ba88428bb3f7"
     __missing_values__: ClassVar[frozenset[str]] = frozenset({""})
 
     authors: list[str]
@@ -29,6 +29,7 @@ class TessMaterial:
     resource_types: list[str]
     source_path: str
     tess_id: str
+    tess_url: str
     title: str | None
     topic_labels: list[str]
     edam_topic_uris: list[str] = source_field("topic_uris", term=EDAM_TOPIC_URIS)

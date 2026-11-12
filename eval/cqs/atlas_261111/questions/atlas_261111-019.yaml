@@ -32,9 +32,12 @@ reference_answer: |
     AEON.py (David Šafránek), modelbase (Anna Matuszyńska).
 
   **Resources the Community page promotes**
-  - standard-GEM, and three bio.tools modelling domains: constraint-based,
-    logical and qualitative, and rule-based modelling. The domains' contents
-    are not in the data.
+  - standard-GEM, and three bio.tools modelling domains: constraint-based
+    (22 tools), logical and qualitative (29) and rule-based modelling (6).
+    Several domain tools are credited to the people above, for example
+    merlin and Metabolic Atlas (constraint-based) and CaSQ and AEON.py
+    (logical). Domain membership alone does not show who in the Community
+    supports a tool.
 
   **Gaps**
   - No public member list, and no record of who maintains which tool for
@@ -65,7 +68,8 @@ eval_notes: |
      domains.
   5. No wrong pairing of a person with a tool.
   Accepted: other correct bio.tools credits for the named people. Grouping by
-  institution or by Node.
+  institution or by Node. Listing domain tools as Community-promoted
+  resources, if not attributed to a Community person without a credit.
   Traps: the bio.tools collection "Plant Systems Biology" is not the
   Community. GlyCombo's developers have no other link to the Community.
   John Hancock is a co-lead candidate in the 2026 election but is not listed
@@ -94,3 +98,6 @@ sources:
   - data/input/biotools/api-t-9da184f1db7a.json
   - data/input/biotools/api-t-4fd59e999aae.json
   - data/input/biotools/api-t-cd7c66c3f741.json
+  - data/input/biotools-domains/api-t-f0fb7eb70dae-f3ceb383e8b6.json
+  - data/input/biotools-domains/api-t-643823f7bf47-4e08ef8c084b.json
+  - data/input/biotools-domains/api-t-fc456e3db527-61c430cf7adf.json

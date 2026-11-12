@@ -4,6 +4,7 @@ import sys
 from collections.abc import Iterator
 from html import unescape
 from pathlib import Path
+from urllib.parse import parse_qs, urlsplit
 
 from bs4 import BeautifulSoup
 
@@ -64,6 +65,17 @@ def biotools() -> Iterator[dict]:
             }
 
 
+def biotools_domains() -> Iterator[dict]:
+    paths: dict[str, str] = {}
+    for line in (INPUT / "data-sources-scraping.jsonl").read_text(encoding="utf-8").splitlines():
+        row = json.loads(line)
+        if row["source"] == "biotools-domains" and row["status"] == "saved":
+            paths[row["path"]] = parse_qs(urlsplit(row["url"]).query)["domain"][0]
+    for path, domain in sorted(paths.items()):
+        for tool in load(ROOT / path)["list"]:
+            yield {"domain": domain, "biotools_id": tool["biotoolsID"], "source_path": path}
+
+
 def tess(folder: str) -> Iterator[dict]:
     seen: set[str] = set()
     for path in sorted((INPUT / folder).glob("*.json")):
@@ -78,6 +90,7 @@ def tess(folder: str) -> Iterator[dict]:
                 "tess_id": item["id"],
                 "title": text(attributes.get("title")),
                 "url": attributes.get("url"),
+                "tess_url": "https://tess.elixir-europe.org" + item["links"]["self"],
                 "description": text(attributes.get("description")),
                 "keywords": strings(attributes.get("keywords")),
                 "topic_uris": [topic["uri"] for topic in topics if topic.get("uri")],
@@ -139,6 +152,7 @@ def zenodo() -> Iterator[dict]:
         path, record, paths = records[record_id]
         metadata = record["metadata"]
         creators = metadata.get("creators") or []
+        contributors = metadata.get("contributors") or []
         grants = metadata.get("grants") or []
         yield {
             "record_id": str(record_id),
@@ -159,6 +173,9 @@ def zenodo() -> Iterator[dict]:
             "creator_names": [text(c.get("name")) or "" for c in creators],
             "creator_orcids": [c.get("orcid") or "" for c in creators],
             "creator_affiliations": [text(c.get("affiliation")) or "" for c in creators],
+            "contributor_names": [text(c.get("name")) or "" for c in contributors],
+            "contributor_orcids": [c.get("orcid") or "" for c in contributors],
+            "contributor_affiliations": [text(c.get("affiliation")) or "" for c in contributors],
             "file_names": [f.get("key") or "" for f in record.get("files") or []],
             "source_path": relative(path),
             "source_paths": paths,
@@ -211,6 +228,11 @@ def iso_date(value: str | None) -> str | None:
     return value.replace("/", "-") if value else None
 
 
+def abstract(soup: BeautifulSoup) -> str | None:
+    field = soup.find("input", id="summary-text-field")
+    return text(str(field["value"])) if field and field.get("value") else None
+
+
 def f1000() -> Iterator[dict]:
     for path in sorted((INPUT / "f1000").glob("*.html")):
         kind = path.name.split("-")[0]
@@ -230,7 +252,7 @@ def f1000() -> Iterator[dict]:
             "item_path": relative(path),
             "kind": kind.removesuffix("s"),
             "title": text(title),
-            "description": text((meta.get("dc.description") or [None])[0]),
+            "description": text((meta.get("dc.description") or [None])[0]) or abstract(soup),
             "subjects": [k for k in dict.fromkeys([*(s.strip() for v in meta.get("dc.subject", []) for s in v.split(",")), *keywords(soup)]) if k],
             "creator_names": [text(v) or "" for v in meta.get("dc.creator") or meta.get("citation_author", [])],
             "date": iso_date((meta.get("dc.date") or meta.get("citation_publication_date") or meta.get("citation_date") or [None])[0]),
@@ -241,6 +263,7 @@ def f1000() -> Iterator[dict]:
 
 CATALOGUES = {
     "biotools": biotools,
+    "biotools_domains": biotools_domains,
     "tess_events": lambda: tess("tess-events"),
     "tess_materials": lambda: tess("tess-materials"),
     "tess_facets": tess_facets,

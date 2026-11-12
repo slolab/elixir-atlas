@@ -130,19 +130,22 @@ class Snapshot(sqlite3.Connection):
         total = sum(facet["count"] for facet in facets if type is None or facet["entity_type"] == type)
         return {"query": term, "total": total, "facets": facets, "hits": hits, "limit": limit, "offset": offset}
 
-    def overlap(self, kinds, groups_only, minimum):
+    def overlap(self, kinds, groups_only, minimum, directory):
         placeholders = ",".join("?" for _ in kinds)
+        scope = "(i.kind IN ('community','platform','focus_group') AND i.status='current')"
+        scope_a, scope_b = scope.replace("i.", "ia."), scope.replace("i.", "ib.")
         holders = self.execute(f"""SELECT id,name,count(DISTINCT initiative) places,
             group_concat(kind || '|' || initiative || '|' || initiative_name,'§') detail
             FROM (SELECT DISTINCT p.id,p.name,h.role_kind kind,i.id initiative,i.name initiative_name
                 FROM HoldsRole h JOIN Person p ON p.id=h.source JOIN Initiative i ON i.id=h.target
-                WHERE h.role_kind IN ({placeholders}) AND (NOT ? OR i.family='group') ORDER BY i.name,h.role_kind)
-            GROUP BY id,name HAVING count(DISTINCT initiative)>=? ORDER BY places DESC,name,id""", [*kinds, groups_only, minimum]).fetchall()
+                WHERE h.role_kind IN ({placeholders}) AND (NOT ? OR i.family='group') AND (NOT ? OR {scope}) ORDER BY i.name,h.role_kind)
+            GROUP BY id,name HAVING count(DISTINCT initiative)>=? ORDER BY places DESC,name,id""", [*kinds, groups_only, directory, minimum]).fetchall()
         pairs = self.execute(f"""SELECT first,first_name,second,second_name,count(DISTINCT person) shared,group_concat(DISTINCT name) people
             FROM (SELECT a.target first,ia.name first_name,b.target second,ib.name second_name,a.source person,p.name
                 FROM HoldsRole a JOIN HoldsRole b ON a.source=b.source AND a.target<b.target
                 JOIN Initiative ia ON ia.id=a.target JOIN Initiative ib ON ib.id=b.target JOIN Person p ON p.id=a.source
-                WHERE a.role_kind IN ({placeholders}) AND b.role_kind IN ({placeholders}) AND ia.family='group' AND ib.family='group' ORDER BY p.name)
+                WHERE a.role_kind IN ({placeholders}) AND b.role_kind IN ({placeholders}) AND ia.family='group' AND ib.family='group'
+                AND (NOT ? OR {scope_a}) AND (NOT ? OR {scope_b}) ORDER BY p.name)
             GROUP BY first,first_name,second,second_name HAVING count(DISTINCT person)>1
-            ORDER BY shared DESC,first_name,first,second LIMIT 60""", [*kinds, *kinds]).fetchall()
+            ORDER BY shared DESC,first_name,first,second LIMIT 60""", [*kinds, *kinds, directory, directory]).fetchall()
         return {"holders": holders, "pairs": pairs}

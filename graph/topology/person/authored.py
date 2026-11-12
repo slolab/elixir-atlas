@@ -7,7 +7,7 @@ from .node import PersonId
 
 @dataclass(frozen=True)
 class Authored:
-    """The person is a listed author or creator of the output."""
+    """The person is listed on the output: as an author (creator) or as a Zenodo contributor; see role."""
 
     schema_id: ClassVar[str] = "atlas:authored"
     id: str
@@ -21,4 +21,9 @@ class Authored:
     )
     affiliation: str | None = field(
         metadata={"description": "Affiliation the output gives for this author."}
+    )
+    role: str = field(
+        metadata={
+            "description": "creator (an author of the record) or contributor (a Zenodo contributor such as a supervisor, editor, project member or other; not an author). Contributors follow the creators in position."
+        }
     )
