@@ -190,8 +190,8 @@ def reviews(db: Database, kind: str = Query(default="", max_length=100)):
 
 
 @app.get("/api/overlap")
-def overlap(db: Database, liaisons: bool = False, groups_only: bool = False, minimum: int = Query(default=3, ge=2, le=10)):
-    return views.overlap(db, liaisons, groups_only, minimum)
+def overlap(db: Database, liaisons: bool = False, groups_only: bool = False, minimum: int = Query(default=3, ge=2, le=10), directory: bool = False):
+    return views.overlap(db, liaisons, groups_only, minimum, directory)
 
 
 SEARCH_MATCH = """document @@ websearch_to_tsquery('english', %(q)s)

@@ -227,10 +227,6 @@ p {
   --trace: var(--trace-a);
 }
 
-.trace-programme {
-  --trace: var(--trace-t);
-}
-
 .trace-exchange {
   --trace: var(--trace-g);
 }
