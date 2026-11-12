@@ -943,3 +943,30 @@ p {
   .search-type { align-items: stretch; flex-direction: column; gap: .4rem; }
   .pagination { gap: .5rem; font-size: .85rem; }
 }
+
+.atlas { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.atlas-questions { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; font-size: 0.85rem; }
+.atlas-questions h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin: 14px 0 6px; }
+.atlas-questions ol { list-style: none; margin: 0; padding: 0; }
+.atlas-questions button { display: block; width: 100%; text-align: left; font: inherit; color: var(--ink); background: none; border: 0; border-left: 3px solid transparent; padding: 6px 8px; cursor: pointer; }
+.atlas-questions button:hover { background: var(--raised); }
+.atlas-questions button[aria-pressed="true"] { border-left-color: var(--trace-c); background: var(--raised); }
+.cq-id { font-weight: 700; color: var(--trace-c); }
+.atlas-question { font-size: 1.1rem; margin: 0 0 6px; }
+.atlas-picks { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.atlas-picks button { font: inherit; font-size: 0.85rem; border: 1px solid var(--trace-c); color: var(--trace-c); background: none; border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+.atlas-picks .clear { border-color: var(--rule); color: var(--ink-soft); }
+.atlas-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 14px 0 24px; }
+.atlas-card { background: var(--raised); border: 1px solid var(--rule); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; max-height: 520px; min-width: 0; }
+.atlas-card header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.atlas-card h3 { margin: 0; font-size: 0.95rem; }
+.atlas-card .count { font-size: 0.8rem; color: var(--ink-soft); }
+.atlas-card input { font: inherit; font-size: 0.85rem; margin: 8px 0; padding: 4px 6px; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); }
+.atlas-card ul { list-style: none; margin: 0; padding: 0; overflow: auto; flex: 1; }
+.atlas-card li { display: flex; align-items: start; gap: 4px; border-top: 1px solid var(--rule); }
+.atlas-card li button { flex: 1; min-width: 0; text-align: left; font: inherit; font-size: 0.85rem; color: var(--ink); background: none; border: 0; padding: 5px 4px; cursor: pointer; overflow-wrap: anywhere; }
+.atlas-card li button small { display: block; color: var(--ink-soft); font-size: 0.75rem; }
+.atlas-card li button[aria-pressed="true"] { background: color-mix(in srgb, var(--trace-c) 14%, transparent); font-weight: 600; }
+.atlas-card .open { padding: 5px 4px; text-decoration: none; color: var(--ink-soft); }
+.table td.quote { font-size: 0.8rem; color: var(--ink-soft); max-width: 420px; }
+@media (max-width: 800px) { .atlas { grid-template-columns: 1fr; } .atlas-questions { position: static; max-height: 260px; } }

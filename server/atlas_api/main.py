@@ -17,6 +17,7 @@ from psycopg import Error as DatabaseError
 from pydantic import BaseModel, Field
 
 from . import views
+from . import atlas
 from .sqlite_snapshot import Snapshot
 from . import query
 from .permissions import check_reader
@@ -187,6 +188,22 @@ def kind(db: Database, id: RecordId):
 @app.get("/api/reviews")
 def reviews(db: Database, kind: str = Query(default="", max_length=100)):
     return views.reviews(db, kind)
+
+
+@app.get("/api/atlas")
+def atlas_overview(db: Database):
+    return atlas.overview(db, topology(db))
+
+
+@app.get("/api/atlas/items")
+def atlas_items(db: Database, card: str = Query(max_length=40), q: str = Query(default="", max_length=200), limit: int = Query(default=atlas.MAX_ITEMS, ge=1, le=atlas.MAX_ITEMS), offset: int = Query(default=0, ge=0, le=100000)):
+    return found(atlas.items(db, card, q.strip(), limit, offset))
+
+
+@app.get("/api/atlas/pick")
+def atlas_pick(db: Database, question: str = Query(max_length=60), picks: str = Query(default="", max_length=4000)):
+    chosen = [tuple(part.split("=", 1)) for part in picks.split(",") if "=" in part]
+    return found(atlas.pick(db, topology(db), question, chosen))
 
 
 @app.get("/api/overlap")

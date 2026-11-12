@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { href, useRoute } from "./route";
+import { Atlas } from "./views/Atlas";
 import { Home } from "./views/Home";
 import { InitiativePage } from "./views/Initiative";
 import { NodePage } from "./views/Node";
@@ -35,6 +36,8 @@ function View({ page, id }: { page: string; id: string }) {
       return <Search query={id} />;
     case "kind":
       return <KindList kind={id} />;
+    case "atlas":
+      return <Atlas />;
     case "overlap":
       return <Overlap />;
     case "reviews":
@@ -77,6 +80,9 @@ function Masthead({ query, page }: { query: string; page: string }) {
         />
       </form>
       <nav className="nav">
+        <a href={href("atlas")} aria-current={page === "atlas" ? "page" : undefined}>
+          Atlas
+        </a>
         <a href={href("overlap")} aria-current={page === "overlap" ? "page" : undefined}>
           Overlap
         </a>

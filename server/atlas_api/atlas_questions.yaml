@@ -1,0 +1,111 @@
+use_cases:
+  A: "Communities Coordinator: see across Communities"
+  B: "Node team: what did we commit to, and who is delivering it"
+  C1: "Researcher: what does ELIXIR offer for my research"
+  C2: "Community co-lead: what can our Community realistically do next"
+questions:
+  - id: atlas_261111-001
+    use_case: A1
+    question: Which of the current ELIXIR Communities work on overlapping topics, outputs or deliverables?
+    cards: [community, topic, project, output, plan_item]
+    routes: [InitiativeTopic, RelatedTo, OutputOf, PlanItemOf]
+  - id: atlas_261111-002
+    use_case: A2
+    question: Which of the current ELIXIR Communities show no public activity since 11 November 2025?
+    cards: [community, output, statement]
+    routes: [OutputOf, StatementAbout]
+  - id: atlas_261111-003
+    use_case: A3
+    question: I want to take part in the ELIXIR Research Data Management Community. Who should I contact about Community matters, through which channel, and how do I join?
+    cards: [community, person, statement]
+    routes: [HoldsRole, StatementAbout]
+  - id: atlas_261111-004
+    use_case: A4
+    question: Which ELIXIR Communities document an onboarding process for new co-leads or new members, and which onboarding material could other Communities reuse?
+    cards: [community, output, statement]
+    routes: [OutputOf, StatementAbout]
+  - id: atlas_261111-005
+    use_case: A5
+    question: Who holds leadership or Hub-liaison roles in more than two of ELIXIR's current Communities, Platforms and Focus Groups?
+    cards: [person, community, platform, focus_group]
+    routes: [HoldsRole]
+  - id: atlas_261111-006
+    use_case: B1
+    question: I work for ELIXIR Estonia. Which ELIXIR projects has our Node taken part in, current and past?
+    cards: [node, project]
+    routes: [TakesPartIn]
+  - id: atlas_261111-007
+    use_case: B2
+    question: I'm in ELIXIR Estonia. What did our Node commit to in the EU project ELIXIR-STEERS, which tasks does the University of Tartu work on, which deliverables or milestones are they tied to and when are these due?
+    cards: [node, project, organisation, plan_item, person]
+    routes: [TakesPartIn, ParticipatesIn, PlanItemOf, LeadsPlanItem, HoldsRole, InNode]
+  - id: atlas_261111-008
+    use_case: B3
+    question: Who in ELIXIR Estonia works on ELIXIR's current projects, and on which activity?
+    cards: [node, person, project, plan_item]
+    routes: [InNode, HoldsRole, TakesPartIn, LeadsPlanItem]
+  - id: atlas_261111-009
+    use_case: B4
+    question: For our ELIXIR Estonia report, is the University of Tartu funded by the EU in ELIXIR-STEERS, or does it contribute in-kind?
+    cards: [node, organisation, project, person]
+    routes: [ParticipatesIn, TakesPartIn, HoldsRole, AffiliatedWith, InNode]
+  - id: atlas_261111-010
+    use_case: B5
+    question: ELIXIR Estonia contributes to ELIXIR-STEERS Task 4.3, capacity building in training skills for ELIXIR Node staff. Which other ELIXIR projects cover the same topic, and where is each overlap written down?
+    cards: [project, plan_item, topic]
+    routes: [PlanItemOf, PlanItemTopic, InitiativeTopic]
+  - id: atlas_261111-011
+    use_case: B7
+    question: I am drafting the webpage for the ELIXIR Compute Platform Commissioned Service of the 2024–28 Scientific Programme (2024-TECHNOLOGY-Compute). Give me the fields for the page.
+    cards: [project, node, person, plan_item, output, statement]
+    routes: [TakesPartIn, HoldsRole, PlanItemOf, OutputOf, StatementAbout]
+  - id: atlas_261111-012
+    use_case: B8
+    question: The FAIR-FEGA project page went live on 30 June 2025. Since then, which new outputs or changes to the project's dates have appeared in public sources?
+    cards: [project, output, statement]
+    routes: [OutputOf, StatementAbout]
+  - id: atlas_261111-013
+    use_case: B9
+    question: For ELIXIR Germany's (de.NBI) end-of-year report, which ELIXIR Commissioned Services that list ELIXIR Germany, and which EU projects of ELIXIR, have outputs on Zenodo dated 2026?
+    cards: [node, project, output, person]
+    routes: [TakesPartIn, OutputOf, Authored, InNode]
+  - id: atlas_261111-014
+    use_case: B10
+    question: For ELIXIR-UK's national reporting, list the UK's ELIXIR project portfolio, whether each is current, and what the Node delivered.
+    cards: [node, project, plan_item, output]
+    routes: [TakesPartIn, PlanItemOf, OutputOf]
+  - id: atlas_261111-015
+    use_case: C1.1
+    question: I am starting a genome-scale metabolic modelling project and I am not part of ELIXIR. Which tools, standards and best practices should I consider?
+    cards: [topic, tool, community, output]
+    routes: [ToolTopic, ToolFor, InitiativeTopic, OutputOf]
+  - id: atlas_261111-016
+    use_case: C1.2
+    question: I am starting a genome-scale metabolic modelling project. Which ELIXIR Community white papers, reports or recommendations should I read?
+    cards: [topic, community, output]
+    routes: [InitiativeTopic, OutputOf]
+  - id: atlas_261111-017
+    use_case: C1.3
+    question: Which training materials in TeSS should I use to learn genome-scale metabolic modelling, and which relevant training events listed in TeSS start on or after 11 November 2026?
+    cards: [topic, material, event]
+    routes: [MaterialTopic, EventTopic]
+  - id: atlas_261111-018
+    use_case: C1.4
+    question: Which ELIXIR Communities work on genome-scale metabolic modelling, and how do I contact them?
+    cards: [topic, community, person]
+    routes: [InitiativeTopic, HoldsRole]
+  - id: atlas_261111-019
+    use_case: C2.2
+    question: Who in the ELIXIR Systems Biology Community develops or supports tools, and which tools are they?
+    cards: [community, person, tool]
+    routes: [HoldsRole, CreditedForTool, ToolFor]
+  - id: atlas_261111-020
+    use_case: C2.3
+    question: Which other ELIXIR Communities should the Systems Biology Community bring in as domain applications for its next roadmap, based on existing joint projects, publications and topic overlap?
+    cards: [community, topic, project, output]
+    routes: [InitiativeTopic, RelatedTo, OutputOf]
+  - id: atlas_261111-021
+    use_case: C2.5
+    question: At its September 2026 meeting, the ELIXIR Systems Biology Community proposed a "systems biology bundle" with three pilot use cases. Is this feasible with the people the Community has?
+    cards: [community, person, plan_item]
+    routes: [HoldsRole, PlanItemOf, LeadsPlanItem]

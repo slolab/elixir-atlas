@@ -40,3 +40,9 @@ Set `ATLAS_API_URL` to change the Vite proxy target. `npm run build --prefix das
 The existing project, person, Node, overlap and review views use the API. Keyword search covers all record types with ranked results, type filters and pagination. Every result has a record-and-evidence view, and node records also show their relationships.
 
 The project owner confirmed public access to the complete 20261111 release on 2026-11-11. There is no login or editing interface.
+
+## Atlas tab
+
+`#/atlas` lists the competency questions of `eval/cqs/atlas_261111` by use case. Choosing one shows the cards it needs (Community, Topic, Node, Project, Person, Plan item, Output, Tool, training…), each with all its items. Picking an item narrows every other card to what the question's routes (relationship tables) connect to it; picks on several cards intersect. Below the cards, each connection is listed with its properties (role, task, funding…), quote and source. An empty narrowed card means no public record is linked, not that none exists.
+
+Questions, their cards and routes are in `server/atlas_api/atlas_questions.yaml`; cards are defined over entity tables in `server/atlas_api/atlas.py` (a Community is an Initiative of kind `community`). Endpoints: `GET /api/atlas` (questions, cards with counts, routes), `GET /api/atlas/items?card=&q=`, `GET /api/atlas/pick?question=&picks=card=id,card=id`.
