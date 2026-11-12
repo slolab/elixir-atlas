@@ -1,110 +1,62 @@
 id: atlas_261111-005
-use_case: "A5"
+use_case: A5
 question: |
-  Who holds leadership or Hub-liaison roles in more than two of ELIXIR's
-  current Communities, Platforms and Focus Groups?
+  Who has leadership or liaison roles in more than two ELIXIR groups?
 answerability: answerable
 reference_answer: |
-  Five people hold leadership or Hub-liaison roles in more than two of the
-  19 current Communities, 5 Platforms and 6 current Focus Groups. Four are
-  ELIXIR Hub staff.
+  These people hold leadership or liaison roles in more than two ELIXIR groups. Here are three documented examples for each:
 
-  - **Katharina F Heil** (Hub), 10 groups: liaison for the 3D-BioInfo,
-    Intrinsically Disordered Proteins, Metabolomics, Microbial
-    Biotechnology, Proteomics, Research Data Management, Single-Cell Omics
-    and Toxicology Communities; Training Platform Coordinator; Communities
-    Future Focus Group.
-  - **Physilia Ying Shi Chua** (Hub), 7 groups: liaison for the
-    Biodiversity, Domestic Animals Genome and Phenome, Food and Nutrition,
-    Microbiome and Plant Sciences Communities; Interoperability Platform
-    liaison; Pathogen Data Focus Group.
-  - **Mihail Anton** (Hub), 4 groups: liaison for the Galaxy and Systems
-    Biology Communities and for the Tools and Training Platforms.
-  - **David Lloyd** (Hub), 4 groups: liaison for the AI Ecosystem; Credit,
-    Recognition and Usage; Equity, Diversity and Inclusion; and RNA Data
-    Focus Groups.
-  - **Thanasis Vergoulis** (Athena Research Center, Greece), 3 groups:
-    Compute Platform WP5 lead, Data Platform WP3 lead, and co-lead of the
-    Credit, Recognition and Usage Focus Group.
-
-  Two groups each: Hub staff Daniel Barrowdale (Cancer Data, Human Copy
-  Number Variation), Magda Chegkazi (Federated Human Data, Rare Diseases),
-  Jonathan Tedds (Compute and Tools Platform Coordinator) and Fabio
-  Liberante (Data and Interoperability Platform Coordinator); and Silvio
-  Tosatto, Fotis Psomopoulos, Hervé Ménager, Vitor Martins dos Santos, Wim
-  Vranken, Nicola Soranzo and Wolmar Nyberg Åkerström.
-
-  Sources:
-  - Communities: https://elixir-europe.org/communities and each Community
-    page linked from it
-  - Platforms: https://elixir-europe.org/platforms/compute,
-    https://elixir-europe.org/platforms/data,
-    https://elixir-europe.org/platforms/interoperability,
-    https://elixir-europe.org/platforms/tools,
-    https://elixir-europe.org/platforms/training
-  - Focus Groups: https://elixir-europe.org/focus-groups,
-    https://elixir-europe.org/focus-groups/ai-ecosystem,
-    https://elixir-europe.org/focus-groups/communities-future,
-    https://elixir-europe.org/focus-groups/credit-recognition-usage,
-    https://elixir-europe.org/focus-groups/equity-diversity-and-inclusion,
-    https://elixir-europe.org/focus-groups/pathogen-data,
-    https://elixir-europe.org/focus-groups/rna-data
+  | Person | Examples of group roles |
+  | --- | --- |
+  | **Katharina Heil** | [RDM Community liaison](https://elixir-europe.org/communities/research-data-management), [Training Platform Coordinator](https://elixir-europe.org/platforms/training), and Hub role in the [Communities Future Focus Group](https://elixir-europe.org/focus-groups/communities-future). |
+  | **Physilia Chua** | Hub representative in the [Biodiversity Community](https://elixir-europe.org/communities/biodiversity), [Interoperability Platform liaison](https://elixir-europe.org/platforms/interoperability), and Hub role in the [Pathogen Data Focus Group](https://elixir-europe.org/focus-groups/pathogen-data). |
+  | **Mihail Anton** | Liaison for the [Galaxy Community](https://elixir-europe.org/communities/galaxy), [Systems Biology Community](https://elixir-europe.org/communities/systems-biology) and [Tools Platform](https://elixir-europe.org/platforms/tools). |
+  | **David Lloyd** | Hub liaison for [AI Ecosystem](https://elixir-europe.org/focus-groups/ai-ecosystem), [Credit, Recognition and Usage](https://elixir-europe.org/focus-groups/credit-recognition-usage), and [Equity, Diversity and Inclusion](https://elixir-europe.org/focus-groups/equity-diversity-and-inclusion). |
+  | **Thanasis Vergoulis** | WP5 lead in [Compute](https://elixir-europe.org/platforms/compute), WP3 lead in [Data](https://elixir-europe.org/platforms/data), and co-lead of [Credit, Recognition and Usage](https://elixir-europe.org/focus-groups/credit-recognition-usage). |
 eval_notes: |
+  Intent: identify people whose leadership or liaison responsibilities span groups. Count each group once, even when the person has several roles within it. The reference uses Communities, Platforms and Focus Groups; other clearly identified ELIXIR group types are acceptable.
+
   Scored:
-  1. Katharina Heil and Physilia Chua: Hub staff with roles in about 10 and
-     7 groups. Group lists may be incomplete but not wrong.
-  2. Mihail Anton and David Lloyd: four groups each, with the groups.
-  3. Thanasis Vergoulis: three groups, Compute Platform (WP5 lead), Data
-     Platform (WP3 lead) and the Credit, Recognition and Usage Focus Group.
-  4. No one else is listed above two groups from these pages alone.
-  Scope: current groups on /communities, /platforms and /focus-groups.
-  Community co-leads and liaisons, Platform leads, coordinators, liaisons
-  and work-package leads, and Focus Group leads and liaisons count.
-  "Additional Community support" and the RDM Trainer Network do not. A
-  Platform lead who also leads WPs of that Platform counts once.
-  Accepted: "Katharina Heil", "Physilia Chua"; Hub counts off by one;
-  Mihail Anton at five if the Data Platform WP3 entry "SE-UU - Mihail Anton
-  1.5" is counted. Tosatto, Psomopoulos (Cellular and molecular research)
-  or Chegkazi (Human data and translational research) over the threshold if
-  the answer names their Science tier role and marks it as outside the
-  three group types.
-  Traps: past Focus Groups (Biocuration, Biodiversity, Cancer Data, Domestic
-  Animals, Environmental Impact, EOSC, Learning Paths, Machine Learning,
-  Professionalising Careers, Health Data, Registries, Systems Biology) and
-  the former Marine Metagenomics Community. Old Focus Group URLs for
-  Systems Biology and Biodiversity redirect to the Community pages; each
-  counts once. "Antonio" and "Juan Antonio" are not Mihail Anton.
+  1. Identifies Katharina Heil with supported roles in more than two groups.
+  2. Identifies Physilia Chua with supported roles in more than two groups.
+  3. Identifies Mihail Anton and David Lloyd, with supported roles in more than two groups for each.
+  4. Identifies Thanasis Vergoulis with the Compute, Data and Credit, Recognition and Usage roles.
+  5. Does not turn ordinary membership, repeated roles within one group or obsolete group names into extra current leadership roles.
+
+  Accepted: shorter group lists that establish the threshold for each person. Exact totals are not required. Other people qualify if the answer supports more than two relevant roles and states what group types it counts. If explicitly limiting the answer to Community co-leads, assess the supported result for that narrower interpretation rather than requiring Hub liaisons.
+
+  Evidence notes: the Data Platform page explicitly includes “SE-UU - Mihail Anton 1.5” among WP3 leads, in addition to his four liaison roles elsewhere. Do not demand the old total of four. Antonio and Juan Antonio are not Mihail Anton. Former Focus Groups that became Communities should not be counted twice. Additional Community support is not automatically a leadership role.
 sources:
-  - data/input/elixir/communities-6227f498e77a.html
-  - data/input/elixir/communities-3d-bioinfo-72c3519de65f.html
-  - data/input/elixir/communities-biodiversity-a6d9ccfc5a47.html
-  - data/input/elixir/communities-cancer-data-096a7c12a376.html
-  - data/input/elixir/communities-domestic-animals-genome-phenome-6d945d0ed580.html
-  - data/input/elixir/communities-human-data-7b925ffe8c5a.html
-  - data/input/elixir/communities-food-and-nutrition-2511251c0446.html
-  - data/input/elixir/communities-galaxy-00e56509dc9e.html
-  - data/input/elixir/communities-human-copy-number-variation-ac7a716d00fc.html
-  - data/input/elixir/communities-intrinsically-disordered-proteins-88757bc0bf86.html
-  - data/input/elixir/communities-metabolomics-9b0158a65813.html
-  - data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html
-  - data/input/elixir/communities-microbiome-7132894a5fdd.html
-  - data/input/elixir/communities-plant-sciences-baf90445b836.html
-  - data/input/elixir/communities-proteomics-3a9d2022994a.html
-  - data/input/elixir/communities-rare-diseases-8613bda925b4.html
-  - data/input/elixir/communities-research-data-management-ef9ea6882b1e.html
-  - data/input/elixir/communities-single-cell-omics-45099943dfd5.html
-  - data/input/elixir/communities-systems-biology-d4e592b20d80.html
-  - data/input/elixir/communities-toxicology-49484bd5f374.html
-  - data/input/elixir/platforms-compute-eacbc306762c.html
-  - data/input/elixir/platforms-data-240a9d6c762d.html
-  - data/input/elixir/platforms-interoperability-5d8f454d7877.html
-  - data/input/elixir/platforms-tools-7f6e7ca0c378.html
-  - data/input/elixir/platforms-training-ea4f7c649ba0.html
-  - data/input/elixir/focus-groups-7a70669fc9c1.html
-  - data/input/elixir/focus-groups-ai-ecosystem-a9ee2a1a815e.html
-  - data/input/elixir/focus-groups-communities-future-6412228fe213.html
-  - data/input/elixir/focus-groups-credit-recognition-usage-c48e4cfd5b70.html
-  - data/input/elixir/focus-groups-equity-diversity-and-inclusion-839dafe3dd9c.html
-  - data/input/elixir/focus-groups-pathogen-data-21e621c7a67f.html
-  - data/input/elixir/focus-groups-rna-data-03567bf02529.html
-  - data/input/elixir/how-we-work-scientific-programme-science-89306532ac59.html
+- data/input/elixir/communities-6227f498e77a.html
+- data/input/elixir/communities-3d-bioinfo-72c3519de65f.html
+- data/input/elixir/communities-biodiversity-a6d9ccfc5a47.html
+- data/input/elixir/communities-cancer-data-096a7c12a376.html
+- data/input/elixir/communities-domestic-animals-genome-phenome-6d945d0ed580.html
+- data/input/elixir/communities-human-data-7b925ffe8c5a.html
+- data/input/elixir/communities-food-and-nutrition-2511251c0446.html
+- data/input/elixir/communities-galaxy-00e56509dc9e.html
+- data/input/elixir/communities-human-copy-number-variation-ac7a716d00fc.html
+- data/input/elixir/communities-intrinsically-disordered-proteins-88757bc0bf86.html
+- data/input/elixir/communities-metabolomics-9b0158a65813.html
+- data/input/elixir/communities-microbial-biotechnology-7bde42c06b92.html
+- data/input/elixir/communities-microbiome-7132894a5fdd.html
+- data/input/elixir/communities-plant-sciences-baf90445b836.html
+- data/input/elixir/communities-proteomics-3a9d2022994a.html
+- data/input/elixir/communities-rare-diseases-8613bda925b4.html
+- data/input/elixir/communities-research-data-management-ef9ea6882b1e.html
+- data/input/elixir/communities-single-cell-omics-45099943dfd5.html
+- data/input/elixir/communities-systems-biology-d4e592b20d80.html
+- data/input/elixir/communities-toxicology-49484bd5f374.html
+- data/input/elixir/platforms-compute-eacbc306762c.html
+- data/input/elixir/platforms-data-240a9d6c762d.html
+- data/input/elixir/platforms-interoperability-5d8f454d7877.html
+- data/input/elixir/platforms-tools-7f6e7ca0c378.html
+- data/input/elixir/platforms-training-ea4f7c649ba0.html
+- data/input/elixir/focus-groups-7a70669fc9c1.html
+- data/input/elixir/focus-groups-ai-ecosystem-a9ee2a1a815e.html
+- data/input/elixir/focus-groups-communities-future-6412228fe213.html
+- data/input/elixir/focus-groups-credit-recognition-usage-c48e4cfd5b70.html
+- data/input/elixir/focus-groups-equity-diversity-and-inclusion-839dafe3dd9c.html
+- data/input/elixir/focus-groups-pathogen-data-21e621c7a67f.html
+- data/input/elixir/focus-groups-rna-data-03567bf02529.html
+- data/input/elixir/how-we-work-scientific-programme-science-89306532ac59.html

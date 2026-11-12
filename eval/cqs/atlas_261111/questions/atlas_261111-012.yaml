@@ -1,67 +1,47 @@
 id: atlas_261111-012
 use_case: "B8"
 question: |
-  The FAIR-FEGA project page
-  (https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega)
-  went live on 30 June 2025. Since then, which new outputs or changes to the
-  project's dates have appeared in public sources? Give the source and date
-  for each.
+  Does the FAIR-FEGA page need updating?
 answerability: partially_answerable
 reference_answer: |
-  The page was published on 30 June 2025 and last edited on 4 June 2026. It
-  still gives the duration as January 2025 to January 2026 and says nothing
-  about the project's status.
+  Yes. I would review the dates first, then check whether two recent FEGA
+  publications belong on the page.
 
-  **Date changes**
-  - **ELIXIR Annual Report 2025** (PDF dated 4 June 2026): lists FAIR-FEGA
-    among the five Human data and translational research (HDTR) projects
-    "funded in 2025" and says these projects are "scheduled to run through
-    2026". This conflicts with the page's January 2026 end.
-  - **HDTR page** (edited 5 May 2026): gives January 2025 to December 2026,
-    but for the HDTR area as a whole, not for FAIR-FEGA alone.
-  - The Commissioned Services list still shows January 2025 to January 2026.
-  - No source gives a new FAIR-FEGA end date. Confirm it with the project.
+  - **Dates:** the [FAIR-FEGA page](https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega)
+    still says January 2025 to January 2026. The [ELIXIR Annual Report 2025](https://elixir-europe.org/sites/default/files/documents/elixir-AnnualReport2025.pdf)
+    includes FAIR-FEGA among projects scheduled to run through 2026.
+    Confirm the project's end date before replacing it; the report does
+    not give a precise revised date for FAIR-FEGA.
+  - **Possible additions:** the [FEGA Metadata Technical Report](https://zenodo.org/records/19388370),
+    published 2 April 2026, describes the EGA v2 metadata model under
+    development. The [FEGA white paper](https://zenodo.org/records/23157797),
+    published 5 October 2026, sets out the federation's future direction.
+    They are relevant to the project, but the records do not establish them
+    as FAIR-FEGA deliverables. Confirm that attribution before listing them
+    as project outputs.
 
-  **Outputs**
-  No public record is labelled as a FAIR-FEGA deliverable or report. Two new
-  FEGA documents involve FAIR-FEGA people and could be linked once the
-  project confirms them:
-  - **"FEGA Metadata Technical Report: EGA v2 model"**, FEGA Metadata Working
-    Group, Zenodo, 2 April 2026 (v1.0.1): https://zenodo.org/records/19388370.
-    It describes the new FEGA metadata model, which FAIR-FEGA says it will
-    test. Jorge Oliveira (BioData.pt) is an author and Gabriele Rinck
-    (EMBL-EBI, on the FAIR-FEGA page) a contributor. It credits HEREDITARY
-    and ELIXIR, not FAIR-FEGA.
-  - **"Federated EGA in the European and Global Human Data Ecosystem"**,
-    white paper, Zenodo, 5 October 2026 (v1.1):
-    https://zenodo.org/records/23157797. Authors include Teresa D'Altri and
-    Gabriele Rinck (both on the FAIR-FEGA page) and Ana Teresa Freitas. It
-    does not mention FAIR-FEGA.
-
-  The page could also reuse the Annual Report's one-line summary: "Defining
-  metadata standards to improve data submission to FEGA nodes and improve
-  FAIRification".
-
-  Sources:
-  - FAIR-FEGA page: https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega
-  - HDTR page: https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr
-  - Commissioned Services list: https://elixir-europe.org/internal-projects/commissioned-services-list?page=2
-  - ELIXIR Annual Report 2025: https://elixir-europe.org/sites/default/files/documents/elixir-AnnualReport2025.pdf
+  The public evidence supports an editorial review, but not a confirmed
+  new completion date or a claim that these outputs fulfil FAIR-FEGA's
+  commitments.
 eval_notes: |
   Scored:
-  1. The page still says January 2025 to January 2026 although it was edited
-     in June 2026, and the end date has passed with no status update.
-  2. The Annual Report 2025 says the HDTR projects run "through 2026", which
-     conflicts with the page.
-  3. No public output is labelled as a FAIR-FEGA output; none is invented.
-  4. Names the FEGA Metadata Technical Report (Zenodo, April 2026) as a
-     related output, with the caveat that it is not credited to FAIR-FEGA.
-  Accepted: also naming the October 2026 FEGA white paper; citing the HDTR
-  page's December 2026 end as context, if it is marked as area-wide.
-  Traps: the poster "Unifying FEGA metadata" (11 June 2025) carries the
-  FAIR-FEGA keyword but predates the page, so it is not new. The HDTR page's
-  dates and twelve Nodes cover all five HDTR projects. The second URL
-  (/commissioned-services/science/hdtr/fair-fega) is the same page.
+  1. Identifies a concrete update need: the project page's January 2026 end
+     conflicts with newer evidence that the HDTR projects run through 2026.
+  2. Does not invent a precise revised FAIR-FEGA date from the area's
+     December 2026 date or infer actual completion from a scheduled end.
+  3. If recommending additions, accurately distinguishes related material
+     from confirmed FAIR-FEGA outputs. A date-focused answer need not
+     discover or include the newer FEGA publications.
+  4. Gives an evidence-based editorial recommendation with a source that
+     the editor can inspect.
+  Accepted: a date-focused answer alone, other supported updates, or a
+  proposed edit with unresolved facts marked. Related publications are
+  optional, not an extra condition for a complete answer.
+  The prompt does not require the page's creation/edit timestamps, a
+  complete change log, or a prescribed source search. The June 2025
+  'Unifying FEGA metadata' poster is relevant background but not a new output
+  since the page was published on 30 June 2025. The EGA v2 report describes
+  work in progress, not a completed production migration.
 sources:
   - data/input/project-pages/how-we-work-scientific-programme-science-hdtr-fair-fega-147f79ce933d-d81d75344d65.html
   - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-fair-fega-5c49c71c2fbe.html

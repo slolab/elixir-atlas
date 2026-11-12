@@ -1,122 +1,37 @@
 id: atlas_261111-001
-use_case: "A1"
+use_case: A1
 question: |
-  Which of the current ELIXIR Communities work on overlapping topics, outputs
-  or deliverables? Give the overlapping Communities as pairs or clusters, with
-  the shared project, output or tool and where it is recorded.
+  Where do the ELIXIR Communities overlap?
 answerability: answerable
 reference_answer: |
-  Scope: the 19 Communities listed on the ELIXIR Communities page. Marine
-  Metagenomics is a former Community (now Microbiome).
+  Several overlaps are visible in shared projects and publications:
 
-  **Shared Scientific Programme projects (2024–2026)**
-  - **Metabolomics cluster**: RCI-M (Next level of reproducible, comparable
-    and integrable metabolomics) lists Food and Nutrition, Galaxy,
-    Metabolomics, Proteomics, Research Data Management, Single-Cell Omics,
-    Systems Biology and Toxicology.
-  - **Biotechnology cluster**: DBTLHub lists Biodiversity, Microbiome,
-    Metabolomics, Microbial Biotechnology, Research Data Management and
-    Systems Biology.
-  - **Human data cluster**: Cancer Data and Federated Human Data share
-    FAIR-FEGA, the federated learning and RO-Crates project, and "Empowering
-    users" (with Galaxy). Federated Human Data also shares FHDportal with
-    Human Copy Number Variation and FEGA-Connect with Proteomics.
-    Spatial2Galaxy lists Cancer Data, Galaxy, Human Copy Number Variation and
-    Single-Cell Omics.
-  - **Protein cluster**: 3D-BioInfo and Intrinsically Disordered Proteins
-    (disordered protein ontologies); Proteomics and Intrinsically Disordered
-    Proteins (PDBe-KB Nextflow workflows).
-  - **Single-Cell Omics and Systems Biology**: TELLME (2026).
+  | Area | Communities and shared work |
+  | --- | --- |
+  | Metabolomics and multi-omics | **Metabolomics, Food and Nutrition, Galaxy, Proteomics, Research Data Management, Single-Cell Omics, Systems Biology and Toxicology** share [RCI-M](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/metabolomics), which connects metabolomics standards, data and workflows. |
+  | Biotechnology | **Microbial Biotechnology, Biodiversity, Microbiome, Metabolomics, Research Data Management and Systems Biology** share [DBTLHub](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub), connecting data and tools for the Design-Build-Test-Learn cycle. |
+  | Human data | **Cancer Data and Federated Human Data** share [FAIR-FEGA](https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega). **Federated Human Data, Rare Diseases and Human Copy Number Variation** also collaborate on human genomic data, as described in the [Communities paper](https://f1000research.com/articles/14-884). |
+  | Protein research | **3D-BioInfo, Intrinsically Disordered Proteins and Proteomics** collaborate on protein research. Examples include [disordered-protein ontologies](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/ontologies) and [PDBe-KB annotation workflows](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/pdbe). |
+  | Interpreting models | **Single-Cell Omics and Systems Biology** share [TELLME](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/tellme), which develops explanations of systems biology and multi-omics models. |
 
-  RCI-M and DBTLHub put Metabolomics, Research Data Management and Systems
-  Biology in the same two projects.
-
-  **Published outputs**
-  - The F1000 article "Fostering and sustaining collaborative innovation"
-    (2025) names two collaborating groups: Intrinsically Disordered
-    Proteins, Proteomics and 3D-BioInfo (protein research); Federated Human
-    Data, Rare Diseases and Human Copy Number Variation (human genomic data).
-    Its Table 1 also shows shared partners, e.g. Beacon (Federated Human Data,
-    Human Copy Number Variation) and Bioschemas (Intrinsically Disordered
-    Proteins, Metabolomics, Toxicology).
-  - Toxicology and Food and Nutrition: the 2026 Toxicology meeting report
-    has a session on synergies with a guest talk from Food and Nutrition.
-  - Domestic Animals Genome and Phenome and Plant Sciences: the 2025–2030
-    roadmap reports strong links on food and agriculture challenges.
-
-  **bio.tools Community tags** (tools tagged with two or more Communities)
-  - Metabolomics and Proteomics: mzspeclib, CarveMe, Profiler, shic
-  - Galaxy and Metabolomics: WaveICA, CAMERA, shic
-  - Galaxy and Plant Sciences: TideCluster
-  - Microbial Biotechnology and Plant Sciences: JLOH, Redundans, ASAFind
-  - 3D-BioInfo and Rare Diseases: DDGun, DDGemb
-  - Human Copy Number Variation and Rare Diseases: Beacon+, Gen Seeker
-
-  **No shared item found**: Domestic Animals Genome and Phenome has no
-  project tag. Rare Diseases has no current shared project.
-
-  Sources:
-  - Communities: https://elixir-europe.org/communities
-  - Projects:
-    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/metabolomics,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/genomic-data,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/data,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fhd,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fega,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/spatial2,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/ontologies,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/pdbe,
-    https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/tellme
-  - F1000: https://f1000research.com/articles/14-884,
-    https://f1000research.com/documents/15-1506,
-    https://f1000research.com/documents/15-229
-  - bio.tools: https://bio.tools/mzspeclib, https://bio.tools/carveme,
-    https://bio.tools/profiler, https://bio.tools/shic,
-    https://bio.tools/waveica, https://bio.tools/camera,
-    https://bio.tools/tidecluster, https://bio.tools/jloh,
-    https://bio.tools/redundans, https://bio.tools/asafind,
-    https://bio.tools/ddgun, https://bio.tools/ddgemb,
-    https://bio.tools/beaconplus, https://bio.tools/gen_seeker
+  Metabolomics, Research Data Management and Systems Biology appear in both RCI-M and DBTLHub. These are documented connections; sharing a topic or project does not by itself mean the work is duplicated.
 eval_notes: |
+  Intent: identify useful connections between Communities. Topic, project, output or people-based interpretations are all reasonable; no ranking or exhaustive network is requested.
+
   Scored:
-  1. RCI-M as a cluster: at least five of its eight Communities, with
-     Metabolomics.
-  2. DBTLHub as a cluster: at least four of its six Communities, with
-     Microbial Biotechnology.
-  3. Human data overlaps: Cancer Data with Federated Human Data (any of the
-     shared projects), and at least one more of FHDportal, FEGA-Connect or
-     Spatial2Galaxy.
-  4. Protein overlaps: 3D-BioInfo, Intrinsically Disordered Proteins and
-     Proteomics as a group, from the projects or from the F1000 article.
-  5. At least two overlaps from outputs or bio.tools tags, each with its
-     source (e.g. Toxicology with Food and Nutrition; Metabolomics with
-     Proteomics in bio.tools).
-  6. Every overlap names its shared item and source.
-  Accepted: the area-level pages "Cellular and molecular research" and
-  "Human data and translational research" as an extra cluster if marked as a
-  programme area, not a project. Overlaps from older projects (before 2024)
-  if dated as past.
-  Traps: Marine Metagenomics appears in bio.tools tags and old projects but
-  is a former Community. omnipy and Galaxy France carry six to nine
-  Community tags each and do not show a topic overlap. bio.tools tags exist
-  for only 11 current Communities. The ELIXIR-UK "Human Data Community" is a
-  national group, not the Federated Human Data Community.
+  1. Identifies a concrete, supported selection of overlapping Communities.
+  2. Explains what connects them through shared topics, projects, outputs, resources or people, with enough detail to make the connection meaningful.
+  3. Keeps the meaning of the evidence accurate: planned collaboration is not a delivered output; a shared topic or catalogue tag is not proof of duplicated effort.
+
+  Accepted: any well-supported selection can replace the examples in the reference answer. Two strong connections can fully answer the question. Neither prescribed scientific domains nor every partner in a large project is required. A people-based interpretation can satisfy the same components with supported cross-Community roles. Do not demand bio.tools examples or a prescribed clustering scheme.
+
+  Evidence notes: RCI-M lists eight Communities and DBTLHub six. The PDBe-KB page names 3D-BioInfo in its text as well as IDP and Proteomics, although its Platform/Community field lists only the latter two. Marine Metagenomics is a former Community, now Microbiome. Catalogue tags alone may be broad or outdated.
 sources:
-  - data/input/elixir/communities-6227f498e77a.html
-  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-metabolomics-650970e517d0.html
-  - data/input/elixir/how-we-work-scientific-programme-science-cmr-dbtlhub-5b825e734781.html
-  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-fair-fega-5c49c71c2fbe.html
-  - data/input/elixir/how-we-work-scientific-programme-science-hdtr-genomic-data-e05c53545fd6.html
-  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-data-619cd9d00201.html
-  - data/input/elixir/how-we-work-scientific-programme-science-hdtr-fhd-fa67bfe29f8d.html
-  - data/input/elixir/how-we-work-scientific-programme-science-hdtr-fega-4ee9e0700e9f.html
-  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-spatial2-7ef279e7ecbd.html
-  - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-ontologies-8d19dbb6c1d2.html
-  - data/input/elixir/how-we-work-scientific-programme-science-cmr-pdbe-d5b3e9b970a2.html
-  - data/input/elixir/how-we-work-scientific-programme-science-cmr-tellme-b20314c918e4.html
-  - data/input/f1000/articles-14-884-3c1e1a5cc421.html
-  - data/input/f1000/documents-15-1506-a95ef205cc83.html
-  - data/input/f1000/documents-15-229-4f44aab4ae52.html
-  - data/input/biotools/
+- data/input/elixir/communities-6227f498e77a.html
+- data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-metabolomics-650970e517d0.html
+- data/input/elixir/how-we-work-scientific-programme-science-cmr-dbtlhub-5b825e734781.html
+- data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-hdtr-fair-fega-5c49c71c2fbe.html
+- data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-cmr-ontologies-8d19dbb6c1d2.html
+- data/input/elixir/how-we-work-scientific-programme-science-cmr-pdbe-d5b3e9b970a2.html
+- data/input/elixir/how-we-work-scientific-programme-science-cmr-tellme-b20314c918e4.html
+- data/input/f1000/articles-14-884-3c1e1a5cc421.html

@@ -1,86 +1,35 @@
 id: atlas_261111-004
-use_case: "A4"
+use_case: A4
 question: |
-  Which ELIXIR Communities document an onboarding process for new co-leads
-  or new members, and which onboarding material could other Communities
-  reuse? Please include links.
+  Does anyone have onboarding material for new Community members or co-leads?
 answerability: partially_answerable
 reference_answer: |
-  **Communities with a documented onboarding process**
-  - **Research Data Management** is the only Community whose public page
-    documents one. The page links an "ELIXIR RDM Community onboarding
-    document", available after approval through "Join this Community". The
-    public Community framework (v02, 2025) sets out who the Community is
-    for, member roles (liaisons, working-group representatives), rules,
-    channels, governance and a three-step joining route. The DATAREX
-    Scientific End Report (2026) says the project developed "community
-    frameworks and onboarding documents".
-  - The onboarding document itself is not public, so its content cannot be
-    checked.
+  Yes. **Start with the [RDM Community framework](https://doi.org/10.5281/zenodo.15235047)**: it describes membership, roles, ways of working, communication channels and how to join. It is a useful public example to adapt for another Community.
 
-  **ELIXIR-wide material for Communities**
-  - Communities Handbook (2024): membership, the Hub liaison, mailing lists,
-    Slack, and co-lead roles. It links "How to join an ELIXIR Community"
-    guides for ELIXIR and non-ELIXIR members on Google Drive. It has no
-    co-lead onboarding procedure.
-  - Co-lead elections 2026–2027: plans an "onboarding and handover" period
-    from mid-December 2026 to mid-January 2027, with new co-leads starting in
-    January 2027. The content of that onboarding is not published.
-  - The Communities Future Focus Group page does not mention onboarding.
+  The [RDM Community page](https://elixir-europe.org/communities/research-data-management) also offers an onboarding document after membership approval. Its contents are not available in the public snapshot, so I cannot say which parts of that document can be reused.
 
-  **Reusable material from outside the Communities**
-  - PeoplePulse M2.2 "ELIXIR Onboarding Protocol" (2025): formats,
-    checklists and content for onboarding new Node members, including
-    onboarding into a specific Platform or Community.
-  - Training Platform M3.12 "Onboarding SOP" (2026): onboarding of new
-    Training Coordinators, building on M3.10 (2025).
-  - The Equity, Diversity and Inclusion Focus Group plans guidance on
-    inclusive onboarding. Nothing is published yet.
+  Other useful starting points are:
 
-  Sources:
-  - RDM Community page:
-    https://elixir-europe.org/communities/research-data-management
-  - RDM onboarding document (login):
-    https://elixir-europe.org/documents/elixir-rdm-community-onboarding
-  - RDM Community framework: https://doi.org/10.5281/zenodo.15235047
-  - DATAREX Scientific End Report: https://doi.org/10.5281/zenodo.18508044
-  - Communities Handbook: https://f1000research.com/documents/13-80
-  - Co-lead elections: https://elixir-europe.org/communities/co-lead-elections
-  - Communities Future Focus Group:
-    https://elixir-europe.org/focus-groups/communities-future
-  - PeoplePulse M2.2: https://doi.org/10.5281/zenodo.17202558
-  - Training Platform M3.12: https://doi.org/10.5281/zenodo.20072664;
-    M3.10: https://doi.org/10.5281/zenodo.17258995
-  - EDI Focus Group:
-    https://elixir-europe.org/focus-groups/equity-diversity-and-inclusion
+  - The [Communities Handbook](https://f1000research.com/documents/13-80), for Community membership, co-lead roles and support from the Hub.
+  - The [PeoplePulse Onboarding Protocol](https://doi.org/10.5281/zenodo.17202558), for welcome emails, meetings, mentoring and follow-up. It was written for Node members, so it needs adapting for a Community.
+  - The Training Platform's [draft onboarding SOP](https://doi.org/10.5281/zenodo.20072664), for a structured process and checklist. It is for Training Coordinators, not Community co-leads, and is still a draft.
+
+  For co-leads specifically, the [election timetable](https://elixir-europe.org/communities/co-lead-elections) schedules onboarding and handover from mid-December 2026 to mid-January 2027, but does not publish the content.
 eval_notes: |
+  Intent: find material that can be used or adapted for Community onboarding. The question does not require a particular Community example or proof that no other process exists.
+
   Scored:
-  1. Research Data Management named as the Community with documented
-     onboarding, with the onboarding document behind "Join this Community".
-  2. The RDM Community framework on Zenodo as the public, reusable part,
-     with link.
-  3. States that no other Community page documents onboarding, and that the
-     RDM onboarding document's content is not public.
-  4. Handbook: covers joining and roles but has no co-lead onboarding
-     procedure; elections page gives an onboarding and handover period
-     without content.
-  5. At least one reusable resource from outside the Communities with link
-     (PeoplePulse Onboarding Protocol or Training Platform SOP).
-  Accepted: the Handbook's "How to join" guides counted as member onboarding
-  material.
-  Traps: the RDM Trainer Network is part of RDM, not another Community. The
-  Training Platform SOP is for Training Coordinators, not Community
-  co-leads. "Onboarding snakemake" and FEGA onboarding posters are about
-  software and data services.
+  1. Identifies relevant, documented onboarding or orientation material, with its audience described accurately. Supported examples include RDM's framework, the Communities Handbook, PeoplePulse's protocol and the Training Platform's SOP; equivalent supported resources are acceptable.
+  2. Explains what the user can use from the material, rather than giving a bare name or promising an inaccessible template.
+  3. Preserves access and publication status: restricted contents are not treated as inspected, and drafts or adaptations are not presented as final Community-specific procedures.
+
+  Accepted: a short recommendation focused on either members or co-leads. One well-chosen resource with a useful explanation can fully answer the request; neither RDM nor the full reference list is compulsory. Co-lead election dates are optional and are not a substitute for reusable material.
+
+  Evidence notes: RDM's public framework includes the joining route, member roles, governance and channels, while its onboarding document requires approval. The Handbook includes links to joining guides and describes co-lead responsibilities. PeoplePulse M2.2 gives flexible onboarding formats and content for Node members. Training M3.12's executive summary calls the SOP a draft awaiting review and targets Training Coordinators. The restricted RDM document and the scheduled co-lead handover cannot be treated as publicly inspected templates.
 sources:
-  - data/input/elixir/communities-research-data-management-ef9ea6882b1e.html
-  - data/input/zenodo/api-records-15235047-files-Framework_v02_2025.pdf-content-86626353c614.pdf
-  - data/input/zenodo/api-records-18508044-5c89b2229ad2.json
-  - data/input/f1000/documents-13-80-pdf-46f3f3cafe8c.pdf
-  - data/input/elixir/communities-co-lead-elections-98278416cde9.html
-  - data/input/elixir/focus-groups-communities-future-6412228fe213.html
-  - data/input/elixir/focus-groups-equity-diversity-and-inclusion-839dafe3dd9c.html
-  - data/input/zenodo/202558-files-ELIXIR-Onboarding-Protocol_-Recommendations-and-Guidelines---M2.2.pdf-content-7ce46eb88f00.pdf
-  - data/input/zenodo/api-records-20072664-files-TECHNOLOGY_Training-Platform_M3.12.pdf-content-97ea619b421a.pdf
-  - data/input/zenodo/api-records-17258995-b55cc8ff8e29.json
-  - data/input/elixir/communities-6227f498e77a.html
+- data/input/elixir/communities-research-data-management-ef9ea6882b1e.html
+- data/input/zenodo/api-records-15235047-files-Framework_v02_2025.pdf-content-86626353c614.pdf
+- data/input/f1000/documents-13-80-pdf-46f3f3cafe8c.pdf
+- data/input/elixir/communities-co-lead-elections-98278416cde9.html
+- data/input/zenodo/202558-files-ELIXIR-Onboarding-Protocol_-Recommendations-and-Guidelines---M2.2.pdf-content-7ce46eb88f00.pdf
+- data/input/zenodo/api-records-20072664-files-TECHNOLOGY_Training-Platform_M3.12.pdf-content-97ea619b421a.pdf
