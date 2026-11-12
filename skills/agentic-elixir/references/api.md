@@ -1,5 +1,7 @@
 # Atlas API
 
+This is an optional online interface. The installed skill uses the bundled release through [query.md](query.md); it does not need API access. Some cloud sessions block shell networking, and web-fetch summaries are not a substitute for raw records. The API can serve a different release from the package.
+
 Base URL: `https://atlas-production-d392fb6d.up.railway.app`
 
 Requests return JSON without authentication. URL-encode GET parameters and send SQL as a JSON POST body. Full endpoint details: [API docs](https://atlas-production-d392fb6d.up.railway.app/docs).
