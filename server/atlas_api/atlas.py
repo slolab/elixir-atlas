@@ -58,12 +58,14 @@ def overview(db, topology):
     routes = routes_of(topology)
     cards = {}
     for card, (table, where, _title, _details, label, description) in CARDS.items():
+        if table not in topology:
+            continue
         n = rows(db, f"SELECT count(*) n FROM {ident(table)}" + (f" WHERE {where}" if where else ""))[0]["n"]
         cards[card] = {"id": card, "label": label, "description": description, "table": table, "count": n}
     qs = []
     for q in questions():
         unknown = [r for r in q["routes"] if r not in routes]
-        qs.append({**q, "routes": [r for r in q["routes"] if r in routes], "missing_routes": unknown})
+        qs.append({**q, "cards": [c for c in q["cards"] if c in cards], "routes": [r for r in q["routes"] if r in routes], "missing_routes": unknown})
     return {"questions": qs, "cards": cards, "routes": routes}
 
 
@@ -106,6 +108,8 @@ def pick(db, topology, question_id, picks):
     seen_links = set()
     for card in q["cards"]:
         table = CARDS[card][0]
+        if table not in topology:
+            continue
         base, _t, where = card_sql(card)
         allowed = None
         for pc, pid in picks:
