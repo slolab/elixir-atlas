@@ -64,12 +64,3 @@ A future reviewer records the approved target, exact field/value or identity dec
 Apply identity decisions before alignment and field corrections before dependent summaries. For example, a corrected initiative date must override sources before calculating its period and Node involvement; a corrected person name must reach leader summaries. A final SQL patch alone would leave derived records inconsistent.
 
 The existing `data/input/review-decisions.csv` is a possible integration point. It currently supports `same` decisions for detected candidates and selected conflict resolutions; `different` does not split an already merged identity. General identity correction and tier-0 ingestion require a follow-up. This feature does not read requests during builds or alter existing review decisions.
-
-## Validation
-
-Server tests cover validation, both submission origins, receipt and release context, unchanged graph data, persistence through release import and repeated provisioning, failed writes, database permissions, and unavailable SQLite mode. Set `ATLAS_TEST_ADMIN_URL` to a disposable PostgreSQL instance for database tests; they create and remove their own database and logins.
-
-```bash
-npm run build --prefix dashboard
-PYTHONPATH=server uv run --project server python -m unittest discover -s server/tests -v
-```

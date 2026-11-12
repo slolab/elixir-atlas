@@ -107,7 +107,7 @@ class BuiltSnapshotTests(unittest.TestCase):
             self.assertTrue(views.reviews(db, "")["items"])
             for liaisons in (False, True):
                 for groups_only in (False, True):
-                    self.assertTrue(views.overlap(db, liaisons, groups_only, 3, False)["holders"])
+                    self.assertTrue(views.overlap(db, liaisons, groups_only, 3)["holders"])
             for type in db.schema:
                 entry = db.execute("SELECT id FROM search_document WHERE entity_type=? LIMIT 1", (type,)).fetchone()
                 if entry:

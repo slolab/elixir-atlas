@@ -140,7 +140,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertTrue(views.reviews(conn, "")["items"])
         for liaisons in (False, True):
             for groups in (False, True):
-                self.assertIn("holders", views.overlap(conn, liaisons, groups, 3, False))
+                self.assertIn("holders", views.overlap(conn, liaisons, groups, 3))
         self.assertIsNone(views.person(conn, "missing"))
 
     def test_search_paging_filters_phrases_and_injection(self):
