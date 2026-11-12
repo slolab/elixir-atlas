@@ -39,6 +39,10 @@ rubric:
 
       Distinguish evidence from inference. Unsupported certainty, invented
       facts and claims that missing evidence proves absence are errors.
+      Judge qualified claims as written. Reporting that a search did not
+      find a particular kind of resource does not by itself assert that no
+      related evidence exists. Missing required answer content still loses
+      coverage; a search limitation does not replace an answer.
       Material false claims in extra content also count against correctness.
       Assess writing and presentation separately under usefulness.
 
@@ -55,8 +59,10 @@ rubric:
       Intent may be implicit. Do not demand a purpose or output format that
       the question never specified. Score each of these four qualities 1
       when met and 0 otherwise:
-      1. The opening gives the main answer, practical action or necessary
-         limitation, rather than research process or background.
+      1. The opening promptly gives the main answer, practical action or
+         necessary limitation. A brief relevant clarification of the entity
+         or scope is acceptable; research process or extended background
+         must not delay the answer.
       2. The detail is sufficient and proportionate to the request. Secondary
          facts and caveats do not bury the result; brevity alone is not enough.
       3. The language and structure are clear and easy to use. The answer

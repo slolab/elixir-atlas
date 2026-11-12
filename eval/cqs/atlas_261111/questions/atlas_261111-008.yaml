@@ -1,7 +1,7 @@
 id: atlas_261111-008
 use_case: B3
 question: |
-  Who's working on what for ELIXIR Estonia at the moment?
+  Who's doing what on Estonia's ELIXIR projects at the moment?
 answerability: partially_answerable
 reference_answer: |
   The current ELIXIR project plans and recent outputs name these contributors:
@@ -18,7 +18,7 @@ reference_answer: |
 
   This is the public project record, not a live allocation of everyone's work. A plan or report credit shows a documented role or contribution; it does not establish what someone is doing today.
 eval_notes: |
-  Intent: identify current people and their work for ELIXIR Estonia. The question is broad; a project-based view or a clearly scoped Node-role view is reasonable. Do not require the user to know which projects to name.
+  Intent: identify people and their current ELIXIR project activities in Estonia. Do not require the user to know which projects to name. A general Node leadership directory alone does not answer which project work those people do.
 
   Scored:
   1. Identifies Hedi Peterson and connects her to substantive current work, such as the STEERS tasks, Tools outreach or Node support.
@@ -27,7 +27,7 @@ eval_notes: |
   4. Identifies further documented STEERS contributors with their actual role, such as Uku Raudvere, Heleri Inno or Kairi Koort; does not substitute names from unrelated completed projects.
   5. Keeps evidence dates and role types honest: a past output or planned participation is not proof of a person's live workload, task ownership or salary funding.
 
-  Accepted: other supported contributors and activities. No exact total of seven people or full governance roster is required. A response explicitly focused on Node coordination roles may instead identify the Node's Head, deputy, technical and training coordinators and describe their functions; do not penalise that plausible interpretation for omitting project contributors. Individual funding or person-month figures are not requested and need not be discussed.
+  Accepted: other supported contributors and project activities. No exact total of seven people or full governance roster is required. Node coordinators may be included when connected to specific project work. Individual funding or person-month figures are not requested and need not be discussed.
 
   Evidence notes: Compute WP4 Activity 2 names Kaur Alasoo as co-lead; WP3 names him among members. Tools WP2 Activity 3 names Hedi Peterson and Magnus Palmblad as co-leads. Priit Adler is a Training WP4 member. Diana Pilvar is named in the Training outputs, not in that work plan. The STEERS handbook identifies Kairi Koort as deputy in the Heads of Nodes Committee, which is a governance role rather than a technical task.
 sources:

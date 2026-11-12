@@ -1,10 +1,10 @@
 id: atlas_261111-002
 use_case: A2
 question: |
-  Which ELIXIR Communities have gone quiet lately?
+  Which ELIXIR Communities have gone quiet over the past year?
 answerability: partially_answerable
 reference_answer: |
-  **[Cancer Data](https://elixir-europe.org/communities/cancer-data) and [Microbial Biotechnology](https://elixir-europe.org/communities/microbial-biotechnology) are the first ones I would follow up with.** Taking “lately” as roughly the past year, I found no recent dated Community event or output for either in the available public record.
+  **[Cancer Data](https://elixir-europe.org/communities/cancer-data) and [Microbial Biotechnology](https://elixir-europe.org/communities/microbial-biotechnology) are the first ones I would follow up with.** I found no dated Community event or output for either over the past year in the available public record.
 
   - **Cancer Data:** its [FAIR-FEGA project page](https://elixir-europe.org/how-we-work/scientific-programme/science/hdtr/fair-fega) was published in June 2025 and names the Community. Its Community page has no recent news or event listing.
   - **Microbial Biotechnology:** the [DBTLHub page](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub), published in July 2025, names it as a partner, but I found no recent Community event or output.
@@ -13,7 +13,7 @@ reference_answer: |
 
   Some other Communities have a thin public trail but do have recent evidence: **Federated Human Data and Intrinsically Disordered Proteins** appear in the [August 2026 STEERS outreach report](https://doi.org/10.5281/zenodo.22096360), and **Human Copy Number Variation** was selected as a [benchmarking collaborator in September 2026](https://doi.org/10.5281/zenodo.22730058). I would not label them inactive on that evidence.
 eval_notes: |
-  Intent: identify Communities that may need follow-up because their recent activity is unclear. “Lately” has no exact cutoff in the question. Accept a reasonable stated period relative to 11 November 2026, including the past year or the current year; do not require exact latest-evidence dates.
+  Intent: identify Communities that may need follow-up because their public activity over the past year is unclear. Use roughly November 2025 to November 2026; do not require exact latest-evidence dates or a particular activity taxonomy.
 
   Scored:
   1. Identifies Cancer Data as a Community with weak recent public evidence, or provides dated evidence supporting a different conclusion.
@@ -21,9 +21,11 @@ eval_notes: |
   3. Distinguishes missing public evidence from confirmed inactivity or closure.
   4. Checks the proposed inactive list against recent evidence: does not dismiss a Community with a relevant dated output, meeting or documented participation within the chosen period without explaining the distinction.
 
-  Accepted: a shorter recent window can produce a different candidate list if the answer states the window and supports the candidates. An answer may call the STEERS outreach participation and Tools benchmarking work activity, or distinguish them from a Community's own event or output. The user does not need an inventory of every active Community or the evaluator's full activity taxonomy.
+  Accepted: different supported watchlists that assess the requested period and account for relevant recent evidence. An answer may call the STEERS outreach participation and Tools benchmarking work activity, or distinguish them from a Community's own event or output. Thin activity is not the same as no activity. The user does not need an inventory of every active Community or the evaluator's full activity taxonomy.
 
   Evidence notes: FAIR-FEGA's page was published 30 June 2025 and DBTLHub's 1 July 2025; these are page publication dates, not event dates. Later page modifications do not establish new activity. Proteomics is named on the PDBe-KB project page published 28 November 2025. The 2026 F1000 records include dated reports for Single-Cell Omics, Systems Biology, Toxicology and Galaxy, and a Rare Diseases roadmap. The ELIXIR-UK Human Data Community is a national group and should not be silently substituted for Federated Human Data.
+
+  Metabolomics has substantive evidence within the requested year: the Groningen RCI-M workshop report, published 7 March 2026, describes a meeting on 16–17 February 2026 and practical work led by a Metabolomics Community co-lead. A low-activity assessment must address this evidence; old overview-page references and election vacancies alone do not establish that the Community has gone quiet.
 sources:
 - data/input/elixir/communities-6227f498e77a.html
 - data/input/elixir/communities-cancer-data-096a7c12a376.html
@@ -46,6 +48,8 @@ sources:
 - data/input/f1000/posters-15-1088-7730863b31a1.html
 - data/input/f1000/posters-15-943-bfa5fec280ce.html
 - data/input/f1000/documents-15-372-9aef02184acc.html
+- data/input/f1000/documents-15-372-pdf-509762c95831.pdf
+- data/input/elixir/how-we-work-scientific-programme-science-cmr-metabolomics-b4a8a1f7e589.html
 - data/input/f1000/articles-14-739-8d845081f7fe.html
 - data/input/f1000/articles-15-339-25264896b524.html
 - data/input/node-uk/event-human-data-community-2026-priorities-priorities-09d7da35403a.html

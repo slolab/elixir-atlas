@@ -1,7 +1,7 @@
 id: atlas_261111-021
 use_case: "C2.5"
 question: |
-  Can the Systems Biology Community actually pull off the bundle discussed in September?
+  Can the Systems Biology Community actually pull off the bundle discussed at its September meeting?
 answerability: partially_answerable
 reference_answer: |
   It looks plausible as a small pilot, but the public record does not
@@ -41,7 +41,8 @@ eval_notes: |
   4. Identifies the material information needed before committing, such as
      owners, effort, schedule or funding, without turning absent public
      evidence into proof that no funding or coordination exists.
-  5. Proposes a practical next step proportionate to the uncertainty.
+  A practical next step can improve the answer but is not required for a
+  complete, supported feasibility assessment.
   Accepted: a cautious positive or negative assessment with evidence, a
   smaller pilot, or another appropriate comparator. The 2023 rare-disease
   bundle is one possible precedent, not a required answer. Its document

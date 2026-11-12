@@ -12,6 +12,8 @@ Version 2 of `atlas_261111` scores correctness and usefulness separately. Correc
 
 The questions use ordinary phrasing, shorthand and omissions. They do not spell out an imagined user's purpose or supply the research method. The reference answers and grading notes allow reasonable interpretations. See the [authoring and review notes](cqs/atlas_261111/sidenotes.md). Version 2 retains the same 21 use cases and data snapshot; its scores are not directly comparable with version 1.
 
+The [raw-data fairness review](cqs/atlas_261111/sidenotes.md#raw-data-fairness-review-12-november-2026) separates missed evidence from question ambiguity and grading mistakes. It covers a 21-question baseline, eight targeted repeat trials and eight same-answer regrades. The resulting changes clarify four questions and remove unsupported grading requirements; agent retrieval failures remain failures.
+
 ## Run the evaluation
 
 ```bash

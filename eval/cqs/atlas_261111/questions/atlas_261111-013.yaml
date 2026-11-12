@@ -1,7 +1,7 @@
 id: atlas_261111-013
 use_case: "B9"
 question: |
-  What has ELIXIR Germany delivered this year?
+  What has ELIXIR Germany delivered across its projects this year?
 answerability: partially_answerable
 reference_answer: |
   Public records show German contributions to several outputs published
@@ -36,13 +36,20 @@ eval_notes: |
   5. Describes the coverage honestly rather than presenting a selected
      public record set as Germany's complete annual output.
   Accepted: other evidenced outputs, publications, software, training or
-  service activity. A useful representative overview can pass without
+  service activity linked to its projects. General Node news or routine
+  services alone do not answer the project-output question.
+  A useful representative overview can pass without
   matching every example or an exact count. Neither Zenodo nor a German
   author-affiliation filter is part of the user's question. Do not require
   29 records, funding figures, a missing-output inventory, specific German
   authors, or the former mandatory WP7 example. The Tools Platform record
   was published in 2026 but reports a 2025 meeting. E-PAN output publication
   after its listed end date is not itself an error.
+  Training Platform D4.4 (Zenodo 20098046), published 30 March 2026,
+  explicitly lists ELIXIR-DE as a responsible participant and credits
+  Lisanna Paladin under Node DE / EMBL-HD on its first page. Accept that
+  source-attributed contribution; EMBL affiliation alone still does not
+  establish German Node involvement.
 sources:
   - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-bfsp-e-pan-501112af6ba5.html
   - data/input/elixir/how-we-work-scientific-programme-commissioned-services-science-bfsp-fairymags-dea92e6d26cf.html
@@ -95,3 +102,5 @@ sources:
   - data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
   - data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf
   - data/input/node-germany/commissioned-services-of-elixir-de-f54a7ab67524.html
+  - data/input/zenodo/api-records-20098046-735967307afc.json
+  - data/input/zenodo/api-records-20098046-files-TECHNOLOGY_Training-Platform_D4.4.pdf-content-115fcdb939d3.pdf

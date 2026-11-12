@@ -25,8 +25,8 @@ reference_answer: |
   commitments.
 eval_notes: |
   Scored:
-  1. Identifies a concrete update need: the project page's January 2026 end
-     conflicts with newer evidence that the HDTR projects run through 2026.
+  1. Identifies a concrete, evidenced update need, such as unresolved status
+     after the page's listed end date or conflicting public dates.
   2. Does not invent a precise revised FAIR-FEGA date from the area's
      December 2026 date or infer actual completion from a scheduled end.
   3. If recommending additions, accurately distinguishes related material
@@ -37,6 +37,9 @@ eval_notes: |
   Accepted: a date-focused answer alone, other supported updates, or a
   proposed edit with unresolved facts marked. Related publications are
   optional, not an extra condition for a complete answer.
+  Forward-looking copy after the listed end date can justify requesting a
+  dated status update. Discovering the Annual Report discrepancy is useful
+  but not mandatory; a scheduled end alone does not prove completion.
   The prompt does not require the page's creation/edit timestamps, a
   complete change log, or a prescribed source search. The June 2025
   'Unifying FEGA metadata' poster is relevant background but not a new output

@@ -145,7 +145,7 @@ def report(job_dir, cq_set):
     (job_dir / "traces.json").write_text(json.dumps(traces, indent=2) + "\n")
     rubrics = [rubric["name"] for rubric in cq_set["rubric"]]
     print("\n" + "  ".join(["question".ljust(20), *(name.ljust(22) for name in rubrics), "agent error"]))
-    for question, grades, error in sorted(rows):
+    for question, grades, error in sorted(rows, key=lambda row: row[0]):
         cells = [grades[name]["verdict"] + (" (escalated)" if grades[name]["judge"] == ESCALATION else "")
                  for name in rubrics]
         print("  ".join([question.ljust(20), *(cell.ljust(22) for cell in cells), error]))
