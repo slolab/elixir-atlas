@@ -948,6 +948,402 @@ p {
 .evidence-list { padding-left: 1.4rem; }
 .evidence-list li { margin: 1rem 0; overflow-wrap: anywhere; }
 .evidence-list span, .evidence-list code { display: block; margin-top: .2rem; font-size: .85rem; }
+
+.finder {
+  --finder-blue: var(--trace-c);
+  --finder-green: var(--trace-a);
+  overflow-wrap: anywhere;
+}
+
+.finder-hero {
+  padding: 24px 0 36px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.finder-hero h1 {
+  max-width: 24ch;
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  line-height: 1.08;
+}
+
+.finder-picker {
+  position: relative;
+  max-width: 780px;
+  margin-top: 28px;
+}
+
+.finder-picker > label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 650;
+}
+
+.finder-picker > input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 2px solid var(--finder-blue);
+  border-radius: 8px;
+  background: var(--raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.05rem;
+}
+
+.finder-picker > input:disabled {
+  border-color: var(--rule);
+}
+
+.finder-hint {
+  margin-top: 8px;
+}
+
+.finder-suggestions,
+.finder-chosen,
+.finder-starters,
+.finder-communities,
+.finder-resources,
+.finder-papers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.finder-suggestions {
+  margin-top: 12px;
+  padding: 6px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--raised);
+}
+
+.finder-suggestions button,
+.finder-starters button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.finder-suggestions button {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.finder-suggestions button:hover,
+.finder-starters button:hover {
+  background: color-mix(in srgb, var(--finder-blue) 7%, var(--raised));
+}
+
+.finder small {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.finder-chosen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.finder-chosen > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 4px 14px;
+  border: 1px solid color-mix(in srgb, var(--finder-blue) 40%, var(--rule));
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--finder-blue) 7%, var(--raised));
+  font-weight: 550;
+}
+
+.finder-chosen button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.finder-chosen button:hover {
+  background: var(--raised);
+}
+
+.finder-starters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.finder-starters button {
+  height: 100%;
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--raised);
+  font-weight: 600;
+}
+
+.finder-starters small {
+  display: block;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+.finder-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.finder-sections a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.finder-sections span {
+  margin-left: 5px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.finder .section {
+  margin-top: 40px;
+}
+
+.finder [id^="finder-"] {
+  scroll-margin-top: 110px;
+}
+
+.finder .section-head {
+  margin-bottom: 20px;
+}
+
+.finder .section-head .note {
+  max-width: 80ch;
+  margin-top: 8px;
+}
+
+.finder-communities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+
+.finder-community {
+  padding: 24px;
+  background: var(--raised);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--finder-blue);
+  border-radius: 8px;
+}
+
+.finder-community h3 {
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.finder-why {
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.finder-contact {
+  margin: 20px 0 0;
+}
+
+.finder-contact > div {
+  margin-top: 14px;
+}
+
+.finder-contact dt {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.finder-contact dd {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+}
+
+.finder-evidence {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+
+.finder-evidence summary {
+  cursor: pointer;
+  font-weight: 550;
+}
+
+.finder-evidence p,
+.finder-evidence > div {
+  max-width: 75ch;
+  margin-top: 12px;
+}
+
+.finder-evidence blockquote {
+  margin: 8px 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--rule);
+}
+
+.finder-evidence small {
+  display: block;
+  margin-top: 4px;
+}
+
+.finder-kind {
+  margin-top: 28px;
+}
+
+.finder-kind h3 {
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--rule);
+  font-size: 1.1rem;
+}
+
+.finder-resources > li,
+.finder-papers > li {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.finder-resource-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 24px;
+}
+
+.finder-resource-title > :first-child {
+  font-weight: 600;
+}
+
+.finder-record,
+.finder-type {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.finder-type {
+  display: block;
+  margin-top: 4px;
+}
+
+.finder-marks {
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.finder-mark {
+  display: inline-block;
+  margin: 0;
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.finder-mark.recommends {
+  border-color: color-mix(in srgb, var(--finder-green) 45%, var(--rule));
+  background: color-mix(in srgb, var(--finder-green) 7%, var(--raised));
+}
+
+.finder-mark.develops {
+  border-color: color-mix(in srgb, var(--finder-blue) 40%, var(--rule));
+  background: color-mix(in srgb, var(--finder-blue) 6%, var(--raised));
+}
+
+.finder-mark[open] {
+  width: 100%;
+  padding: 12px;
+}
+
+.finder-mark > .source {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.finder-papers small,
+.finder-papers .finder-record {
+  display: block;
+  margin-top: 6px;
+}
+
+.finder-training {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.finder-limits {
+  max-width: 85ch;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 760px) {
+  .finder-communities,
+  .finder-training {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .masthead .nav {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+
+  .finder-hero {
+    padding-top: 8px;
+  }
+
+  .finder-starters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .finder-suggestions button {
+    flex-direction: column;
+  }
+
+  .finder-community {
+    padding: 18px;
+  }
+
+  .finder [id^="finder-"] {
+    scroll-margin-top: 200px;
+  }
+}
+
 @media (max-width: 680px) {
   .record-fields > div { grid-template-columns: 1fr; gap: .3rem; }
   .search-type { align-items: stretch; flex-direction: column; gap: .4rem; }

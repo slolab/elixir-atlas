@@ -1,4 +1,5 @@
 import os
+from datetime import date
 import re
 import hashlib
 import threading
@@ -215,6 +216,19 @@ def kind(db: Database, id: RecordId):
 @app.get("/api/reviews")
 def reviews(db: Database, kind: str = Query(default="", max_length=100)):
     return views.reviews(db, kind)
+
+
+@app.get("/api/topics")
+def topic_list(db: Database):
+    return views.topics(db)
+
+
+@app.get("/api/topic-support")
+def topic_support(db: Database, topics: str = Query(min_length=1, max_length=2000)):
+    topic_ids = list(dict.fromkeys(t.strip() for t in topics.split(",") if t.strip()))
+    if not topic_ids or len(topic_ids) > 10:
+        raise HTTPException(422, "Choose between one and ten research topics.")
+    return views.topic_support(db, topic_ids, date.today().isoformat())
 
 
 @app.get("/api/overlap")

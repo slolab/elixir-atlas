@@ -10,6 +10,7 @@ import { RecordPage } from "./views/Record";
 import { KindList, Search } from "./views/Search";
 import { apiUrl, useApi } from "./db";
 import { UpdateRequest, UpdateRequestsEnabled } from "./UpdateRequest";
+import { TopicPage } from "./views/Topic";
 
 export function App() {
   const route = useRoute();
@@ -31,6 +32,8 @@ export function App() {
 
 function View({ page, id }: { page: string; id: string }) {
   switch (page) {
+    case "topic":
+      return <TopicPage id={id} />;
     case "record":
       return <RecordPage value={id} />;
     case "initiative":
@@ -85,6 +88,9 @@ function Masthead({ query, page }: { query: string; page: string }) {
         />
       </form>
       <nav className="nav">
+        <a href={href("topic")} aria-current={page === "topic" ? "page" : undefined}>
+          Find by topic
+        </a>
         <a href={href("overlap")} aria-current={page === "overlap" ? "page" : undefined}>
           Overlap
         </a>
