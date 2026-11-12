@@ -4,7 +4,13 @@ Base URL: `https://atlas-production-d392fb6d.up.railway.app`
 
 Requests return JSON without authentication. URL-encode GET parameters and send SQL as a JSON POST body. Full endpoint details: [API docs](https://atlas-production-d392fb6d.up.railway.app/docs).
 
-## SQL
+## Update requests
+
+When the user asks to report an incorrect answer, record, or ambiguous identity, check `api.update_requests` in `/api/release`. If true, POST JSON to `/api/update-requests` with `origin: "agent"`, a required `message`, and optional `proposed_change`, `evidence`, and `context` strings. Put the relevant answer excerpt in `context`. Supply both `entity_type` and `entity_id` for a known record, or omit both for a general report. For an ambiguity item, target `ReviewItem` and its ID. Message, proposal, and evidence each allow 5,000 characters; context allows 10,000.
+
+A 201 response returns the request `id` and `status: "pending"`. Tell the user the request was saved and the Atlas data has not changed. Submit only at the user's request, preserve uncertainty, and never treat a suggested match as an approved resolution. There is no review or approval API. If submissions are unavailable or fail, report that the request was not saved.
+
+## SQL queries
 
 Check `/api/release`. When `api.sql` is true, use `/api/schema?format=sql&detail=summary` to discover tables and relationship directions. Fetch full definitions with `&tables=initiative,holdsrole,person` (substitute your tables). These definitions retain the build's descriptions, types, nullability and foreign keys. Reuse them during the investigation. The unfiltered `/api/schema?format=sql` still returns everything; save large responses and inspect relevant sections rather than relying on truncated terminal output. Otherwise use the GET routes below.
 

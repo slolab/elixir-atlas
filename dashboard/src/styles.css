@@ -922,6 +922,16 @@ p {
 }
 
 .search-type { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; }
+.update-request { margin-bottom: 1.5rem; padding: .8rem 1rem; border: 1px solid var(--rule); background: var(--raised); }
+.update-request summary { cursor: pointer; font-weight: 600; }
+.update-request form, .update-request label { display: grid; gap: .5rem; }
+.update-request form, .update-request [role="status"] { margin-top: 1rem; }
+.update-request form { gap: 1rem; max-width: 48rem; }
+.update-request textarea { width: 100%; resize: vertical; padding: .6rem; border: 1px solid var(--rule); border-radius: 3px; font: inherit; color: var(--ink); background: var(--paper); }
+.update-request button { justify-self: start; padding: .5rem 1rem; font: inherit; cursor: pointer; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); }
+.update-request button:disabled { opacity: .5; cursor: default; }
+.update-request code { overflow-wrap: anywhere; }
+.reviews .update-request { margin-top: 1rem; }
 .search-type select { max-width: 100%; padding: .5rem .7rem; font: inherit; border: 1px solid currentColor; background: transparent; }
 .search-hits { list-style: none; padding: 0; }
 .search-hits > li { padding: 1.5rem 0; border-bottom: 1px solid #d9d6d0; }

@@ -99,7 +99,7 @@ export function InitiativePage({ id }: { id: string }) {
         </aside>
         <div className="main">
           {data.reviews.length ? (
-            <Section title="Open questions" note={`${data.reviews.length} places where the sources disagree or a match is unclear. A reviewer can settle them in the review decisions file.`}>
+            <Section title="Open questions" note={`${data.reviews.length} places where the sources disagree or a match is unclear. Request an update to suggest a resolution.`}>
               <More items={data.reviews} limit={2} render={(shown) => <ReviewList items={shown} />} />
             </Section>
           ) : null}

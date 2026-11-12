@@ -46,7 +46,7 @@ export function PersonPage({ id }: { id: string }) {
         </aside>
         <div className="main">
           {data.reviews.length ? (
-            <Section title="Open questions" note="This record may be the same person as another one. A reviewer can settle it in the review decisions file.">
+            <Section title="Open questions" note="This record may be the same person as another one. Request an update to suggest a resolution.">
               <More items={data.reviews} limit={2} render={(shown) => <ReviewList items={shown} />} />
             </Section>
           ) : null}

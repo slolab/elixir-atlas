@@ -2,7 +2,7 @@ import os
 import re
 import hashlib
 import threading
-from contextlib import asynccontextmanager, closing
+from contextlib import ExitStack, asynccontextmanager, closing
 from pathlib import Path
 from typing import Annotated, Literal
 
@@ -19,9 +19,10 @@ from pydantic import BaseModel, Field
 from . import views
 from .sqlite_snapshot import Snapshot
 from . import query
-from .permissions import check_reader
+from .permissions import check_reader, check_role
 from .schema import sql_schema
 from .tracing import trace
+from .update_requests import UpdateRequest, check_database, insert_request
 
 
 API_REVISION = hashlib.sha256(b"".join(path.name.encode() + path.read_bytes() for path in sorted(Path(__file__).parent.glob("*.py")))).hexdigest()
@@ -31,20 +32,28 @@ QUERY_SLOTS = threading.BoundedSemaphore(2)
 @asynccontextmanager
 async def lifespan(app):
     app.state.snapshot = None
+    app.state.request_pool = None
     app.state.trace_directory = os.environ.get("ATLAS_TRACE_DIR")
     if path := os.environ.get("ATLAS_SQLITE_PATH"):
         with closing(Snapshot(path)) as snapshot:
             app.state.snapshot = snapshot
             yield
         return
-    with ConnectionPool(os.environ["DATABASE_URL"], min_size=1, max_size=8, timeout=10, kwargs={"row_factory": dict_row, "prepare_threshold": None}) as pool:
+    with ExitStack() as stack:
+        pool = stack.enter_context(ConnectionPool(os.environ["DATABASE_URL"], min_size=1, max_size=8, timeout=10, kwargs={"row_factory": dict_row, "prepare_threshold": None}))
         with pool.connection() as conn:
             check_reader(conn)
         app.state.pool = pool
+        if writer_url := os.environ.get("ATLAS_REQUEST_DATABASE_URL"):
+            check_database(os.environ["DATABASE_URL"], writer_url)
+            writer = stack.enter_context(ConnectionPool(writer_url, min_size=1, max_size=2, timeout=5, kwargs={"row_factory": dict_row, "prepare_threshold": None}))
+            with writer.connection() as conn:
+                check_role(conn, request_writer=True)
+            app.state.request_pool = writer
         yield
 
 
-app = FastAPI(title="ELIXIR Atlas API", version="1.0.0", description="Read-only access to the Atlas release, records, relationships, source evidence and keyword search.", lifespan=lifespan)
+app = FastAPI(title="ELIXIR Atlas API", version="1.0.0", description="Read-only Atlas data and public submission of pending update requests.", lifespan=lifespan)
 app.middleware("http")(trace)
 
 
@@ -89,10 +98,29 @@ def health(db: Database):
 
 
 @app.get("/api/release")
-def release(db: Database):
+def release(request: Request, db: Database):
+    api = {"revision": API_REVISION, "sql": not isinstance(db, Snapshot), "update_requests": request.app.state.request_pool is not None}
     if isinstance(db, Snapshot):
-        return {**db.release, "api": {"revision": API_REVISION, "sql": False}}
-    return {**views.one(db, "SELECT id, manifest, counts, imported_at FROM release"), "api": {"revision": API_REVISION, "sql": True}}
+        return {**db.release, "api": api}
+    return {**views.one(db, "SELECT id, manifest, counts, imported_at FROM release"), "api": api}
+
+
+@app.post("/api/update-requests", status_code=201)
+def submit_update_request(body: UpdateRequest, request: Request, db: Database):
+    pool = request.app.state.request_pool
+    if pool is None:
+        raise HTTPException(503, "Update requests are unavailable in this deployment.")
+    current = views.one(db, "SELECT id FROM release")
+    if current is None:
+        raise HTTPException(503, "No release loaded")
+    if body.entity_type is not None:
+        record(db, body.entity_type, body.entity_id)
+    try:
+        with pool.connection() as writer:
+            result = insert_request(writer, body, current["id"])
+        return result
+    except DatabaseError as error:
+        raise HTTPException(503, "The request could not be saved. Please try again.") from error
 
 
 @app.get("/api/schema")
