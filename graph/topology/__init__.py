@@ -31,6 +31,7 @@ from .initiative.plan_linked_to import PlanLinkedTo
 from .initiative.related_to import RelatedTo
 from .initiative.shares_work_with import SharesWorkWith
 from .initiative.became import Became
+from .initiative.part_of import PartOf
 from .initiative.recommends import Recommends
 from .resource.is_tool import IsTool
 from .initiative.initiative_topic import InitiativeTopic
@@ -83,6 +84,7 @@ TOPOLOGY = Topology(
         PlanLinkedTo,
         RelatedTo,
         Became,
+        PartOf,
         Recommends,
         IsTool,
         InitiativeTopic,
@@ -148,6 +150,7 @@ __all__ = [
     "PlanLinkedTo",
     "RelatedTo",
     "Became",
+    "PartOf",
     "Recommends",
     "IsTool",
     "InitiativeTopic",

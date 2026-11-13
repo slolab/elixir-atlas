@@ -13,6 +13,7 @@ from ._documents import (
     PLAN_LINK_DOCUMENTS,
     RECOMMENDATION_DOCUMENTS,
     ROLE_DOCUMENTS,
+    UK_STRUCTURED_PAGES,
 )
 from .cordis import CordisParticipant, CordisParticipantReader, CordisProject, CordisProjectReader
 from .elixir_pages import (
@@ -26,6 +27,7 @@ from .elixir_pages import (
     GroupDirectoryReader,
 )
 from .initiatives import InitiativeReader, InitiativeStatement
+from .node_pages import NodePageRole, UkPeopleReader
 from .plan_links import PlanLink, PlanLinkReader
 from .plans import PlanItem, PlanReader
 from .recommendations import Recommendation, RecommendationReader
@@ -47,6 +49,7 @@ EXTRACTIONS: tuple[Extraction, ...] = (
     Extraction(
         name="role_statements", schema=RoleStatement, extractor=RoleReader, files=ROLE_DOCUMENTS, parallel=16
     ),
+    Extraction(name="node_page_roles", schema=NodePageRole, extractor=UkPeopleReader, files=UK_STRUCTURED_PAGES),
     Extraction(name="plan_items", schema=PlanItem, extractor=PlanReader, files=PLAN_DOCUMENTS, parallel=16),
     Extraction(
         name="group_directory", schema=GroupDirectoryEntry, extractor=GroupDirectoryReader, files=DIRECTORY_PAGES

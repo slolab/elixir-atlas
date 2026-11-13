@@ -63,7 +63,7 @@ def name_key(raw: str) -> str:
 
 
 def is_person_name(raw: str) -> bool:
-    if re.match(r"^\s*[A-Z]{2,3}-[A-Z]", raw) or not any(char.islower() for char in raw):
+    if re.match(r"^\s*[A-Z]{2,3}-[A-Z]", raw) or not any(char.islower() for char in raw) or re.search(r"\bERIC\b", raw):
         return False
     key = name_key(raw)
     tokens = key.split()

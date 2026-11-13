@@ -108,6 +108,15 @@ def resolve_people(mentions: list[Mention], same: list[tuple[str, str]]) -> Peop
         for mention in group:
             union.union(mention.key, f"{key}#")
             reasons.append((mention.key, "exact_name" if len(group) > 1 else "single_mention"))
+    reordered: dict[frozenset[str], set[str]] = defaultdict(set)
+    for key in by_key:
+        if key not in ambiguous and len(set(key.split())) >= 3:
+            reordered[frozenset(key.split())].add(key)
+    for keys in reordered.values():
+        if len(keys) == 2:
+            left, right = sorted(keys)
+            union.union(f"{left}#", f"{right}#")
+            reasons.append((by_key[left][0].key, "name_order"))
     for attribute in ("orcid", "email"):
         first: dict[str, str] = {}
         for mention in mentions:

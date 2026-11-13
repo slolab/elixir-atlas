@@ -57,6 +57,7 @@ class PlannedItem:
     url: str | None
     evidence: str | None
     topics: tuple[str, ...]
+    month_start: str | None = None
 
 
 def option(value: str, urls: list[str | None]) -> str:
@@ -192,7 +193,7 @@ def merge_plan_items(
     reviews: list[Review] = []
     date = agreed_date([v for v, _ in values if v])
     if not values:
-        date = next((found for item in items if (found := project_month(item.date_as_written, start))), None)
+        date = next((found for item in items if (found := project_month(item.date_as_written, item.month_start or start))), None)
     if conflict := date_conflict(plan_item_id, f"{label} ({first.initiative_name})", "date", [(v, u) for v, u in values if v]):
         reviews.append(conflict)
         date = chosen(conflict, decided)

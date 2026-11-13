@@ -116,11 +116,11 @@ class LlmExtractor(Extractor):
         self.key = key
         self.usage_log = os.environ.get("ATLAS_USAGE_LOG")
 
-    def ask(self, schema: Schema, document: Document, text: str) -> list[dict[str, Any]]:
+    def ask(self, schema: Schema, document: Document, text: str, note: str = "") -> list[dict[str, Any]]:
         instructions = self.instructions + ("\n\n" + topic_instructions() if self.uses_topics else "")
         system = SYSTEM.format(name=schema.name, description=schema.description, instructions=instructions)
         relative = document.path.relative_to(PROJECT_ROOT).as_posix()
-        user = f"Document: {relative}\nURL: {url_of(document.path) or 'unknown'}\n\n{text}"
+        user = f"Document: {relative}\nURL: {url_of(document.path) or 'unknown'}\n\n{note + chr(10) * 2 if note else ''}{text}"
         payload = {
             "model": self.settings["model"],
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],

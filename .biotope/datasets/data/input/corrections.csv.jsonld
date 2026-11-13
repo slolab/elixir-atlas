@@ -1,0 +1,246 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "data/input/corrections.csv",
+  "description": "Corrections that a Node or another person who knows the facts has confirmed. They take precedence over every other source for the fact they name. Each build applies them before it derives leaders, Node involvement and kinds, and reports any correction whose subject or target the build does not have.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "corrections.csv",
+      "name": "corrections.csv",
+      "contentSize": "1493",
+      "contentUrl": "data/input/corrections.csv",
+      "encodingFormat": "text/csv",
+      "sha256": "4b7823d1eee68d1329443ce98d029994889819b106ddf71d7278e297aa9559da"
+    }
+  ],
+  "dateCreated": "2026-11-13T09:07:59.103705+00:00",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "corrections.csv#corrections",
+      "name": "corrections",
+      "description": "One confirmed correction per row.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/subject",
+          "name": "subject",
+          "description": "The Atlas id the correction is about, such as person:tim-beck or initiative:eosc-entrust.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "subject"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'subject' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/property",
+          "name": "property",
+          "description": "node (the person's ELIXIR Node), role (the person's role in an initiative) or kind (an initiative's kind).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "property"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'property' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/action",
+          "name": "action",
+          "description": "add or remove for node and role; set for kind.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "action"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'action' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/target",
+          "name": "target",
+          "description": "The Node id (node:uk) or initiative id the node or role correction names; empty for kind.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "target"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'target' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/value",
+          "name": "value",
+          "description": "For role, the role kind (lead, co_lead, member, participant, ...); for kind, the initiative kind.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "value"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'value' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/role",
+          "name": "role",
+          "description": "For an added role, the role as the person who confirmed it writes it, such as PI.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "role"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'role' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/confirmed_by",
+          "name": "confirmed_by",
+          "description": "Who confirmed the correction, by position rather than by name.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "confirmed_by"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'confirmed_by' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/date",
+          "name": "date",
+          "description": "When it was confirmed, as YYYY-MM or YYYY-MM-DD.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "date"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'date' from corrections.csv"
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "corrections.csv#corrections/note",
+          "name": "note",
+          "description": "What the correction is based on.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "corrections.csv"
+            },
+            "extract": {
+              "column": "note"
+            }
+          },
+          "biotope:fromData": {
+            "description": "Column 'note' from corrections.csv"
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true,
+      "biotope:fromData": {
+        "description": "Records from corrections.csv"
+      }
+    }
+  ],
+  "biotope:status": "processed",
+  "biotope:fromData": {
+    "description": "Dataset for corrections.csv"
+  }
+}

@@ -15,12 +15,12 @@ from ..alignment.keys import acronym_key, family, group_key, plain, url_key
 from ..alignment.links import (
     BecameLink,
     CatalogueLink,
+    Located,
     DocumentInfo,
     EdgeLink,
     EventLink,
     InitiativeRecord,
     Linked,
-    Located,
     OutputLink,
     ParticipationLink,
     PlanItemRecord,
@@ -62,7 +62,7 @@ from ..mappings.catalogues import (
 )
 from ..mappings.derived import INVOLVED_IN, NODE_INVOLVED_IN, PLAN_LINKED_TO, SHARES_WORK_WITH
 from ..mappings.entities import ELIXIR_NODES, ORGANISATIONS, PEOPLE, REVIEW_ITEMS
-from ..mappings.initiatives import BECAME, INITIATIVES, PARTICIPATIONS, RELATED_TO, SOURCE_STATEMENTS, TAKES_PART_IN
+from ..mappings.initiatives import BECAME, INITIATIVES, PART_OF, PARTICIPATIONS, RELATED_TO, SOURCE_STATEMENTS, TAKES_PART_IN
 from ..mappings.people import AFFILIATED_WITH, CANDIDATES, HOLDS_ROLE, IN_NODE, WORKS_ON_PLAN_ITEM
 from ..mappings.plans import PLAN_ITEMS
 from ..mappings.resources import RECOMMENDS, RESOURCES
@@ -77,6 +77,8 @@ from ..sources.catalogues.tess_events.loader import load as load_events
 from ..sources.catalogues.tess_facets.loader import load as load_facets
 from ..sources.catalogues.tess_materials.loader import load as load_materials
 from ..sources.catalogues.zenodo_records.loader import load as load_zenodo
+from ..sources.corrections_csv.corrections_csv_corrections.loader import load as load_corrections
+from ..sources.corrections_csv.corrections_csv_corrections.schema import Correction
 from ..sources.cordis_participants_jsonl.records.loader import load as load_participants
 from ..sources.cordis_projects_jsonl.records.loader import load as load_projects
 from ..sources.data_sources_scraping_jsonl.scraping_index.loader import load as load_index
@@ -90,6 +92,8 @@ from ..sources.group_directory_jsonl.records.loader import load as load_director
 from ..sources.group_directory_jsonl.records.schema import GroupDirectoryRow
 from ..sources.initiative_statements_jsonl.records.loader import load as load_statements
 from ..sources.initiative_statements_jsonl.records.schema import InitiativeStatementRow
+from ..sources.node_page_roles_jsonl.node_page_roles_jsonl_node_page_roles.loader import load as load_node_roles
+from ..sources.node_page_roles_jsonl.node_page_roles_jsonl_node_page_roles.schema import NodePageRoleRow
 from ..sources.perun.export.loader import load as load_perun
 from ..sources.perun.export_2.loader import load as load_perun_2
 from ..sources.plan_items_jsonl.records.loader import load as load_plan_items
@@ -139,6 +143,11 @@ SERIES_BASES = frozenset({"linked", "deliverable", "grant"})
 GROUP_QUALIFIER = re.compile(r"community|platform|focus group|elixir", re.I)
 DELIVERABLE_CODE = re.compile(r"\b([DM]\s?\d+\.\d+)\b")
 PLAN_PROJECT_KINDS = frozenset({"work_package", "task", "deliverable", "milestone"})
+EU_PROJECT_LISTING = "elixir-europe.org/about-us/how-funded/eu-projects"
+LEAD_CLAIMS = frozenset({"lead", "co_lead", "chair", "coordinator"})
+UNCONFIRMED_LEAD = "unconfirmed_lead"
+INTERNATIONAL_NODES = frozenset({"node:embl-ebi", "node:hub"})
+CORRECTED = Located(None, None, None)
 GROUP_WORDS = (
     ("community", "community"),
     ("platform", "platform"),
@@ -360,6 +369,44 @@ def funding(value: RoleStatementRow, evidence: str | None) -> str:
     return value.funding
 
 
+def node_page_role(row: SourceRecord[NodePageRoleRow]) -> SourceRecord[RoleStatementRow]:
+    value = row.value
+    statement = RoleStatementRow(
+        id=f"node_page:{value.id}",
+        document=value.document,
+        person_name=value.person_name,
+        role=value.role,
+        role_kind=value.role_kind,
+        place=value.place,
+        place_kind=value.place_kind,
+        affiliation=value.affiliation,
+        node=value.node,
+        funding="not_stated",
+        email=None,
+    )
+    return SourceRecord(statement, row.evidence)
+
+
+def corrected_role(row: SourceRecord[Correction], person: str, place: str) -> SourceRecord[RoleStatementRow]:
+    value = row.value
+    statement = RoleStatementRow(
+        id=f"correction:{row.evidence[0].location}",
+        document=row.evidence[0].artifact,
+        person_name=person,
+        role=value.role or value.value or "member",
+        role_kind=value.value or "member",
+        place=place,
+        place_kind="group",
+        funding="not_stated",
+        email=None,
+    )
+    return SourceRecord(statement, row.evidence)
+
+
+def correction_note(value: Correction) -> str:
+    return f"Confirmed by {value.confirmed_by or 'a reviewer'}{' (' + value.date + ')' if value.date else ''}: {value.note or ''}".strip()
+
+
 def meaningful(name: str) -> bool:
     if plain(name) in INFRASTRUCTURE_NAMES:
         return True
@@ -506,7 +553,9 @@ def run(context: RunContext) -> None:
     statements = list(load_statements(context))
     projects = list(load_projects(context))
     participants = list(load_participants(context))
-    roles = list(load_roles(context))
+    node_roles = list(load_node_roles(context))
+    roles = [*load_roles(context), *(node_page_role(row) for row in node_roles)]
+    corrections = list(load_corrections(context))
     plans = list(load_plan_items(context))
     directory = list(load_directory(context))
     pages = list(load_pages(context))
@@ -648,6 +697,11 @@ def run(context: RunContext) -> None:
             return replace(identity, kind=entry.kind, family=family(entry.kind))
         if identity.family == "project" and any(AREA_PAGE.search(page) for page in identity.pages):
             return replace(identity, kind="programme_area")
+        listed = (documents.url(claim_documents[claim]) or "" for claim in identity.claims if claim in claim_documents)
+        if identity.family == "project" and (
+            any(claim.startswith("cordis:") for claim in identity.claims) or any(EU_PROJECT_LISTING in url for url in listed)
+        ):
+            return replace(identity, kind="eu_project")
         if identity.kind not in REGISTRY_KINDS:
             return identity
         places = [claim_documents[claim] for claim in identity.claims if claim in claim_documents]
@@ -814,6 +868,18 @@ def run(context: RunContext) -> None:
         for conflict in conflicts:
             collected.add_review(conflict)
         initiative_records[identity.initiative_id] = finished(identity, record)
+    for row in corrections:
+        value = row.value
+        if value.property != "kind":
+            continue
+        if value.subject not in initiative_records or not value.value:
+            context.exclude("correction_target_missing", row.evidence)
+            continue
+        identity = initiatives.identities[value.subject]
+        initiatives.identities[value.subject] = replace(identity, kind=value.value, family=family(value.value))
+        initiative_records[value.subject] = replace(initiative_records[value.subject], kind=value.value)
+        collected.cite(value.subject, row.evidence)
+        collected.counts["corrections_applied"] += 1
 
     for entry, evidence in entries.values():
         source = initiatives.by_claim[entry.claim_id]
@@ -833,9 +899,27 @@ def run(context: RunContext) -> None:
         found = (titled and placement.named_project(head)) or initiatives.resolve(head, "commissioned_service")
         if row.value.kind == "work_package" and number and found and placement.family(found) == "project":
             sub_projects[(row.value.document, number)] = found
+            for area in placement.described.get(row.value.document, []):
+                if area != found and initiatives.identities[area].kind == "programme_area":
+                    link = EdgeLink(found, area, initiatives.identities[area].name, documents.located(row.value.document), None, "work_plan")
+                    collected.edge("part_of", link, row.evidence)
+    page_owner = {url_key(page): key for key, identity in initiatives.identities.items() for page in identity.pages}
+    for key, identity in initiatives.identities.items():
+        for page in identity.pages:
+            own = url_key(page) or ""
+            parents = [parent for parent in page_owner if parent and own.startswith(f"{parent}/") and page_owner[parent] != key]
+            if parents:
+                parent = page_owner[max(parents, key=len)]
+                link = EdgeLink(key, parent, initiatives.identities[parent].name, Located(None, page, None), None, "sub_page")
+                collected.edge("part_of", link, collected.cited(key, limit=3))
 
     planned: dict[tuple[str, str], list[PlannedItem]] = defaultdict(list)
     plan_rows: dict[tuple[str, str], list[SourceRecord[PlanItemRow]]] = defaultdict(list)
+    document_starts = {
+        document: min(starts)
+        for document, ids in placement.described.items()
+        if (starts := [start for i in ids if placement.family(i) == "project" and (start := initiative_records[i].start) and "-" in start])
+    }
     for row in plans:
         value = row.value
         prefer = value.kind in PLAN_PROJECT_KINDS
@@ -867,6 +951,7 @@ def run(context: RunContext) -> None:
             url=documents.url(value.document),
             evidence=quote(row),
             topics=topic_ids(value.topics),
+            month_start=document_starts.get(value.document),
         )
         planned[plan_key(item)].append(item)
         if f"plan:{value.id}" in initiatives.by_claim:
@@ -928,10 +1013,13 @@ def run(context: RunContext) -> None:
             perun_account=value.lifescienceid_username or value.logins,
             perun_organisation=value.organization,
         )
+    node_orcids = {f"node_page:{row.value.id}": orcid_of(row.value.orcid) for row in node_roles if row.value.orcid}
     for row in roles:
         value = row.value
         if is_person_name(value.person_name):
-            mention(f"role:{value.id}", value.person_name, "role_statement", row.evidence, email=email_of(value.email))
+            mention(
+                f"role:{value.id}", value.person_name, "role_statement", row.evidence, email=email_of(value.email), orcid=node_orcids.get(value.id)
+            )
     plan_people_links: list[tuple[str, str, SourceRecord[PlanItemRow], str]] = []
     group_names = {group_key(alias) for identity in initiatives.identities.values() for alias in (identity.name, *identity.aliases)}
 
@@ -1107,6 +1195,18 @@ def run(context: RunContext) -> None:
             work_leads[(row.value.document, initiative_id, "/".join(codes))].add(row.value.person_name)
     lead_sets: dict[tuple[str, str], dict[str, set[str]]] = defaultdict(lambda: defaultdict(set))
     person_nodes: dict[str, dict[str, set[str | None]]] = defaultdict(lambda: defaultdict(set))
+    removed_roles = {(row.value.subject, row.value.target) for row in corrections if row.value.property == "role" and row.value.action == "remove"}
+    own_leads: set[tuple[str, str]] = set()
+    for row in roles:
+        value = row.value
+        person_id = people.person_of(f"role:{value.id}")
+        initiative_id, work_item = role_initiative.get(value.id, (None, None))
+        primary = primary_key.get(initiative_id or "")
+        own_page = primary is not None and page_url_key(documents.url(value.document), documents.redirects) == primary
+        if person_id and initiative_id in registry_of and not work_item and value.role_kind in LEAD_CLAIMS and own_page:
+            own_leads.add((person_id, initiative_id))
+    led_on_own_page = {initiative_id for _, initiative_id in own_leads}
+    unconfirmed: dict[tuple[str, str], set[str]] = defaultdict(set)
     for row in roles:
         value = row.value
         person_id = people.person_of(f"role:{value.id}")
@@ -1146,6 +1246,9 @@ def run(context: RunContext) -> None:
         if initiative_id is None:
             context.exclude("role_place_unresolved", row.evidence)
             continue
+        if (person_id, initiative_id) in removed_roles:
+            collected.counts["roles_removed_by_correction"] += 1
+            continue
         codes = work_codes(work_item)
         crowded = bool(codes) and len(work_leads[(value.document, initiative_id, "/".join(codes))]) > MAX_WORK_LEADS
         kind = role_kind(value, quote(row), crowded)
@@ -1153,6 +1256,11 @@ def run(context: RunContext) -> None:
         if kind == "lead" and not work_item and initiatives.identities[initiative_id].kind == "community":
             kind = "co_lead"
             collected.counts["community_leads_as_co_leads"] += 1
+        primary = primary_key.get(initiative_id)
+        own_page = primary is not None and page_url_key(url, documents.redirects) == primary
+        if kind in LEAD_CLAIMS and not work_item and initiative_id in led_on_own_page and (person_id, initiative_id) not in own_leads:
+            kind = UNCONFIRMED_LEAD
+            unconfirmed[(person_id, initiative_id)].add(url or value.document)
         context.map(
             HOLDS_ROLE,
             row,
@@ -1171,13 +1279,42 @@ def run(context: RunContext) -> None:
                 collected.edge("works_on_plan_item", link, row.evidence)
             if kind in ("work_package_lead", "task_lead"):
                 lead_sets[(initiative_id, f"lead of {tried[0].upper()}")][value.document].add(person_id)
-        elif not work_item and kind in LEADS:
+        elif not work_item and kind in LEADS and (own_page or initiative_id not in led_on_own_page):
             lead_sets[(initiative_id, "leads")][value.document].add(person_id)
         lead = lead_node(value) if initiative_id in registry_of and kind in LEAD_NODE_ROLES and not work_item else None
         if lead and page_url_key(url, documents.redirects) == primary_key.get(initiative_id):
             node_id, written = lead
             link = EdgeLink(node_id, initiative_id, f"{value.person_name} ({written})", located, None, "lead_node")
             collected.edge("takes_part_in", link, row.evidence)
+    for row in corrections:
+        value = row.value
+        if value.property != "role" or value.action != "add":
+            continue
+        person_id, initiative_id = value.subject, value.target or ""
+        if person_id not in people.identities or initiative_id not in initiatives.identities:
+            context.exclude("correction_target_missing", row.evidence)
+            continue
+        kind = value.value or "member"
+        statement = corrected_role(row, people.identities[person_id].name, initiatives.identities[initiative_id].name)
+        link = RoleLink(person_id, initiative_id, None, kind, "not_stated", correction_note(value), CORRECTED)
+        context.map(HOLDS_ROLE, statement, SourceRecord(link, row.evidence))
+        derived.role(person_id, initiative_id, kind, statement.value.role, None, row.evidence, None)
+        derived.involve(person_id, initiative_id, "correction", row.evidence, None)
+        collected.cite(initiative_id, row.evidence)
+        collected.counts["corrections_applied"] += 1
+    for (person_id, initiative_id), urls in sorted(unconfirmed.items()):
+        name, group = people.identities[person_id].name, initiatives.identities[initiative_id].name
+        own = initiatives.identities[initiative_id].pages[0] if initiatives.identities[initiative_id].pages else None
+        collected.add_review(
+            review(
+                "value_conflict",
+                f"Another source names {name} as a lead of the {group}, but its own ELIXIR page does not. Is {name} a current lead?",
+                [person_id, initiative_id],
+                [name, group],
+                [option("current lead", list[str | None](sorted(urls))), option("not a current lead", [own])],
+                "leader",
+            )
+        )
     for key, written, row, role in plan_people_links:
         person_id = people.person_of(key)
         plan_item_id = plan_of_row.get(row.value.id)
@@ -1527,6 +1664,10 @@ def run(context: RunContext) -> None:
             entry = derived.involve(edge.value.source, plan.initiative_id, "plan_item", edge.evidence, edge.value.located.url)
             entry.plan.add(f"{edge.value.role}: {plan.code + ' ' if plan.code else ''}{plan.label[:100]}")
             entry.leads_plan = entry.leads_plan or edge.value.role == "lead"
+    for key, entry in list(derived.involved.items()):
+        if entry.bases == {"tool_credit"} or key in removed_roles:
+            collected.counts["involvements_dropped_tool_credit_only" if key not in removed_roles else "involvements_removed_by_correction"] += 1
+            del derived.involved[key]
     def item_id(initiative_id: str, written: str | None) -> str | None:
         codes = [code for part in reversed(WORK_ITEM_CODE.findall(written or "")) if (code := code_key(part))]
         return next((found for code in codes if (found := plan_by_code.get((initiative_id, code)))), None)
@@ -1549,8 +1690,12 @@ def run(context: RunContext) -> None:
     initiative_people: dict[str, set[str]] = defaultdict(set)
     for person_id, initiative_id in derived.involved:
         initiative_people[initiative_id].add(person_id)
+    delivered_items = {plan_item_id for _, delivered in zenodo_links.values() for plan_item_id, _ in delivered}
     for record in plan_records:
         item = record.value
+        if item.plan_item_id in delivered_items:
+            item = replace(item, status="delivered")
+            collected.counts["plan_items_delivered"] += 1
         text = f"{item.label} {item.description or ''}"
         named_tools = tuple(
             label
@@ -1573,9 +1718,48 @@ def run(context: RunContext) -> None:
     for (person_id, initiative_id), entry in list(derived.involved.items()):
         if entry.kinds & SHARING_LEADERS:
             derived.share("leader", person_id, people.identities[person_id].name, initiative_id, next(iter(entry.urls), None), entry.evidence)
+    for row in corrections:
+        value = row.value
+        if value.property != "node":
+            continue
+        if value.subject not in people.identities or value.target not in BY_ID:
+            context.exclude("correction_target_missing", row.evidence)
+            continue
+        if value.action == "remove":
+            edges = collected.edges["in_node"]
+            for key in [key for key, edge in edges.items() if (edge.value.source, edge.value.target) == (value.subject, value.target)]:
+                del edges[key]
+        else:
+            collected.edge("in_node", EdgeLink(value.subject, value.target, correction_note(value), CORRECTED, None, "correction"), row.evidence)
+        collected.counts["corrections_applied"] += 1
+    past_pages = {primary_key.get(i) for i, entry in registry_of.items() if entry.status == "past"} - {None}
     person_nodes_found: dict[str, dict[str, None]] = defaultdict(dict)
+    past_nodes: dict[str, dict[str, None]] = defaultdict(dict)
     for edge in collected.edges["in_node"].values():
-        person_nodes_found[edge.value.source][edge.value.target] = None
+        past = page_url_key(edge.value.located.url, documents.redirects) in past_pages
+        (past_nodes if past else person_nodes_found)[edge.value.source][edge.value.target] = None
+    for person_id, nodes in past_nodes.items():
+        if person_id not in person_nodes_found:
+            person_nodes_found[person_id] = nodes
+        else:
+            collected.counts["past_group_nodes_set_aside"] += len(set(nodes) - set(person_nodes_found[person_id]))
+    for person_id, nodes in person_nodes_found.items():
+        if not nodes or set(nodes) & INTERNATIONAL_NODES:
+            continue
+        identity = people.identities[person_id]
+        for domain in identity.email_domains:
+            country = CODES.get(domain.rsplit(".", 1)[-1].upper())
+            if country and country not in nodes and BY_ID[country].kind == "member_node":
+                collected.add_review(
+                    review(
+                        "value_conflict",
+                        f"Sources place {identity.name} in {', '.join(BY_ID[n].name for n in nodes)}, but their email domain {domain} is in another country. Which is their Node?",
+                        [person_id],
+                        [identity.name],
+                        [*(option(BY_ID[n].name, []) for n in nodes), option(BY_ID[country].name, [f"email domain {domain}"])],
+                        "node",
+                    )
+                )
     person_organisations: dict[str, dict[str, None]] = defaultdict(dict)
     for edge in collected.edges["affiliated_with"].values():
         person_organisations[edge.value.source][organisations.identities[edge.value.target].name] = None
@@ -1635,6 +1819,8 @@ def run(context: RunContext) -> None:
         context.map(TAKES_PART_IN, collected.edges["takes_part_in"][key])
     for key in sorted(collected.edges["related_to"]):
         context.map(RELATED_TO, collected.edges["related_to"][key])
+    for key in sorted(collected.edges["part_of"]):
+        context.map(PART_OF, collected.edges["part_of"][key])
     for key in sorted(collected.edges["in_node"]):
         context.map(IN_NODE, collected.edges["in_node"][key])
     for key in sorted(collected.edges["affiliated_with"]):

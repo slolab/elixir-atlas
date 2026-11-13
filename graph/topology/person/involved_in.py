@@ -33,9 +33,15 @@ class InvolvedIn:
     tools: list[str] = field(
         metadata={"description": "bio.tools entries that credit the person (developer, maintainer, contact or other), by name, at most 30. Entries the initiative also tags (tool_for) or recommends end in ' [this initiative]'; the others are the person's tools from bio.tools credits, whether or not they are linked to the initiative. The credit is matched to the person record by the build."}
     )
-    nodes: list[str] = field(metadata={"description": "The person's ELIXIR Nodes from in_node, by name."})
+    nodes: list[str] = field(
+        metadata={
+            "description": "The person's current ELIXIR Nodes from in_node, by name. A Node that only the page of a past group states is left out when a current source gives another; Node corrections apply."
+        }
+    )
     organisations: list[str] = field(metadata={"description": "The person's organisations from affiliated_with, by name."})
     bases: list[str] = field(
-        metadata={"description": "Which sources the involvement rests on: role, candidate, plan_item, author, tool_credit."}
+        metadata={
+            "description": "Which sources the involvement rests on: role, candidate, plan_item, author, tool_credit, correction (a Node-confirmed correction). A bio.tools credit alone does not make an involvement; it only adds tools to one that exists."
+        }
     )
     source_urls: list[str] = field(metadata={"description": "Up to five URLs of the pages or documents that state the roles and plan items."})

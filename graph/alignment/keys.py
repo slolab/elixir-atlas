@@ -34,6 +34,7 @@ SITES = {
 ZENODO_RECORD = re.compile(r"^zenodo\.org/(?:api/)?(?:records?|deposit)/(\d+)|^(?:dx\.)?doi\.org/10\.5281/zenodo\.(\d+)", re.I)
 PROGRAMME_CODE = re.compile(r"(?<![0-9])(?:20)?(2[0-9])[- _](TECHNOLOGY|SCIENCE)[- _](?:commissioned services )?([A-Za-z]+)", re.I)
 PROGRAMME_LABELS = frozenset({"ekes", "sepp"})
+AREA_WORDS = frozenset({"elixir", "priority", "area", "work", "plan", "programme", "the"})
 CODE_LIKE = re.compile(r"^(wp|t|d|m|task|activity)\s?\d", re.I)
 
 
@@ -71,6 +72,24 @@ def project_key(name: str) -> str:
     name = re.sub(r"\(([A-Z][A-Za-z]*[A-Z])\)", " ", name)
     text = re.sub(r"\b(20\d\d) 20(\d\d)\b", r"\1 \2", plain(name))
     return re.sub(r"\s*\b(work ?plan|programme)$", "", text).strip()
+
+
+def eu_key(name: str) -> str:
+    name = re.sub(r"\(\s*\d{4}\s*[-–]\s*\d{2,4}\s*\)", " ", name)
+    words = [word for word in project_key(name).split() if word not in ("european", "project", "elixir", "the")]
+    return " ".join(words)
+
+
+def short_acronym(acronym: str | None) -> str | None:
+    if not acronym:
+        return None
+    key = plain(acronym).replace(" ", "")
+    return key if 3 <= len(key) <= 12 and not CODE_LIKE.match(acronym.strip()) and key not in PROGRAMME_LABELS else None
+
+
+def area_key(name: str) -> str | None:
+    words = [word for word in plain(name).split() if word not in AREA_WORDS and not word.isdigit()]
+    return " ".join(words) if len(words) >= 2 else None
 
 
 def acronym_key(acronym: str | None) -> str | None:
