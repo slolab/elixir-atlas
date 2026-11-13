@@ -1,7 +1,10 @@
 from dataclasses import dataclass, field
-from typing import ClassVar, Literal
+from typing import Any, ClassVar, Literal
 
-from ._llm import MODEL, LlmExtractor
+from biotope.extraction import Document, Schema
+
+from ._llm import MODEL, LlmExtractor, chunks
+from ._reading import document_text, person_links, squashed
 
 RoleKind = Literal[
     "lead",
@@ -85,16 +88,60 @@ class RoleStatement:
     email: str | None = field(metadata={"description": "The person's email address, if the document gives it."})
 
 
+RECALL = (
+    "This document links the following people, but no record names them yet: {names}. Return a record for each "
+    "role or membership the document states for them, including the heading or list they appear under. Return no "
+    "record for a person the document only mentions, thanks or cites."
+)
+
+
+def names_match(linked: str, person: str) -> bool:
+    left, right = squashed(linked), squashed(person)
+    if not left or not right:
+        return False
+    if left in right or right in left:
+        return True
+    first, second = [squashed(word) for word in linked.split()], [squashed(word) for word in person.split()]
+    return first[-1] == second[-1] and (first[0].startswith(second[0]) or second[0].startswith(first[0]))
+
+
+def unmatched(linked: list[str], records: list[dict[str, Any]]) -> list[str]:
+    people = [str(record["person"]["value"]) for record in records]
+    return [name for name in linked if not any(names_match(name, person) for person in people)]
+
+
 class RoleReader(LlmExtractor):
     name = "role-reader"
-    version = "1"
+    version = "2"
     settings = {"model": MODEL, "reasoning": "low"}
     instructions = (
         "Tables of work packages, tasks and partners often name a lead and a deputy per item: give each person "
-        "their own record. A person profile page gives one record per role or group it lists for the person. "
+        "their own record. A 'WP Partnership' or partner list names everyone in the work package, often as "
+        "'<partner code> - <name>': every listed person gets a member record for that work package, or for each "
+        "activity the list names, besides any lead record. A person profile page gives one record per role or group it lists for the person. "
         "Names of Nodes are often written as 'ELIXIR <country>' or as the Node's own name, such as de.NBI, "
         "BioData.pt, SIB, IFB, INB or CSC; copy them as written. People listed under a heading such as "
         "'Leadership' or 'Leadership and Hub liaison' lead that group (lead or co_lead) unless the page marks them "
         "as liaison or coordinator; a label such as 'Deputy Head of Node' next to their name is their Node "
         "position, which gets its own record with the Node as place."
     )
+
+    def extract(self, document: Document, schema: Schema) -> list[dict[str, Any]]:
+        records = super().extract(document, schema)
+        text = document_text(document.path)
+        missing = [name for name in unmatched(person_links(document.path), records) if squashed(name) in squashed(text)]
+        if not missing:
+            return records
+        note = RECALL.format(names="; ".join(missing))
+        haystack = squashed(text)
+        known = {tuple(record[name]["value"] for name in schema.key) for record in records}
+        for part in chunks(text):
+            if not any(squashed(name) in squashed(part) for name in missing):
+                continue
+            for raw in self.ask(schema, document, part, note):
+                record = self.convert(raw, schema, haystack)
+                key = tuple(record[name]["value"] for name in schema.key)
+                if key not in known and any(names_match(name, str(record["person"]["value"])) for name in missing):
+                    known.add(key)
+                    records.append(record)
+        return records

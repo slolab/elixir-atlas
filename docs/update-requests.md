@@ -63,4 +63,6 @@ A future reviewer records the approved target, exact field/value or identity dec
 
 Apply identity decisions before alignment and field corrections before dependent summaries. For example, a corrected initiative date must override sources before calculating its period and Node involvement; a corrected person name must reach leader summaries. A final SQL patch alone would leave derived records inconsistent.
 
+`data/input/corrections.csv` is the first tier-0 input. Each row is a reviewed `node`, `role` or `kind` correction for an Atlas id, with who confirmed it, when and on what basis; the build applies it before alignment-dependent summaries and reports a missing subject or target in `run.json`. It is filled by hand from Node checks for now; approving update requests into it is the follow-up.
+
 The existing `data/input/review-decisions.csv` is a possible integration point. It currently supports `same` decisions for detected candidates and selected conflict resolutions; `different` does not split an already merged identity. General identity correction and tier-0 ingestion require a follow-up. This feature does not read requests during builds or alter existing review decisions.

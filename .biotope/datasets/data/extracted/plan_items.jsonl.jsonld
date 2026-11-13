@@ -54,10 +54,10 @@
       "@type": "cr:FileObject",
       "@id": "plan_items.jsonl",
       "name": "plan_items.jsonl",
-      "contentSize": "25250117",
+      "contentSize": "25133702",
       "contentUrl": "data/extracted/plan_items.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "425d43470bf4f3507d4263776e50479544786fd6f2b016a4b6daa99fd763ea02",
+      "sha256": "f5757e6059890240af0a85b7de01f677e2eb7fe30fa88cda6d46536d5de69eb9",
       "isBasedOn": [
         {
           "contentUrl": "data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html",
@@ -2855,7 +2855,7 @@
       }
     }
   ],
-  "dateCreated": "2026-11-11T20:10:26.628498+00:00",
+  "dateCreated": "2026-11-13T09:24:58.475223+00:00",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
   "version": "1.0.0",
   "recordSet": [

@@ -2,7 +2,7 @@ import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 
-from .keys import GROUP_KINDS, acronym_key, family, initiative_key, plain, programme_code, url_key
+from .keys import GROUP_KINDS, acronym_key, area_key, eu_key, family, initiative_key, plain, programme_code, short_acronym, url_key
 from .names import slug
 from .people import UnionFind
 
@@ -46,6 +46,8 @@ def words(name: str) -> set[str]:
 
 
 BRACKETED_ACRONYM = re.compile(r"\(([A-Z][A-Za-z]*[A-Z])\)")
+AREA = re.compile(r"/science/[^/]+$")
+PROJECT_PAGE = re.compile(r"^elixir-europe\.org/(internal-projects|how-we-work/scientific-programme)/")
 WORK_PACKAGE = re.compile(r"\b(WP|Work ?Package)\s?\d+", re.I)
 
 
@@ -208,6 +210,28 @@ def resolve_initiatives(claims: list[Claim], redirects: dict[str, str], same: li
         for value in (claim.acronym, claim.name if " " not in claim.name.strip() else None, bracketed.group(1) if bracketed else None):
             if acronym := acronym_key(value):
                 clusters_.join(claim.claim_id, f"acronym:{acronym}")
+            if claim.kind == "eu_project" and (short := short_acronym(value)):
+                clusters_.join(claim.claim_id, f"eu_acronym:{short}")
+        if claim.kind == "eu_project" and (key := eu_key(claim.name)):
+            if clusters_.join(claim.claim_id, f"eu:{key}"):
+                reasons.append((claim.claim_id, "eu_name"))
+    project_pages: dict[str, set[str]] = defaultdict(set)
+    for page in own_url.values():
+        if PROJECT_PAGE.match(page) and "-" in segment(page):
+            project_pages[segment(page)].add(page)
+    for claim in claims:
+        page = own_url.get(claim.claim_id)
+        if page and not page.startswith("elixir-europe.org/") and not is_document(page) and family(claim.kind) == "project":
+            matched = project_pages.get(segment(page), set())
+            if len(matched) == 1 and clusters_.join(f"url:{page}", f"url:{next(iter(matched))}"):
+                reasons.append((claim.claim_id, "same_slug"))
+    areas = {union.find(claim_id) for claim_id, page in own_url.items() if AREA.search(page)}
+    area_names = {key: union.find(c.claim_id) for c in claims if union.find(c.claim_id) in areas and (key := area_key(c.name))}
+    for claim in claims:
+        root = area_names.get(area_key(claim.name) or "")
+        if root and claim.coverage == "listed" and family(claim.kind) == "project" and union.find(claim.claim_id) not in areas:
+            if clusters_.join(claim.claim_id, root):
+                reasons.append((claim.claim_id, "area_name"))
     for left, right in same:
         clusters_.join(left, right, guarded=False)
         reasons.append((left, "decision"))

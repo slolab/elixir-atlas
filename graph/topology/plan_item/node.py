@@ -49,7 +49,7 @@ class PlanItem:
     )
     status: str = field(
         metadata={
-            "description": "Status the sources state: planned, ongoing, done, delayed, open or not_stated."
+            "description": "Status the sources state: planned, ongoing, done, delayed, open or not_stated; delivered when an output delivers the item (a delivers edge), whatever the plan says."
         }
     )
     leads: list[str] = field(

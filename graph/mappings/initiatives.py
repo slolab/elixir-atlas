@@ -14,6 +14,7 @@ from ..topology import (
     InitiativeTopic,
     OrganisationId,
     ParticipatesIn,
+    PartOf,
     RelatedTo,
     SourceStatement,
     SourceStatementId,
@@ -71,6 +72,17 @@ def make_became(link: SourceRecord[BecameLink]) -> Iterator[Became]:
         source_url=value.located.url,
         retrieved_at=value.located.retrieved_at,
         source_document=value.located.document_id,
+    )
+
+
+def make_part_of(link: SourceRecord[EdgeLink]) -> Iterator[PartOf]:
+    value = link.value
+    yield PartOf(
+        id=f"part_of:{digest(value.source, value.target, value.basis)}",
+        source=InitiativeId(value.source),
+        target=InitiativeId(value.target),
+        basis=value.basis,
+        source_url=value.located.url,
     )
 
 
@@ -186,6 +198,11 @@ BECAME = Mapping(
     name="atlas:became",
     function=make_became,
     evidence=("Transitions the ELIXIR directory pages and archived group pages state, resolved to initiatives by name.",),
+)
+PART_OF = Mapping(
+    name="atlas:part_of",
+    function=make_part_of,
+    evidence=("Own pages under a parent's page, and programme work plans with a work package per sub-project.",),
 )
 RELATED_TO = Mapping(
     name="atlas:related_to",

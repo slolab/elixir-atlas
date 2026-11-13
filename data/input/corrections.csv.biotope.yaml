@@ -1,0 +1,28 @@
+# What people write about this dataset. A value here wins over the data's; an empty value clears it.
+description: >-
+  Corrections that a Node or another person who knows the facts has confirmed. They take precedence over every
+  other source for the fact they name. Each build applies them before it derives leaders, Node involvement and
+  kinds, and reports any correction whose subject or target the build does not have.
+tables:
+  corrections.csv#corrections:
+    description: One confirmed correction per row.
+    columns:
+      subject:
+        description: The Atlas id the correction is about, such as person:tim-beck or initiative:eosc-entrust.
+      property:
+        description: >-
+          node (the person's ELIXIR Node), role (the person's role in an initiative) or kind (an initiative's kind).
+      action:
+        description: add or remove for node and role; set for kind.
+      target:
+        description: The Node id (node:uk) or initiative id the node or role correction names; empty for kind.
+      value:
+        description: For role, the role kind (lead, co_lead, member, participant, ...); for kind, the initiative kind.
+      role:
+        description: For an added role, the role as the person who confirmed it writes it, such as PI.
+      confirmed_by:
+        description: Who confirmed the correction, by position rather than by name.
+      date:
+        description: When it was confirmed, as YYYY-MM or YYYY-MM-DD.
+      note:
+        description: What the correction is based on.

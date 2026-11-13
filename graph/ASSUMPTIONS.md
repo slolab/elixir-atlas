@@ -131,6 +131,36 @@ The build gathers the joins that most questions need, so one row answers them. T
 - Initiative fields: `leaders`; `limits`, from the kind and data, including the registrar group a join button leads to and an end date passed with no completion stated (003, 004, 012); `recent_activity` with `latest_own_activity` and `latest_activity`; `scope`, the outcomes, goal labels, resources and tools as search text (002, 018). `Tool.recommended_by` lists the groups whose documents point to it (015).
 - The API views list these records and add no logic of their own.
 
+## Build v4 rules
+
+From the ELIXIR-UK COG form check (Xènia) and the website-content review (Debbie) of release `20261112`. Each finding was traced to a class of records; the rules below fix the class, and `data/input/corrections.csv` holds what no public page states.
+
+### Extraction
+
+- The HTML cleaner no longer drops elements whose class names a sidebar. The ELIXIR-UK theme puts all page content in `aside#sidebar`, so the model never saw the "governance roles" of 122 UK people pages, the "Coordination / leads" of 14 activity pages or 26 ORCID links (Haerty, Loach). Menus and breadcrumbs are still dropped.
+- ELIXIR-UK people and activity pages are read by code (`extraction/node_pages.py`, extraction `node_page_roles`), not by the model: title, organisation, ORCID, governance roles, the groups a person leads ("Community leadership"), the groups, clubs and projects on the profile, and an activity page's coordination/leads. A person is placed in ELIXIR-UK only when their organisation is listed as a UK member (`/members/`); external advisers stay without a Node. Each record's evidence quote is the page block it was read from, rendered like the document text (links inline), so it is verbatim in the document.
+- Role extraction checks recall against the page's own links: people the page links to a profile (`/users/…`, `/people/…`) but no record names get a second ask that lists them. Names match on folded letters, and on the same surname with one given name a prefix of the other (Alex/Alexander).
+- Work plan PDFs have no links to check against, and a full re-run dropped whole "WP Partnership" lists (17 Interoperability Platform members; the BioDiv-FAIR-Checker WP 6 lead in the BFSP plan) that the earlier run had. The instructions now name that list form, and those plans were redone.
+- `scripts/extraction_check.py` scores the extraction against `eval/extraction/fixtures.yaml` (expected and forbidden facts from the feedback cases and the work plans) and reports, over all role documents, person links lost in cleaning, linked people with no record, pages with no records, and people a document had in the committed extraction but no longer has.
+
+### Precedence and corrections
+
+- `data/input/corrections.csv` is tier 0: a Node-confirmed `node` (add/remove), `role` (add/remove) or `kind` (set) for an Atlas id. It wins over every source, applies before leaders, Node involvement and kinds are derived, and a correction whose subject or target is missing is excluded as `correction_target_missing` in `run.json`. Seeded with the 8 COG findings.
+- Current leaders of a Community, Platform or Focus Group come from its own ELIXIR page when that page lists leads. A lead, co-lead, chair or coordinator that only another page names (a Node website, a past page) is `unconfirmed_lead` and raises a `value_conflict` review (property `leader`) instead of counting as leadership.
+- A person's current Nodes leave out a Node that only the own page of a past group states when a current source gives another (Emily Clark: past Focus Group page says UK, current Community page says EMBL-EBI). `InNode` keeps every statement. An email domain whose country Node differs from a member-Node-only placement raises a `value_conflict` (property `node`).
+- A bio.tools credit alone no longer makes an `involved_in` row; it only adds tools to an involvement that rests on a role, plan item, authored output or correction (Wendi Bacon and Galaxy through TIaaS).
+
+### Identity, kinds and plans
+
+- EU projects: a trailing year range ("(2022–2027)"), "European" and "project" are ignored in the name key, and acronyms of three letters join when both claims are EU projects (GDI). Differing ranges become date conflicts.
+- A Node project page joins the ELIXIR project page with the same hyphenated last path segment (`elixiruknode.org/project/2022-edp2`).
+- A listed project whose name matches a Scientific Programme area's name, ignoring ELIXIR, years and "priority area / work plan / programme", joins the area (the BFSP listing).
+- Person names with three or more words join a person with the same words in another order ("Pérez Sitjà Xènia"). Names containing the legal form "ERIC" are organisations.
+- A project on ELIXIR's EU projects page or in CORDIS is `eu_project`, whatever its own page says (EOSC-ENTRUST).
+- Project months ("M26") count from the earliest start among the projects the stating document describes, not from the sub-project the item is moved to (BFSP WP6 items moved to BioDiv-FAIR-Checker).
+- A plan item that an output delivers has status `delivered`.
+- `part_of` links a sub-project or sub-group to its parent: basis `sub_page` (its own page sits under the parent's page) or `work_plan` (a programme work plan has a work package for it).
+
 ## Known gaps
 
 - Person variants (a nickname, a dropped middle name, several Perun accounts with one name) stay separate records with open `person_match` items; some people therefore appear 2–4 times until reviewed.
@@ -138,8 +168,10 @@ The build gathers the joins that most questions need, so one row answers them. T
 - Stated counts ("seven Nodes") and documents that need permission are not stored.
 - Roles from older handbook versions are kept beside newer ones; `period` is rarely stated.
 - 45% of role holders have no Node, because organisations are not linked to Nodes.
-- One BFSP listing ("Biodiversity, food security and pathogens") stays a separate row beside `initiative:bfsp`.
+- Facts no public page states (membership known only to the Node or in Perun groups) enter only through `corrections.csv`; the Perun export has no group column.
+- An `output` plan item that a Zenodo link creates stays beside the coded milestone the same record delivers.
 - Some UK Node pages about an ELIXIR group join that group even when they describe its earlier form (the UK Cancer Data Focus Group page joins the Cancer Data Community).
+- Long work plans still lose some partner-list members between runs (in v4 the 83-page BFSP plan lacks 4 of about 100 people the previous run had). Re-runs vary: the fixtures and the drop report in `scripts/extraction_check.py` show it, but they do not fix it.
 
 ## Open questions
 

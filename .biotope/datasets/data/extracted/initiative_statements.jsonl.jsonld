@@ -54,10 +54,10 @@
       "@type": "cr:FileObject",
       "@id": "initiative_statements.jsonl",
       "name": "initiative_statements.jsonl",
-      "contentSize": "9756089",
+      "contentSize": "9792679",
       "contentUrl": "data/extracted/initiative_statements.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "c7c492586e8a34d0ba7c41340dab53dcb1de98a86b0c781b5820ba5501d2f700",
+      "sha256": "806cb20907577086fa23d41db1cbb1090849e89a163be71aae9a08ca78b63dd2",
       "isBasedOn": [
         {
           "contentUrl": "data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html",
@@ -2663,7 +2663,7 @@
       }
     }
   ],
-  "dateCreated": "2026-11-11T20:05:28.390832+00:00",
+  "dateCreated": "2026-11-13T09:22:00.383473+00:00",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
   "version": "1.0.0",
   "recordSet": [

@@ -1,0 +1,85 @@
+- documents: data/input/elixir/focus-groups-rna-data-*.html
+  extraction: role_statements
+  expect:
+    - {person: Wilfried Haerty, role_kind: [lead, co_lead]}
+    - {person: Ernesto Picardi, role_kind: [lead, co_lead]}
+    - {person: Ana Victoria Conesa Cegarra, role_kind: [lead, co_lead]}
+    - {person: David Lloyd, role_kind: [liaison]}
+  forbid:
+    - {person: Adam Ameur, role_kind: [lead, co_lead, chair, coordinator]}
+
+- documents: data/input/elixir/communities-galaxy-*.html
+  extraction: role_statements
+  expect:
+    - {person: Nicola Soranzo, role_kind: [lead, co_lead]}
+  forbid:
+    - {person: Wendi Bacon}
+
+- documents: data/input/elixir/communities-domestic-animals-genome-phenome-*.html
+  extraction: role_statements
+  expect:
+    - {person: Emily Clark, role_kind: [lead, co_lead], affiliation: EMBL-EBI}
+
+- documents: data/input/elixir/focus-groups-health-data-*.html
+  extraction: role_statements
+  expect:
+    - {person: Tim Beck, role_kind: [chair, lead, co_lead]}
+
+- documents: data/input/elixir/communities-single-cell-omics-*.html
+  extraction: role_statements
+  expect:
+    - {person: Frederic Bastian, role_kind: [lead, co_lead]}
+  forbid:
+    - {person: Marisa Loach}
+
+- documents: data/input/elixir/internal-projects-commissioned-services-datarex-*.html
+  extraction: role_statements
+  expect:
+    - {person: Xenia Perez Sitja}
+
+- documents: data/input/node-uk/people-wilfried-haerty-*.html
+  extraction: node_page_roles
+  expect:
+    - {person: Wilfried Haerty, place: RNA Data Focus Group, role_kind: [lead], node: ELIXIR-UK, affiliation: Earlham Institute}
+
+- documents: data/input/node-uk/activities-rna-data-focus-group-*.html
+  extraction: node_page_roles
+  expect:
+    - {person: Wilfried Haerty, role_kind: [lead], affiliation: Earlham Institute}
+
+- documents: data/input/node-uk/people-marisa-loach-*.html
+  extraction: node_page_roles
+  expect:
+    - {person: Marisa Loach, orcid: 0000-0001-6979-6930, place: Galaxy Community}
+
+- documents: data/input/node-uk/people-xenia-perez-sitja-*.html
+  extraction: node_page_roles
+  expect:
+    - {person: Xènia Pérez Sitjà, role_kind: [deputy], place: ELIXIR-UK}
+    - {person: Xènia Pérez Sitjà, place: FAIR-in-action bridge}
+
+- documents: data/input/node-uk/people-frederik-coppens-*.html
+  extraction: node_page_roles
+  forbid:
+    - {person: Frederik Coppens, node: ELIXIR-UK}
+
+- documents: data/input/zenodo/api-records-19469586-files-24-SCIENCE-BFSP-v2.pdf-*.pdf
+  extraction: plan_items
+  expect:
+    - {code: Activity 4, label: Community engagement, leads: Carole Goble}
+    - {code: M6.1, date_as_written: M26}
+
+- documents: data/input/zenodo/api-records-17633187-files-24-TECHNOLOGY-INTEROPERABILITYPLATFORM.pdf-*.pdf
+  extraction: role_statements
+  expect:
+    - {person: Vassilios Ioannidis, role_kind: [work_package_lead], work_item: Standardising processes for FAIR data}
+    - {person: Brane Leskošek, work_item: Standardising processes for FAIR data}
+    - {person: Polonca Ferk, work_item: Standardising processes for FAIR data}
+    - {person: Wei Kheng Teh, work_item: Standardising processes for FAIR data}
+
+- documents: data/input/zenodo/api-records-19469586-files-24-SCIENCE-BFSP-v2.pdf-*.pdf
+  extraction: role_statements
+  expect:
+    - {person: Alban Gaignard, role_kind: [work_package_lead, lead, co_lead], work_item: BioDiv-FAIR-Checker}
+    - {person: Christian de Guttry, role_kind: [member]}
+    - {person: Chiara Bortoluzzi, role_kind: [member]}

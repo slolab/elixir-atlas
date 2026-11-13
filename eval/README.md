@@ -119,3 +119,16 @@ Build v3 precomputes the joins and absences that questions need. These include p
 | `build-v3b` | 21 | 0.57 | 5 / 14 / 2 | 498 | 28.3 MB | $0.84 |
 
 `build-v3a` has the source fixes but not yet the precomputed records. `build-v3b` adds the records, plan links, output series and grant-string rules, Node plan-item lists, and the skill and API sections that expose them. Each run is one trial per question, and several verdicts have judge confidence below 0.5. The two remaining failures are 010 and 021. In 010 the agent found the plan links but left out the named Estonian staff and part of the task list. In 021 it named no person per pilot and left out the comparator's funding. Release `20261112` adds plan-item tool mentions and `related_to` quotes after `build-v3b`; those two changes were not evaluated.
+
+## Build v4 run, 13 November 2026
+
+Build v4 answers two data-quality reviews of release `20261112`: the ELIXIR-UK COG form check and a review of the ELIXIR website content. `graph/ASSUMPTIONS.md` lists its rules under "Build v4 rules". The calibrated CQ set (`atlas_261111` version 2 after `0eac7ec`) rewrote all 21 questions, so earlier scores are not comparable. Both runs below use those questions, the same skill, API code (revision `9d96cd2a`), model and local PostgreSQL setup. Only the served release differs.
+
+| Run | Release | Correctness | Correct / partial / failed | Usefulness | API responses | Response bytes | Agent cost |
+| --- | --- | ---: | --- | ---: | ---: | ---: | ---: |
+| `cqv2-base-20261112` | `20261112` | 0.74 | 12 / 7 / 2 | 0.69 | 400 | 16.9 MB | $0.64 |
+| `build-v4` | local `build-v4-candidate` | 0.76 | 12 / 8 / 1 | 0.60 | 363 | 16.3 MB | $0.62 |
+
+Correctness improved on 014, 019 and 020 and declined on 012 and 013. 019, the question about Systems Biology tool contributors, went from failed to partial; tool credits no longer count as group involvement but remain in `CreditedForTool`. The 013 decline is a retrieval miss: Daniel Wibberg's Germany link is the same in both releases. Most of the lower usefulness comes from the release identity: 18 of 21 v4 answers comment on the local manifest (`build-v4-candidate`, snapshot `local-uncommitted`, created after the CQ cutoff), and the judges mark those notes as distracting. Each run has one trial per question, and most changed verdicts have judge confidence below 0.5.
+
+The COG and website findings are checked directly against the graph rather than through CQs: all 18 checks pass on build v4, compared with 2 on `20261112`. `scripts/extraction_check.py` runs the extraction fixtures in `eval/extraction/fixtures.yaml` and the recall reports. In this run all 27 fixtures pass, all 1,861 linked people on role pages have a record, and the only remaining drops from the previous extraction are 4 BFSP work-plan members, the Interoperability Platform plan's contact person and 5 deliverable authors (excluded by the schema).
