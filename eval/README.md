@@ -2,13 +2,17 @@
 
 `user_stories.md` holds the end-to-end use cases (A, B, C) that the CQ sets are built from. The scripts that run and annotate the evaluation are in `src/eval/`. `cqs/<set-id>/` holds a competency-question (CQ) set, a simplified version of the biotope-bench layout:
 
-- `set.yaml`: the set's `id`, its `version`, the users' `purpose`, the data snapshot it was written against (`reference_dataset`), the `context` that answering agents see and the `correctness` `rubric`.
+- `set.yaml`: the set's `id`, its `version`, the users' `purpose`, the data snapshot it was written against (`reference_dataset`), the `context` that answering agents see and its scoring rubrics.
 - `questions/<set-id>-NNN.yaml`: one question with its `use_case` (a question id from `user_stories.md`, such as `B4`), `question`, `answerability`, `reference_answer`, `eval_notes` (the components the rubric scores) and `sources` (paths under `data/`).
 - `sidenotes.md`: how the answers were derived, data-quality notes and details left out of the answers.
 
 Retired sets are in `archive/`.
 
-The rubric measures accuracy: whether the answer's facts are correct. Argilla collects how users like the answers: annotators see each question with its reference answer, rate it from 1 to 5 and can leave feedback.
+Version 2 of `atlas_261111` scores correctness and usefulness separately. Correctness checks the facts needed for a reasonable reading of the question. Usefulness checks whether the answer is direct, readable, proportionate and linked to its evidence. Argilla collects human feedback: annotators see each question with its reference answer, rate it from 1 to 5 and can leave feedback.
+
+The questions use ordinary phrasing, shorthand and omissions. They do not spell out an imagined user's purpose or supply the research method. The reference answers and grading notes allow reasonable interpretations. See the [authoring and review notes](cqs/atlas_261111/sidenotes.md). Version 2 retains the same 21 use cases and data snapshot; its scores are not directly comparable with version 1.
+
+The [raw-data fairness review](cqs/atlas_261111/sidenotes.md#raw-data-fairness-review-12-november-2026) separates missed evidence from question ambiguity and grading mistakes. It covers a 21-question baseline, eight targeted repeat trials and eight same-answer regrades. The resulting changes clarify four questions and remove unsupported grading requirements; agent retrieval failures remain failures.
 
 ## Run the evaluation
 
@@ -19,11 +23,9 @@ uv run src/eval/run.py eval/cqs/atlas_261111 --questions 006 007 --repeats 3
 
 `run.py` turns each question into a [Harbor](https://github.com/laude-institute/harbor) task in `eval/tasks/`, and Harbor runs Codex with `openai/gpt-6-luna` at reasoning effort high in Docker. The shared image preinstalls Codex 0.167.1 so trials reuse the cached installation instead of downloading Node.js and Codex for each question. With `--evidence raw`, the default, the agent reads all of `data/input` read-only and the URL index `data-sources-scraping.jsonl`; it can reach only OpenRouter and PyPI. It writes its answer to `answer.md`.
 
-`judge.py` then grades every answer by the set's rubrics with `openai/gpt-6-luna-decisions` on OpenRouter's decisions API. A verdict with a confidence below 0.8 is graded again by `openai/gpt-6.1-sol` at reasoning effort high. Each trial in `eval/results/<job>/` keeps its `judgement.json`, and the script prints a score table. Each choice of `--questions` and `--repeats` is its own job, such as `atlas_261111-v1__raw__gpt-6-luna__006-007-x3`. Rerunning the same command resumes unfinished trials and grades again only answers whose inputs changed.
+`judge.py` then grades every answer by the set's rubrics with `openai/gpt-6-luna-decisions` on OpenRouter's decisions API. A verdict with a confidence below 0.8 is graded again by `openai/gpt-6.1-sol` at reasoning effort high. Each trial in `eval/results/<job>/` keeps its `judgement.json`, and the script prints a score table. Each choice of `--questions` and `--repeats` is its own job, such as `atlas_261111-v2__raw__gpt-6-luna__006-007-x3`. Rerunning the same command resumes unfinished trials and grades again only answers whose inputs changed.
 
 Use `--api-url` to evaluate another Atlas deployment. The copied API reference and network allowlist use that address; the distributed skill stays unchanged. A local service must be reachable from Docker, not just the host's loopback address. Use PostgreSQL when comparing with Railway: the SQLite backend has different search semantics and ranking.
-
-`judge.py` then grades every answer by the set's rubrics with `openai/gpt-6-luna-decisions` on OpenRouter's decisions API. A verdict with a confidence below 0.8 is graded again by `openai/gpt-6.1-sol` at reasoning effort high. Each trial in `eval/results/<job>/` keeps its `judgement.json`, and the script prints a score table. Each choice of `--questions` and `--repeats` is its own job, such as `atlas_261110-v1__raw__baseline__gpt-6-luna__006-007-x3`. Rerunning the same command resumes unfinished trials and grades again only answers whose inputs changed.
 
 Use a new `--experiment` name after changing the skill, runner, prompts, CQ set, API or data. Task instructions and the skill are copied once and guarded by `experiment.json`; changed recorded inputs cannot replace an existing experiment. The manifest records file hashes and the API release or raw snapshot identity. SQL-capable deployments include an API code fingerprint in the release metadata. API code changes require a new experiment name even if the data release is unchanged. Keep the API and raw files stable during a run. `--prepare-only` generates tasks without running agents or judges.
 

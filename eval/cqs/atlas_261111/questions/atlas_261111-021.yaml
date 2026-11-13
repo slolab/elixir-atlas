@@ -1,82 +1,57 @@
 id: atlas_261111-021
 use_case: "C2.5"
 question: |
-  At its September 2026 meeting, the ELIXIR Systems Biology Community proposed
-  a "systems biology bundle" with three pilot use cases. Is this feasible with
-  the people the Community has, compared with the Systems Biology Service
-  Bundle for Rare Diseases published in 2023?
+  Can the Systems Biology Community actually pull off the bundle discussed at its September meeting?
 answerability: partially_answerable
 reference_answer: |
-  **The plan** (meeting in Ljubljana, 10–11 September 2026)
-  - A documented bundle of workflows built on ELIXIR-registered tools, with
-    training materials.
-  - Three pilots: medical (Disease Maps), plant (Stress Knowledge Map) and
-    microbial (with the Microbial Biotechnology Community).
-  - Next step: outreach to Disease Maps, Food and Nutrition, Plant Sciences
-    and Microbial Biotechnology. The report names no owners, dates or
-    funding.
+  It looks plausible as a small pilot, but the public record does not
+  establish that the Community has the capacity to deliver the whole bundle.
 
-  **People the Community has for each pilot** (public sources only)
-  - Medical: Marek Ostaszewski (MINERVA Platform); Anna Niarakis and Irina
-    Balaur also build disease map tools.
-  - Plant: Carissa Bleker and Kristina Gruden (SKM developers, National
-    Institute of Biology).
-  - Microbial: Oscar Dias and Miguel Rocha (merlin, University of Minho);
-    Vitor Martins dos Santos co-leads both Communities.
-  - The meeting had 19 people in person and 5 online, from 8 Nodes and the
-    Hub.
+  The [September meeting report](https://f1000research.com/documents/15-1717)
+  proposes documented workflows and training for three cases: medical
+  applications through Disease Maps, plants through the Stress Knowledge
+  Map, and microbial work with Microbial Biotechnology. It does not record
+  agreed pilot owners, committed effort, a delivery schedule or funding.
 
-  **Comparable case: Systems Biology Service Bundle for Rare Diseases**
-  - Published on Zenodo on 16 October 2023: a 10-page document covering
-    five use cases with tools, workflows and tutorials, plus concept maps in
-    TeSS.
-  - Three authors: Friederike Ehrhart, Cenna Doornbos (ELIXIR Netherlands)
-    and Marek Ostaszewski.
-  - Funded by a task of the ELIXIR Rare Diseases Community Implementation
-    Study and by EJP RD. That study ran from January 2022 to January 2023
-    with 19 people from 11 Nodes.
+  There are relevant people to approach: Marek Ostaszewski is the
+  [MINERVA primary contact](https://bio.tools/MINERVA_Platform), Carissa
+  Bleker develops and maintains [SKM](https://bio.tools/skm), and Oscar Dias
+  and Miguel Rocha are credited on [merlin](https://bio.tools/merlin-sysbio).
+  Their expertise is a starting point, not evidence that they have agreed
+  to take this work on.
 
-  **Assessment**
-  - Feasible in scale: the rare disease bundle shows that three people can
-    deliver a five-use-case bundle. The Systems Biology Community has named
-    tool developers for each of its three pilots, and Marek Ostaszewski has
-    already co-authored a bundle.
-  - Not yet feasible as planned: that bundle had dedicated funding and a
-    coordinator. The Systems Biology plan has neither, and the previous
-    roadmap reported limited engagement with Community training.
-  - I would name one lead per pilot, reuse the rare disease bundle format,
-    and seek funding such as a Commissioned Service before committing to
-    dates.
+  The [2023 Systems Biology for Rare Diseases bundle](https://zenodo.org/records/10006029)
+  is a useful precedent: it documents five use cases with tools, workflows
+  and tutorials, and acknowledges ELIXIR and EJP RD funding. It shows a
+  reusable format, not how many people or months the new bundle will need.
 
-  **Not public:** the member list, how much time each person can give, and
-  who has agreed to lead each pilot.
-
-  Sources:
-  - Meeting report: https://f1000research.com/documents/15-1717
-  - Rare disease bundle: https://elixir-europe.org/services/service-bundles/systems-biology-rare-disease
-  - Bundle document: https://zenodo.org/api/records/10006029
-  - Rare Diseases Implementation Study: https://elixir-europe.org/internal-projects/commissioned-services/2022-rd-services
-  - bio.tools: https://bio.tools/MINERVA_Platform, https://bio.tools/skm,
-    https://bio.tools/merlin-sysbio
+  I would first agree one pilot, a lead and a realistic time commitment,
+  then reuse that format and establish the remaining resources before
+  promising all three pilots.
 eval_notes: |
   Scored:
-  1. Plan: the bundle with its three pilots (medical/Disease Maps,
-     plant/SKM, microbial/Microbial Biotechnology), and that no owners,
-     dates or funding are given.
-  2. People: at least one named person per pilot, tied to a tool or role
-     (for example Ostaszewski, Bleker or Gruden, Dias or Rocha).
-  3. Comparator: the 2023 rare disease bundle with its size (three authors,
-     five use cases) and its funding (Rare Diseases Implementation Study,
-     EJP RD).
-  4. Verdict: a clear feasibility judgement that names the missing funding
-     or owners.
-  5. Gaps: the member list and people's available time are not public.
-  Accepted: other comparable delivered bundles (AMP4RD 2023) if the facts are
-  right. Using the meeting attendance as the size of the active Community.
-  Traps: Disease Maps is an external network, not an ELIXIR Community. The
-  "Making Models That Matter" preprint and the RDMkit page are other planned
-  outputs, not the bundle. Counting SYBEL's 17 participants as current
-  bundle staff is unsupported: SYBEL ended in January 2024.
+  1. Identifies the September proposal accurately: documented workflows
+     and training across medical/Disease Maps, plant/SKM and microbial
+     use cases, or a clearly stated subset proposed as a first step.
+  2. Gives a reasoned, conditional feasibility assessment using relevant
+     expertise, existing resources or an appropriate delivered precedent.
+  3. Separates evidence of expertise from available capacity and agreed
+     responsibility. Meeting attendance, old project rosters and paper
+     authorship do not establish who can deliver the new work.
+  4. Identifies the material information needed before committing, such as
+     owners, effort, schedule or funding, without turning absent public
+     evidence into proof that no funding or coordination exists.
+  A practical next step can improve the answer but is not required for a
+  complete, supported feasibility assessment.
+  Accepted: a cautious positive or negative assessment with evidence, a
+  smaller pilot, or another appropriate comparator. The 2023 rare-disease
+  bundle is one possible precedent, not a required answer. Its document
+  has three authors and five use cases, but authorship is not a delivery
+  team or effort estimate. Its funding acknowledgement establishes
+  ELIXIR/EJP RD support, not that the same resources are available now.
+  Do not require a named person for every pilot, attendance counts or a
+  public membership list as proof of available capacity. Disease Maps is
+  an external network, and SYBEL ended before this proposal.
 sources:
   - data/input/f1000/documents-15-1717-pdf-6eac35069521.pdf
   - data/input/elixir/services-service-bundles-systems-biology-rare-disease-9642738e7d39.html

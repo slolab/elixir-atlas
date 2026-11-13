@@ -1,127 +1,72 @@
 id: atlas_261111-006
-use_case: "B1"
+use_case: B1
 question: |
-  I work for ELIXIR Estonia. Which ELIXIR projects has our Node taken part
-  in, current and past? Please cover EU-funded projects, Commissioned
-  Services and Implementation Studies, and staff exchanges, with the dates of
-  each.
+  What projects has ELIXIR Estonia been involved in?
 answerability: answerable
 reference_answer: |
-  The ELIXIR Estonia Node page lists services and leadership but no projects.
-  The list below comes from CORDIS and from the project pages on
-  elixir-europe.org that name ELIXIR Estonia under "Nodes involved". Status is
-  as of 11 November 2026.
+  Estonia has taken part in EU projects, Platform work, Commissioned Services and staff exchanges.
 
-  **EU projects** (University of Tartu, TARTU ULIKOOL, is a participant in
-  all three):
-  - ELIXIR-STEERS, grant 101131096: 1 February 2024 to 31 January 2027.
-    Current.
-  - ELIXIR-CONVERGE, grant 871075: 1 February 2020 to 31 July 2023.
-  - ELIXIR-EXCELERATE, grant 676559: 1 September 2015 to 31 August 2019.
+  **Recent work**
 
-  **Running in 2026:**
-  - ELIXIR Node support (Scientific Programme): January 2024 to December 2026.
-  - ELIXIR Compute, Tools and Training Platforms (2024-26): the project pages
-    give January 2024 to January 2026, but the work plans on Zenodo are
-    2024-2026 plans over 36 months (M01 to M36). The two sources disagree on
-    the end date.
+  | Project | Period |
+  | --- | --- |
+  | [ELIXIR-STEERS](https://cordis.europa.eu/project/id/101131096), through the University of Tartu | February 2024–January 2027 |
+  | [ELIXIR Node support](https://elixir-europe.org/how-we-work/scientific-programme/nodes/support) | January 2024–December 2026 |
+  | [Compute](https://doi.org/10.5281/zenodo.12819244), [Tools](https://doi.org/10.5281/zenodo.16993903) and [Training](https://doi.org/10.5281/zenodo.12516053) Platform work plans | 2024–2026 |
+  | [DATAREX](https://elixir-europe.org/internal-projects/commissioned-services/datarex) | January 2024–December 2025 |
 
-  **Earlier Commissioned Services and Implementation Studies:**
-  - DATAREX, Data Management for Research in ELIXIR: January 2024 to
-    December 2025
-  - A framework to standardize machine learning in life sciences (2023-24):
-    January 2023 to January 2024
-  - Five 2022-23 services, each January 2022 to January 2023: ELIXIR Beacon
-    Infrastructure Service; bio.tools registry and EDAM ontology; Federated
-    EGA framework; TeSS, the ELIXIR training portal; Consolidating quality
-    and impact of the TeSS training resources
-  - Tools Platform Ecosystem: June 2021 to May 2023
-  - Standardising the fluxomics workflows: June to November 2021
-  - Capacity building in interoperability: June 2019 to December 2021
-  - ELIXIR Federated Human Data (2019-21): January 2019 to January 2021
-  - Metabolite identification: June 2018 to December 2019
-  - Towards Data Stewardship in ELIXIR: Training and Portal: January 2018 to
-    June 2019
-  - Developing learning paths for users of ELIXIR services: January 2018 to
-    June 2019
-  - ELIXIR integration from a user perspective: January to December 2017
-  - Building the foundation for Data Carpentry and Software Carpentry within
-    ELIXIR: January 2015 to January 2016
+  **Earlier projects**
 
-  **Staff exchanges:**
-  - Bioinformatics and statistical skills training workshop (SEP 2025-08),
-    with ELIXIR Czech Republic: March to May 2025
-  - Preparing the Data Steward Handbook for early publication (SEP 2024-02):
-    October 2024 to March 2025
+  - EU projects: [ELIXIR-CONVERGE](https://cordis.europa.eu/project/id/871075), February 2020–July 2023, and [ELIXIR-EXCELERATE](https://cordis.europa.eu/project/id/676559), September 2015–August 2019. The University of Tartu participated in both.
+  - 2023–2024: [standardising machine learning in life sciences](https://elixir-europe.org/internal-projects/commissioned-services/2023-MLstandards).
+  - 2022–2023: [Beacon Infrastructure](https://elixir-europe.org/internal-projects/commissioned-services/2022-beacon-infrastructure), [bio.tools and EDAM](https://elixir-europe.org/internal-projects/commissioned-services/2022-etp3), [Federated EGA](https://elixir-europe.org/internal-projects/commissioned-services/2022-fhd), [TeSS](https://elixir-europe.org/internal-projects/commissioned-services/2022-tess) and [TeSS training quality and impact](https://elixir-europe.org/internal-projects/commissioned-services/2022-trp3).
+  - 2021–2023: [Tools Platform Ecosystem](https://elixir-europe.org/internal-projects/commissioned-services/tools-platform-ecosystem); in 2021, [standardising fluxomics workflows](https://elixir-europe.org/internal-projects/commissioned-services/fluxomics-workflows).
+  - 2019–2021: [capacity building in interoperability](https://elixir-europe.org/internal-projects/commissioned-services/capacity-building) and [Federated Human Data](https://elixir-europe.org/internal-projects/commissioned-services/federated-human-data).
+  - 2018–2019: [metabolite identification](https://elixir-europe.org/internal-projects/commissioned-services/metabolite-identification), [data stewardship training and portal](https://elixir-europe.org/internal-projects/commissioned-services/towards-data-stewardship) and [learning paths](https://elixir-europe.org/internal-projects/commissioned-services/learning-paths-2018).
+  - 2017: [ELIXIR integration from a user perspective](https://elixir-europe.org/internal-projects/commissioned-services/elixir-integration-user-perspective).
+  - 2015–2016: [Data Carpentry and Software Carpentry](https://elixir-europe.org/internal-projects/commissioned-services/data-carpentry).
 
-  Sources:
-  - Node page: https://elixir-europe.org/about-us/who-we-are/nodes/estonia
-  - CORDIS: https://cordis.europa.eu/project/id/101131096,
-    https://cordis.europa.eu/project/id/871075,
-    https://cordis.europa.eu/project/id/676559
-  - Node support: https://elixir-europe.org/how-we-work/scientific-programme/nodes/support
-  - Platforms: https://elixir-europe.org/internal-projects/commissioned-services/2024-compute,
-    https://elixir-europe.org/internal-projects/commissioned-services/2024-tools,
-    https://elixir-europe.org/internal-projects/commissioned-services/2024-training;
-    work plans https://doi.org/10.5281/zenodo.12819244 (Compute),
-    https://doi.org/10.5281/zenodo.16993903 (Tools),
-    https://doi.org/10.5281/zenodo.12516053 (Training)
-  - Earlier services: the pages under
-    https://elixir-europe.org/internal-projects/commissioned-services/
-    (datarex, 2023-MLstandards, 2022-beacon-infrastructure, 2022-etp3,
-    2022-fhd, 2022-tess, 2022-trp3, tools-platform-ecosystem,
-    fluxomics-workflows, capacity-building, federated-human-data,
-    metabolite-identification, towards-data-stewardship, learning-paths-2018,
-    elixir-integration-user-perspective, data-carpentry)
-  - Staff exchanges: https://elixir-europe.org/internal-projects/staff-exchange-programme/bioinformatics-stats,
-    https://elixir-europe.org/internal-projects/staff-exchange-programme/ds-handbook
+  **Staff exchanges** include the [bioinformatics and statistics workshop with ELIXIR Czech Republic](https://elixir-europe.org/internal-projects/staff-exchange-programme/bioinformatics-stats), March–May 2025, and [preparing the Data Steward Handbook](https://elixir-europe.org/internal-projects/staff-exchange-programme/ds-handbook), October 2024–March 2025.
 eval_notes: |
+  Intent: give a useful view of Estonia's project involvement. The question does not specify a historical cutoff, project taxonomy, exact dates or an exhaustive list. A clearly scoped recent overview and a broader history are both reasonable; assess the breadth the answer claims.
+
   Scored:
-  1. EU projects: STEERS (2024-2027, current), CONVERGE (2020-2023) and
-     EXCELERATE (2015-2019), with University of Tartu as participant.
-  2. Running in 2026: Node support (to December 2026) and the 2024-26
-     Compute, Tools and Training Platforms. Either end date for the
-     Platforms is accepted if the answer gives its source; noting the
-     conflict is better.
-  3. Earlier services: at least 12 of the 16 listed, with dates. No service
-     that does not list ELIXIR Estonia.
-  4. Staff exchanges: the two 2024-25 exchanges with dates.
-  5. Every item has a source link.
-  Accepted: grouping by type or by year; "Implementation Study" and
-  "Commissioned Service" used interchangeably; the 2022-23 TeSS services
-  named as "ETP3" or "TrP3".
-  Traps: the ELITMa Module 2 staff exchange (2025) took place in Tartu but
-  lists only ELIXIR Netherlands. Performance benchmarking (2019-21) does not
-  involve Estonia. The Node page's "IMI-EMIF-Platform" is not an ELIXIR
-  project. DATAREX and the 2022-23 services have ended.
+  1. Identifies STEERS and the University of Tartu's involvement. If describing earlier EU projects, correctly attributes CONVERGE and EXCELERATE to Tartu.
+  2. Identifies Estonia's Platform or Node support involvement with concrete projects, rather than treating its portfolio as EU grants alone.
+  3. Provides a useful view of service or exchange work within its stated period, with correct Estonia participation. For a historical overview, supported examples include DATAREX, machine-learning standards, the 2022–2023 services and the two staff exchanges.
+  4. Keeps current and ended work distinct wherever it makes a status claim, and does not assert exhaustiveness from a small selection.
+
+  Accepted: grouping by period or project type; a clearly labelled selection rather than every reference item. Exact start and end days are not required. Do not apply the old “12 of 16” threshold. Other supported projects may be included. A useful answer focused on current involvement can omit historical examples if it states that scope.
+
+  Evidence notes: CORDIS confirms the three EU grants and Tartu as participant. The older Platform webpages and 36-month work plans disagree on end dates; answers can use either with clear attribution. Merely hosting an event in Tartu does not establish Node participation: the ELITMa Module 2 staff exchange lists only the Netherlands. DATAREX ended in December 2025. IMI-EMIF on the Node page should not be called an ELIXIR project without further evidence.
 sources:
-  - data/input/elixir/about-us-who-we-are-nodes-estonia-9088d6d418c0.html
-  - data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
-  - data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html
-  - data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html
-  - data/input/elixir/how-we-work-scientific-programme-nodes-support-67466de6c4d9.html
-  - data/input/elixir/internal-projects-commissioned-services-2024-compute-fe8508a1f821.html
-  - data/input/elixir/internal-projects-commissioned-services-2024-tools-2c5bdc4e9d4a.html
-  - data/input/elixir/internal-projects-commissioned-services-2024-training-44d231a0f1b9.html
-  - data/input/zenodo/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
-  - data/input/zenodo/api-records-16993903-files-24-TECHNOLOGY-TOOLSPLATFORM.pdf-content-8388907eb4ee.pdf
-  - data/input/zenodo/records-12516053-files-COPY-for-publishing_24-TECHNOLOGY-TRAININGPLATFORM-v0.2.pdf-content-a9e217096534.pdf
-  - data/input/elixir/internal-projects-commissioned-services-datarex-33368d83847d.html
-  - data/input/elixir/internal-projects-commissioned-services-2023-MLstandards-66b4906f2c1b.html
-  - data/input/elixir/internal-projects-commissioned-services-2022-beacon-infrastructure-d8a60a21e2c5.html
-  - data/input/elixir/internal-projects-commissioned-services-2022-etp3-5323f29e23ee.html
-  - data/input/elixir/internal-projects-commissioned-services-2022-fhd-edbcd6418ccd.html
-  - data/input/elixir/internal-projects-commissioned-services-2022-tess-5d42d01dce14.html
-  - data/input/elixir/internal-projects-commissioned-services-2022-trp3-0b4e9d77a553.html
-  - data/input/elixir/internal-projects-commissioned-services-tools-platform-ecosystem-c3af6af468bf.html
-  - data/input/elixir/internal-projects-commissioned-services-fluxomics-workflows-75033244b193.html
-  - data/input/elixir/internal-projects-commissioned-services-capacity-building-8477905aff5d.html
-  - data/input/elixir/internal-projects-commissioned-services-federated-human-data-6b7882ead004.html
-  - data/input/elixir/internal-projects-commissioned-services-metabolite-identification-6f41e96e9dd0.html
-  - data/input/elixir/internal-projects-commissioned-services-towards-data-stewardship-6c3d1051ccef.html
-  - data/input/elixir/internal-projects-commissioned-services-learning-paths-2018-01e7306bb975.html
-  - data/input/elixir/internal-projects-commissioned-services-elixir-integration-user-perspective-4ccf2dfc1d06.html
-  - data/input/elixir/internal-projects-commissioned-services-data-carpentry-348ca57cb0da.html
-  - data/input/elixir/internal-projects-staff-exchange-programme-bioinformatics-stats-222873449abf.html
-  - data/input/elixir/internal-projects-staff-exchange-programme-ds-handbook-34cb701093cb.html
-  - data/input/elixir/internal-projects-staff-exchange-programme-elitma-module2support-1df263b8a999.html
+- data/input/elixir/about-us-who-we-are-nodes-estonia-9088d6d418c0.html
+- data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
+- data/input/cordis-converge/project-id-871075-7a468a4efcc1-7876de915268.html
+- data/input/cordis-excelerate/project-id-676559-f1b0491142d6-c989fcc82213.html
+- data/input/elixir/how-we-work-scientific-programme-nodes-support-67466de6c4d9.html
+- data/input/elixir/internal-projects-commissioned-services-2024-compute-fe8508a1f821.html
+- data/input/elixir/internal-projects-commissioned-services-2024-tools-2c5bdc4e9d4a.html
+- data/input/elixir/internal-projects-commissioned-services-2024-training-44d231a0f1b9.html
+- data/input/zenodo/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
+- data/input/zenodo/api-records-16993903-files-24-TECHNOLOGY-TOOLSPLATFORM.pdf-content-8388907eb4ee.pdf
+- data/input/zenodo/records-12516053-files-COPY-for-publishing_24-TECHNOLOGY-TRAININGPLATFORM-v0.2.pdf-content-a9e217096534.pdf
+- data/input/elixir/internal-projects-commissioned-services-datarex-33368d83847d.html
+- data/input/elixir/internal-projects-commissioned-services-2023-MLstandards-66b4906f2c1b.html
+- data/input/elixir/internal-projects-commissioned-services-2022-beacon-infrastructure-d8a60a21e2c5.html
+- data/input/elixir/internal-projects-commissioned-services-2022-etp3-5323f29e23ee.html
+- data/input/elixir/internal-projects-commissioned-services-2022-fhd-edbcd6418ccd.html
+- data/input/elixir/internal-projects-commissioned-services-2022-tess-5d42d01dce14.html
+- data/input/elixir/internal-projects-commissioned-services-2022-trp3-0b4e9d77a553.html
+- data/input/elixir/internal-projects-commissioned-services-tools-platform-ecosystem-c3af6af468bf.html
+- data/input/elixir/internal-projects-commissioned-services-fluxomics-workflows-75033244b193.html
+- data/input/elixir/internal-projects-commissioned-services-capacity-building-8477905aff5d.html
+- data/input/elixir/internal-projects-commissioned-services-federated-human-data-6b7882ead004.html
+- data/input/elixir/internal-projects-commissioned-services-metabolite-identification-6f41e96e9dd0.html
+- data/input/elixir/internal-projects-commissioned-services-towards-data-stewardship-6c3d1051ccef.html
+- data/input/elixir/internal-projects-commissioned-services-learning-paths-2018-01e7306bb975.html
+- data/input/elixir/internal-projects-commissioned-services-elixir-integration-user-perspective-4ccf2dfc1d06.html
+- data/input/elixir/internal-projects-commissioned-services-data-carpentry-348ca57cb0da.html
+- data/input/elixir/internal-projects-staff-exchange-programme-bioinformatics-stats-222873449abf.html
+- data/input/elixir/internal-projects-staff-exchange-programme-ds-handbook-34cb701093cb.html
+- data/input/elixir/internal-projects-staff-exchange-programme-elitma-module2support-1df263b8a999.html

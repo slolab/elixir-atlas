@@ -1,101 +1,71 @@
 id: atlas_261111-014
 use_case: "B10"
 question: |
-  For ELIXIR-UK's national reporting, list the UK's ELIXIR project portfolio:
-  the 2024–28 Commissioned Services and ELIXIR's EU grants (ELIXIR-EXCELERATE,
-  ELIXIR-CONVERGE, ELIXIR-STEERS) that involve ELIXIR UK, whether each is
-  current or ended as of November 2026, and whether UK partners receive EU
-  grant money or contribute in-kind. As gaps, list the 2024–28 Platform and
-  Science-area projects that do not list ELIXIR UK, and the projects where
-  the ELIXIR website and the ELIXIR-UK website disagree.
+  Which projects is ELIXIR-UK involved in? Is any of that funded?
 answerability: partially_answerable
 reference_answer: |
-  **2024–28 Commissioned Services that list ELIXIR UK** (elixir-europe.org)
-  - Current: the Data, Interoperability, Tools and Training Platforms and
-    Infrastructure Services (January 2024 to December 2026); Node support and
-    PeoplePulse (to December 2026); Train the Trainer (to January 2027);
-    BioDiv-FAIR-Checker and FAIRferm (January to December 2026); DBTLHub,
-    RCI-M metabolomics and Spatial2Galaxy (to December 2026); FAIR annotation
-    workflows for PDBe-KB and TELLME (2026).
-  - Ended: FHDportal and "Leveraging federated learning and RO-Crates"
-    (January 2026), E-PAN (May 2026), HARVEST (June 2026).
+  Yes, some UK participation has documented EU funding. The public
+  portfolio spans infrastructure, research, training and national projects.
 
-  **EU grants (CORDIS, net EU contribution to UK beneficiaries)**
-  - ELIXIR-EXCELERATE, September 2015 to August 2019, ended: Manchester
-    €528,281; Cambridge €315,165; Oxford €242,958; Earlham €183,750;
-    Heriot-Watt €105,433.
-  - ELIXIR-CONVERGE, February 2020 to July 2023, ended: Manchester €139,933;
-    Cambridge €93,350; Oxford €58,833. The ELIXIR-UK site also names
-    Bradford, Cardiff, Newcastle, Dundee and Birmingham, which are not
-    beneficiaries in CORDIS.
-  - ELIXIR-STEERS, February 2024 to January 2027, current: Manchester
-    €75,616; Earlham €62,192. CORDIS also lists both as partners whose
-    participation ended (€0).
+  **Current work**
 
-  **Funded or in-kind.** For the Commissioned Services, no public source
-  gives per-Node funding or says whether UK work is funded or in-kind.
-  For the EU grants, only
-  the CORDIS beneficiaries above receive EU money. No source states that the
-  other UK institutions contributed in-kind.
+  - The UK is listed in the [Data](https://elixir-europe.org/how-we-work/scientific-programme/technology/data),
+    [Interoperability](https://elixir-europe.org/how-we-work/scientific-programme/technology/interoperability),
+    [Tools](https://elixir-europe.org/how-we-work/scientific-programme/technology/tools)
+    and [Training](https://elixir-europe.org/how-we-work/scientific-programme/technology/training)
+    work programmes, plus [Infrastructure Services](https://elixir-europe.org/how-we-work/scientific-programme/technology/infraserv).
+    The [UK Compute page](https://elixiruknode.org/project/2024-technology-compute/)
+    also names Manchester, although the current central page omits the UK.
+  - Science projects include [DBTLHub](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/dbtlhub),
+    [RCI-M](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/metabolomics),
+    [Spatial2Galaxy](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/spatial2),
+    [TELLME](https://elixir-europe.org/how-we-work/scientific-programme/science/cmr/tellme),
+    [BioDiv-FAIR-Checker](https://elixir-europe.org/how-we-work/scientific-programme/science/bfsp/biodiv)
+    and [FAIRferm](https://elixir-europe.org/how-we-work/scientific-programme/science/bfsp/fairferm).
+  - The UK also participates in [Node support](https://elixir-europe.org/how-we-work/scientific-programme/nodes/support),
+    [PeoplePulse](https://elixir-europe.org/how-we-work/scientific-programme/people/peoplepulse)
+    and [Train the Trainer](https://elixir-europe.org/how-we-work/scientific-programme/people/ttt).
+    Its [own directory](https://elixiruknode.org/projects/) adds AgroServ,
+    BioFAIR Methods Commons and FAIR-in-action bridge.
 
-  **Gaps: 2024–28 projects that do not list ELIXIR UK**
-  - Platforms: Compute (page lists Czech Republic, Finland, Germany,
-    Luxembourg, Netherlands, Switzerland).
-  - Biodiversity, food security and pathogens: Odyssey, non-human pathogen
-    metadata standards, FAIR plant virtual assistant, FAIRyMAGs, KYBELE.
-  - Cellular and molecular research: FRET-IDP Community Resource, structural
-    and functional ontologies of disordered proteins.
-  - Human data and translational research: FAIR-FEGA, Empowering users,
-    FEGA-Connect.
-  - ELIXIR UK takes part in all three Science areas and in four of the five
-    Platforms.
+  **Funding and past work**
 
-  **Where the two websites disagree**
-  - Compute Platform: the ELIXIR-UK site lists it (University of Manchester,
-    Stian Soiland-Reyes), and the work plan names Manchester. The current
-    ELIXIR page does not list the UK; the older 2024-26 page does.
-  - E-PAN: the ELIXIR-UK site shows it as current, January 2024 to January
-    2027. The ELIXIR page gives January 2025 to May 2026.
-  - The ELIXIR-UK projects page omits ELIXIR-STEERS, ELIXIR-EXCELERATE and
-    every 2024–28 service that lists ELIXIR UK except the Data,
-    Interoperability and Tools Platforms and E-PAN.
+  [ELIXIR-STEERS](https://cordis.europa.eu/project/id/101131096) runs until
+  January 2027. CORDIS records net EU contributions of €75,616 to Manchester
+  and €62,192 to Earlham. Earlier funded participation includes
+  [EXCELERATE](https://cordis.europa.eu/project/id/676559), which ended in
+  2019, and [CONVERGE](https://cordis.europa.eu/project/id/871075), which ended
+  in 2023.
 
-  Sources:
-  - 2024–28 project pages under https://elixir-europe.org/how-we-work/scientific-programme
-    (technology/*, nodes/support, people/*, science/bfsp/*, science/cmr/*,
-    science/hdtr/*)
-  - Older Compute page: https://elixir-europe.org/internal-projects/commissioned-services/2024-compute
-  - Compute work plan: https://zenodo.org/records/12819244
-  - CORDIS: https://cordis.europa.eu/project/id/676559,
-    https://cordis.europa.eu/project/id/871075,
-    https://cordis.europa.eu/project/id/101131096
-  - ELIXIR-UK projects: https://elixiruknode.org/projects/,
-    https://elixiruknode.org/project/2024-technology-compute/,
-    https://elixiruknode.org/project/e-pan-enhancing-pan-genome-analysis-in-plants/,
-    https://elixiruknode.org/project/elixir-converge/
+  The reviewed Commissioned Service pages do not establish each UK partner's
+  funding or in-kind status. The directories also disagree: the
+  [UK E-PAN page](https://elixiruknode.org/project/e-pan-enhancing-pan-genome-analysis-in-plants/)
+  runs to January 2027, while the [central page](https://elixir-europe.org/how-we-work/scientific-programme/science/bfsp/e-pan)
+  ends in May 2026. Treat this as a public overview to reconcile, not a complete
+  financial register.
 eval_notes: |
   Scored:
-  1. 2024–28 services with ELIXIR UK, split into current and ended (at
-     least the four Platforms, E-PAN and HARVEST as ended, and the
-     HDTR projects FHDportal and federated learning as ended).
-  2. EU grants: EXCELERATE and CONVERGE ended, STEERS current, with the UK
-     beneficiaries and their EU contributions from CORDIS.
-  3. Funded or in-kind: states that no public source gives Node funding or
-     in-kind status for the Commissioned Services; nothing is invented.
-  4. Gaps: Compute as the one Platform without the UK, and the Science
-     projects without the UK.
-  5. Website disagreements: Compute, E-PAN dates, and services missing from
-     the ELIXIR-UK projects page.
-  Accepted: adding other EU projects from the ELIXIR-UK site (AgroServ
-  current; EOSC-Life, BY-COVID, FAIRplus, EJP RD, FAIR-IMPACT, BioDT
-  ended) or national projects (BioFAIR Methods Commons, FAIR-in-action
-  bridge, ELIXIR-UK DaSH), if marked as outside ELIXIR's own projects.
-  Treating the Compute Platform as a UK project with the conflict flagged.
-  Traps: the ELIXIR-UK site's project budgets for EU projects are whole-
-  project totals, not UK shares. ELEAD 2.0 lists no Nodes at all, so it is
-  not a UK gap. EMBL-EBI is not ELIXIR UK. DATAREX and the Toxicology
-  integration project (2024–2025) are ELIXIR-funded but not on the 2024–28
-  Programme pages.
+  1. Gives an evidenced portfolio spanning more than one type of work, such
+     as Platform services, science projects, EU grants or national projects.
+  2. Distinguishes current from past participation where dates are supplied:
+     STEERS runs to January 2027; EXCELERATE ended in 2019 and CONVERGE in
+     2023. A passed scheduled end is not proof of actual completion.
+  3. Identifies documented UK grant funding, such as the STEERS beneficiaries
+     Manchester (€75,616) and Earlham (€62,192), without confusing whole-
+     project budgets with UK shares. Exact amounts are optional if not given.
+  4. Does not infer in-kind work or individual salary funding from an absent
+     public budget, institutional participation or a catalogue listing.
+  5. Handles material uncertainty honestly: for example Compute's conflicting
+     participation lists, E-PAN's conflicting dates, or incomplete coverage.
+  Accepted: a current-only overview with its scope clear, a historical
+  portfolio, or a different well-supported selection. The question does not
+  limit the portfolio to the 2024–28 programme or ELIXIR's own EU grants;
+  AgroServ and national projects are legitimate inclusions. Do not require
+  an exact inventory, every beneficiary's amount, or projects the UK does
+  not participate in. The current Compute page omits the UK, but its plan
+  and the UK site establish Manchester's involvement. CORDIS's former
+  zero-euro STEERS partner entries must not override its funded beneficiary
+  entries. EMBL-EBI and ELIXIR UK are distinct.
 sources:
   - data/input/elixir/how-we-work-scientific-programme-technology-data-71282031a7e0.html
   - data/input/elixir/how-we-work-scientific-programme-technology-interoperability-a93a760438e6.html

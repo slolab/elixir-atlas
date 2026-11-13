@@ -1,71 +1,52 @@
 id: atlas_261111-017
 use_case: "C1.3"
 question: |
-  Which training materials in TeSS should I use to learn genome-scale
-  metabolic modelling, and which relevant training events listed in TeSS start
-  on or after 11 November 2026?
+  Any good courses or tutorials on genome-scale metabolic modelling?
 answerability: answerable
 reference_answer: |
-  "Officially recommended" below means the item is in the ELIXIR Systems
-  Biology Community's TeSS collection, which the Community page links. All
-  other items are only listed in TeSS.
+  For tutorials you can use now:
 
-  **Upcoming events** (both in the Community's TeSS collection)
-  - **Constraint-based modeling of metabolic networks with CellNetAnalyzer
-    and CNApy: Module 2 – Advanced topics**: online, 19 November 2026,
-    de.NBI (ELIXIR Germany).
-    https://tess.elixir-europe.org/events/constraint-based-modeling-of-metabolic-networks-with-cellnetanalyzer-and-cnapy-module-2-advanced-topics
-  - **Constraint-Based Modeling: Introduction and Advanced Topics (2027)**:
-    Maastricht, 1–5 February 2027; GEM methods for biotechnology and systems
-    biomedicine.
-    https://tess.elixir-europe.org/events/constraint-based-modeling-introduction-and-advanced-topics-2027
+  - [COBRA Toolbox tutorials](https://tess.elixir-europe.org/materials/constraint-based-reconstruction-and-analysis-toolbox-tutorials)
+    cover a range of constraint-based methods with MATLAB examples, from
+    beginner to advanced topics.
+  - [Introduction to CellNetAnalyzer](https://tess.elixir-europe.org/materials/introduction-to-cellnetanalyzer)
+    covers analysis of metabolic networks, including flux balance analysis.
+  - [COBREXA tutorials](https://tess.elixir-europe.org/materials/tutorials-on-cobrexa)
+    offer tutorials and notebooks for metabolic modelling in Julia, with
+    more advanced material on large analyses.
 
-  No other event starting from 11 November 2026 matches genome-scale or
-  constraint-based modelling. The collection's Dynamic Modeling in Systems
-  Biology course (Wageningen, 7–11 December 2026) covers dynamic, not
-  constraint-based, models.
+  Two upcoming courses are listed:
 
-  **Materials for GEMs** (listed in TeSS, not in the Community collection)
-  - Constraint-based reconstruction and analysis (COBRA) Toolbox tutorials:
-    https://tess.elixir-europe.org/materials/constraint-based-reconstruction-and-analysis-toolbox-tutorials
-  - Tutorials on COBREXA:
-    https://tess.elixir-europe.org/materials/tutorials-on-cobrexa
-  - Analysis of huge metabolic models with COBREXA.jl:
-    https://tess.elixir-europe.org/materials/analysis-of-huge-metabolic-models-with-cobrexa-jl-6a5d2934-1460-4b79-a0c6-6957c7994c1a
-  - Interrogating the effect of enzyme kinetics on metabolism using
-    differentiable constraint-based models:
-    https://tess.elixir-europe.org/materials/interrogating-the-effect-of-enzyme-kinetics-on-metabolism-using-differentiable-constraint-based-models
-  - Introduction to CellNetAnalyzer:
-    https://tess.elixir-europe.org/materials/introduction-to-cellnetanalyzer
+  - [CellNetAnalyzer and CNApy: advanced topics](https://tess.elixir-europe.org/events/constraint-based-modeling-of-metabolic-networks-with-cellnetanalyzer-and-cnapy-module-2-advanced-topics),
+    online on **19 November 2026**. It builds on the introductory module;
+    that module took place on 5 November.
+  - [Constraint-Based Modeling: Introduction and Advanced Topics](https://tess.elixir-europe.org/events/constraint-based-modeling-introduction-and-advanced-topics-2027),
+    **1–5 February 2027 in Maastricht**, covers genome-scale metabolic
+    networks for biotechnology and systems biomedicine.
 
-  **Related materials in the Community collection** (officially
-  recommended, on model reproducibility in general rather than GEMs)
-  - Exploring reproducible and reusable systems biology models with
-    BioModels:
-    https://tess.elixir-europe.org/materials/exploring-reproducible-and-reusable-systems-biology-models-with-biomodels
-  - Reproducibility in Systems Biology Modelling: BioModels' role:
-    https://tess.elixir-europe.org/materials/reproducibility-in-systems-biology-modelling-biomodels-role
-
-  Collection: https://tess.elixir-europe.org/collections/elixir-systems-biology-community-training-events-and-materials1
+  For a first introduction, I would work through a tutorial before joining
+  the advanced CNApy session.
 eval_notes: |
   Scored:
-  1. Events: CNApy Module 2 (online, 19 November 2026) and the Maastricht
-     Constraint-Based Modeling course (1–5 February 2027).
-  2. Materials: at least three of the five GEM materials (COBRA Toolbox
-     tutorials, COBREXA tutorials, COBREXA.jl, differentiable constraint-based
-     models, Introduction to CellNetAnalyzer).
-  3. Labels: says which items are in the Systems Biology Community's TeSS
-     collection and which are only in TeSS. None of the five GEM materials is
-     in the collection.
-  4. Links to the TeSS entries or the collection.
-  Accepted: adding Dynamic Modeling in Systems Biology (7–11 December 2026)
-  the EMBL-EBI multi-omics course (8–12 March 2027) or VIB's Tracer
-  metabolomics course (Leuven, 2–4 March 2027) as adjacent, if not called
-  GEM training.
-  Traps: CNApy Module 1 ran on 5 November 2026, before the cut-off. The BiG
-  Talks Metabolic Atlas event in the collection dates from 10 September
-  2021. TeSS events tagged with the EDAM topic "Systems biology" are not the
-  Community collection.
+  1. Offers relevant learning resources with enough description to choose
+     between them; a catalogue of unrelated systems biology courses is
+     insufficient.
+  2. Correctly describes the tutorials or course content. Verified options
+     include COBRA Toolbox tutorials, CellNetAnalyzer, COBREXA tutorials,
+     large-model COBREXA material and differentiable constraint-based models.
+  3. Uses dates and delivery format accurately for any events recommended
+     as upcoming. CNApy Module 2 is online on 19 November 2026; the
+     Maastricht course is 1–5 February 2027. Module 1 on 5 November is past.
+  4. Gives usable resource links and distinguishes introductory from
+     advanced material when recommending a learning route.
+  Accepted: self-paced tutorials only, courses only, a different evidenced
+  selection, or a follow-up about experience after offering starting points.
+  No particular number of resources or event is mandatory. Do not require
+  TeSS collection membership or formal endorsement labels; a Community
+  collection is a curated list, not proof of official recommendation. A
+  past event may be useful as recorded material if clearly labelled and
+  access to that material is established. Dynamic modelling courses may be
+  adjacent background but should not be passed off as GEM-specific courses.
 sources:
   - data/input/elixir/communities-systems-biology-d4e592b20d80.html
   - data/input/tess-events/events.json_api-b5a06ffce44b.json

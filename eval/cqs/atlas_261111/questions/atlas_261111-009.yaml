@@ -1,51 +1,20 @@
 id: atlas_261111-009
-use_case: "B4"
+use_case: B4
 question: |
-  For our ELIXIR Estonia report: is the University of Tartu funded by the EU
-  in ELIXIR-STEERS, or does it contribute in-kind? How much EU funding does
-  it receive, and does that tell us whether our people on STEERS are paid by
-  the project?
-answerability: partially_answerable
+  Is Estonia getting any money from STEERS, or are we doing it in-kind?
+answerability: answerable
 reference_answer: |
-  **Funded.** CORDIS lists TARTU ULIKOOL (University of Tartu) as a
-  participant in ELIXIR-STEERS (Horizon Europe grant 101131096, 1 February
-  2024 to 31 January 2027, coordinated by EMBL):
-
-  - Net EU contribution: **€67,500**
-  - Total cost declared by the university: **€84,375**
-
-  The EU contribution covers 80% of Tartu's declared cost. The remaining
-  €16,875 is not paid by the grant; CORDIS does not say how Tartu covers it.
-  The University of Tartu is the only Estonian organisation in the project.
-  Tallinn University, where Deputy Head of Node Kairi Koort works, is not a
-  participant.
-
-  **Individuals: not public.** The €67,500 goes to the university. No public
-  source says whether Hedi Peterson, Uku Raudvere, Heleri Inno or other ELIXIR
-  Estonia staff named in STEERS documents are paid from it, or how much
-  effort each gives. The STEERS project handbook names roles but no budgets
-  or person-months. The University of Tartu or the STEERS project office at
-  the ELIXIR Hub could confirm.
-
-  Sources:
-  - CORDIS: https://cordis.europa.eu/project/id/101131096
-  - STEERS participants: https://elixir-europe.org/about-us/how-funded/eu-projects/steers/participants
-  - D1.6 Updated Project Handbook v3: https://doi.org/10.5281/zenodo.18469231
+  **Yes—Estonia is funded through the University of Tartu.** [CORDIS lists a net EU contribution of €67,500](https://cordis.europa.eu/project/id/101131096) to TARTU ULIKOOL for STEERS. This covers 80% of the university's declared project cost of €84,375, so its participation is not wholly in-kind.
 eval_notes: |
+  Intent: determine whether Estonia's STEERS participation receives funding. Interpret Estonia as the ELIXIR Node's participating institution, the University of Tartu.
+
   Scored:
-  1. Funded: the University of Tartu is an EU-funded participant
-     (beneficiary), not in-kind.
-  2. Net EU contribution €67,500.
-  3. Total cost €84,375, or the 80% funding rate.
-  4. Says the EU funding is the organisation's and does not show whether
-     any named person is paid by the project or how much time they give.
-  Accepted: "€67.5k"; omitting the total cost if the net EU contribution and
-  point 4 are right.
-  Traps: €3,200,000 is the whole project's EU contribution and €4,000,000.01
-  its total cost. €197,829.29 (CONVERGE) and €557,502.50 (EXCELERATE) are
-  Tartu's figures in earlier projects. ELIXIR membership fees in the 2024-28
-  financial plan are not STEERS funding.
+  1. Correctly identifies the University of Tartu as an EU-funded STEERS participant, rather than a wholly in-kind contributor.
+  2. Supports that conclusion with the participant-level funding evidence, keeping Tartu's award distinct from the total project grant or unrelated ELIXIR funding.
+
+  Accepted: a direct funded/not-in-kind answer with a source identifying the funded participant. The exact award amount, total cost, percentage and individual-staff discussion are optional. If supplied, the net EU contribution is €67,500, total cost €84,375 and EU share 80%. The uncovered €16,875 must not be assigned to a particular funding source without evidence. An institutional award does not prove that any named person is paid from it.
+
+  Evidence notes: CORDIS's TARTU ULIKOOL participant entry gives both figures. The whole project receives €3,200,000 from the EU; that is not Estonia's amount. Tartu's CONVERGE and EXCELERATE contributions are different awards.
 sources:
-  - data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
-  - data/input/elixir/about-us-how-funded-eu-projects-steers-participants-d48391fb1530.html
-  - data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf
+- data/input/cordis-steers/project-id-101131096-cd5dcf3e20b5-f8dda8493d26.html
+- data/input/elixir/about-us-how-funded-eu-projects-steers-participants-d48391fb1530.html

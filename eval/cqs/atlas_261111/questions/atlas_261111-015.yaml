@@ -1,29 +1,27 @@
 id: atlas_261111-015
 use_case: "C1.1"
 question: |
-  I am starting a genome-scale metabolic modelling project and I am not part
-  of ELIXIR. Which tools, standards and best practices should I consider? For
-  each one, tell me whether an ELIXIR Community page or publication
-  recommends it, or whether it is only tagged in a catalogue, and give links.
-answerability: partially_answerable
+  What should I use for genome-scale metabolic modelling?
+answerability: answerable
 reference_answer: |
-  **Officially recommended** (named by the Systems Biology Community page,
-  its white paper or its 2026 "Making Models That Matter" preprint)
+  A useful starting set is a modelling tool, a model repository and a way
+  to test and share your results. The choice depends on whether you are
+  building a model or analysing an existing one.
 
-  Tools and resources:
-  - **standard-GEM**: template repository for open-source GEMs, with GitHub
-    releases and Zenodo DOIs. Linked from the Community page; recommended in
-    the white paper and the preprint.
-  - **MEMOTE**: standardised testing of GEMs (white paper).
-    https://bio.tools/memote
-  - **FROG analysis**: reproducibility check for GEMs and other
-    constraint-based models (preprint).
-  - **Metabolic Atlas**: browse and analyse open GEMs (white paper).
-    https://bio.tools/metabolicatlas
-  - **MetaNetX/MNXref**: shared namespace for metabolites and reactions;
-    checks model annotation (white paper). https://bio.tools/metanetx
-  - **BioModels**: curated model repository (white paper, preprint).
-    https://bio.tools/biomodels
+  - **Build or analyse models:** [CarveMe](https://bio.tools/carveme) automates
+    reconstruction, [merlin](https://bio.tools/merlin-sysbio) provides a graphical
+    reconstruction workflow, and the [COBRA Toolbox](https://bio.tools/COBRA_Toolbox)
+    supports constraint-based analysis.
+  - **Find and compare models:** [Metabolic Atlas](https://bio.tools/metabolicatlas)
+    provides open genome-scale models for browsing and analysis;
+    [MetaNetX](https://bio.tools/metanetx) helps reconcile metabolite and
+    reaction identifiers. Both are discussed in the [Systems Biology white paper](https://f1000research.com/articles/11-1265/v2).
+  - **Check and share the work:** use [MEMOTE](https://bio.tools/memote) for
+    model tests and [standard-GEM](https://www.biorxiv.org/content/10.1101/2023.03.21.512712v1.abstract)
+    to organise a versioned model repository. The [Making Models That Matter preprint](https://arxiv.org/abs/2609.13127)
+    also recommends FROG analysis for checking the reproducibility of
+    genome-scale models, open formats such as SBML, clear annotations and
+    shared simulation settings.
 
   Standards:
   - SBML (Level 3) for model exchange, MIRIAM for annotation, SED-ML and

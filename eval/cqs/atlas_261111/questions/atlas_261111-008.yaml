@@ -1,87 +1,48 @@
 id: atlas_261111-008
-use_case: "B3"
+use_case: B3
 question: |
-  Who in ELIXIR Estonia works on ELIXIR's current projects, and on which
-  activity? I mean ELIXIR-STEERS, the 2024-26 work plans of the Compute,
-  Tools and Training Platforms, and the ELIXIR Node support project.
+  Who's doing what on Estonia's ELIXIR projects at the moment?
 answerability: partially_answerable
 reference_answer: |
-  Seven people from ELIXIR Estonia are named. All are at the University of
-  Tartu except Kairi Koort (Tallinn University).
+  The current ELIXIR project plans and recent outputs name these contributors:
 
-  - **Hedi Peterson** (Head of Node):
-    - ELIXIR-STEERS: University of Tartu representative in the General
-      Assembly and Estonia's member of the Heads of Nodes Committee; named in
-      the leadership of Tasks 3.4, 4.1, 4.2 and 4.3; participant in
-      milestone M4.1 (ELITMa expansion).
-    - Tools Platform: partner in WP2 (Research Software Ecosystem), where she
-      co-leads Activity 3 Outreach with Magnus Palmblad, and partner in WP3
-      (software management, stewardship and standards).
-    - Node support: listed among the people involved.
-  - **Kairi Koort** (Deputy Head of Node): ELIXIR-STEERS deputy for Estonia
-    in the Heads of Nodes Committee.
-  - **Uku Raudvere** (Technical Coordinator): ELIXIR-STEERS, participant in
-    milestone M3.5, proof-of-concept optimisations in a workflow management
-    system (Task 3.4).
-  - **Heleri Inno**: ELIXIR-STEERS, co-author of milestone report M3.4 on
-    identifying the critical parts of workflows for optimisation.
-  - **Kaur Alasoo**: Compute Platform, co-lead of WP4 Activity 2
-    "Operationalise ELIXIR Cloud"; member of WP3 Activities 1 and 2
-    (sensitive data access and sensitive processing environments).
-  - **Priit Adler**: Training Platform, member of WP4 (Train-the-Trainer
-    programme consolidation).
-  - **Diana Pilvar** (Training Coordinator): Training Platform, co-author of
-    D2.7 on Bioschemas for training events and materials (October 2025) and
-    reviewer of D4.1, the guide to FAIRifying training materials (March
-    2026). She is not named in the Training Platform work plan.
+  | Person | Work |
+  | --- | --- |
+  | **Hedi Peterson** | Named in STEERS task leadership for [workflow optimisation](https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp3) and [Node operations, management and training](https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp4). She also co-leads outreach in the [Tools Platform's research software work](https://doi.org/10.5281/zenodo.16993903), WP2 Activity 3, and is listed in [Node support](https://elixir-europe.org/how-we-work/scientific-programme/nodes/support). |
+  | **Kaur Alasoo** | Co-leads “Operationalise ELIXIR Cloud”, WP4 Activity 2, and contributes to sensitive-data access work in the [Compute Platform plan](https://doi.org/10.5281/zenodo.12819244). |
+  | **Priit Adler** | Contributes to consolidation of the Train-the-Trainer programme in [Training Platform WP4](https://doi.org/10.5281/zenodo.12516053). |
+  | **Uku Raudvere** | Named participant in the [STEERS workflow optimisation proof-of-concept, M3.5](https://doi.org/10.5281/zenodo.20759675). |
+  | **Heleri Inno** | Contributed to the [STEERS workflow optimisation strategy, M3.4](https://doi.org/10.5281/zenodo.17035147). |
+  | **Diana Pilvar** | Co-authored the Training Platform's [Bioschemas report for training resources](https://doi.org/10.5281/zenodo.17257903) and reviewed its [guide to FAIRifying training materials](https://doi.org/10.5281/zenodo.20098139). |
+  | **Kairi Koort** | Estonia's deputy on the STEERS Heads of Nodes Committee; Hedi Peterson is the main representative, according to the [project handbook](https://doi.org/10.5281/zenodo.18469231). |
 
-  **Not public:** how much time each person gives and who is paid by which
-  project. The Compute Platform and Node support pages list ELIXIR Estonia
-  without naming every Estonian contributor.
-
-  Sources:
-  - Node page: https://elixir-europe.org/about-us/who-we-are/nodes/estonia
-  - STEERS: https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp3,
-    https://elixir-europe.org/about-us/how-funded/eu-projects/steers/wp4,
-    https://doi.org/10.5281/zenodo.18469231 (D1.6 handbook),
-    https://doi.org/10.5281/zenodo.17035147 (M3.4),
-    https://doi.org/10.5281/zenodo.20759675 (M3.5),
-    https://doi.org/10.5281/zenodo.20761901 (M4.1)
-  - Platform work plans: https://doi.org/10.5281/zenodo.12819244 (Compute),
-    https://doi.org/10.5281/zenodo.16993903 (Tools),
-    https://doi.org/10.5281/zenodo.12516053 (Training)
-  - Training Platform outputs: https://doi.org/10.5281/zenodo.17257903 (D2.7),
-    https://doi.org/10.5281/zenodo.20098139 (D4.1)
-  - Node support: https://elixir-europe.org/how-we-work/scientific-programme/nodes/support
+  This is the public project record, not a live allocation of everyone's work. A plan or report credit shows a documented role or contribution; it does not establish what someone is doing today.
 eval_notes: |
+  Intent: identify people and their current ELIXIR project activities in Estonia. Do not require the user to know which projects to name. A general Node leadership directory alone does not answer which project work those people do.
+
   Scored:
-  1. Hedi Peterson: STEERS governance (General Assembly, Heads of Nodes
-     Committee) and STEERS tasks, plus Tools Platform WP2 Activity 3
-     co-lead.
-  2. Kaur Alasoo: Compute Platform WP4 Activity 2 co-lead.
-  3. Priit Adler: Training Platform WP4 member.
-  4. Uku Raudvere and Heleri Inno: STEERS WP3 workflow optimisation work
-     (M3.5, M3.4). Kairi Koort: Heads of Nodes Committee deputy.
-  5. Says time commitment and individual funding are not public.
-  Accepted: Diana Pilvar omitted, or listed for the Training Platform
-  outputs. "UT", "UTARTU" and "UTAR" for the University of Tartu.
-  Traps: past projects are out of scope: DATAREX (ended December 2025;
-  Diana Pilvar, Heleri Inno), the 2025 staff exchanges, Ulvi Talas in the
-  2022-23 Beacon and Federated EGA services, and Kairi Koort in the 2018-21
-  metabolomics services. Kaur Alasoo has no STEERS role in the data.
+  1. Identifies Hedi Peterson and connects her to substantive current work, such as the STEERS tasks, Tools outreach or Node support.
+  2. Identifies Kaur Alasoo's Compute work, retaining the co-lead role for Operationalise ELIXIR Cloud when describing that activity.
+  3. Identifies current Training work through Priit Adler, Diana Pilvar or both, with correct activities and role strength.
+  4. Identifies further documented STEERS contributors with their actual role, such as Uku Raudvere, Heleri Inno or Kairi Koort; does not substitute names from unrelated completed projects.
+  5. Keeps evidence dates and role types honest: a past output or planned participation is not proof of a person's live workload, task ownership or salary funding.
+
+  Accepted: other supported contributors and project activities. No exact total of seven people or full governance roster is required. Node coordinators may be included when connected to specific project work. Individual funding or person-month figures are not requested and need not be discussed.
+
+  Evidence notes: Compute WP4 Activity 2 names Kaur Alasoo as co-lead; WP3 names him among members. Tools WP2 Activity 3 names Hedi Peterson and Magnus Palmblad as co-leads. Priit Adler is a Training WP4 member. Diana Pilvar is named in the Training outputs, not in that work plan. The STEERS handbook identifies Kairi Koort as deputy in the Heads of Nodes Committee, which is a governance role rather than a technical task.
 sources:
-  - data/input/elixir/about-us-who-we-are-nodes-estonia-9088d6d418c0.html
-  - data/input/elixir/about-us-how-funded-eu-projects-steers-wp3-bd836267417c.html
-  - data/input/elixir/about-us-how-funded-eu-projects-steers-wp4-be60fab378d5.html
-  - data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf
-  - data/input/zenodo-steers/rt_Strategy-to-identify-the-most-critical-parts-of-a-workflow-for-optimisation.pdf-content-3ed4a6671b2b-219831aa2eb1.pdf
-  - data/input/zenodo-steers/oof-of-concept-implementation-of-optimisations-in-a-workflow-management-system.pdf-content-bf3c2f33b813-d6cf0eb315ab.pdf
-  - data/input/zenodo-steers/XIR-Node-Services-Provision-and-Greening-of-research-infrastructure-operations.pdf-content-026cbcf3565b-ef334da2f088.pdf
-  - data/input/zenodo/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
-  - data/input/zenodo/api-records-16993903-files-24-TECHNOLOGY-TOOLSPLATFORM.pdf-content-8388907eb4ee.pdf
-  - data/input/zenodo/records-12516053-files-COPY-for-publishing_24-TECHNOLOGY-TRAININGPLATFORM-v0.2.pdf-content-a9e217096534.pdf
-  - data/input/zenodo/api-records-17257903-files-D2.7_TP24-26.docx.pdf-content-374b4ac80c4b.pdf
-  - data/input/zenodo/api-records-20098139-files-TECHNOLOGY_Training-Platform_D4.1.pdf-content-c6e09afb5816.pdf
-  - data/input/elixir/how-we-work-scientific-programme-nodes-support-67466de6c4d9.html
-  - data/input/elixir/internal-projects-commissioned-services-2024-tools-2c5bdc4e9d4a.html
-  - data/input/zenodo/-2023-DATAREX---Data-Management-for-Research-in-ELIXIR---Scientific_End_Report.pdf-content-fd565a85b4d6.pdf
+- data/input/elixir/about-us-who-we-are-nodes-estonia-9088d6d418c0.html
+- data/input/elixir/about-us-how-funded-eu-projects-steers-wp3-bd836267417c.html
+- data/input/elixir/about-us-how-funded-eu-projects-steers-wp4-be60fab378d5.html
+- data/input/zenodo-steers/cords-18469231-files-20260131_ELIXIR-STEERS_D1.6-Updated-Project-Handbook---v3.pdf-content-61bac3ad42d2-40249dd15821.pdf
+- data/input/zenodo-steers/rt_Strategy-to-identify-the-most-critical-parts-of-a-workflow-for-optimisation.pdf-content-3ed4a6671b2b-219831aa2eb1.pdf
+- data/input/zenodo-steers/oof-of-concept-implementation-of-optimisations-in-a-workflow-management-system.pdf-content-bf3c2f33b813-d6cf0eb315ab.pdf
+- data/input/zenodo-steers/XIR-Node-Services-Provision-and-Greening-of-research-infrastructure-operations.pdf-content-026cbcf3565b-ef334da2f088.pdf
+- data/input/zenodo/api-records-12819244-files-Public_Template_24-TECHNOLOGY-Compute.pdf-content-5918ba8f3372.pdf
+- data/input/zenodo/api-records-16993903-files-24-TECHNOLOGY-TOOLSPLATFORM.pdf-content-8388907eb4ee.pdf
+- data/input/zenodo/records-12516053-files-COPY-for-publishing_24-TECHNOLOGY-TRAININGPLATFORM-v0.2.pdf-content-a9e217096534.pdf
+- data/input/zenodo/api-records-17257903-files-D2.7_TP24-26.docx.pdf-content-374b4ac80c4b.pdf
+- data/input/zenodo/api-records-20098139-files-TECHNOLOGY_Training-Platform_D4.1.pdf-content-c6e09afb5816.pdf
+- data/input/elixir/how-we-work-scientific-programme-nodes-support-67466de6c4d9.html
+- data/input/elixir/internal-projects-commissioned-services-2024-tools-2c5bdc4e9d4a.html
+- data/input/zenodo/-2023-DATAREX---Data-Management-for-Research-in-ELIXIR---Scientific_End_Report.pdf-content-fd565a85b4d6.pdf

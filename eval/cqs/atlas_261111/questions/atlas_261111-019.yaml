@@ -1,35 +1,22 @@
 id: atlas_261111-019
 use_case: "C2.2"
 question: |
-  Who in the ELIXIR Systems Biology Community develops or supports tools, and
-  which tools are they? Use bio.tools credits and the Community's own pages.
+  Who in the ELIXIR Systems Biology Community develops or looks after tools?
 answerability: partially_answerable
 reference_answer: |
-  The Community's member list is not public, so "members" here means people
-  named on public pages: the co-leads and liaison, the SYBEL participants,
-  the 2026 meeting report and the authors of "Making Models That Matter".
-  Tools were matched to them by the person's name in bio.tools credits.
+  These are documented links between people active in the Community and
+  tools:
 
-  **Tagged with the Systems Biology Community in bio.tools** (3 tools)
-  - **SKM** (Stress Knowledge Map), also tagged Plant Sciences: Carissa
-    Bleker, Kristina Gruden, Živa Ramšak, Vid Podpečan, National Institute
-    of Biology (ELIXIR Slovenia). https://bio.tools/skm
-  - **GlyCombo** and **GlyComboCLI**: Christopher Ashwood and Maia Kelly,
-    who appear nowhere else in the Community's pages.
+  | Person | Tool and documented role |
+  | --- | --- |
+  | Carissa Bleker | Developer and maintainer of [SKM](https://bio.tools/skm) and [BoolDog](https://bio.tools/booldog) |
+  | Miguel Rocha and Oscar Dias | Listed in the credits for [merlin](https://bio.tools/merlin-sysbio); Oscar is also the primary contact for [TranSyT](https://bio.tools/transyt) |
+  | Mihail Anton | Primary contact for [Metabolic Atlas](https://bio.tools/metabolicatlas) |
+  | Marek Ostaszewski | Primary contact for [MINERVA](https://bio.tools/MINERVA_Platform) |
 
-  **Tools credited to named Community people** (no Community tag)
-  - National Institute of Biology, Slovenia: BoolDog (Carissa Bleker, Anže
-    Županič, Kristina Gruden); DiNAR (Kristina Gruden, Živa Ramšak).
-  - University of Minho, Portugal: merlin (Miguel Rocha, Oscar Dias);
-    TranSyT and diel_models (Oscar Dias).
-  - ELIXIR Sweden: Metabolic Atlas (Mihail Anton).
-  - Luxembourg: MINERVA Platform (Marek Ostaszewski).
-  - Germany: COPASI and basico (Frank T. Bergmann).
-  - Maastricht University: PathVisio (Chris Evelo, Martina Kutmon) and
-    WikiPathways (Martina Kutmon).
-  - EMBL-EBI: BioModels (Rahuman Malik-Sheriff).
-  - Others: CaSQ and RA-map (Anna Niarakis), CyFi-MAP (Irina Balaur),
-    AEON.py (David Šafránek), modelbase (Anna Matuszyńska).
+  Carissa and Miguel are co-leads, and Mihail is the liaison, on the
+  [Community page](https://elixir-europe.org/communities/systems-biology).
+  Oscar and Marek presented at the [September 2026 Community meeting](https://f1000research.com/documents/15-1717).
 
   **Resources the Community page promotes**
   - standard-GEM, and three bio.tools modelling domains: constraint-based
