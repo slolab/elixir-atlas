@@ -1,5 +1,5 @@
 import type { NodeData } from "../types";
-import { RequestState, Empty, Facts, More, Section } from "../components";
+import { Table, RequestState, Empty, Facts, More, Section } from "../components";
 import { apiUrl, useApi, list } from "../db";
 import { count, label, text } from "../format";
 import { href } from "../route";
@@ -20,7 +20,7 @@ export function NodePage({ id }: { id: string }) {
         <p className="summary">
           Takes part in {count(groups.length, "group", "groups")} and {count(projects.length, "project", "projects")}. Sources place {count(data.people.length, "person", "people")} in this Node.
         </p>
-        <p className="note"><a href={href("record", `ElixirNode/${id}`)}>Record and source evidence</a></p>
+        <p className="note"><a href={href("record", `ElixirNode/${id}`)}>Record and source evidence</a>, or <a href={href("portfolio", id)}>the Node's portfolio</a>: projects over time, commitments, people and outputs for the report</p>
       </header>
       <div className="entity-body">
         <aside className="side">
@@ -47,7 +47,7 @@ export function NodePage({ id }: { id: string }) {
                 items={data.people}
                 limit={30}
                 render={(shown) => (
-                  <table className="table">
+                  <Table className="table">
                     <thead>
                       <tr>
                         <th scope="col">Person</th>
@@ -66,7 +66,7 @@ export function NodePage({ id }: { id: string }) {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </Table>
                 )}
               />
             ) : (

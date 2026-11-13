@@ -15,7 +15,7 @@ from ....standardization import EDAM_TOPIC_URIS
 @dataclass(frozen=True, kw_only=True)
 class TessEvent:
     __record_set__: ClassVar[str] = "tess_events.jsonl#tess_events"
-    __source_digest__: ClassVar[str] = "9f5c5e7f007199e8bdecf81070f686bf6937e8bf6b07d495bb425f4030dfa04e"
+    __source_digest__: ClassVar[str] = "adf7de05b984a7aa4666e2d39cd22b8a5f3eb68e82306cedd62a519045970ad5"
     __missing_values__: ClassVar[frozenset[str]] = frozenset({""})
 
     city: str | None
@@ -33,6 +33,7 @@ class TessEvent:
     source_path: str
     start: str | None
     tess_id: str
+    tess_url: str
     title: str | None
     topic_labels: list[str]
     edam_topic_uris: list[str] = source_field("topic_uris", term=EDAM_TOPIC_URIS)

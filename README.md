@@ -44,27 +44,34 @@ Serving: [PostgreSQL, API, search and Railway deployment](server/README.md).
 
 ## Agentic ELIXIR skill
 
-[Agentic ELIXIR](skills/agentic-elixir/SKILL.md) answers the [user stories](eval/user_stories.md) through the public Atlas API, using enriched keyword searches, relationships and source evidence. The package contains only the skill and its API reference; no credentials, local data or runtime dependencies are needed beyond an agent that can make HTTP requests.
+Two versions are available:
 
-Install from this checkout:
+- `dist/agentic-elixir.zip`: the complete dated release, for cloud and local sessions without network access.
+- `dist/agentic-elixir-api.zip`: the live API version, for agents with direct HTTP access to the Atlas host. Install as `agentic-elixir-api`; it requires no credentials and follows the release currently served on Railway.
 
-```bash
-npx skills add ./skills/agentic-elixir -g
-```
+[Agentic ELIXIR](skills/agentic-elixir/SKILL.md) answers the [user stories](eval/user_stories.md) from a complete Atlas release bundled in the skill. It searches records and runs read-only SQLite queries with Python's standard library. It works in cloud and local sessions without network access, connectors, credentials or package installation. Installing a new release ZIP updates its data; Railway updates do not change an already installed skill.
 
-After the skill is published to this repository, install remotely:
-
-```bash
-npx skills add slolab/elixir-atlas --skill agentic-elixir -g
-```
-
-The installer lets you choose agents. To select one explicitly, add `-a codex`, `-a claude-code`, `-a opencode` or `-a hermes-agent`. See the installer's [supported agents](https://github.com/vercel-labs/skills/blob/main/docs/agents.md). The installer requires Node.js; the installed skill does not.
-
-To create a ZIP from the repository root:
+Build the release package from this checkout:
 
 ```bash
-mkdir -p dist
-python3 -m zipfile -c dist/agentic-elixir.zip skills/agentic-elixir
+uv run --project server python scripts/build_skill.py data/releases/20261112
 ```
 
-Extract the ZIP and install its `agentic-elixir` folder with `npx skills add ./agentic-elixir -g`, or place that folder in your agent's skills directory.
+Upload `dist/agentic-elixir.zip` through Claude's skill installation screen. For a filesystem-based agent, install the generated complete folder:
+
+```bash
+npx skills add ./dist/agentic-elixir -g
+```
+
+The installer lets you choose agents. To select one explicitly, add `-a codex`, `-a claude-code`, `-a opencode` or `-a hermes-agent`. The installer requires Node.js; the installed skill needs only Python 3 with SQLite. The source folder alone has no data: install the built package, not `skills/agentic-elixir` directly.
+
+Check the generated package:
+
+```bash
+python3 dist/agentic-elixir/scripts/atlas.py verify
+python3 dist/agentic-elixir/scripts/atlas.py search metabolomics --type Initiative
+```
+
+The build verifies the immutable release checksums and includes all graph records, schema descriptions and provenance. A separate full-text index supplies search; its excerpts are previews, while records and SQL return the original fields. The live API remains available for the dashboard and other clients.
+
+Build the API-only ZIP with `python3 -m zipfile -c dist/agentic-elixir-api.zip skills/agentic-elixir-api`, or install its source folder directly with `npx skills add ./skills/agentic-elixir-api -g`. The two skill names are distinct so both can be installed together.

@@ -26,6 +26,7 @@ def _decode(row: dict[str, Any]) -> TessEvent:
         source_path=row["source_path"],
         start=row.get("start"),
         tess_id=row["tess_id"],
+        tess_url=row["tess_url"],
         title=row.get("title"),
         topic_labels=row["topic_labels"],
         edam_topic_uris=row["topic_uris"],

@@ -48,10 +48,10 @@
   },
   "@type": "sc:Dataset",
   "name": "data/extracted/catalogues",
-  "description": "Dataset containing 7 files (application/jsonl) with automatically inferred types and structure",
+  "description": "Dataset containing 8 files (application/jsonl) with automatically inferred types and structure",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
   "citeAs": "Unknown. (2026). data/extracted/catalogues [Data set].",
-  "dateCreated": "2026-11-10T18:00:12.180987Z",
+  "dateCreated": "2026-11-12T07:15:40.191636Z",
   "version": "1.0.0",
   "distribution": [
     {
@@ -62,6 +62,15 @@
       "contentUrl": "biotools.jsonl",
       "encodingFormat": "application/jsonl",
       "sha256": "4e24f20e97f4daae8f83c553f9ba82b8a59d427a5cc5e12e6133ce9eb0650a08"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "biotools_domains.jsonl",
+      "name": "biotools_domains.jsonl",
+      "contentSize": "8414",
+      "contentUrl": "biotools_domains.jsonl",
+      "encodingFormat": "application/jsonl",
+      "sha256": "2cb79b21e0dc6481fd6b4270d5976f36caaff28decc65a00e5794aa045624ae6"
     },
     {
       "@type": "cr:FileObject",
@@ -76,19 +85,19 @@
       "@type": "cr:FileObject",
       "@id": "f1000_items.jsonl",
       "name": "f1000_items.jsonl",
-      "contentSize": "512018",
+      "contentSize": "1231415",
       "contentUrl": "f1000_items.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "b673034479896be2f1aee4115422443f259c4c6372385690b37df10daa733479"
+      "sha256": "e80e6060432a422e0d9de58cb99a941e30e2d2a0801a15c2305fddb74bfcb83a"
     },
     {
       "@type": "cr:FileObject",
       "@id": "tess_events.jsonl",
       "name": "tess_events.jsonl",
-      "contentSize": "14286103",
+      "contentSize": "15463376",
       "contentUrl": "tess_events.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "5ca20dc1ac05d70e5920e4cb58b7a52469184b87b41108b643ba3c7c7485568c"
+      "sha256": "f1559cded8ca43f3667cfb2ef1bc11e51c8ccff4e3f9c3eda1c7a655f2abfad7"
     },
     {
       "@type": "cr:FileObject",
@@ -103,19 +112,19 @@
       "@type": "cr:FileObject",
       "@id": "tess_materials.jsonl",
       "name": "tess_materials.jsonl",
-      "contentSize": "4340298",
+      "contentSize": "4719362",
       "contentUrl": "tess_materials.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "2d605ecd47725bd7b2310953be77f61d60375e5eb6d0a50660e50d2cf90b3ad4"
+      "sha256": "9d7f882df7d8b23004404e8243c4bb559d680fe8b4edb352126af61136131175"
     },
     {
       "@type": "cr:FileObject",
       "@id": "zenodo_records.jsonl",
       "name": "zenodo_records.jsonl",
-      "contentSize": "1091271",
+      "contentSize": "1143356",
       "contentUrl": "zenodo_records.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "601f2d731ec0c3d785dfa72bcec576f5902cdce416685147961b86ac4fdbdbfe"
+      "sha256": "58f23db5d30906fb6ffe88055d17f102957a5841c652c64ceb574aa11e2c8cac"
     }
   ],
   "recordSet": [
@@ -431,6 +440,60 @@
             },
             "extract": {
               "column": "topic_uris"
+            }
+          }
+        }
+      ],
+      "biotope:namedAfterFile": true
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "biotools_domains.jsonl#biotools_domains",
+      "name": "biotools_domains.jsonl",
+      "description": "Records from biotools_domains.jsonl (57 rows)",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "biotools_domains.jsonl#biotools_domains/biotools_id",
+          "name": "biotools_id",
+          "description": "Column 'biotools_id'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools_domains.jsonl"
+            },
+            "extract": {
+              "column": "biotools_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools_domains.jsonl#biotools_domains/domain",
+          "name": "domain",
+          "description": "Column 'domain'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools_domains.jsonl"
+            },
+            "extract": {
+              "column": "domain"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "biotools_domains.jsonl#biotools_domains/source_path",
+          "name": "source_path",
+          "description": "Column 'source_path'",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "biotools_domains.jsonl"
+            },
+            "extract": {
+              "column": "source_path"
             }
           }
         }
@@ -1055,6 +1118,21 @@
         },
         {
           "@type": "cr:Field",
+          "@id": "tess_events.jsonl#tess_events/tess_url",
+          "name": "tess_url",
+          "description": "Column 'tess_url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "tess_events.jsonl"
+            },
+            "extract": {
+              "column": "tess_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
           "@id": "tess_events.jsonl#tess_events/title",
           "name": "title",
           "description": "Column 'title'",
@@ -1387,6 +1465,21 @@
         },
         {
           "@type": "cr:Field",
+          "@id": "tess_materials.jsonl#tess_materials/tess_url",
+          "name": "tess_url",
+          "description": "Column 'tess_url'",
+          "dataType": "sc:URL",
+          "source": {
+            "fileObject": {
+              "@id": "tess_materials.jsonl"
+            },
+            "extract": {
+              "column": "tess_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
           "@id": "tess_materials.jsonl#tess_materials/title",
           "name": "title",
           "description": "Column 'title'",
@@ -1502,6 +1595,57 @@
             },
             "extract": {
               "column": "concept_record_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/contributor_affiliations",
+          "name": "contributor_affiliations",
+          "description": "Column 'contributor_affiliations'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "contributor_affiliations"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/contributor_names",
+          "name": "contributor_names",
+          "description": "Column 'contributor_names'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "contributor_names"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "zenodo_records.jsonl#zenodo_records/contributor_orcids",
+          "name": "contributor_orcids",
+          "description": "Column 'contributor_orcids'",
+          "cr:arrayShape": "-1",
+          "cr:isArray": true,
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "zenodo_records.jsonl"
+            },
+            "extract": {
+              "column": "contributor_orcids"
             }
           }
         },

@@ -27,3 +27,9 @@ class SourceDocument:
         }
     )
     content_type: str | None = field(metadata={"description": "Media type."})
+    published: str | None = field(
+        metadata={"description": "The page's own publication date (datePublished, YYYY-MM-DD), for ELIXIR website pages. A page date is not evidence of a group's activity."}
+    )
+    modified: str | None = field(
+        metadata={"description": "The page's last-modified date (dateModified, YYYY-MM-DD), for ELIXIR website pages. An edit can be a correction or a layout change; it is not evidence of a group's activity."}
+    )

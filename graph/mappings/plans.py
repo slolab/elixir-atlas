@@ -23,6 +23,7 @@ def make_plan_item(record: SourceRecord[PlanItemRecord]) -> Iterator[PlanItem | 
         status=value.status,
         leads=[list_item(item) for item in value.leads],
         participants=[list_item(item) for item in value.participants],
+        tools=list(value.tools),
         effort=one_line(value.effort),
         link=value.link,
         sources=list(value.sources),

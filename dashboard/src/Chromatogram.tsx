@@ -5,9 +5,8 @@ import { href } from "./route";
 type Project = { id: string; name: string; kind: string; start: string; end: string };
 
 const TRACES = [
-  { key: "services", label: "Commissioned services and studies", short: "commissioned services and studies", kinds: ["commissioned_service", "implementation_study"] },
+  { key: "services", label: "Commissioned services", short: "commissioned services", kinds: ["commissioned_service"] },
   { key: "eu", label: "EU projects", short: "EU projects", kinds: ["eu_project"] },
-  { key: "programme", label: "Scientific Programme projects", short: "Scientific Programme projects", kinds: ["programme_project"] },
   { key: "exchange", label: "Staff exchanges", short: "staff exchanges", kinds: ["staff_exchange"] },
 ];
 
@@ -85,53 +84,53 @@ export function Chromatogram({ projects: source }: { projects: Project[] }) {
 
   return (
     <div className="chromatogram">
-      <p className="readout" aria-live="polite">
-        <strong>{monthName(shown)}</strong>
-        {TRACES.map((trace, index) => (
-          <span key={trace.key} className={`readout-item trace-${trace.key}`}>
-            {data.raw[index][shown - data.first]} {trace.short}
-          </span>
-        ))}
-      </p>
-      <svg
-        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        preserveAspectRatio="none"
-        role="slider"
-        tabIndex={0}
-        aria-label="Month"
-        aria-valuemin={data.first}
-        aria-valuemax={data.last}
-        aria-valuenow={picked}
-        aria-valuetext={monthName(picked)}
-        onPointerMove={(event) => setHover(monthAt(event))}
-        onPointerLeave={() => setHover(null)}
-        onClick={(event) => setPicked(monthAt(event))}
-        onKeyDown={onKey}
-      >
-        {years.map((year) => (
-          <line key={year} className="year-rule" x1={x(year * 12)} x2={x(year * 12)} y1={TOP} y2={HEIGHT - BOTTOM} />
-        ))}
-        {data.curves.map((curve, index) => (
-          <path
-            key={TRACES[index].key}
-            className={`trace trace-${TRACES[index].key}`}
-            style={{ animationDelay: `${index * 180}ms` }}
-            pathLength={1}
-            d={curve.map((value, at) => `${at ? "L" : "M"}${x(data.first + at).toFixed(1)},${y(value).toFixed(1)}`).join("")}
-          />
-        ))}
-        <line className="baseline" x1={0} x2={WIDTH} y1={HEIGHT - BOTTOM} y2={HEIGHT - BOTTOM} />
-        {TODAY >= data.first && TODAY <= data.last ? (
-          <line className="today" x1={x(TODAY)} x2={x(TODAY)} y1={TOP} y2={HEIGHT - BOTTOM} />
-        ) : null}
-        <line className="cursor" x1={x(shown)} x2={x(shown)} y1={TOP - 8} y2={HEIGHT - BOTTOM} />
-      </svg>
-      <div className="years" aria-hidden="true">
-        {years.map((year) => (
-          <span key={year} style={{ left: `${(x(year * 12) / WIDTH) * 100}%` }} className={year % 2 ? "odd" : ""}>
-            {year}
-          </span>
-        ))}
+      <div className="chart-panel">
+        <p className="readout" aria-live="polite">
+          <strong>{monthName(shown)}</strong>
+          {TRACES.map((trace, index) => (
+            <span key={trace.key} className={`readout-item trace-${trace.key}`}>
+              {data.raw[index][shown - data.first]} {trace.short}
+            </span>
+          ))}
+        </p>
+        <svg
+          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          preserveAspectRatio="none"
+          role="slider"
+          tabIndex={0}
+          aria-label="Month"
+          aria-valuemin={data.first}
+          aria-valuemax={data.last}
+          aria-valuenow={picked}
+          aria-valuetext={monthName(picked)}
+          onPointerMove={(event) => setHover(monthAt(event))}
+          onPointerLeave={() => setHover(null)}
+          onClick={(event) => setPicked(monthAt(event))}
+          onKeyDown={onKey}
+        >
+          {years.map((year) => (
+            <line key={year} className="year-rule" x1={x(year * 12)} x2={x(year * 12)} y1={TOP} y2={HEIGHT - BOTTOM} />
+          ))}
+          {data.curves.map((curve, index) => (
+            <path
+              key={TRACES[index].key}
+              className={`trace trace-${TRACES[index].key}`}
+              d={curve.map((value, at) => `${at ? "L" : "M"}${x(data.first + at).toFixed(1)},${y(value).toFixed(1)}`).join("")}
+            />
+          ))}
+          <line className="baseline" x1={0} x2={WIDTH} y1={HEIGHT - BOTTOM} y2={HEIGHT - BOTTOM} />
+          {TODAY >= data.first && TODAY <= data.last ? (
+            <line className="today" x1={x(TODAY)} x2={x(TODAY)} y1={TOP} y2={HEIGHT - BOTTOM} />
+          ) : null}
+          <line className="cursor" x1={x(shown)} x2={x(shown)} y1={TOP - 8} y2={HEIGHT - BOTTOM} />
+        </svg>
+        <div className="years" aria-hidden="true">
+          {years.map((year) => (
+            <span key={year} style={{ left: `${(x(year * 12) / WIDTH) * 100}%` }} className={year % 2 ? "odd" : ""}>
+              {year}
+            </span>
+          ))}
+        </div>
       </div>
       <div className="running">
         <h2>Running in {monthName(picked)}</h2>

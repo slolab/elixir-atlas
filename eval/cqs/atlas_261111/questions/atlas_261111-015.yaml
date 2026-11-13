@@ -23,30 +23,66 @@ reference_answer: |
     genome-scale models, open formats such as SBML, clear annotations and
     shared simulation settings.
 
-  If you already have a model, start by checking its format and the analysis
-  you need before choosing a reconstruction tool.
+  Standards:
+  - SBML (Level 3) for model exchange, MIRIAM for annotation, SED-ML and
+    MIASE for simulation experiments, COMBINE archive and RO-Crate for
+    packaging (preprint, white paper). The COMBINE standards collection in
+    FAIRsharing: https://fairsharing.org/FAIRsharing.ad3f2b
+
+  Best practices:
+  - The preprint's ten recommendations for FAIR- and CURE-compliant models,
+    for example open formats, validation and testing, versioning in a code
+    repository, persistent identifiers and sharing simulation protocols.
+  - The BioModels reproducibility scorecard (preprint).
+
+  **Community-supported** (tagged in bio.tools, no Community recommendation
+  found)
+  - **CarveMe**: automated GEM reconstruction; tagged with the Microbial
+    Biotechnology, Metabolomics, Marine Metagenomics and Proteomics
+    Communities and ELIXIR Norway. https://bio.tools/carveme
+  - **COBRA Toolbox**: tagged ELIXIR Luxembourg and the Tools Platform.
+    https://bio.tools/COBRA_Toolbox
+  - **merlin**: genome-scale reconstruction; tagged ELIXIR Portugal and the
+    Tools Platform. https://bio.tools/merlin-sysbio
+  - The bio.tools domain "Constraint-based modelling", linked from the
+    Systems Biology Community page, lists 22 tools, among them CarveMe,
+    merlin, RAVEN Toolbox, OptFlux, CNApy, COBREXA.jl, sybil, Pathway
+    Tools, AuReMe and FAME. The domain is a catalogue listing, not a
+    recommendation of each tool.
+    https://bio.tools/t?domain=constraint-based-modelling
+
+  **Not available yet or not in the evidence**
+  - An RDMkit page on systems biology models is in progress, with a target
+    of December 2026.
+  - FAIRsharing and RDMkit content were not collected, so their records
+    cannot be checked here.
+  - The three tools tagged with the Systems Biology Community in bio.tools
+    (SKM, GlyCombo, GlyComboCLI) are not GEM tools.
+
+  Sources:
+  - Community page: https://elixir-europe.org/communities/systems-biology
+  - White paper: https://f1000research.com/articles/11-1265/v2
+  - Making Models That Matter: https://arxiv.org/abs/2609.13127
+  - Meeting report: https://f1000research.com/documents/15-1717
 eval_notes: |
   Scored:
-  1. Recommends tools or resources relevant to genome-scale metabolic
-     modelling and explains their uses rather than listing unrelated
-     systems biology tools. Verified options include CarveMe, merlin,
-     COBRA Toolbox, Metabolic Atlas, MetaNetX, MEMOTE and standard-GEM.
-  2. Makes a useful distinction between reconstruction, analysis, finding
-     existing models, or testing/sharing, without prescribing an unsupported
-     universal best tool.
-  3. Describes the recommended resources accurately and gives supporting
-     evidence. Catalogue tags and Community links are not formal endorsement.
-  4. Accounts for the unspecified organism, model and task by making a
-     reasonable conditional recommendation or asking a focused follow-up
-     after giving useful starting options.
-  Accepted: a narrower tool-focused answer, a broader workflow including
-  SBML, annotations, versioning and reproducibility, or other evidenced
-  choices. Do not require a fixed resource count, explicit endorsement
-  labels for every item, the whole standards list, a ten-point checklist,
-  or mention of uncollected sources and future RDMkit work. If the answer
-  mentions FROG, the preprint recommends it for GEM reproducibility; if it
-  mentions the Systems Biology bio.tools tag, SKM and GlyCombo are not a
-  GEM toolset. Missing use-case details must not be invented.
+  1. Official GEM resources: at least three of standard-GEM, MEMOTE, FROG,
+     Metabolic Atlas, MetaNetX and BioModels, each traced to the Community
+     page, white paper or preprint.
+  2. Standards: SBML plus at least one of MIRIAM, SED-ML/MIASE, COMBINE
+     archive or RO-Crate.
+  3. Best practice: the ten recommendations of "Making Models That Matter"
+     or the BioModels reproducibility scorecard.
+  4. Labels: every resource is marked officially recommended or
+     catalogue-only, with links; CarveMe is catalogue-only.
+  5. Gaps: the RDMkit page is not yet published (target December 2026) and
+     FAIRsharing and RDMkit were not consulted.
+  Accepted: other bio.tools GEM tools if labelled catalogue-only. Calling the
+  COMBINE FAIRsharing collection recommended, since the preprint names it.
+  Traps: the bio.tools Systems Biology tag (SKM, GlyCombo, GlyComboCLI) is
+  not a GEM toolset. A tool listed in the bio.tools domain that the
+  Community page links is not thereby recommended by the Community. A tool
+  with a Node tag is not thereby recommended by a Community.
 sources:
   - data/input/elixir/communities-systems-biology-d4e592b20d80.html
   - data/input/f1000/articles-11-1265-v2-pdf-55068db9319e.pdf
@@ -61,3 +97,4 @@ sources:
   - data/input/biotools/api-t-0fd2a0517a19.json
   - data/input/biotools/api-t-3e77f0b98173.json
   - data/input/biotools/api-t-4dc2b6e48d5c.json
+  - data/input/biotools-domains/api-t-f0fb7eb70dae-f3ceb383e8b6.json

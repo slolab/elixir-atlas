@@ -27,6 +27,10 @@ PROJECT_DOCUMENTS = frozenset(DOCUMENTS - {".csv", ".tsv", ".json", ".xml"})
 
 SOURCES = {
     "biotools": Source(("https://bio.tools/api/t/?format=json&per_page=100&sort=additionDate&ord=asc",), discover=biotools, sections=(10,)),
+    "biotools-domains": Source(tuple(
+        f"https://bio.tools/api/t/?format=json&domain={domain}&per_page=100"
+        for domain in ("constraint-based-modelling", "qual-logical-models", "rule-based-modelling")
+    ), discover=biotools, sections=(10,)),
     "tess-events": Source((
         "https://tess.elixir-europe.org/events.json_api?include_expired=true&page_size=100",
     ), discover=tess, sections=(11,)),

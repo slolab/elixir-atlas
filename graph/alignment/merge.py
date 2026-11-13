@@ -98,7 +98,8 @@ def merge_initiative(
             values.append((value, funded.url))
         own = [value for s in primary if (value := getattr(s, prop))]
         dates[prop] = agreed_date(own) if own else agreed_date([value for value, _ in values])
-        if conflict := date_conflict(identity.initiative_id, identity.name, prop, values):
+        compared = [(f"{value}-12" if prop == "end" and re.fullmatch(r"\d{4}", value) else value, url) for value, url in values]
+        if conflict := date_conflict(identity.initiative_id, identity.name, prop, compared):
             reviews.append(conflict)
             dates[prop] = chosen(conflict, decided) or dates[prop]
     statuses = [s.status for s in primary if s.status != "not_stated"]

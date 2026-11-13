@@ -54,13 +54,13 @@
       "@type": "cr:FileObject",
       "@id": "data-sources-scraping.jsonl",
       "name": "data-sources-scraping.jsonl",
-      "contentSize": "7576443",
+      "contentSize": "7581380",
       "contentUrl": "data/input/data-sources-scraping.jsonl",
       "encodingFormat": "application/jsonl",
-      "sha256": "254a8cca4d0832d4b31c9f19675b8de6ac1fe30336c19371f606a5369761ae9c"
+      "sha256": "aaf50ffb9bf3cf28f63a00993d2b087d7490ea2bbb2f7856869ec632d43ed18a"
     }
   ],
-  "dateCreated": "2026-11-10T16:17:35.997412+00:00",
+  "dateCreated": "2026-11-11T20:03:47.456464+00:00",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
   "version": "1.0.0",
   "recordSet": [
@@ -68,7 +68,7 @@
       "@type": "cr:RecordSet",
       "@id": "data-sources-scraping.jsonl#data-sources-scraping",
       "name": "data-sources-scraping.jsonl",
-      "description": "Records from data-sources-scraping.jsonl (13455 rows)",
+      "description": "Records from data-sources-scraping.jsonl (13465 rows)",
       "field": [
         {
           "@type": "cr:Field",

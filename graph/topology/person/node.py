@@ -48,7 +48,7 @@ class Person:
     )
     source_kinds: list[str] = field(
         metadata={
-            "description": "Kinds of source that name the person: perun, role_statement, plan_item, zenodo, f1000, biotools."
+            "description": "Kinds of source that name the person: perun, role_statement, plan_item, election_candidate, zenodo, f1000, biotools."
         }
     )
     identity_basis: list[str] = field(
