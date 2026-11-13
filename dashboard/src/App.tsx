@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { href, updateRequestHref, useRoute } from "./route";
 import { Home } from "./views/Home";
+import { PortfolioPage } from "./views/Portfolio";
 import { InitiativePage } from "./views/Initiative";
 import { NodePage } from "./views/Node";
 import { Overlap } from "./views/Overlap";
@@ -48,6 +49,8 @@ function View({ page, id }: { page: string; id: string }) {
       return <Search query={id} />;
     case "kind":
       return <KindList kind={id} />;
+    case "portfolio":
+      return <PortfolioPage id={id} />;
     case "overlap":
       return <Overlap />;
     case "reviews":
@@ -97,6 +100,7 @@ function Masthead({ query, page }: { query: string; page: string }) {
 function Navigation({ page, requestLink }: { page: string; requestLink: string }) {
   const navigation = [
     { page: "home", title: "Home", icon: "m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9" },
+    { page: "portfolio", title: "Node portfolio", icon: "M3 7h18v13H3zM8 7V4h8v3M3 13h18" },
     { page: "topic", title: "Find by topic", icon: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4 5-2 6-6 2 2-6 6-2Z" },
     { page: "overlap", title: "Shared leadership", icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8 1a4 4 0 0 1 0 7m1 4a4 4 0 0 1 4 4v2" },
     { page: "reviews", title: "Data review", icon: "M9 5h12M9 12h12M9 19h12M2 5l1 1 3-3M2 12l1 1 3-3M2 19l1 1 3-3" },

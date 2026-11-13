@@ -231,6 +231,11 @@ def topic_support(db: Database, topics: str = Query(min_length=1, max_length=200
     return views.topic_support(db, topic_ids, date.today().isoformat())
 
 
+@app.get("/api/portfolio")
+def node_portfolio(db: Database, id: RecordId, year: str = Query(default="", max_length=4)):
+    return found(views.portfolio(db, id, year))
+
+
 @app.get("/api/overlap")
 def overlap(db: Database, liaisons: bool = False, groups_only: bool = False, minimum: int = Query(default=3, ge=2, le=10), directory: bool = False):
     return views.overlap(db, liaisons, groups_only, minimum, directory)
