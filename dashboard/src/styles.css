@@ -80,8 +80,8 @@ p {
   --page-gutter: clamp(20px, 3vw, 48px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto auto 1fr;
-  grid-template-areas: "header" "navigation" "main";
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas: "notice" "header" "navigation" "main";
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--raised);
@@ -97,6 +97,28 @@ p {
   min-width: 0;
   padding: 20px var(--page-gutter);
   background: var(--raised);
+}
+
+.notice {
+  grid-area: notice;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 10px var(--page-gutter);
+  background: var(--blue);
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.notice a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration-color: currentColor;
+}
+
+.notice a:focus-visible {
+  outline-color: var(--orange);
 }
 
 .brand {
@@ -217,8 +239,8 @@ p {
 @media (min-width: 1200px) {
   .app-shell {
     grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-    grid-template-rows: 108px 1fr;
-    grid-template-areas: "header header" "navigation main";
+    grid-template-rows: auto 108px 1fr;
+    grid-template-areas: "notice notice" "header header" "navigation main";
   }
 
   .masthead {
