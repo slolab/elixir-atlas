@@ -99,6 +99,23 @@ p {
   background: var(--raised);
 }
 
+.nav-note {
+  grid-column: 1 / -1;
+  padding: 10px 8px 14px;
+  color: var(--raised);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.nav .nav-note a {
+  display: inline;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+}
+
 .notice {
   grid-area: notice;
   display: flex;
@@ -309,6 +326,20 @@ p {
     border-radius: 0;
     font-weight: 400;
     color: var(--ink-soft);
+  }
+
+  .nav .nav-note {
+    margin-top: 8px;
+    padding: 20px 12px 0;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+  }
+
+  .nav .nav-note a {
+    display: inline;
+    padding: 0;
+    color: var(--blue);
+    font-weight: 400;
   }
 
   .page {
