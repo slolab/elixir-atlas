@@ -17,6 +17,11 @@ export function Home() {
         </p>
         <Chromatogram projects={data.projects} />
       </section>
+      <Section title="About the ELIXIR Atlas">
+        <p>
+          The ELIXIR Atlas is a proof of concept developed as a BioHackathon project funded by ELIXIR. It is not an official ELIXIR resource. The official source of ELIXIR information is <a href="https://elixir-europe.org" target="_blank" rel="noopener">elixir-europe.org</a>.
+        </p>
+      </Section>
       <div className="columns">
         <Section title="Groups and projects by kind">
           <Bars bars={data.kinds.map((kind) => ({ key: kind.kind, name: <a href={href("kind", kind.kind)}>{label(kind.kind)}</a>, value: kind.n }))} />

@@ -22,6 +22,7 @@ export function App() {
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById("main-content")?.focus(); }}>Skip to main content</a>
+      <Notice />
       <Masthead query={route.page === "search" ? route.id : ""} page={route.page} />
       <Navigation page={route.page} requestLink={requestLink} />
       <main className="page" id="main-content" tabIndex={-1}>
@@ -58,6 +59,19 @@ function View({ page, id }: { page: string; id: string }) {
     default:
       return <Home />;
   }
+}
+
+function Notice() {
+  return (
+    <aside className="notice" aria-label="About this information">
+      <p>
+        <strong>AI-compiled content.</strong> The information in this atlas was compiled using AI and has not been independently checked or validated by humans. It may contain inaccuracies.
+      </p>
+      <p>
+        For official ELIXIR information, visit <a href="https://elixir-europe.org" target="_blank" rel="noopener">elixir-europe.org</a>.
+      </p>
+    </aside>
+  );
 }
 
 function Masthead({ query, page }: { query: string; page: string }) {
