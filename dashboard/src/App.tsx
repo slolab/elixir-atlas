@@ -127,6 +127,9 @@ function Navigation({ page, requestLink }: { page: string; requestLink: string }
           {item.title}
         </a>)}
         <a className="feedback-link" href={requestLink} aria-current={page === "request-update" ? "page" : undefined}>Request update</a>
+        <p className="nav-note">
+          This page is a proof of concept created by project 26 of the ELIXIR BioHackathon 2026 and will not be regularly updated. The source code is available at <a href="https://github.com/slolab/elixir-atlas" target="_blank" rel="noopener">github.com/slolab/elixir-atlas</a>.
+        </p>
       </div>
     </nav>
   );
